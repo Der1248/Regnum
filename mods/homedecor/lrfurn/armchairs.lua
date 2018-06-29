@@ -1,0 +1,70 @@
+local armchairs_list = {
+	{ "Red Armchair", "red"},
+	{ "Orange Armchair", "orange"},
+	{ "Yellow Armchair", "yellow"},
+	{ "Green Armchair", "green"},
+	{ "Blue Armchair", "blue"},
+	{ "Violet Armchair", "violet"},
+	{ "Black Armchair", "black"},
+	{ "Grey Armchair", "grey"},
+	{ "White Armchair", "white"},
+}
+
+for i in ipairs(armchairs_list) do
+	local armchairdesc = armchairs_list[i][1]
+	local colour = armchairs_list[i][2]
+
+	minetest.register_node("lrfurn:armchair_"..colour, {
+		description = armchairdesc,
+		drawtype = "mesh",
+		mesh = "lrfurn_armchair.obj",
+		tiles = {
+			"lrfurn_sofa_"..colour..".png",
+			"lrfurn_sofa_bottom.png"
+		},
+		paramtype = "light",
+		paramtype2 = "facedir",
+		groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
+		sounds = default.node_sound_wood_defaults(),
+		on_rightclick = function(pos, node, clicker)
+			if not clicker:is_player() then
+				return
+			end
+			pos.y = pos.y-0.5
+			clicker:setpos(pos)
+			clicker:set_hp(20)
+		end
+	})
+
+	minetest.register_craft({
+		output = "lrfurn:armchair_"..colour,
+		recipe = {
+			{"wool:"..colour, "", "", },
+			{"stairs:slab_wood", "", "", },
+			{"group:stick", "", "", }
+		}
+	})
+
+	minetest.register_craft({
+		output = "lrfurn:armchair_"..colour,
+		recipe = {
+			{"wool:"..colour, "", "", },
+			{"moreblocks:slab_wood", "", "", },
+			{"group:stick", "", "", }
+		}
+	})
+
+	minetest.register_craft({
+		output = "lrfurn:armchair_"..colour,
+		recipe = {
+			{"wool:"..colour, "", "", },
+			{"group:wood_slab", "", "", },
+			{"group:stick", "", "", }
+		}
+	})
+
+end
+
+if minetest.setting_get("log_mods") then
+	minetest.log("action", "armchairs loaded")
+end
