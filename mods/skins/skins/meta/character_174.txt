@@ -1,4 +1,0 @@
-name = "PopularMMOs ",
-author = "???",
-description = "1.Spezial Skin",
-comment = "to minetest by 1248",
