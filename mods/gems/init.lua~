@@ -1,0 +1,875 @@
+minetest.register_tool("gems:pick_ruby", {
+	description = "ruby pickaxe",
+	inventory_image = "ruby_ruby_pick.png",
+	tool_capabilities = {
+		full_punch_interval = 0,
+		max_drop_level=3,
+		groupcaps={
+			cracky={times={[1]=2.0, [2]=1.0, [3]=0.5}, uses=1000, maxlevel=3},
+		}
+	},
+})
+
+minetest.register_tool("gems:pick_shadow", {
+	description = "shadow pickaxe",
+	inventory_image = "shadow_pick.png",
+	tool_capabilities = {
+		full_punch_interval = 0,
+		max_drop_level=3,
+		groupcaps={
+
+			cracky={times={[1]=1.2, [2]=0.6, [3]=0.3}, uses=100000, maxlevel=3},
+		}
+	},
+})	
+
+minetest.register_tool("gems:pick_emerald", {
+	description = "emerald pickaxe",
+	inventory_image = "gems_emerald_pick.png",
+	tool_capabilities = {
+		full_punch_interval = 0,
+		max_drop_level=3,
+		groupcaps={
+			cracky={times={[1]=0.8, [2]=0.4, [3]=0.2}, uses=1000000, maxlevel=3},
+		}
+	},
+})
+
+minetest.register_tool("gems:pick_sapphire", {
+	description = "sapphire pickaxe",
+	inventory_image = "gems_sapphire_pick.png",
+	tool_capabilities = {
+		full_punch_interval = 0,
+		max_drop_level=3,
+		groupcaps={
+			cracky={times={[1]=2.0, [2]=1.0, [3]=0.5}, uses=1000, maxlevel=3},
+		}
+	},
+})
+
+minetest.register_tool("gems:pick_amethyst", {
+	description = "amethyst pickaxe",
+	inventory_image = "gems_amethyst_pick.png",
+	tool_capabilities = {
+		full_punch_interval = 0,
+		max_drop_level=3,
+		groupcaps={
+			cracky={times={[1]=1.6, [2]=0.8, [3]=0.4}, uses=10000, maxlevel=3},
+		}
+	},
+})
+
+minetest.register_tool("gems:pick_pearl", {
+	description = "pearl pickaxe",
+	inventory_image = "gems_pearl_pick.png",
+	tool_capabilities = {
+		full_punch_interval = 0,
+		max_drop_level=3,
+		groupcaps={
+			cracky={times={[1]=1.2, [2]=0.6, [3]=0.3}, uses=100000, maxlevel=3},
+		}
+	},
+})
+
+
+minetest.register_tool("gems:sword_ruby", {
+    description = "ruby sword",
+	inventory_image = "ruby_ruby_sword.png",
+	tool_capabilities = {
+		full_punch_interval = 1.0,
+		max_drop_level=1,
+		groupcaps={
+
+			snappy={times={[2]=1.00, [3]=0.50}, uses=1000, maxlevel=3},
+
+		}
+	},
+})
+
+minetest.register_tool("gems:sword_shadow", {
+    description = "shadow sword",
+	inventory_image = "shadow_sword.png",
+	tool_capabilities = {
+		full_punch_interval = 1.0,
+		max_drop_level=1,
+		groupcaps={
+
+ 			snappy={times={[2]=0.60, [3]=0.30}, uses=100000, maxlevel=3},
+		}	
+	},
+})
+	
+minetest.register_tool("gems:sword_emerald", {
+    description = "emerald sword",
+	inventory_image = "gems_emerald_sword.png",
+	tool_capabilities = {
+		full_punch_interval = 1.0,
+		max_drop_level=1,
+		groupcaps={
+
+			snappy={times={[2]=0.40, [3]=0.20}, uses=1000000, maxlevel=3},
+		}
+	},
+})
+
+minetest.register_tool("gems:sword_sapphire", {
+    description = "sapphire sword",
+	inventory_image = "gems_sapphire_sword.png",
+	tool_capabilities = {
+		full_punch_interval = 1.0,
+		max_drop_level=1,
+		groupcaps={
+
+			snappy={times={[2]=1.00, [3]=0.50}, uses=1000, maxlevel=3},
+		}
+	}
+})
+
+minetest.register_tool("gems:sword_amethyst", {
+    description = "amethyst sword",
+	inventory_image = "gems_amethyst_sword.png",
+	tool_capabilities = {
+		full_punch_interval = 1.0,
+		max_drop_level=1,
+		groupcaps={
+
+			snappy={times={[2]=0.80, [3]=0.40}, uses=10000, maxlevel=3},
+		}
+	}
+})
+
+minetest.register_tool("gems:sword_pearl", {
+    description = "pearl sword",
+	inventory_image = "gems_pearl_sword.png",
+	tool_capabilities = {
+		full_punch_interval = 1.0,
+		max_drop_level=1,
+		groupcaps={
+
+			snappy={times={[2]=0.60, [3]=0.30}, uses=100000, maxlevel=3},
+		}
+	}
+})
+
+minetest.register_tool("gems:axe_emerald", {
+    descroption = "emerald axe",
+	inventory_image = "gems_emerald_axe.png",
+	tool_capabilities = {
+	    max_drop_level=1,
+		groupcaps={
+			choppy={times={[1]=0.8, [2]=0.4, [3]=0.2}, uses=1000000, maxlevel=3},
+ 	 	}
+	},
+})
+
+minetest.register_tool("gems:axe_shadow", {
+    descroption = "shadow axe",
+	inventory_image = "shadow_axe.png",
+	tool_capabilities = {
+	    max_drop_level=1,
+		groupcaps={
+
+			choppy={times={[1]=1.2, [2]=0.6, [3]=0.3}, uses=100000, maxlevel=3},
+		}
+    },
+})	
+
+minetest.register_tool("gems:axe_ruby", {
+    descroption = "ruby axe",
+	inventory_image = "ruby_ruby_axe.png",
+	tool_capabilities = {
+	    max_drop_level=1,
+		groupcaps={
+			choppy={times={[1]=2.0, [2]=1.0, [3]=0.5}, uses=1000, maxlevel=3},
+ 	 	}
+	},
+})
+
+minetest.register_tool("gems:axe_sapphire", {
+    descroption = "sapphire axe",
+	inventory_image = "gems_sapphire_axe.png",
+	tool_capabilities = {
+	    max_drop_level=1,
+		groupcaps={
+			choppy={times={[1]=2.0, [2]=1.0, [3]=0.5}, uses=1000, maxlevel=3},
+ 	 	}
+	},
+})
+
+minetest.register_tool("gems:axe_amethyst", {
+    descroption = "amethyst axe",
+	inventory_image = "gems_amethyst_axe.png",
+	tool_capabilities = {
+	    max_drop_level=1,
+		groupcaps={
+			choppy={times={[1]=1.6, [2]=0.8, [3]=0.4}, uses=10000, maxlevel=3},
+ 	 	}
+	},
+})
+
+minetest.register_tool("gems:axe_pearl", {
+    descroption = "pearl axe",
+	inventory_image = "gems_pearl_axe.png",
+	tool_capabilities = {
+	    max_drop_level=1,
+		groupcaps={
+			choppy={times={[1]=1.2, [2]=0.6, [3]=0.3}, uses=100000, maxlevel=3},
+ 	 	}
+	},
+})
+
+minetest.register_tool("gems:shovel_ruby", {
+	description = "ruby shovel",
+	inventory_image = "ruby_ruby_shovel.png",
+	wield_image = "ruby_ruby_shovel.png",
+	tool_capabilities = {
+		max_drop_level=1,
+		groupcaps={
+			crumbly={times={[1]=2.00, [2]=1.00, [3]=0.50}, uses=1000, maxlevel=3}
+		}
+	},
+})
+
+minetest.register_tool("gems:shovel_shadow", {
+	description = "shadow shovel",
+	inventory_image = "shadow_shovel.png",
+	wield_image = "shadow_shovel.png",
+	tool_capabilities = {
+		max_drop_level=1,
+		groupcaps={
+			crumbly={times={[1]=1.2, [2]=0.6, [3]=0.3}, uses=100000, maxlevel=3}
+		}
+    }
+})	
+			
+
+minetest.register_tool("gems:shovel_emerald", {
+	description = "emerald shovel",
+	inventory_image = "gems_emerald_shovel.png",
+	wield_image = "gems_emerald_shovel.png",
+	tool_capabilities = {
+		max_drop_level=1,
+		groupcaps={
+			crumbly={times={[1]=0.80, [2]=0.40, [3]=0.20}, uses=1000000, maxlevel=3}
+		}
+	},
+})
+
+minetest.register_tool("gems:shovel_sapphire", {
+	description = "sapphire shovel",
+	inventory_image = "gems_sapphire_shovel.png",
+	wield_image = "gems_sapphire_shovel.png",
+	tool_capabilities = {
+		max_drop_level=1,
+		groupcaps={
+			crumbly={times={[1]=2.00, [2]=1.00, [3]=0.50}, uses=1000, maxlevel=3}
+		}
+	},
+})
+
+minetest.register_tool("gems:shovel_amethyst", {
+	description = "amethyst shovel",
+	inventory_image = "gems_amethyst_shovel.png",
+	wield_image = "gems_amethyst_shovel.png",
+	tool_capabilities = {
+		max_drop_level=1,
+		groupcaps={
+			crumbly={times={[1]=1.60, [2]=0.80, [3]=0.40}, uses=10000, maxlevel=3}
+		}
+	},
+})
+
+minetest.register_tool("gems:shovel_pearl", {
+	description = "pearl shovel",
+	inventory_image = "gems_pearl_shovel.png",
+	wield_image = "gems_pearl_shovel.png",
+	tool_capabilities = {
+		max_drop_level=1,
+		groupcaps={
+			crumbly={times={[1]=1.20, [2]=0.60, [3]=0.30}, uses=100000, maxlevel=3}
+		}
+	},
+})
+
+minetest.register_node("gems:ruby_ore", {
+	  description = "ruby ore",
+	  tiles = {"ruby_ruby_ore.png"},
+	  is_ground_content = true,
+	  groups = {cracky=6},
+	  sounds = default.node_sound_defaults(),
+	  drop = 'craft "gems:ruby_gem" 1',
+})
+
+minetest.register_node("gems:emerald_ore", {
+	  description = "emerald ore",
+	  tiles = {"gems_emerald_ore.png"},
+	  is_ground_content = true,
+	  groups = {cracky=9},
+	  sounds = default.node_sound_defaults(),
+	  drop = 'craft "gems:emerald_gem" 1',
+})
+
+minetest.register_node("gems:sapphire_ore", {
+	  description = "sapphire ore",
+	  tiles = {"gems_sapphire_ore.png"},
+	  is_ground_content = true,
+	  groups = {cracky=6},
+	  sounds = default.node_sound_defaults(),
+	  drop = 'craft "gems:sapphire_gem" 1',
+})
+
+minetest.register_node("gems:amethyst_ore", {
+	  description = "amethyst ore",
+	  tiles = {"gems_amethyst_ore.png"},
+	  is_ground_content = true,
+	  groups = {cracky=7} ,
+	  sounds = default.node_sound_defaults(),
+	  drop = 'craft "gems:amethyst_gem" 1',
+})
+
+minetest.register_node("gems:shadow_ore", {
+	  description = "shadow ore",
+	  tiles = {"shadow_ore.png"},
+	  is_ground_content = true,
+	  groups = {cracky=8},
+	  sounds = default.node_sound_defaults(),
+	  drop = 'craft "gems:shadow_gem" 1',
+})
+
+minetest.register_node("gems:pearl_ore", {
+	  description = "pearl ore",
+	  tiles = {"gems_pearl_ore.png"},
+	  is_ground_content = true,
+	  groups = {cracky=8},
+	  sounds = default.node_sound_defaults(),
+	  drop = 'craft "gems:pearl_gem" 1',
+})
+
+minetest.register_node( "gems:ruby_block", {
+	description = "ruby block",
+	tile_images = { "ruby_ruby_block.png" },
+	is_ground_content = true,
+	groups = {cracky=3},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node( "gems:emerald_block", {
+	description = "emerald block",
+	tile_images = { "gems_emerald_block.png" },
+	is_ground_content = true,
+	groups = {cracky=3},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node( "gems:sapphire_block", {
+	description = "sapphire block",
+	tile_images = { "gems_sapphire_block.png" },
+	is_ground_content = true,
+	groups = {cracky=3},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node( "gems:shadow_block", {
+	description = "shadow block",
+	tile_images = { "shadow_block.png" },
+	is_ground_content = true,
+	groups = {cracky=3},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node( "gems:pearl_block", {
+	description = "pearl block",
+	tile_images = { "gems_pearl_block.png" },
+	is_ground_content = true,
+	groups = {cracky=3},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node( "gems:amethyst_block", {
+	description = "amethyst block",
+	tile_images = { "gems_amethyst_block.png" },
+	is_ground_content = true,
+	groups = {cracky=3},
+	sounds = default.node_sound_stone_defaults(),
+})
+	   
+minetest.register_craftitem( "gems:ruby_gem", {
+	description = "ruby gem",
+	tile_images = { "ruby:ruby_gem" },
+	inventory_image = "ruby_ruby_gem.png",
+	on_place_on_ground = minetest.craftitem_place_item,
+})
+
+minetest.register_craftitem( "gems:emerald_gem", {
+	description = "emerald gem",
+	tile_images = { "gems:emerald_gem" },
+	inventory_image = "gems_emerald_gem.png",
+	on_place_on_ground = minetest.craftitem_place_item,
+})
+
+minetest.register_craftitem( "gems:shadow_gem", {
+	description = "shadow gem",
+	tile_images = { "gems:shadow_gem" },
+	inventory_image = "shadow_gem.png",
+	on_place_on_ground = minetest.craftitem_place_item,
+})
+
+minetest.register_craftitem( "gems:sapphire_gem", {
+	description = "sapphire gem",
+	tile_images = { "gems:sapphire_gem" },
+	inventory_image = "gems_sapphire_gem.png",
+	on_place_on_ground = minetest.craftitem_place_item,
+})
+
+minetest.register_craftitem( "gems:amethyst_gem", {
+	description = "amethyst gem",
+	tile_images = { "gems:amethyst_gem" },
+	inventory_image = "gems_amethyst_gem.png",
+	on_place_on_ground = minetest.craftitem_place_item,
+})
+
+minetest.register_craftitem( "gems:pearl_gem", {
+	description = "pearl gem",
+	tile_images = { "gems:pearl_gem" },
+	inventory_image = "gems_pearl_gem.png",
+	on_place_on_ground = minetest.craftitem_place_item,
+})
+
+minetest.register_craft({
+        output = 'gems:pick_emerald',
+        recipe = {
+            {'gems:emerald_gem', 'gems:emerald_gem', 'gems:emerald_gem'},
+		    {'', 'default:stick', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:pick_ruby',
+        recipe = {
+            {'gems:ruby_gem', 'gems:ruby_gem', 'gems:ruby_gem'},
+		    {'', 'default:stick', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:pick_sapphire',
+        recipe = {
+            {'gems:sapphire_gem', 'gems:sapphire_gem', 'gems:sapphire_gem'},
+		    {'', 'default:stick', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:pick_amethyst',
+        recipe = {
+            {'gems:amethyst_gem', 'gems:amethyst_gem', 'gems:amethyst_gem'},
+		    {'', 'default:stick', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:pick_shadow',
+        recipe = {
+            {'gems:shadow_gem', 'gems:shadow_gem', 'gems:shadow_gem'},
+		    {'', 'default:stick', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:pick_pearl',
+        recipe = {
+            {'gems:pearl_gem', 'gems:pearl_gem', 'gems:pearl_gem'},
+		    {'', 'default:stick', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+	output = 'gems:ruby_block',
+	recipe = {
+		{'gems:ruby_gem','gems:ruby_gem','gems:ruby_gem',},
+		{'gems:ruby_gem','gems:ruby_gem','gems:ruby_gem',},
+		{'gems:ruby_gem','gems:ruby_gem','gems:ruby_gem',},
+	}
+})
+
+minetest.register_craft({
+	output = 'gems:shadow_block',
+	recipe = {
+		{'gems:shadow_gem','gems:shadow_gem','gems:shadow_gem',},
+		{'gems:shadow_gem','gems:shadow_gem','gems:shadow_gem',},
+		{'gems:shadow_gem','gems:shadow_gem','gems:shadow_gem',},
+	}
+})
+
+minetest.register_craft({
+	output = 'gems:amethyst_block',
+	recipe = {
+		{'gems:amethyst_gem','gems:amethyst_gem','gems:amethyst_gem',},
+		{'gems:amethyst_gem','gems:amethyst_gem','gems:amethyst_gem',},
+		{'gems:amethyst_gem','gems:amethyst_gem','gems:amethyst_gem',},
+	}
+})
+
+minetest.register_craft({
+	output = 'gems:emerald_block',
+	recipe = {
+		{'gems:emerald_gem', 'gems:emerald_gem', 'gems:emerald_gem'},
+		{'gems:emerald_gem', 'gems:emerald_gem', 'gems:emerald_gem'},
+		{'gems:emerald_gem', 'gems:emerald_gem', 'gems:emerald_gem'},
+	}
+})
+
+minetest.register_craft({
+	output = 'gems:sapphire_block',
+	recipe = {
+		{'gems:sapphire_gem', 'gems:sapphire_gem', 'gems:sapphire_gem'},
+		{'gems:sapphire_gem', 'gems:sapphire_gem', 'gems:sapphire_gem'},
+		{'gems:sapphire_gem', 'gems:sapphire_gem', 'gems:sapphire_gem'},
+	}
+})
+
+minetest.register_craft({
+	output = 'gems:pearl_block',
+	recipe = {
+		{'gems:pearl_gem', 'gems:pearl_gem', 'gems:pearl_gem'},
+		{'gems:pearl_gem', 'gems:pearl_gem', 'gems:pearl_gem'},
+		{'gems:pearl_gem', 'gems:pearl_gem', 'gems:pearl_gem'},
+	}
+})
+
+minetest.register_craft({
+        output = 'gems:shovel_ruby',
+        recipe = {
+            {'', 'gems:ruby_gem', ''},
+		    {'', 'default:stick', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:shovel_emerald',
+        recipe = {
+            {'', 'gems:emerald_gem', ''},
+		    {'', 'default:stick', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:shovel_sapphire',
+        recipe = {
+            {'', 'gems:sapphire_gem', ''},
+		    {'', 'default:stick', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:shovel_amethyst',
+        recipe = {
+            {'', 'gems:amethyst_gem', ''},
+		    {'', 'default:stick', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:shovel_pearl',
+        recipe = {
+            {'', 'gems:pearl_gem', ''},
+		    {'', 'default:stick', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:shovel_shadow',
+        recipe = {
+            {'','gems:shadow_gem', ''},
+		    {'', 'default:stick', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+
+minetest.register_craft({
+        output = 'gems:sword_ruby',
+        recipe = {
+            {'', 'gems:ruby_gem', ''},
+		    {'', 'gems:ruby_gem', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:sword_amethyst',
+        recipe = {
+            {'', 'gems:amethyst_gem', ''},
+		    {'', 'gems:amethyst_gem', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:sword_emerald',
+        recipe = {
+            {'', 'gems:emerald_gem', ''},
+		    {'', 'gems:emerald_gem', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:sword_sapphire',
+        recipe = {
+            {'', 'gems:sapphire_gem', ''},
+		    {'', 'gems:sapphire_gem', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:sword_shadow',
+        recipe = {
+            {'gems:shadow_gem', '', ''},
+		    {'gems:shadow_gem' , '', ''},
+		    {'default:stick', '', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:sword_pearl',
+        recipe = {
+            {'', 'gems:pearl_gem', ''},
+		    {'', 'gems:pearl_gem', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:axe_ruby',
+        recipe = {
+            {'gems:ruby_gem', 'gems:ruby_gem', ''},
+		    {'gems:ruby_gem', 'default:stick', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:axe_emerald',
+        recipe = {
+            {'gems:emerald_gem', 'gems:emerald_gem', ''},
+		    {'gems:emerald_gem', 'default:stick', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:axe_sapphire',
+        recipe = {
+            {'gems:sapphire_gem', 'gems:sapphire_gem', ''},
+		    {'gems:sapphire_gem', 'default:stick', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:axe_amethyst',
+        recipe = {
+            {'gems:amethyst_gem', 'gems:amethyst_gem', ''},
+		    {'gems:amethyst_gem', 'default:stick', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:axe_pearl',
+        recipe = {
+            {'gems:pearl_gem', 'gems:pearl_gem', ''},
+		    {'gems:pearl_gem', 'default:stick', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:axe_shadow',
+        recipe = {
+            {'gems:shadow_gem', 'gems:shadow_gem', ''},
+		    {'gems:shadow_gem', 'default:stick', ''},
+		    {'', 'default:stick', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:amethyst_gem 9',
+        recipe = {
+            {'', '', ''},
+		    {'', 'gems:amethyst_block', ''},
+		    {'', '', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:ruby_gem 9',
+        recipe = {
+            {'', '', ''},
+		    {'', 'gems:ruby_block', ''},
+		    {'', '', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:emerald_gem 9',
+        recipe = {
+            {'', '', ''},
+		    {'', 'gems:emerald_block', ''},
+		    {'', '', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:sapphire_gem 9',
+        recipe = {
+            {'', '', ''},
+		    {'', 'gems:sapphire_block', ''},
+		    {'', '', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:shadow_gem 9',
+        recipe = {
+            {'', '', ''},
+		    {'', 'gems:shadow_block', ''},
+		    {'', '', ''},
+                
+        }
+})
+
+minetest.register_craft({
+        output = 'gems:pearl_gem 9',
+        recipe = {
+            {'', '', ''},
+		    {'', 'gems:pearl_block', ''},
+		    {'', '', ''},
+                
+        }
+})
+
+
+
+ 
+
+
+
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "gems:ruby_ore",
+	wherein        = "default:stone",
+	clust_scarcity = 10*10*10,
+	clust_num_ores = 4,
+	clust_size     = 3,
+	height_min     = -31000,
+	height_max     = -1000,
+	flags          = "absheight",
+})
+
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "gems:sapphire_ore",
+	wherein        = "default:stone",
+	clust_scarcity = 10*10*10,
+	clust_num_ores = 4,
+	clust_size     = 3,
+	height_min     = -31000,
+	height_max     = -1000,
+	flags          = "absheight",
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "gems:amethyst_ore",
+	wherein        = "default:stone",
+	clust_scarcity = 13*13*13,
+	clust_num_ores = 4,
+	clust_size     = 3,
+	height_min     = -31000,
+	height_max     = -2000,
+	flags          = "absheight",
+})
+
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "gems:shadow_ore",
+	wherein        = "default:stone",
+	clust_scarcity = 15*15*15,
+	clust_num_ores = 4,
+	clust_size     = 3,
+	height_min     = -31000,
+	height_max     = -3000,
+	flags          = "absheight",
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "gems:pearl_ore",
+	wherein        = "default:stone",
+	clust_scarcity = 15*15*15,
+	clust_num_ores = 4,
+	clust_size     = 3,
+	height_min     = -31000,
+	height_max     = -3000,
+	flags          = "absheight",
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "gems:emerald_ore",
+	wherein        = "default:stone",
+	clust_scarcity = 17*17*17,
+	clust_num_ores = 4,
+	clust_size     = 3,
+	height_min     = -31000,
+	height_max     = -4000,
+	flags          = "absheight",
+})
+
+
+

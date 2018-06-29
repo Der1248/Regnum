@@ -1,0 +1,19 @@
+Bugs and problems:
+
+player is not attached to heli after restart of the game.
+
+Rotation of entity in any direction don`t change yaw ( :get_yaw() - returns 0)
+
+Using set_bone_position scale model to -1, but rotate as need
+
+Also I can`t control any bone independently
+
+It would be useful function "is_attached()" for entity
+
+
+
+
+Done:
+
+Craft recipe
+Rotation
