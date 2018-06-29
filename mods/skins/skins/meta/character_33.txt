@@ -1,0 +1,4 @@
+name = "PopularMMOs ",
+author = "ottisprominecraft555",
+description = "The first voted skin",
+comment = "to minetest by 1248",
