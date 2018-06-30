@@ -1,11 +1,11 @@
-A subgame by 1248
-I develop the Regnum subgame over the last 5 years
+A Game by 1248
+
 Thanks to:
-NightmareLP who build a mod for my subgame
-et77 who had some great ideas
-wuschel1912 who tests the subgame
+NightmareLP for building a mod
+et77 for great ideas
+wuschel1912 for testing
 
-
+Info:
 If you want better tools and/or to upgrade them, Regnum is the right choice for you.
 With Regnum you can get very fast tools. Some tools can double your ores when you dig for them.
 You have to craft more then 120 battleaxes to get the best one. The Regnum battle-axe!
@@ -19,3 +19,7 @@ Get coins, laser-guns and many other rewards
 Get a gift from 4 mobs.
 More then 1800 different blocks, items, tools and lots more.
 It will take a long time before you get the regnum battle-axe, the highest level, all keys,8 Regnum bags and the best armor
+
+License:
+See README.txt in each mod for more information
+Every code written by me is LGPLv2.1
