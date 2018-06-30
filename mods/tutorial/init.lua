@@ -6,7 +6,7 @@ minetest.register_on_joinplayer(function(player)
 		offset = {x=0, y=10},
 		alignment = {x=1, y=0},
 		number = 0xFFFFFF ,
-		text = "For Minetest 	  :  0.4.17",
+		text = "For Minetest 	  :  0.4.17.x",
 	})
 	player:hud_add({
 		hud_elem_type = "text",
