@@ -6,19 +6,14 @@ et77 for great ideas
 wuschel1912 for testing
 
 Info:
-If you want better tools and/or to upgrade them, Regnum is the right choice for you.
-With Regnum you can get very fast tools. Some tools can double your ores when you dig for them.
-You have to craft more then 120 battleaxes to get the best one. The Regnum battle-axe!
-Only simple things are needed to upgrade your tools. Dirt, cobble…but you need lots of it.
-Or you need some new ores such as uranium, titanium or more then 20 others.
-Dig up uranium and you get green experience. Dig up a red or blue ore and you get red or blue experience.
-Get the highest level, the xp key, the craft key or the bag key.
-With the craft key you can craft 4x4.
-Look with the xp key for all xp you need.
-Get coins, laser-guns and many other rewards
-Get a gift from 4 mobs.
-More then 1800 different blocks, items, tools and lots more.
-It will take a long time before you get the regnum battle-axe, the highest level, all keys,8 Regnum bags and the best armor
+50 achievements to earn,11 differend monsters to hunt,
+6 animals to tame, 20 differend mods, more than 20 new ores,
+179 skins, 11 differend craft types, 6 xp types,
+up to 8 very big bagpacks, a huge inventory,
+many tools with cool functions and
+more then 3700 different blocks, items and tools.
+Craft keys, colect xp, craft battleaxes, armor, guns and lots more.
+And this in only one Game.
 
 License:
 See README.txt in each mod for more information
