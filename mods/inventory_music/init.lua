@@ -16,12 +16,14 @@ minetest.register_globalstep(function(dtime)
             if inst2 == 1 then
                 table.insert(inst_list, "Theme2")
             end
-            local inst = inst_list[ math.random(#inst_list)]
-            local music = player_inv:get_stack("music", 1):get_count()
-            if music == 1 then
-                sound_play_regnum = minetest.sound_play(inst, {
-	                to_player = player,
-                })
+            if inst1 == 1 or inst2 == 1 then
+                local inst = inst_list[ math.random(#inst_list)]
+                local music = player_inv:get_stack("music", 1):get_count()
+                if music == 1 then
+                    sound_play_regnum = minetest.sound_play(inst, {
+	                    to_player = player,
+                    })
+                end
             end
         end
     end
