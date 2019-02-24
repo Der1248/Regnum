@@ -18,3 +18,6 @@ And this in only one Game.
 License:
 See README.txt in each mod for more information
 Every code written by me is LGPLv2.1
+
+Notes:
+sfinv mod changed

@@ -17,6 +17,8 @@ sfinv.register_page("sfinv:crafting", {
 				image[5,4.75;1,1;gui_hb_bg.png]
 				image[6,4.75;1,1;gui_hb_bg.png]
 				image[7,4.75;1,1;gui_hb_bg.png]
+				image_button[0,0;1.6,1.6;inventory_plus_inven.png;inven;]
+				label[0.3,1.5;selection]
 			]], true)
 	end
 })

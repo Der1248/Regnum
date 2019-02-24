@@ -1,4 +1,8 @@
 default
-inventory_plus?
-unified_inventory?
-
+player_monoids?
+armor_monoid?
+pova?
+fire?
+ethereal?
+bakedclay?
+intllib?

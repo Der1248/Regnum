@@ -200,80 +200,7 @@ minetest.register_chatcommand("regnum", {
 		local player_inv = player:get_inventory()
         local name = player:get_player_name()
 	    local player_inv = player:get_inventory()
-	    local armor_inv = minetest.create_detached_inventory(name.."_armor", {
-		on_put = function(inv, listname, index, stack, player)
-			player:get_inventory():set_stack(listname, index, stack)
-			armor:set_player_armor(player)
-			armor:update_inventory(player)
-		end,
-		on_take = function(inv, listname, index, stack, player)
-			player:get_inventory():set_stack(listname, index, nil)
-			armor:set_player_armor(player)
-			armor:update_inventory(player)
-		end,
-		on_move = function(inv, from_list, from_index, to_list, to_index, count, player)
-			local plaver_inv = player:get_inventory()
-			local stack = inv:get_stack(to_list, to_index)
-			player_inv:set_stack(to_list, to_index, stack)
-			player_inv:set_stack(from_list, from_index, nil)
-			armor:set_player_armor(player)
-			armor:update_inventory(player)
-		end,
-		allow_put = function(inv, listname, index, stack, player)
-			if listname == "armor" then
-                if index == 1 and stack:get_definition().groups.armor_head then
-			      return 1
-			    elseif index == 2 and stack:get_definition().groups.armor_torso then
-			      return 1
-			    elseif index == 3 and stack:get_definition().groups.armor_legs then
-			      return 1
-			    elseif index == 4 and stack:get_definition().groups.armor_feet then
-			      return 1
-		        elseif index == 5 and stack:get_definition().groups.armor_shield then
-			      return 1
-			    else
-			      return 0
-			    end
-            else
-                return 1
-            end
-
-		end,
-		allow_take = function(inv, listname, index, stack, player)
-			return stack:get_count()
-		end,
-		allow_move = function(inv, from_list, from_index, to_list, to_index, count, player)
-			if listname == "armor" then
-                if index == 1 and stack:get_definition().groups.armor_head then
-			      return 1
-			    elseif index == 2 and stack:get_definition().groups.armor_torso then
-			      return 1
-			    elseif index == 3 and stack:get_definition().groups.armor_legs then
-			      return 1
-			    elseif index == 4 and stack:get_definition().groups.armor_feet then
-			      return 1
-		        elseif index == 5 and stack:get_definition().groups.armor_shield then
-			      return 1
-			    else
-			      return 0
-			    end
-            else
-                return 1
-            end
-		end,
-	})
-	armor_inv:set_size("armor", 5)
-    armor_inv:set_size("arm2", 1)
-    player_inv:set_size("arm", 1)
-    player_inv:set_size("arm2", 1)
-	player_inv:set_size("armor", 5)
-    
-    local stack = player_inv:get_stack("arm2", 1)
-	armor_inv:set_stack("arm2", 1, stack)
-	for i=1, 5 do
-		local stack = player_inv:get_stack("armor", i)
-		armor_inv:set_stack("armor", i, stack)
-	end	
+		armor.init_player_armor(player)
 		local bags_inv = minetest.create_detached_inventory(player:get_player_name().."_bags",{
 			on_put = function(inv, listname, index, stack, player)
 				player:get_inventory():set_stack(listname, index, stack)
@@ -477,7 +404,7 @@ minetest.register_chatcommand("rank", {
 	privs = {},
 	func = function(name, param)
 		pri = minetest.get_player_privs(name)
-        if pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom and pri.teleport and pri.noclip and pri.debug and pri.settime and pri.bring and pri.server and pri.password and pri.delprotect and pri.kick and pri.ban and pri.rollback and pri.privs and pri.basic_privs and pri.give and pri.sign_editor and pri.protection_bypass and pri.travelnet_remove and pri.travelnet_attach and pri.shop_admin then
+        if     pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom and pri.teleport and pri.noclip and pri.debug and pri.settime and pri.bring and pri.server and pri.password and pri.delprotect and pri.kick and pri.ban and pri.rollback and pri.privs and pri.basic_privs and pri.give and pri.protection_bypass and pri.travelnet_remove and pri.travelnet_attach and pri.shop_admin then
 			minetest.chat_send_player(name, "Your Rank: Admin")
 		elseif pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom and pri.teleport and pri.noclip and pri.debug and pri.settime and pri.bring then
 			minetest.chat_send_player(name, "Your Rank: Legend")

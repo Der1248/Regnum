@@ -183,6 +183,7 @@ creative.register_tab("nodes", "Nodes", minetest.registered_nodes)
 creative.register_tab("tools", "Tools", minetest.registered_tools)
 creative.register_tab("craftitems", "Items", minetest.registered_craftitems)
 
+
 local old_homepage_name = sfinv.get_homepage_name
 function sfinv.get_homepage_name(player)
 	if creative.is_enabled_for(player:get_player_name()) then

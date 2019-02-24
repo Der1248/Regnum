@@ -14,7 +14,7 @@ minetest.register_on_joinplayer(function(player)
 		offset = {x=0, y=30},
 		alignment = {x=1, y=0},
 		number = 0xFFFFFF ,
-		text = "Game Version	 :  3.2.10",
+		text = "Game Version	 :  3.3.0",
 	})
 end)
 
@@ -27,7 +27,6 @@ dofile(minetest.get_modpath("tutorial").."/basic/abm.lua")
 dofile(minetest.get_modpath("tutorial").."/basic/entity.lua")
 dofile(minetest.get_modpath("tutorial").."/basic/chatcommand.lua")
 dofile(minetest.get_modpath("tutorial").."/basic/other.lua")
-dofile(minetest.get_modpath("tutorial").."/other/atom.lua")
 dofile(minetest.get_modpath("tutorial").."/other/mummy.lua")
 dofile(minetest.get_modpath("tutorial").."/other/regnum.lua")
 

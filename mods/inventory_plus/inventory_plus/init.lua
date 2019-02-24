@@ -134,21 +134,22 @@ inventory_plus.get_formspec = function(player,page)
 		local formspec = ""
 		local x,y=ox,oy
 		for _, i in ipairs(inventory_plus.buttons[player:get_player_name()]) do
-			formspec = formspec .. "image_button[0,0;1.6,1.6;inventory_plus_inven.png;inven;]"
+			--formspec = formspec --.. "image_button[0,0;1.6,1.6;inventory_plus_inven.png;inven;]"
 			x=x+1
 			if x >= ox+mx then
 				y = y+1
 				x = ox
 			end
 		end
-  formspec = formspec .. "label[0.3,1.5;selection]"
+    --formspec = formspec .. "label[0.3,1.5;selection]"
 		return formspec
 	end
 	-- craft page
 	if page=="main" then
 		if minetest.setting_getbool("creative_mode") then
+			sfinv.set_player_inventory_formspec(player)
 			return player:get_inventory_formspec()
-				.. get_buttons(6,0,2)
+				--.. get_buttons(6,0,2)
 		else
 			return inventory_plus.inventory[player:get_player_name()]
 				.. get_buttons(0,0,3)
