@@ -134,8 +134,8 @@ function mesecon.mvps_pull_single(pos, dir) -- pos: pos of mvps; direction: dire
 		minetest.add_node(pos, nn)
 		minetest.get_meta(pos):from_table(meta)
 
-		nodeupdate(np)
-		nodeupdate(pos)
+		minetest.check_for_falling(np)
+		minetest.check_for_falling(pos)
 		mesecon.on_dignode(np, nn)
 		mesecon.update_autoconnect(np)
 		on_mvps_move({{pos = pos, oldpos = np, node = nn, meta = meta}})
@@ -173,7 +173,7 @@ function mesecon.mvps_pull_all(pos, direction) -- pos: pos of mvps; direction: d
 		minetest.add_node(oldpos, lnode2)
 		minetest.get_meta(oldpos):from_table(meta)
 		moved_nodes[#moved_nodes+1] = {pos = oldpos, oldpos = lpos2, node = lnode2, meta = meta}
-		nodeupdate(oldpos)
+		minetest.check_for_falling(oldpos)
 		oldpos = {x=lpos2.x, y=lpos2.y, z=lpos2.z}
 		lpos2.x = lpos2.x-direction.x
 		lpos2.y = lpos2.y-direction.y

@@ -1,13 +1,3 @@
--- support for i18n
-armor_i18n = { }
-local MP = minetest.get_modpath(minetest.get_current_modname())
-armor_i18n.gettext, armor_i18n.ngettext = dofile(MP.."/intllib.lua")
--- escaping formspec
-armor_i18n.fgettext = function(...) return minetest.formspec_escape(armor_i18n.gettext(...)) end
--- local functions
-local S = armor_i18n.gettext
-local F = armor_i18n.fgettext
-
 local modname = minetest.get_current_modname()
 local modpath = minetest.get_modpath(modname)
 local worldpath = minetest.get_worldpath()
@@ -15,12 +5,15 @@ local last_punch_time = {}
 local pending_players = {}
 local timer = 0
 
-dofile(modpath.."/api.lua")
-ARMOR_MOD_NAME = minetest.get_current_modname()
-dofile(minetest.get_modpath(ARMOR_MOD_NAME).."/armor.lua")
+-- support for i18n
+armor_i18n = { }
+armor_i18n.gettext, armor_i18n.ngettext = dofile(modpath.."/intllib.lua")
 
-dofile(minetest.get_modpath(ARMOR_MOD_NAME).."/tutorial.lua")
-dofile(minetest.get_modpath(ARMOR_MOD_NAME).."/tutorial_craft.lua")
+-- local functions
+local S = armor_i18n.gettext
+local F = minetest.formspec_escape
+
+dofile(modpath.."/api.lua")
 
 -- Legacy Config Support
 
@@ -71,11 +64,6 @@ end
 
 -- Mod Compatibility
 
---[[if minetest.get_modpath("technic") then
-	armor.formspec = armor.formspec..
-		"label[5,2.5;"..F("Radiation")..":  armor_group_radiation]"
-	armor:register_armor_group("radiation")
-end--]]
 local skin_mods = {"skins", "u_skins", "simple_skins", "wardrobe"}
 for _, mod in pairs(skin_mods) do
 	local path = minetest.get_modpath(mod)
@@ -97,17 +85,17 @@ if not minetest.get_modpath("ethereal") then
 end
 
 dofile(modpath.."/armor.lua")
-
+dofile(modpath.."/tutorial.lua")
+dofile(modpath.."/tutorial_craft.lua")
 -- Armor Initialization
 
 armor.formspec = armor.formspec..
-	"label[4.5,1.5;"..F("Level")..": armor_level]"..
-	"label[4.5,2;"..F("Heal")..":  armor_attr_heal]"..
+	"label[4.5,1.5;"..F(S("Level"))..": armor_level]"..
+	"label[4.5,2;"..F(S("Heal"))..":  armor_attr_heal]"..
 	"label[4.5,2.5;"..F("Fire")..":  armor_attr_fire]"..
 	"label[4.5,3;"..F("Water")..":  armor_attr_water]"..
 	"label[4.5,3.5;"..F("Speed")..":  armor_physics_speed]"..
 	"label[4.5,4;"..F("Jump")..":  armor_physics_jump]"
-	
 armor:register_on_destroy(function(player, index, stack)
 	local name = player:get_player_name()
 	local def = stack:get_definition()
@@ -166,9 +154,10 @@ local function validate_armor_inventory(player)
 		armor:run_callbacks("on_unequip", player, i, stack)
 	end
 end
+
 armor.init_player_armor = function(player)
 	local name = player:get_player_name()
-	local pos = player:getpos()
+	local pos = player:get_pos()
 	if not name or not pos then
 		return false
 	end
@@ -225,7 +214,7 @@ armor.init_player_armor = function(player)
 			return stack:get_count()
 		end,
 		allow_move = function(inv, from_list, from_index, to_list, to_index, count, player)
-            return 0
+			return count
 		end,
 	}, name)
 	local player_inv = player:get_inventory()
@@ -243,8 +232,6 @@ armor.init_player_armor = function(player)
 		local stack = player_inv:get_stack("armor", i)
 		armor_inv:set_stack("armor", i, stack)
 	end
-	
-	
 	for i=1, 6 do
 		local stack = armor_inv:get_stack("armor", i)
 		if stack:get_count() > 0 then
@@ -358,7 +345,7 @@ if armor.config.drop == true or armor.config.destroy == true then
 		end
 		armor:save_armor_inventory(player)
 		armor:set_player_armor(player)
-		local pos = player:getpos()
+		local pos = player:get_pos()
 		if pos and armor.config.destroy == false then
 			minetest.after(armor.config.bones_delay, function()
 				local meta = nil
@@ -423,7 +410,6 @@ end, true)
 minetest.register_globalstep(function(dtime)
 	timer = timer + dtime
 	if timer > armor.config.init_delay then
-		local players = minetest.get_connected_players()
 		for player, count in pairs(pending_players) do
 			local remove = armor.init_player_armor(player) == true
 			pending_players[player] = count + 1
@@ -460,14 +446,14 @@ if armor.config.water_protect == true or armor.config.fire_protect == true then
 		end
 		for _,player in pairs(minetest.get_connected_players()) do
 			local name = player:get_player_name()
-			local pos = player:getpos()
+			local pos = player:get_pos()
 			local hp = player:get_hp()
 			if not name or not pos or not hp then
 				return
 			end
 			-- water breathing
 			if armor.config.water_protect == true then
-				if armor.def[name].water >= 1 and
+				if armor.def[name].water > 0 and
 						player:get_breath() < 10 then
 					player:set_breath(10)
 				end

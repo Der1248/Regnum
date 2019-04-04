@@ -38,6 +38,7 @@ armor = {
 		default.gui_bg..
 		default.gui_bg_img..
 		default.gui_slots..
+		default.get_hotbar_bg(1, 5.7)..
 		"list[current_player;main;1,5.7;8,1;]"..
 		"list[current_player;main;1,6.85;8,3;8]"..
 		"label[8,3;Armor key]"..
@@ -75,8 +76,8 @@ armor = {
 		on_damage = {},
 		on_destroy = {},
 	},
-	migrate_old_inventory = false,
-	version = "0.4.12",
+	migrate_old_inventory = true,
+	version = "0.4.13",
 }
 
 armor.config = {
@@ -84,7 +85,7 @@ armor.config = {
 	init_times = 10,
 	bones_delay = 1,
 	update_time = 1,
-	drop = false,
+	drop = minetest.get_modpath("bones") ~= nil,
 	destroy = false,
 	level_multiplier = 1,
 	heal_multiplier = 1,
@@ -97,7 +98,7 @@ armor.config = {
 	material_mithril = true,
 	material_crystal = true,
 	water_protect = true,
-	fire_protect = true,
+	fire_protect = minetest.get_modpath("ethereal") ~= nil,
 	punch_damage = true,
 }
 
