@@ -404,7 +404,7 @@ minetest.register_chatcommand("rank", {
 	privs = {},
 	func = function(name, param)
 		pri = minetest.get_player_privs(name)
-        if     pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom and pri.teleport and pri.noclip and pri.debug and pri.settime and pri.bring and pri.server and pri.password and pri.delprotect and pri.kick and pri.ban and pri.rollback and pri.privs and pri.basic_privs and pri.give and pri.protection_bypass and pri.travelnet_remove and pri.travelnet_attach and pri.shop_admin then
+        if     pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom and pri.teleport and pri.noclip and pri.debug and pri.settime and pri.bring and pri.server and pri.password and pri.delprotect and pri.kick and pri.ban and pri.rollback and pri.privs and pri.basic_privs and pri.give and pri.protection_bypass and pri.travelnet_remove and pri.travelnet_attach and pri.shop_admin and pri.creative then
 			minetest.chat_send_player(name, "Your Rank: Admin")
 		elseif pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom and pri.teleport and pri.noclip and pri.debug and pri.settime and pri.bring then
 			minetest.chat_send_player(name, "Your Rank: Legend")

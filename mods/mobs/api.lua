@@ -2730,6 +2730,7 @@ function mob_class:on_punch(hitter, tflp, tool_capabilities, dir)
 	end -- END if damage
 
 	-- knock back effect (only on full punch)
+	--[[
 	if self.knock_back
 	and tflp >= punch_interval then
 
@@ -2757,7 +2758,7 @@ function mob_class:on_punch(hitter, tflp, tool_capabilities, dir)
 
 		self.pause_timer = 0.25
 	end
-
+	--]]
 	-- if skittish then run away
 	if self.runaway == true
 	and self.order ~= "stand" then
