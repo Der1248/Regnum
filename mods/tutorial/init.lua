@@ -14,7 +14,7 @@ minetest.register_on_joinplayer(function(player)
 		offset = {x=0, y=30},
 		alignment = {x=1, y=0},
 		number = 0xFFFFFF ,
-		text = "Game Version	 :  3.3.3",
+		text = "Game Version	 :  3.3.4",
 	})
 end)
 
@@ -107,6 +107,38 @@ minetest.register_node("tutorial:trophy_year1", {
 })
 minetest.register_node("tutorial:trophy_year2", {
     description = "Two years Regnum!!",
+	tiles = {
+		"moreores_mithril_block.png"
+	},
+    groups = { snappy=3 },
+    drawtype = "nodebox",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.125, -0.5, -0.125, 0.1875, -0.4375, 0.1875}, -- NodeBox1
+			{-0.0625, -0.4375, -0.0625, 0.125, -0.375, 0.125}, -- NodeBox2
+			{-0.02, -0.375, -0.02, 0.0825, -0.1875, 0.0825}, -- NodeBox3
+			{-0.0625, -0.1875, -0.0625, 0.125, -0.125, 0.125}, -- NodeBox4
+			{-0.125, -0.1875, -0.0625, -0.0625, 0.125, 0.125}, -- NodeBox5
+			{0.125, -0.1875, -0.0625, 0.1875, 0.125, 0.125}, -- NodeBox6
+			{-0.125, -0.1875, 0.125, 0.1875, 0.125, 0.1875}, -- NodeBox7
+			{-0.125, -0.1875, -0.125, 0.1875, 0.125, -0.0625}, -- NodeBox8
+			{-0.0625, -0.25, -0.0625, 0.125, -0.1875, 0.125}, -- NodeBox9
+			{0.1875, 0.05, 0, 0.23, 0.0925, 0.0625}, -- NodeBox10
+			{0.1875, -0.15, 0, 0.23, -0.11, 0.0625}, -- NodeBox11
+			{0.23, -0.15, 0, 0.2725, 0.0925, 0.0625}, -- NodeBox12
+			{-0.1675, -0.15, 0, -0.125, -0.11, 0.0625}, -- NodeBox13
+			{-0.1675, 0.05, 0, -0.125, 0.0925, 0.0625}, -- NodeBox14
+			{-0.21, -0.15, 0, -0.1675, 0.0925, 0.0625}, -- NodeBox15
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.21, -0.5, -0.125, 0.2725, 0.125, 0.1875 }
+	}
+})
+minetest.register_node("tutorial:trophy_year3", {
+    description = "Three years Regnum!!",
 	tiles = {
 		"moreores_mithril_block.png"
 	},
@@ -954,6 +986,11 @@ minetest.register_on_joinplayer(function(player)
     player:set_physics_override(override_table)
     local player_inv = player:get_inventory()
     player_inv:set_stack("crtime", 1, nil)
+	player_inv:set_size("year", 3)
+	if player_inv:room_for_item("main", "tutorial:trophy_year3") and player_inv:get_stack("year", 3):get_count() == 0 then
+		player_inv:add_item("main", "tutorial:trophy_year3")
+		player_inv:set_stack("year", 3, "default:dirt")
+	end
 end)
 minetest.register_craftitem("tutorial:cooking_schluessel1", {
 	description = "Cookingkey lv.1",

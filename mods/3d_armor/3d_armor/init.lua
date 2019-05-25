@@ -350,7 +350,6 @@ minetest.register_on_player_hpchange(function(player, hp_change)
 		local name = player:get_player_name()
 		if name then
 			local heal = armor.def[name].heal
-			minetest.chat_send_all(""..heal)
 			if heal >= math.random(100) then
 				hp_change = 0
 			end
