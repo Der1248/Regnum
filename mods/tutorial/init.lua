@@ -14,7 +14,7 @@ minetest.register_on_joinplayer(function(player)
 		offset = {x=0, y=30},
 		alignment = {x=1, y=0},
 		number = 0xFFFFFF ,
-		text = "Game Version	 :  3.3.4",
+		text = "Game Version	 :  3.3.5",
 	})
 end)
 
@@ -986,11 +986,11 @@ minetest.register_on_joinplayer(function(player)
     player:set_physics_override(override_table)
     local player_inv = player:get_inventory()
     player_inv:set_stack("crtime", 1, nil)
-	player_inv:set_size("year", 3)
-	if player_inv:room_for_item("main", "tutorial:trophy_year3") and player_inv:get_stack("year", 3):get_count() == 0 then
-		player_inv:add_item("main", "tutorial:trophy_year3")
-		player_inv:set_stack("year", 3, "default:dirt")
-	end
+	--player_inv:set_size("year", 3)
+	--if player_inv:room_for_item("main", "tutorial:trophy_year3") and player_inv:get_stack("year", 3):get_count() == 0 then
+	--	player_inv:add_item("main", "tutorial:trophy_year3")
+	--	player_inv:set_stack("year", 3, "default:dirt")
+	--end
 end)
 minetest.register_craftitem("tutorial:cooking_schluessel1", {
 	description = "Cookingkey lv.1",
