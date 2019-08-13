@@ -14,7 +14,7 @@ minetest.register_on_joinplayer(function(player)
 		offset = {x=0, y=30},
 		alignment = {x=1, y=0},
 		number = 0xFFFFFF ,
-		text = "Game Version	 :  3.3.5",
+		text = "Game Version	 :  3.3.6",
 	})
 end)
 
@@ -6379,10 +6379,10 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 			end	
 			local player_inv = player:get_inventory()
 			if crafting8.get_formspec(player) == (player:get_inventory_formspec()) then
-                player_inv:set_stack("crtime", 1, nil)
-                player_inv:add_item("main", "tutorial:bottle_crystal")
 				inventory_plus.set_inventory_formspec(player, crafting8.get_formspec(player))
 			end
+			player_inv:set_stack("crtime", 1, nil)
+            player_inv:add_item("main", "tutorial:bottle_crystal")
 		end)
 	end
     if fields.meda1 then
