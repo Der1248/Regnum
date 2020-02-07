@@ -62,7 +62,7 @@ minetest.register_node("technic:supply_converter", {
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("infotext", S("Supply Converter"))
-		meta:set_float("active", false)
+		meta:set_float("active", 0)
 	end,
 	technic_run = run,
 })

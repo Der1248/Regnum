@@ -2098,13 +2098,6 @@ minetest.register_craft({
     }
 })
 minetest.register_craft({
-    output = 'nyancat:nyancat',
-    recipe = {
-        {'nyancat:nyancat_rainbow', 'nyancat:nyancat_rainbow'},
-        {'nyancat:nyancat_rainbow', 'nyancat:nyancat_rainbow'},
-    }
-})
-minetest.register_craft({
     output = 'tutorial:battleaxe_mega13',
     recipe = {
 		{'default:goldblock','default:goldblock', 'default:goldblock'},

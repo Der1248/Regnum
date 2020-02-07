@@ -138,7 +138,7 @@ skins.formspec.main = function(name)
 	else
 		formspec = formspec .. "button[0,4.7;1,.5;skins_page_"..page..";<<]"
 	end
-	formspec = formspec .. "button[.75,4.7;6.5,.5;skins_page_"..page..";Page "..(page+1).."/"..math.floor(#skins.list/8+1).."]" -- a button is used so text is centered
+	formspec = formspec .. "button[.75,4.7;6.5,.5;skins_page_"..page..";Page "..(page+1).."/"..math.floor(#skins.list/8).."]" -- a button is used so text is centered
 	if index > 8 then
 		formspec = formspec .. "button[7,4.7;1,.5;skins_page_"..(page+1)..";>>]"
 	else

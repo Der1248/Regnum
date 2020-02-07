@@ -320,8 +320,17 @@ if pipeworks.enable_node_breaker then
 				virtplayer:set_wielded_item(on_use(wieldstack, virtplayer, pointed_thing) or wieldstack)
 			else
 				local under_node = minetest.get_node(pointed_thing.under)
-				local on_dig = (minetest.registered_nodes[under_node.name] or {on_dig=minetest.node_dig}).on_dig
-				on_dig(pointed_thing.under, under_node, virtplayer)
+				local array = {"tutorial:stone_with_titan","tutorial:stone_with_regnum","tutorial:stone_with_blau","tutorial:stone_with_rot","tutorial:stone_with_titan","tutorial:arena_glass","tutorial:arena_block","tutorial:stone_with_admin","tutorial:stone_with_uranium","tutorial:stone_with_white","tutorial:stone_with_black","tutorial:","tutorial:","tutorial:"}
+				local d = 0
+				for index, value in ipairs(array) do
+					if value == under_node.name then
+						d = 1
+					end
+				end
+				if d == 0 then
+					local on_dig = (minetest.registered_nodes[under_node.name] or {on_dig=minetest.node_dig}).on_dig
+					on_dig(pointed_thing.under, under_node, virtplayer)
+				end
 			end
 			wieldstack = virtplayer:get_wielded_item()
 			local wieldname = wieldstack:get_name()

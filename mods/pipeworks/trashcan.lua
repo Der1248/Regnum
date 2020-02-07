@@ -38,12 +38,3 @@ minetest.register_node("pipeworks:trashcan", {
 		minetest.get_meta(pos):get_inventory():set_stack(listname, index, ItemStack(""))
 	end,
 })
-
-minetest.register_craft({
-	output = "pipeworks:trashcan",
-	recipe = {
-		{ "homedecor:plastic_sheeting", "homedecor:plastic_sheeting", "homedecor:plastic_sheeting" },
-		{ "default:steel_ingot", "", "default:steel_ingot" },
-		{ "default:steel_ingot", "default:steel_ingot", "default:steel_ingot" },
-	},
-})

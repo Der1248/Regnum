@@ -145,14 +145,14 @@ inventory_plus.get_formspec = function(player,page)
 		return formspec
 	end
 	-- craft page
-	if page=="main" then
+	if page=="main" or page==""then
 		if minetest.setting_getbool("creative_mode") then
 			sfinv.set_player_inventory_formspec(player)
 			return player:get_inventory_formspec()
 				--.. get_buttons(6,0,2)
 		else
 			return inventory_plus.inventory[player:get_player_name()]
-				.. get_buttons(0,0,3)
+				--.. get_buttons(0,0,3)
 		end
 	end
 end

@@ -998,9 +998,9 @@ rg16.get_formspec = function(player, pos)
         .."label[0,2.8;The dog and the cat will kill monsters and collect the wrapping paper]"
         .."label[0,3.1;The sheep will produce wool.]"
         .."label[0,3.4;The dagon will produce a dragon gift or a gem gift if you have a regnum crystal.]"
-        .."label[0,3.4;The fox will produce a fox key and treasures.]"
-        .."label[0,3.4;The tortoise will produce a tortoise gift or a gem gift if you have a regnum crystal.]"
-        .."label[0,3.7;You can chage the color of the pets and they can folow you.]"
+        .."label[0,3.7;The fox will produce a fox key and treasures.]"
+        .."label[0,4.0;The tortoise will produce a tortoise gift or a gem gift if you have a regnum crystal.]"
+        .."label[0,4.3;You can chage the color of the pets and they can folow you.]"
         .."button[2,10;   2,0.5;rg15;<]"
         .."button[4,10;   2,0.5;rg17;>]"
 	return formspec		
@@ -1149,7 +1149,7 @@ rg8.get_formspec = function(player, pos)
         .."label[0,1.3;Here you can see how to craft items]"
         .."label[0,1.6;Click on one item to see the crafting]"
         .."label[0,1.9;You can also see 4x4 and 5x5 craftings,]"
-        .."label[0,2.2;You can see the craftings for battleaxes/armor/gun ]"
+        .."label[0,2.2;You can see the craftings for battleaxes/armor/gun]"
         .."label[0,2.5;in the Regnum Craft Guide.]"
         .."label[0,2.8;How to use Craft guide:]"
         .."label[0,3.1;1. Click on one item and you see the crafting above]"
@@ -2023,7 +2023,6 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
             player_inv:set_stack("dna", 8, "tutorial:big_dna_string "..(y8-1))
             player_inv:add_item("main","mobs:random_monster_egg")
         end
-		inventory_plus.set_inventory_formspec(player, dna.get_formspec(player))
 	end
 end)
 local ach = {}
@@ -2354,7 +2353,7 @@ ach2.get_formspec = function(player, pos)
     formspec= "label[0.8,1.1;Regnumbattleaxe]"
 		.."label[0.8,1.9;Bagkey Lv.MAX]"
 		.."label[0.8,2.7.5;Armorkey]"
-		.."label[0.8,3.5;Xp key]"
+		.."label[0.8,3.5;Levelkey]"
 		.."label[0.8,4.3.5;Craftkey Lv.MAX]"
 		.."label[0.8,5.1;Legendkey]"
 		.."label[0.8,5.9;Regnumkey]"
@@ -2451,7 +2450,7 @@ for j = 1, 8, 1 do
 			buildable_to = true,
 			damage_per_second = (i*8),
 			drop = {},
-			groups = {dig_immediate=3},
+			groups = {dig_immediate=3,not_in_creative_inventory=1},
 		})
 		minetest.register_abm({
 			nodenames = {"tutorial:legend_thunder_"..i.."_"..j},
@@ -2529,6 +2528,7 @@ for k = 1, 8, 1 do
 			minetest.register_tool("tutorial:legendball_"..i.."_"..j.."_"..k, {
 				description = "Legend Ball: Ball damage lv."..k..", Thunder damage lv."..i..", Thunder lengh lv."..j,
 				inventory_image = "tutorial_legendball.png",
+				groups = {not_in_creative_inventory=1},
 				on_use = function(itemstack, placer, pointed_thing)
 						local dir = placer:get_look_dir();
 						local inv = placer:get_inventory()
@@ -2549,10 +2549,10 @@ end
 local mode_text = {
 	{"Give player Enemy rank. (revoke all privs)"},
 	{"Give player Member rank. (interact,shout)"},
-	{"Give player Premium rank. (interact,shout,fly,fast,home,zoom)"},
-	{"Give player VIP rank. (interact,shout,fly,fast,home,teleport,zoom)"},
-	{"Give player Hero rank. (interact,shout,fly,fast,home,teleport,noclip,zoom,debug)"},
-	{"Give player Legend rank (interact,shout,fly,fast,home,teleport,bring,noclip,settime,zoom,debug)"},
+	{"Give player Premium rank. (interact,shout,fly,fast,home)"},
+	{"Give player VIP rank. (interact,shout,fly,fast,home,teleport)"},
+	{"Give player Hero rank. (interact,shout,fly,fast,home,teleport,noclip,debug)"},
+	{"Give player Legend rank (interact,shout,fly,fast,home,teleport,noclip,debug,bring,settime)"},
 	{"Give player Admin rank (all privs)"},
 	{"Mark player as a youtuber "},
 }
@@ -2619,7 +2619,7 @@ local function server_hammer_handler(itemstack, user, pointed_thing, mode)
 			player:set_nametag_attributes({color = {a = 255, r = 255, g = 255, b = 255}, text = "[Youtuber][Member]"..player:get_player_name()})
 		end
 	elseif mode == 3 then
-		minetest.chat_send_player(punched_player, puncher.." gives you Premium rank. You can use interact,shout,fast,fly,home and zoom")
+		minetest.chat_send_player(punched_player, puncher.." gives you Premium rank. You can use interact,shout,fly,fast and home")
 		minetest.set_player_privs(punched_player, {})
 		local punched_player_privs = minetest.get_player_privs(punched_player)
 		punched_player_privs["interact"] = true
@@ -2627,7 +2627,6 @@ local function server_hammer_handler(itemstack, user, pointed_thing, mode)
 		punched_player_privs["fly"] = true
 		punched_player_privs["fast"] = true
 		punched_player_privs["home"] = true
-        punched_player_privs["zoom"] = true
 		minetest.set_player_privs(punched_player, punched_player_privs)
 		local player = minetest.get_player_by_name(punched_player)
 		local player_inv = player:get_inventory()
@@ -2639,7 +2638,7 @@ local function server_hammer_handler(itemstack, user, pointed_thing, mode)
 			player:set_nametag_attributes({color = {a = 255, r = 0, g = 0, b = 255}, text = "[Youtuber][Premium]"..player:get_player_name()})
 		end
 	elseif mode == 4 then
-		minetest.chat_send_player(punched_player, puncher.." gives you VIP rank. You can use interact,shout,fast,home,zoom,teleport and fly")
+		minetest.chat_send_player(punched_player, puncher.." gives you VIP rank. You can use interact,shout,fly,fast,home and teleport")
 		minetest.set_player_privs(punched_player, {})
 		local punched_player_privs = minetest.get_player_privs(punched_player)
 		punched_player_privs["interact"] = true
@@ -2647,7 +2646,6 @@ local function server_hammer_handler(itemstack, user, pointed_thing, mode)
 		punched_player_privs["fly"] = true
 		punched_player_privs["fast"] = true
 		punched_player_privs["home"] = true
-        punched_player_privs["zoom"] = true
 		punched_player_privs["teleport"] = true
 		minetest.set_player_privs(punched_player, punched_player_privs)	
 		local player = minetest.get_player_by_name(punched_player)
@@ -2660,7 +2658,7 @@ local function server_hammer_handler(itemstack, user, pointed_thing, mode)
 			player:set_nametag_attributes({color = {a = 255, r = 255, g = 255, b = 0}, text = "[Youtuber][VIP]"..player:get_player_name()})
 		end
 	elseif mode == 5 then
-		minetest.chat_send_player(punched_player, puncher.." gives you Hero rank. You can use interact,shout,fast,home,zoom,teleport,noclip,fly and debug")
+		minetest.chat_send_player(punched_player, puncher.." gives you Hero rank. You can use interact,shout,fly,fast,home,teleport,noclip and debug")
 		minetest.set_player_privs(punched_player, {})
 		local punched_player_privs = minetest.get_player_privs(punched_player)
 		punched_player_privs["interact"] = true
@@ -2668,7 +2666,6 @@ local function server_hammer_handler(itemstack, user, pointed_thing, mode)
 		punched_player_privs["fly"] = true
 		punched_player_privs["fast"] = true
 		punched_player_privs["home"] = true
-        punched_player_privs["zoom"] = true
 		punched_player_privs["teleport"] = true
 		punched_player_privs["noclip"] = true
         punched_player_privs["debug"] = true
@@ -2683,7 +2680,7 @@ local function server_hammer_handler(itemstack, user, pointed_thing, mode)
 			player:set_nametag_attributes({color = {a = 255, r = 0, g = 255, b = 255}, text = "[Youtuber][Hero]"..player:get_player_name()})
 		end
 	elseif mode == 6 then
-		minetest.chat_send_player(punched_player, puncher.." gives you Legend rank. You can use interact,shout,fast,home,zoom,teleport,noclip,fly,debug,bring and settime")
+		minetest.chat_send_player(punched_player, puncher.." gives you Legend rank. You can use interact,shout,fly,fast,home,teleport,noclip,debug,bring and settime")
 		minetest.set_player_privs(punched_player, {})
 		local punched_player_privs = minetest.get_player_privs(punched_player)
 		punched_player_privs["interact"] = true
@@ -2691,7 +2688,6 @@ local function server_hammer_handler(itemstack, user, pointed_thing, mode)
 		punched_player_privs["fly"] = true
 		punched_player_privs["fast"] = true
 		punched_player_privs["home"] = true
-        punched_player_privs["zoom"] = true
 		punched_player_privs["bring"] = true
 		punched_player_privs["teleport"] = true
 		punched_player_privs["noclip"] = true
@@ -2716,7 +2712,6 @@ local function server_hammer_handler(itemstack, user, pointed_thing, mode)
 		punched_player_privs["fly"] = true
 		punched_player_privs["fast"] = true
 		punched_player_privs["home"] = true
-        punched_player_privs["zoom"] = true
 		punched_player_privs["bring"] = true
 		punched_player_privs["teleport"] = true
 		punched_player_privs["noclip"] = true
@@ -2750,15 +2745,15 @@ local function server_hammer_handler(itemstack, user, pointed_thing, mode)
 		minetest.chat_send_player(punched_player, puncher.." marks you as a youtuber")
 		pri = minetest.get_player_privs(punched_player)
 		local player = minetest.get_player_by_name(punched_player)
-		if pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom and pri.teleport and pri.noclip and pri.debug and pri.settime and pri.bring and pri.server and pri.password and pri.delprotect and pri.kick and pri.ban and pri.rollback and pri.privs and pri.basic_privs and pri.give and pri.sign_editor and pri.protection_bypass and pri.travelnet_remove and pri.travelnet_attach and pri.shop_admin and pri.creative then
+		if pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.teleport and pri.noclip and pri.debug and pri.settime and pri.bring and pri.server and pri.password and pri.delprotect and pri.kick and pri.ban and pri.rollback and pri.privs and pri.basic_privs and pri.give and pri.sign_editor and pri.protection_bypass and pri.travelnet_remove and pri.travelnet_attach and pri.shop_admin and pri.creative then
 			player:set_nametag_attributes({color = {a = 255, r = 255, g = 0, b = 255}, text = "[Youtuber][Admin]"..player:get_player_name()})
-		elseif pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom and pri.teleport and pri.noclip and pri.debug and pri.settime and pri.bring then
+		elseif pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.teleport and pri.noclip and pri.debug and pri.settime and pri.bring then
 			player:set_nametag_attributes({color = {a = 255, r = 0, g = 255, b = 0}, text = "[Youtuber][Legend]"..player:get_player_name()})
-		elseif pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom and pri.teleport and pri.noclip and pri.debug then
+		elseif pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.teleport and pri.noclip and pri.debug then
 			player:set_nametag_attributes({color = {a = 255, r = 0, g = 255, b = 255}, text = "[Youtuber][Hero]"..player:get_player_name()})
-		elseif pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom and pri.teleport then
+		elseif pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.teleport then
 			player:set_nametag_attributes({color = {a = 255, r = 255, g = 255, b = 0}, text = "[Youtuber][VIP]"..player:get_player_name()})
-		elseif pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom then
+		elseif pri.interact and pri.shout and pri.fly and pri.fast and pri.home then
 			player:set_nametag_attributes({color = {a = 255, r = 0, g = 0, b = 255}, text = "[Youtuber][Premium]"..player:get_player_name()})
 		elseif pri.interact and pri.shout then
 			player:set_nametag_attributes({text = "[Youtuber][Member]"..player:get_player_name()})
@@ -2801,42 +2796,6 @@ minetest.register_on_joinplayer(function(player)
 	local player_inv = player:get_inventory()
 	player_inv:set_size("t", 1)
 	player_inv:add_item("t", "default:dirt")
-	local pri = minetest.get_player_privs(player:get_player_name())
-	player_inv:set_size("youtube", 1)
-	local c = player_inv:get_stack("youtube",1):get_count()
-	if c == 0 then
-		if pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom and pri.teleport and pri.noclip and pri.debug and pri.settime and pri.bring and pri.server and pri.password and pri.delprotect and pri.kick and pri.ban and pri.rollback and pri.privs and pri.basic_privs and pri.give and pri.protection_bypass and pri.travelnet_remove and pri.travelnet_attach and pri.shop_admin and pri.creative then
-			player:set_nametag_attributes({color = {a = 255, r = 255, g = 0, b = 255}, text = "[Admin]"..player:get_player_name()})
-		elseif pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom and pri.teleport and pri.noclip and pri.debug and pri.settime and pri.bring then
-			player:set_nametag_attributes({color = {a = 255, r = 0, g = 255, b = 0}, text = "[Legend]"..player:get_player_name()})
-		elseif pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom and pri.teleport and pri.noclip and pri.debug then
-			player:set_nametag_attributes({color = {a = 255, r = 0, g = 255, b = 255}, text = "[Hero]"..player:get_player_name()})
-		elseif pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom and pri.teleport then
-			player:set_nametag_attributes({color = {a = 255, r = 255, g = 255, b = 0}, text = "[VIP]"..player:get_player_name()})
-		elseif pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom then
-			player:set_nametag_attributes({color = {a = 255, r = 0, g = 0, b = 255}, text = "[Premium]"..player:get_player_name()})
-		elseif pri.interact and pri.shout then
-			player:set_nametag_attributes({text = "[Member]"..player:get_player_name()})
-		else
-			player:set_nametag_attributes({color = {a = 255, r = 255, g = 0, b = 0}, text = "[Enemy]"..player:get_player_name()})
-		end
-	else
-		if pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom and pri.teleport and pri.noclip and pri.debug and pri.settime and pri.bring and pri.server and pri.password and pri.delprotect and pri.kick and pri.ban and pri.rollback and pri.privs and pri.basic_privs and pri.give and pri.protection_bypass and pri.travelnet_remove and pri.travelnet_attach and pri.shop_admin and pri.creative then
-			player:set_nametag_attributes({color = {a = 255, r = 255, g = 0, b = 255}, text = "[Youtuber][Admin]"..player:get_player_name()})
-		elseif pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom and pri.teleport and pri.noclip and pri.debug and pri.settime and pri.bring then
-			player:set_nametag_attributes({color = {a = 255, r = 0, g = 255, b = 0}, text = "[Youtuber][Legend]"..player:get_player_name()})
-		elseif pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom and pri.teleport and pri.noclip and pri.debug then
-			player:set_nametag_attributes({color = {a = 255, r = 0, g = 255, b = 255}, text = "[Youtuber][Hero]"..player:get_player_name()})
-		elseif pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom and pri.teleport then
-			player:set_nametag_attributes({color = {a = 255, r = 255, g = 255, b = 0}, text = "[Youtuber][VIP]"..player:get_player_name()})
-		elseif pri.interact and pri.shout and pri.fly and pri.fast and pri.home and pri.zoom then
-			player:set_nametag_attributes({color = {a = 255, r = 0, g = 0, b = 255}, text = "[Youtuber][Premium]"..player:get_player_name()})
-		elseif pri.interact and pri.shout then
-			player:set_nametag_attributes({text = "[Youtuber][Member]"..player:get_player_name()})
-		else
-			player:set_nametag_attributes({color = {a = 255, r = 255, g = 0, b = 0}, text = "[Youtuber][Enemy]"..player:get_player_name()})
-		end
-	end
 end)
 local kri = {}
 kri.get_formspec = function(player, pos)
@@ -3926,7 +3885,7 @@ xp_gru.get_formspec = function(player)
         .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
         .."bgcolor[#080808BB;true]"
 		.."button[2.5,0;2,0.5;main;Main]"
-		.."textlist[0,1;6,5;xp_gru;Lv.1 = 10xp,Lv.2 = 20xp,Lv.3 = 30xp,Lv.4 = 40xp,Lv.5 = 50xp,Lv.6 = 70xp,Lv.7 = 90xp,Lv.8 = 110xp,Lv.9 = 130xp,Lv.10 = 150xp,Lv.11 = 180xp,Lv.12 = 210xp,Lv.13 = 240xp,Lv.14 = 270xp,Lv.15 = 300xp,Lv.16 = 340xp,Lv.17 = 380xp,Lv.18 = 420xp,Lv.19 = 460xp,Lv.20 = 500xp,Lv.21 = 550xp,Lv.22 = 600xp,Lv.23 = 650xp,Lv.24 = 700xp,Lv.25 = 750xp,Lv.26 = 810xp,Lv.27 = 870xp,Lv.28 = 930xp,Lv.29 = 990xp,Lv.30 = 1050xp,Lv.31 = 1120xp,Lv.32 = 1190xp,Lv.33 = 1260xp,Lv.34 = 1330xp,Lv.35 = 1400xp,Lv.36 = 1480xp,Lv.37 = 1560xp,Lv.38 = 1640xp,Lv.39 = 1720xp,Lv.40 = 1800xp,Lv.41 = 1890xp,Lv.42 = 1980xp,Lv.43 = 2070xp,Lv.44 = 2160xp,Lv.45 = 2250xp,Lv.45 = 2250xp,Lv.46 = 2350xp,Lv.47 = 2450xp,Lv.48 = 2550xp,Lv.49 = 2650xp,Lv.50 = 2750xp,Lv.51 = 2860xp,Lv.52 = 2970xp,Lv.53 = 3080xp,Lv.54 = 3190xp,Lv.55 = 3300xp,Lv.56 = 3420xp,Lv.57 = 3540xp,Lv.58 = 3660xp,Lv.59 = 3780xp,Lv.60 = 3900xp,Lv.61 = 4030xp,Lv.62 = 4160xp,Lv.63 = 4290xp,Lv.64 = 4420xp,Lv.65 = 4550xp,Lv.66 = 4690xp,Lv.67 = 4830xp,Lv.68 = 4970xp,Lv.69 = 5110xp,Lv.70 = 5250xp,Lv.71 = 5400xp,Lv.72 = 5550xp,Lv.73 = 5700xp,Lv.74 = 5850xp,Lv.75 = 6000xp,Lv.76 = 6160xp,Lv.77 = 6320xp,Lv.78 = 6480xp,Lv.79 = 6640xp,Lv.80 = 6800xp,Lv.81 = 6970xp,Lv.82 = 7140xp,Lv.83 = 7310xp,Lv.84 = 7480xp,Lv.85 = 7650xp,Lv.86 = 7830xp,Lv.87 = 8010xp,Lv.88 = 8190xp,Lv.89 = 8370xp,Lv.90 = 8550xp,Lv.91 = 8740xp,Lv.92 = 8930xp,Lv.93 = 9120xp,Lv.94 = 9310xp,Lv.95 = 9500xp,Lv.96 = 9700xp,Lv.97 = 9900xp,Lv.98 = 10100xp,Lv.99 = 10300xp,Lv.100 = 10500xp,Lv.MAX = 11950xp]"
+		.."textlist[0,1;6,5;xp_gru;Lv.1 = 10xp,Lv.2 = 20xp,Lv.3 = 30xp,Lv.4 = 40xp,Lv.5 = 50xp,Lv.6 = 70xp,Lv.7 = 90xp,Lv.8 = 110xp,Lv.9 = 130xp,Lv.10 = 150xp,Lv.11 = 180xp,Lv.12 = 210xp,Lv.13 = 240xp,Lv.14 = 270xp,Lv.15 = 300xp,Lv.16 = 340xp,Lv.17 = 380xp,Lv.18 = 420xp,Lv.19 = 460xp,Lv.20 = 500xp,Lv.21 = 550xp,Lv.22 = 600xp,Lv.23 = 650xp,Lv.24 = 700xp,Lv.25 = 750xp,Lv.26 = 810xp,Lv.27 = 870xp,Lv.28 = 930xp,Lv.29 = 990xp,Lv.30 = 1050xp,Lv.31 = 1120xp,Lv.32 = 1190xp,Lv.33 = 1260xp,Lv.34 = 1330xp,Lv.35 = 1400xp,Lv.36 = 1480xp,Lv.37 = 1560xp,Lv.38 = 1640xp,Lv.39 = 1720xp,Lv.40 = 1800xp,Lv.41 = 1890xp,Lv.42 = 1980xp,Lv.43 = 2070xp,Lv.44 = 2160xp,Lv.45 = 2250xp,Lv.46 = 2350xp,Lv.47 = 2450xp,Lv.48 = 2550xp,Lv.49 = 2650xp,Lv.50 = 2750xp,Lv.51 = 2860xp,Lv.52 = 2970xp,Lv.53 = 3080xp,Lv.54 = 3190xp,Lv.55 = 3300xp,Lv.56 = 3420xp,Lv.57 = 3540xp,Lv.58 = 3660xp,Lv.59 = 3780xp,Lv.60 = 3900xp,Lv.61 = 4030xp,Lv.62 = 4160xp,Lv.63 = 4290xp,Lv.64 = 4420xp,Lv.65 = 4550xp,Lv.66 = 4690xp,Lv.67 = 4830xp,Lv.68 = 4970xp,Lv.69 = 5110xp,Lv.70 = 5250xp,Lv.71 = 5400xp,Lv.72 = 5550xp,Lv.73 = 5700xp,Lv.74 = 5850xp,Lv.75 = 6000xp,Lv.76 = 6160xp,Lv.77 = 6320xp,Lv.78 = 6480xp,Lv.79 = 6640xp,Lv.80 = 6800xp,Lv.81 = 6970xp,Lv.82 = 7140xp,Lv.83 = 7310xp,Lv.84 = 7480xp,Lv.85 = 7650xp,Lv.86 = 7830xp,Lv.87 = 8010xp,Lv.88 = 8190xp,Lv.89 = 8370xp,Lv.90 = 8550xp,Lv.91 = 8740xp,Lv.92 = 8930xp,Lv.93 = 9120xp,Lv.94 = 9310xp,Lv.95 = 9500xp,Lv.96 = 9700xp,Lv.97 = 9900xp,Lv.98 = 10100xp,Lv.99 = 10300xp,Lv.100 = 10500xp,Lv.MAX = 11950xp]"
 	return formspec
 end
 xp_gel.get_formspec = function(player)
@@ -3994,7 +3953,7 @@ xp_gui.get_formspec = function(player)
 		.."list[current_player;main;0,4.25;8,1;]"
 		.."list[current_player;main;0,5.5;8,3;8]"
 		.."list[current_player;feld2;5,0;1,1;]"
-		.."label[5,0.9;Xp key]"
+		.."label[5.1,0.9;Levelkey]"
 		.."button[3.5,1.5;2.0,0.2;"..image1..";Xp green you need]"
 		.."button[3.5,2.2;2.0,0.2;"..image2..";Xp red/blue you need]"
 		.."button[5.5,1.5;2.0,0.2;"..image3..";Xp gray you need]"
@@ -4010,6 +3969,70 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
     end
 	if fields.xp_gui then
 		inventory_plus.set_inventory_formspec(player, xp_gui.get_formspec(player))
+	end
+	if fields.craft10 then
+		local item_name = ""
+		for i=1,10 do
+			local player_inv = player:get_inventory()
+			local crafted = nil
+			local table_dec = nil
+			local player_inv = player:get_inventory()
+			local tablelist = player_inv:get_list("craft")
+			if tablelist then
+				crafted,table_dec = minetest.get_craft_result({method = "normal", width = 3, items = tablelist})
+			end
+			if item_name == "" or item_name == crafted.item:get_name() then
+				item_name = crafted.item:get_name()
+				local k = 0
+				if player_inv:room_for_item("main", crafted.item) == true then
+					k = 1
+				end
+				if crafted.item:get_name() == "" then
+					k = 0
+				end
+				local kk = nil
+				if not kk == ture then
+					k = 0
+				end
+				if k == 1 then
+					player_inv:add_item("main", crafted.item)
+					player_inv:set_list("craft", table_dec.items)
+				end
+			end
+		end
+		inventory_plus.set_inventory_formspec(player, sfinv.get_formspec(player, sfinv.get_or_create_context(player)))
+	end
+	if fields.craft99 then
+		local item_name = ""
+		for i=1,99 do
+			local player_inv = player:get_inventory()
+			local crafted = nil
+			local table_dec = nil
+			local player_inv = player:get_inventory()
+			local tablelist = player_inv:get_list("craft")
+			if tablelist then
+				crafted,table_dec = minetest.get_craft_result({method = "normal", width = 3, items = tablelist})
+			end
+			if item_name == "" or item_name == crafted.item:get_name() then
+				item_name = crafted.item:get_name()
+				local k = 0
+				if player_inv:room_for_item("main", crafted.item) == true then
+					k = 1
+				end
+				if crafted.item:get_name() == "" then
+					k = 0
+				end
+				local kk = nil
+				if not kk == ture then
+					k = 0
+				end
+				if k == 1 then
+					player_inv:add_item("main", crafted.item)
+					player_inv:set_list("craft", table_dec.items)
+				end
+			end
+		end
+		inventory_plus.set_inventory_formspec(player, sfinv.get_formspec(player, sfinv.get_or_create_context(player)))
 	end
 	if fields.cra then
 		local player_inv = player:get_inventory()
@@ -4036,8 +4059,9 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 			player_inv:set_list("crvier", table_dec.items)
 		end
 		inventory_plus.set_inventory_formspec(player, crafting.get_formspec(player))
-	end
+    end
     if fields.cra10 then
+		local item_name = ""
         for i=1,10 do
             local player_inv = player:get_inventory()
 		    local crafted = nil
@@ -4047,25 +4071,29 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		    if tablelist then
 			    crafted,table_dec = minetest.get_craft_result({method = "normal", width = 4, items = tablelist})
 		    end
-		    local k = 0
-		    if player_inv:room_for_item("main", crafted.item) == true then
-			    k = 1
-		    end
-		    if crafted.item:get_name() == "" then
-			    k = 0
-		    end
-		    local kk = nil
-		    if not kk == ture then
-			    k = 0
-		    end
-		    if k == 1 then
-			    player_inv:add_item("main", crafted.item)
-			    player_inv:set_list("crvier", table_dec.items)
-		    end
+			if item_name == "" or item_name == crafted.item:get_name() then
+				item_name = crafted.item:get_name()
+				local k = 0
+				if player_inv:room_for_item("main", crafted.item) == true then
+					k = 1
+				end
+				if crafted.item:get_name() == "" then
+					k = 0
+				end
+				local kk = nil
+				if not kk == ture then
+					k = 0
+				end
+				if k == 1 then
+					player_inv:add_item("main", crafted.item)
+					player_inv:set_list("crvier", table_dec.items)
+				end
+			end
 		    inventory_plus.set_inventory_formspec(player, crafting.get_formspec(player))
         end
     end
     if fields.cra99 then
+		local item_name = ""
         for i=1,99 do
             local player_inv = player:get_inventory()
 		    local crafted = nil
@@ -4075,21 +4103,24 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		    if tablelist then
 			    crafted,table_dec = minetest.get_craft_result({method = "normal", width = 4, items = tablelist})
 		    end
-		    local k = 0
-		    if player_inv:room_for_item("main", crafted.item) == true then
-			    k = 1
-		    end
-		    if crafted.item:get_name() == "" then
-			    k = 0
-		    end
-		    local kk = nil
-		    if not kk == ture then
-			    k = 0
-		    end
-		    if k == 1 then
-			    player_inv:add_item("main", crafted.item)
-			    player_inv:set_list("crvier", table_dec.items)
-		    end
+			if item_name == "" or item_name == crafted.item:get_name() then
+				item_name = crafted.item:get_name()
+				local k = 0
+				if player_inv:room_for_item("main", crafted.item) == true then
+					k = 1
+				end
+				if crafted.item:get_name() == "" then
+					k = 0
+				end
+				local kk = nil
+				if not kk == ture then
+					k = 0
+				end
+				if k == 1 then
+					player_inv:add_item("main", crafted.item)
+					player_inv:set_list("crvier", table_dec.items)
+				end
+			end
 		    inventory_plus.set_inventory_formspec(player, crafting.get_formspec(player))
         end
     end
@@ -4116,6 +4147,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		inventory_plus.set_inventory_formspec(player, crafting3.get_formspec(player))
 	end
     if fields.cra310 then
+		local item_name = ""
         for i=1,10 do
 		    local player_inv = player:get_inventory()
 		    local crafted = nil
@@ -4125,21 +4157,25 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		    if tablelist then
 			    crafted,table_dec = minetest.get_craft_result({method = "normal", width = 5, items = tablelist})
 		    end
-		    local k = 0
-		    if player_inv:room_for_item("main", crafted.item) == true then
-			    k = 1
-		    end
-		    if crafted.item:get_name() == "" then
-			    k = 0
-		    end
-		    if k == 1 then
-			    player_inv:add_item("main", crafted.item)
-			    player_inv:set_list("crvier3", table_dec.items)
-		    end
+			if item_name == "" or item_name == crafted.item:get_name() then
+				item_name = crafted.item:get_name()
+				local k = 0
+				if player_inv:room_for_item("main", crafted.item) == true then
+					k = 1
+				end
+				if crafted.item:get_name() == "" then
+					k = 0
+				end
+				if k == 1 then
+					player_inv:add_item("main", crafted.item)
+					player_inv:set_list("crvier3", table_dec.items)
+				end
+			end
 		    inventory_plus.set_inventory_formspec(player, crafting3.get_formspec(player))
         end
 	end
     if fields.cra399 then
+		local item_name = ""
         for i=1,99 do
 		    local player_inv = player:get_inventory()
 		    local crafted = nil
@@ -4149,17 +4185,20 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		    if tablelist then
 			    crafted,table_dec = minetest.get_craft_result({method = "normal", width = 5, items = tablelist})
 		    end
-		    local k = 0
-		    if player_inv:room_for_item("main", crafted.item) == true then
-			    k = 1
-		    end
-		    if crafted.item:get_name() == "" then
-			    k = 0
-		    end
-		    if k == 1 then
-			    player_inv:add_item("main", crafted.item)
-			    player_inv:set_list("crvier3", table_dec.items)
-		    end
+			if item_name == "" or item_name == crafted.item:get_name() then
+				item_name = crafted.item:get_name()
+				local k = 0
+				if player_inv:room_for_item("main", crafted.item) == true then
+					k = 1
+				end
+				if crafted.item:get_name() == "" then
+					k = 0
+				end
+				if k == 1 then
+					player_inv:add_item("main", crafted.item)
+					player_inv:set_list("crvier3", table_dec.items)
+				end
+			end
 		    inventory_plus.set_inventory_formspec(player, crafting3.get_formspec(player))
         end
 	end
@@ -4238,203 +4277,3 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		inventory_plus.set_inventory_formspec(player, crafting4.get_formspec(player))
 	end
 end)
-local function has_locked_chest_privilege(meta, player)
-	if player:get_player_name() ~= meta:get_string("owner") then
-		return false
-	end
-	return true
-end
-tutorial = {}
-local function add_spawner(pos)
-	minetest.set_node(pos, {name="tutorial:spawner_mummy"})
-	if not minetest.setting_getbool("only_peaceful_mobs") then tutorial.spawn_mummy({x=pos.x,y=pos.y,z=pos.z-2},2) end
-end
-local function can_replace(pos)
-	local n = minetest.get_node_or_nil(pos)
-	if n and n.name and minetest.registered_nodes[n.name] and not minetest.registered_nodes[n.name].walkable then
-		return true
-	elseif not n then
-		return true
-	else
-		return false
-	end
-end
-local function get_sign(i)
-	if i == 0 then
-		return 0
-	else
-		return i/math.abs(i)
-	end
-end
-local function get_velocity(vx, vy, vz, yaw)
-	local x = math.cos(yaw)*vx+math.cos(math.pi/2+yaw)*vz
-	local z = math.sin(yaw)*vx+math.sin(math.pi/2+yaw)*vz
-	return {x=x, y=vy, z=z}
-end
-local function get_v(v)
-	return math.sqrt(vx^2+vz^2)
-end
-local heli = {
-	physical = true,
-	collisionbox = {-1,-0.6,-1, 1,0.3,1},
-	collide_with_objects = true,
-	weight = 5,	
-	visual = "mesh",
-	mesh = "root.x",
-	driver = nil,
-	model = nil,
-	motor = nil,
-	left = true,
-	timer=0,
-	yaw=0,
-	prev_y=0,
-	vx=0,
-	vy=0,
-	vz=0
-}
-local heliModel = {
-	visual = "mesh",
-	mesh = "heli.x",
-	textures = {"bladest.png","bladest.png","helit.png","Glasst.png"},
-}	
-local motor = {
-	physical = true,
-	collisionbox = {-2,0.5,-1, 1,1,1},
-	visual = "mesh",
-	mesh = "motor.x",
-	textures = {"motort.png"},
-	driver = nil,
-	left = true,
-	timer=0,
-	vx = 0,
-	vy = 0,
-	vz = 0
-}
-function heli:on_rightclick(clicker)
-	if not clicker or not clicker:is_player() then
-		return
-	end
-	if self.driver and clicker == self.driver then
-		clicker:set_attach(self.model, "Root", {x=0,y=0,z=0}, {x=0,y=0,z=0})
-		self.driver = nil
-		clicker:set_detach()
-		self.model:set_animation({x=0,y=1},0, 0)
-	elseif not self.driver then
-		self.model:set_animation({x=0,y=10},10, 0)
-		self.driver = clicker
-		clicker:set_attach(self.model, "Root", {x=0,y=0,z=-10}, {x=-90,y=0,z=-90})
-	end
-end
-function heliModel:on_activate(staticdata, dtime_s)
-	self.object:set_armor_groups({immortal=1})
-	local is_attached = false
-	for _,object in ipairs(minetest.env:get_objects_inside_radius(self.object:getpos(), 2)) do
-		if object and object:get_luaentity() and object:get_luaentity().name=="tutorial:heli" then
-			if object:get_luaentity().model == nil then
-				object:get_luaentity().model = self
-			end
-			if object:get_luaentity().model == self then
-				is_attached = true
-			end
-		end
-	end
-	if is_attached == false then
-		self.object:remove()
-	end
-end
-function heli:on_activate(staticdata, dtime_s)
-	self.object:set_armor_groups({immortal=1})
-	self.prev_y=self.object:getpos()
-	if self.model == nil then
-		self.model = minetest.env:add_entity(self.object:getpos(), "tutorial:heliModel")
-		self.model:set_attach(self.object, "Root", {x=0,y=0,z=2}, {x=0,y=0,z=0})	
-	end
-end
-function heli:get_staticdata(self)	
-end
-function heli:on_punch(puncher, time_from_last_punch, tool_capabilities, direction)
-	if self.model ~= nil then
-		self.model:remove()
-	end
-	self.object:remove()
-	if puncher and puncher:is_player() then
-		puncher:get_inventory():add_item("main", "tutorial:heli")
-	end
-end
-function heliModel:on_punch(puncher, time_from_last_punch, tool_capabilities, direction)
-	self.object:remove()
-end
-function heli:on_step(dtime)
-	if self.driver and ( math.abs(self.driver:getpos().x-self.object:getpos().x)>10*dtime or math.abs(self.driver:getpos().y-self.object:getpos().y)>10*dtime or math.abs(self.driver:getpos().z-self.object:getpos().z)>10*dtime) then
-		self.driver = nil
-	end
-	if self.driver then
-		self.yaw = self.driver:get_look_yaw()
-		v = self.object:getvelocity()
-		local ctrl = self.driver:get_player_control()
-		if ctrl.up then
-			self.vx = self.vx + math.cos(self.driver:get_look_yaw())*0.1
-			self.vz = self.vz + math.sin(self.driver:get_look_yaw())*0.1
-		end
-		if ctrl.down then
-			self.vx = self.vx-math.cos(self.driver:get_look_yaw())*0.1
-			self.vz = self.vz-math.sin(self.driver:get_look_yaw())*0.1
-		end
-		if ctrl.left then
-			self.vz = self.vz+math.cos(self.driver:get_look_yaw())*0.1
-			self.vx = self.vx+math.sin(math.pi+self.driver:get_look_yaw())*0.1
-		end
-		if ctrl.right then
-			self.vz = self.vz-math.cos(self.driver:get_look_yaw())*0.1
-			self.vx = self.vx-math.sin(math.pi+self.driver:get_look_yaw())*0.1
-		end
-		if ctrl.jump then
-			if self.vy<1.5 then
-				self.vy = self.vy+0.2
-			end
-		end
-		if ctrl.sneak then
-			if self.vy>-1.5 then
-				self.vy = self.vy-0.2
-			end
-		end
-		if math.abs(self.vx) > 4.5 then
-			self.vx = 4.5*get_sign(self.vx)
-		end
-		if math.abs(self.vz) > 4.5 then
-			self.vz = 4.5*get_sign(self.vz)
-		end
-		
-	end
-	local sx=get_sign(self.vx)
-	self.vx = self.vx - 0.02*sx
-	local sz=get_sign(self.vz)
-	self.vz = self.vz - 0.02*sz
-	local sy=get_sign(self.vy)
-	self.vy = self.vy-0.01*sy
-	if sx ~= get_sign(self.vx) then
-		self.vx = 0
-	end
-	if sz ~= get_sign(self.vz) then
-		self.vz = 0
-	end
-	if math.abs(self.vx) > 4.5 then
-		self.vx = 4.5*get_sign(self.vx)
-	end
-	if math.abs(self.vz) > 4.5 then
-		self.vz = 4.5*get_sign(self.vz)
-	end
-	if math.abs(self.vy) > 4.5 then
-		self.vz = 4.5*get_sign(self.vz)
-	end
-	self.object:setvelocity({x=self.vx, y=self.vy,z=self.vz})
-	if self.model then
-		self.model:set_attach(self.object,"Root", {x=0,y=0,z=0}, {
-			x=-90+self.vz*4*math.cos(self.yaw)-self.vx*4*math.sin(self.yaw), 
-			y=0-self.vz*4*math.sin(self.yaw)-self.vx*4*math.cos(self.yaw), 
-			z=self.yaw*57})
-	end
-end
-minetest.register_entity("tutorial:heli", heli)
-minetest.register_entity("tutorial:heliModel", heliModel)
-minetest.register_entity("tutorial:motor", motor)

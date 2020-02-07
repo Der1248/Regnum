@@ -76,7 +76,7 @@ minetest.register_globalstep(function(dtime)
                         elseif i < 91 then
                             g = 7650+(i-85)*18*10
                         elseif i < 96 then
-                            g = 8500+(i-90)*19*10
+                            g = 8550+(i-90)*19*10
                         elseif i < 101 then
                             g = 9500+(i-95)*20*10
                         end
@@ -124,7 +124,7 @@ minetest.register_globalstep(function(dtime)
                         if (new_xp >= g) then
                             vv = i
                         end
-                        if (new_xp >= 11949) then
+                        if (new_xp >= 11950) then
                             vv = 101
                         end
                         if i == 100 then
@@ -241,7 +241,6 @@ minetest.register_globalstep(function(dtime)
 							    to_player = player:get_player_name(),
 						    })
                         end
-                        
                     end
                     if new_xp == 2750 then
                         player_inv:set_size("xpi01", 15)

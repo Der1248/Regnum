@@ -12,6 +12,7 @@ mobs:register_mob("mobs:tortoise", {
 	visual = "mesh",
 	mesh = "mobs_tortoise.b3d",
 	attacks_monsters = false,
+	attack_npcs = false,
 	textures = {
 		{"mobs_tortoise.png"},
 	},

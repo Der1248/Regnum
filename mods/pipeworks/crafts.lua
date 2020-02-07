@@ -13,9 +13,9 @@ minetest.register_craft( {
 minetest.register_craft( {
 	output = "pipeworks:tube_1 64",
 	recipe = {
+	        { "gems:ruby_gem", "gems:ruby_gem", "gems:ruby_gem" },
 	        { "", "", "" },
-	        { "", "", "" },
-	        { "gems:pearl_gem", "gems:pearl_gem", "gems:pearl_gem" }
+	        { "gems:ruby_gem", "gems:ruby_gem", "gems:ruby_gem" }
 	},
 })
 
@@ -27,8 +27,8 @@ minetest.register_craft( {
 	output = "pipeworks:mese_sand_tube_1 2",
 	recipe = {
 	        { "gems:pearl_gem", "gems:pearl_gem", "gems:pearl_gem" },
-	        { "gems:pearl_gem", "gems:pearl_gem", "gems:pearl_gem" },
-	        { "", "", "" }
+	        { "", "", "" },
+	        { "gems:pearl_gem", "gems:pearl_gem", "gems:pearl_gem" }
 	},
 })
 

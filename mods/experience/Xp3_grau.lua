@@ -80,7 +80,7 @@ minetest.register_globalstep(function(dtime)
                         elseif i < 101 then
                             c = 10
                         end
-                        if i == (10 or 20 or 30 or 40 or 50 or 60 or 70 or 80 or 90) then
+                        if i == 10 or i == 20 or i == 30 or i == 40 or i == 50 or i == 60 or i == 70 or i == 80 or i == 90 then
                             h = 1
                         else
                             h = 0

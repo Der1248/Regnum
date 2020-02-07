@@ -12,6 +12,7 @@ mobs:register_mob("mobs:fox", {
 	visual = "mesh",
 	mesh = "mobs_fox.b3d",
 	attacks_monsters = false,
+	attack_npcs = false,
 	textures = {
 		{"mobs_fox1.png"},
 	},

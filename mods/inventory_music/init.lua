@@ -1,12 +1,12 @@
 local sound_time = 0
 local sound_play_on = 0
-local sound_play_regnum = nil
+local sound_play_regnum = {}
 local inst_list = {}
 minetest.register_globalstep(function(dtime)
     if sound_play_on == 0 then
         sound_play_on = 1
-        inst_list = {}
         for _,player in ipairs(minetest.get_connected_players()) do
+			inst_list = {}
             local player_inv = player:get_inventory()
             local inst1 = player_inv:get_stack("inst", 1):get_count()
             local inst2 = player_inv:get_stack("inst", 2):get_count()
@@ -20,8 +20,8 @@ minetest.register_globalstep(function(dtime)
                 local inst = inst_list[ math.random(#inst_list)]
                 local music = player_inv:get_stack("music", 1):get_count()
                 if music == 1 then
-                    sound_play_regnum = minetest.sound_play(inst, {
-	                    to_player = player,
+                    sound_play_regnum[player:get_player_name()] = minetest.sound_play(inst, {
+	                    to_player = player:get_player_name(),
                     })
                 end
             end
@@ -93,6 +93,9 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
         local inst2 = player_inv:get_stack("inst", 2):get_count()
         if inst1 == 0 and inst2 == 0 then
             player_inv:set_stack("music", 1, nil)
+			if sound_play_regnum[player:get_player_name()] ~= nil then
+                minetest.sound_stop(sound_play_regnum[player:get_player_name()])
+            end
         end
         inventory_plus.set_inventory_formspec(player, set.get_formspec(player))
     end
@@ -107,6 +110,9 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
         local inst2 = player_inv:get_stack("inst", 2):get_count()
         if inst1 == 0 and inst2 == 0 then
             player_inv:set_stack("music", 1, nil)
+			if sound_play_regnum[player:get_player_name()] ~= nil then
+                minetest.sound_stop(sound_play_regnum[player:get_player_name()])
+            end
         end
         inventory_plus.set_inventory_formspec(player, set.get_formspec(player))
     end
@@ -118,8 +124,8 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
             player_inv:set_stack("inst", 2, nil)
         else
             player_inv:set_stack("music", 1, nil)
-            if sound_play_regnum ~= nil then
-                minetest.sound_stop(sound_play_regnum)
+            if sound_play_regnum[player:get_player_name()] ~= nil then
+                minetest.sound_stop(sound_play_regnum[player:get_player_name()])
             end
         end
         inventory_plus.set_inventory_formspec(player, set.get_formspec(player))

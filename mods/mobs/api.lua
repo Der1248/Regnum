@@ -743,9 +743,10 @@ function mob_class:check_for_death(cmi_cause)
 		if use_cmi then
 			cmi.notify_die(self.object, cmi_cause)
 		end
-
-		self.object:remove()
-
+		if self.name == "mobs:dog" or self.name == "mobs:cat" or self.name == "mobs:sheep" or self.name == "mobs:dragon" or self.name == "mobs:knight_1248" or self.name == "mobs:fox" or self.name == "mobs:tortoise" then
+		else
+			self.object:remove()
+		end
 		return true
 	end
 
@@ -772,16 +773,20 @@ function mob_class:check_for_death(cmi_cause)
 			if use_cmi and self.object:get_luaentity() then
 				cmi.notify_die(self.object, cmi_cause)
 			end
-
-			self.object:remove()
+			if self.name == "mobs:dog" or self.name == "mobs:cat" or self.name == "mobs:sheep" or self.name == "mobs:dragon" or self.name == "mobs:knight_1248" or self.name == "mobs:fox" or self.name == "mobs:tortoise" then
+			else
+				self.object:remove()
+			end
 		end, self)
 	else
 
 		if use_cmi then
 			cmi.notify_die(self.object, cmi_cause)
 		end
-
-		self.object:remove()
+		if self.name == "mobs:dog" or self.name == "mobs:cat" or self.name == "mobs:sheep" or self.name == "mobs:dragon" or self.name == "mobs:knight_1248" or self.name == "mobs:fox" or self.name == "mobs:tortoise" then
+		else
+			self.object:remove()
+		end
 	end
 
 	effect(pos, 20, "tnt_smoke.png")
@@ -853,23 +858,26 @@ function mob_class:do_env_damage()
 
 	-- remove mob if standing inside ignore node
 	if self.standing_in == "ignore" then
-		self.object:remove()
+		if self.name == "mobs:dog" or self.name == "mobs:cat" or self.name == "mobs:sheep" or self.name == "mobs:dragon" or self.name == "mobs:knight_1248" or self.name == "mobs:fox" or self.name == "mobs:tortoise" then
+		else
+			self.object:remove()
+		end
 		return
 	end
 
 	-- is mob light sensative, or scared of the dark :P
 	if self.light_damage ~= 0 then
-
 		local light = minetest.get_node_light(pos) or 0
-
 		if light >= self.light_damage_min
 		and light <= self.light_damage_max then
-
-			self.health = self.health - self.light_damage
-
-			effect(pos, 5, "tnt_smoke.png")
-
-			if self:check_for_death({type = "light"}) then return end
+			if self.name == "mobs:dog" or self.name == "mobs:cat" or self.name == "mobs:sheep" or self.name == "mobs:dragon" or self.name == "mobs:knight_1248" or self.name == "mobs:fox" or self.name == "mobs:tortoise" then
+			else
+				self.health = self.health - self.light_damage
+				effect(pos, 5, "tnt_smoke.png")
+				if self:check_for_death({type = "light"}) then 
+					return 
+				end
+			end
 		end
 	end
 
@@ -880,43 +888,45 @@ function mob_class:do_env_damage()
 	-- water
 	if self.water_damage
 	and nodef.groups.water then
-
 		if self.water_damage ~= 0 then
+			if self.name == "mobs:dog" or self.name == "mobs:cat" or self.name == "mobs:sheep" or self.name == "mobs:dragon" or self.name == "mobs:knight_1248" or self.name == "mobs:fox" or self.name == "mobs:tortoise" then
+			else
+				self.health = self.health - self.water_damage
+				effect(pos, 5, "bubble.png", nil, nil, 1, nil)
+				if self:check_for_death({type = "environment",pos = pos, node = self.standing_in}) then 
+					return 
+				end
+			end
 
-			self.health = self.health - self.water_damage
-
-			effect(pos, 5, "bubble.png", nil, nil, 1, nil)
-
-			if self:check_for_death({type = "environment",
-					pos = pos, node = self.standing_in}) then return end
+			
 		end
-
 	-- lava or fire or ignition source
 	elseif self.lava_damage
 	and nodef.groups.igniter then
 --	and (nodef.groups.lava
 --	or self.standing_in == node_fire
 --	or self.standing_in == node_permanent_flame) then
-
 		if self.lava_damage ~= 0 then
-
-			self.health = self.health - self.lava_damage
-
-			effect(pos, 5, "fire_basic_flame.png", nil, nil, 1, nil)
-
-			if self:check_for_death({type = "environment",
-					pos = pos, node = self.standing_in, hot = true}) then return end
+			if self.name == "mobs:dog" or self.name == "mobs:cat" or self.name == "mobs:sheep" or self.name == "mobs:dragon" or self.name == "mobs:knight_1248" or self.name == "mobs:fox" or self.name == "mobs:tortoise" then
+			else
+				self.health = self.health - self.lava_damage
+				effect(pos, 5, "fire_basic_flame.png", nil, nil, 1, nil)
+				if self:check_for_death({type = "environment",pos = pos, node = self.standing_in, hot = true}) then 
+					return 
+				end
+			end
 		end
 
 	-- damage_per_second node check
 	elseif nodef.damage_per_second ~= 0 then
-
-		self.health = self.health - nodef.damage_per_second
-
-		effect(pos, 5, "tnt_smoke.png")
-
-		if self:check_for_death({type = "environment",
-				pos = pos, node = self.standing_in}) then return end
+		if self.name == "mobs:dog" or self.name == "mobs:cat" or self.name == "mobs:sheep" or self.name == "mobs:dragon" or self.name == "mobs:knight_1248" or self.name == "mobs:fox" or self.name == "mobs:tortoise" then
+        else
+			self.health = self.health - nodef.damage_per_second
+			effect(pos, 5, "tnt_smoke.png")
+			if self:check_for_death({type = "environment",pos = pos, node = self.standing_in}) then 
+				return 
+			end
+		end
 	end
 --[[
 	--- suffocation inside solid node
@@ -2218,9 +2228,10 @@ function mob_class:do_states(dtime)
 
 						node_break_radius = 1
 					end
-
-					self.object:remove()
-
+					if self.name == "mobs:dog" or self.name == "mobs:cat" or self.name == "mobs:sheep" or self.name == "mobs:dragon" or self.name == "mobs:knight_1248" or self.name == "mobs:fox" or self.name == "mobs:tortoise" then
+					else
+						self.object:remove()
+					end
 					if minetest.get_modpath("tnt") and tnt and tnt.boom
 					and not minetest.is_protected(pos, "") then
 
@@ -2532,16 +2543,16 @@ function mob_class:falling(pos)
 			local d = (self.old_y or 0) - self.object:get_pos().y
 
 			if d > 5 then
-
-				self.health = self.health - floor(d - 5)
-
-				effect(pos, 5, "tnt_smoke.png", 1, 2, 2, nil)
-
-				if self:check_for_death({type = "fall"}) then
-					return
+				if self.name == "mobs:dog" or self.name == "mobs:cat" or self.name == "mobs:sheep" or self.name == "mobs:dragon" or self.name == "mobs:knight_1248" or self.name == "mobs:fox" or self.name == "mobs:tortoise" then
+				else
+					self.health = self.health - floor(d - 5)
+					effect(pos, 5, "tnt_smoke.png", 1, 2, 2, nil)
+					if self:check_for_death({type = "fall"}) then
+						return
+					end
 				end
 			end
-
+			
 			self.old_y = self.object:get_pos().y
 		end
 	end
@@ -2837,8 +2848,10 @@ function mob_class:get_staticdata()
 	and self.lifetimer < 20000 then
 
 		--print ("REMOVED " .. self.name)
-
-		self.object:remove()
+		if self.name == "mobs:dog" or self.name == "mobs:cat" or self.name == "mobs:sheep" or self.name == "mobs:dragon" or self.name == "mobs:knight_1248" or self.name == "mobs:fox" or self.name == "mobs:tortoise" then
+		else
+			self.object:remove()
+		end
 
 		return ""-- nil
 	end
@@ -2883,8 +2896,10 @@ function mob_class:mob_activate(staticdata, def, dtime)
 	-- remove monsters in peaceful mode
 	if self.type == "monster"
 	and peaceful_only then
-
-		self.object:remove()
+		if self.name == "mobs:dog" or self.name == "mobs:cat" or self.name == "mobs:sheep" or self.name == "mobs:dragon" or self.name == "mobs:knight_1248" or self.name == "mobs:fox" or self.name == "mobs:tortoise" then
+		else
+			self.object:remove()
+		end
 
 		return
 	end
@@ -3187,8 +3202,10 @@ function mob_class:mob_expire(pos, dtime)
 --				S("lifetimer expired, removed @1", self.name))
 
 			effect(pos, 15, "tnt_smoke.png", 2, 4, 2, 0)
-
-			self.object:remove()
+			if self.name == "mobs:dog" or self.name == "mobs:cat" or self.name == "mobs:sheep" or self.name == "mobs:dragon" or self.name == "mobs:knight_1248" or self.name == "mobs:fox" or self.name == "mobs:tortoise" then
+			else
+				self.object:remove()
+			end
 
 			return
 		end
@@ -3198,15 +3215,10 @@ end
 
 -- main mob function
 function mob_class:on_step(dtime)
-self.metadata3 = self.metadata3 + dtime
+	self.metadata3 = self.metadata3 + dtime
     if self.metadata3 > 1 then
         self.metadata3 = 0
         if self.name == "mobs:dog" then
-            if self.owner and minetest.get_player_by_name(self.owner) then
-                minetest.get_player_by_name(self.owner):set_attribute("dogx", ""..math.floor(self.object:getpos().x+0.5))
-                minetest.get_player_by_name(self.owner):set_attribute("dogy", ""..math.floor(self.object:getpos().y+0.5))
-                minetest.get_player_by_name(self.owner):set_attribute("dogz", ""..math.floor(self.object:getpos().z+0.5))
-            end
 		    local pos = self.object:getpos()
             if minetest.get_player_by_name(self.owner) then
 			    local inv = minetest.get_player_by_name(self.owner):get_inventory()
@@ -3224,11 +3236,6 @@ self.metadata3 = self.metadata3 + dtime
             end
 	    end
 	    if self.name == "mobs:cat" then
-            if self.owner and minetest.get_player_by_name(self.owner) then
-                minetest.get_player_by_name(self.owner):set_attribute("catx", ""..math.floor(self.object:getpos().x+0.5))
-                minetest.get_player_by_name(self.owner):set_attribute("caty", ""..math.floor(self.object:getpos().y+0.5))
-                minetest.get_player_by_name(self.owner):set_attribute("catz", ""..math.floor(self.object:getpos().z+0.5))
-            end
 		    local pos = self.object:getpos()
             if minetest.get_player_by_name(self.owner) then
 			    local inv = minetest.get_player_by_name(self.owner):get_inventory()
@@ -3245,304 +3252,316 @@ self.metadata3 = self.metadata3 + dtime
 			    end
             end
 	    end
-        if self.name == "mobs:dragon" then
-            if self.owner and minetest.get_player_by_name(self.owner) then
-                minetest.get_player_by_name(self.owner):set_attribute("dragonx", ""..math.floor(self.object:getpos().x+0.5))
-                minetest.get_player_by_name(self.owner):set_attribute("dragony", ""..math.floor(self.object:getpos().y+0.5))
-                minetest.get_player_by_name(self.owner):set_attribute("dragonz", ""..math.floor(self.object:getpos().z+0.5))
-            end
-	    end
-        if self.name == "mobs:sheep" then
-            if self.owner and minetest.get_player_by_name(self.owner) then
-                minetest.get_player_by_name(self.owner):set_attribute("sheepx", ""..math.floor(self.object:getpos().x+0.5))
-                minetest.get_player_by_name(self.owner):set_attribute("sheepy", ""..math.floor(self.object:getpos().y+0.5))
-                minetest.get_player_by_name(self.owner):set_attribute("sheepz", ""..math.floor(self.object:getpos().z+0.5))
-            
-            end
-	    end
-        if self.name == "mobs:fox" then
-            if self.owner and minetest.get_player_by_name(self.owner) then
-                minetest.get_player_by_name(self.owner):set_attribute("foxx", ""..math.floor(self.object:getpos().x+0.5))
-                minetest.get_player_by_name(self.owner):set_attribute("foxy", ""..math.floor(self.object:getpos().y+0.5))
-                minetest.get_player_by_name(self.owner):set_attribute("foxz", ""..math.floor(self.object:getpos().z+0.5))
-            end
-	    end
-        if self.name == "mobs:tortoise" then
-            if self.owner and minetest.get_player_by_name(self.owner) then
-                minetest.get_player_by_name(self.owner):set_attribute("tortoisex", ""..math.floor(self.object:getpos().x+0.5))
-                minetest.get_player_by_name(self.owner):set_attribute("tortoisey", ""..math.floor(self.object:getpos().y+0.5))
-                minetest.get_player_by_name(self.owner):set_attribute("tortoisez", ""..math.floor(self.object:getpos().z+0.5))
-            end
-	    end
-        if self.name == "mobs:knight_1248" then
-            if self.owner and minetest.get_player_by_name(self.owner) then
-                minetest.get_player_by_name(self.owner):set_attribute("knightx", ""..math.floor(self.object:getpos().x+0.5))
-                minetest.get_player_by_name(self.owner):set_attribute("knighty", ""..math.floor(self.object:getpos().y+0.5))
-                minetest.get_player_by_name(self.owner):set_attribute("knightz", ""..math.floor(self.object:getpos().z+0.5))
-            end
-        
-        end
-	    if self.name == "mobs:dog" and self.metadata2 == 1 then
-		    local pos = self.object:getpos()
-		    local all_objects = minetest.get_objects_inside_radius(pos, 15)
-		    local players = {}
-		    local k = 0
-		    local _,obj
-		    for _,obj in ipairs(all_objects) do
-			    if obj:is_player() then
-				    if self.owner == obj:get_player_name() then
-					    k = 1	
-				    end
-			    end
-		    end
-		    if k == 0 then
-			    if minetest.get_player_by_name(self.owner) then
-				    self.object:setpos({x = minetest.get_player_by_name(self.owner):getpos().x, y = minetest.get_player_by_name(self.owner):getpos().y+1, z = minetest.get_player_by_name(self.owner):getpos().z+1})
-			    end
-		    end
-	    end
-	    if self.name == "mobs:cat" and self.metadata2 == 1 then
-		    local pos = self.object:getpos()
-		    local all_objects = minetest.get_objects_inside_radius(pos, 15)
-		    local players = {}
-		    local k = 0
-		    local _,obj
-		    for _,obj in ipairs(all_objects) do
-			    if obj:is_player() then
-				    if self.owner == obj:get_player_name() then
-					    k = 1	
-				    end
-			    end
-		    end
-		    if k == 0 then
-			    if minetest.get_player_by_name(self.owner) then
-				    self.object:setpos({x = minetest.get_player_by_name(self.owner):getpos().x, y = minetest.get_player_by_name(self.owner):getpos().y+1, z = minetest.get_player_by_name(self.owner):getpos().z+1})
-			    end
-		    end
-	    end
-        if self.name == "mobs:dragon" and self.metadata2 == 1 then
-		    local pos = self.object:getpos()
-		    local all_objects = minetest.get_objects_inside_radius(pos, 15)
-		    local players = {}
-		    local k = 0
-		    local _,obj
-		    for _,obj in ipairs(all_objects) do
-			    if obj:is_player() then
-				    if self.owner == obj:get_player_name() then
-					    k = 1	
-				    end
-			    end
-		    end
-		    if k == 0 then
-                if self.owner then
-				    if minetest.get_player_by_name(self.owner) then
-                        minetest.get_player_by_name(self.owner):get_inventory():set_size("dragon2",1)
-					    self.object:setpos({x = minetest.get_player_by_name(self.owner):getpos().x, y = minetest.get_player_by_name(self.owner):getpos().y+1, z = minetest.get_player_by_name(self.owner):getpos().z+1})
-                        local numd = minetest.get_player_by_name(self.owner):get_inventory():get_stack("dragon2", 1):get_count()
-                        if numd > 50 then
-                            if minetest.get_player_by_name(self.owner):get_inventory():get_stack("dragon", 1):get_name() == "tutorial:dragon_crystal" then
-                                minetest.get_player_by_name(self.owner):get_inventory():add_item("main", "tutorial:geschenk_gem")
-                            else
-                                minetest.get_player_by_name(self.owner):get_inventory():add_item("main", "tutorial:geschenk_dragon")
-                            end
-                            minetest.get_player_by_name(self.owner):get_inventory():set_stack("dragon2", 1, "")
-                        else
-                            minetest.get_player_by_name(self.owner):get_inventory():set_stack("dragon2", 1, "default:dirt "..1+numd)
-                        end
-				    end
-                end
-		    end
-	    end
-        if self.name == "mobs:sheep" and self.metadata2 == 1 then
-		    local pos = self.object:getpos()
-		    local all_objects = minetest.get_objects_inside_radius(pos, 15)
-		    local players = {}
-		    local k = 0
-		    local _,obj
-		    for _,obj in ipairs(all_objects) do
-			    if obj:is_player() then
-				    if self.owner == obj:get_player_name() then
-					    k = 1	
-				    end
-			    end
-		    end
-		    if k == 0 then
-                if self.owner then
-				    if minetest.get_player_by_name(self.owner) then
-                        minetest.get_player_by_name(self.owner):get_inventory():set_size("sheep2",1)
-                        minetest.get_player_by_name(self.owner):get_inventory():set_size("sheep3",1)
-					    self.object:setpos({x = minetest.get_player_by_name(self.owner):getpos().x, y = minetest.get_player_by_name(self.owner):getpos().y+1, z = minetest.get_player_by_name(self.owner):getpos().z+1})
-                        local numd = minetest.get_player_by_name(self.owner):get_inventory():get_stack("sheep2", 1):get_count()
-                        if numd > 50 then
-                            minetest.get_player_by_name(self.owner):get_inventory():add_item("main", minetest.get_player_by_name(self.owner):get_inventory():get_stack("sheep3", 1))
-                            minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep2", 1, "")
-                        else
-                            minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep2", 1, "default:dirt "..1+numd)
-                        end
-				    end
-                end
-		    end
-	    end
-        if self.name == "mobs:knight_1248" and self.metadata2 == 1 then
-		    local pos = self.object:getpos()
-		    local all_objects = minetest.get_objects_inside_radius(pos, 15)
-		    local players = {}
-		    local k = 0
-		    local _,obj
-		    for _,obj in ipairs(all_objects) do
-			    if obj:is_player() then
-				    if self.owner == obj:get_player_name() then
-					    k = 1	
-				    end
-			    end
-		    end
-		    if k == 0 then
-			    if minetest.get_player_by_name(self.owner) then
-				    self.object:setpos({x = minetest.get_player_by_name(self.owner):getpos().x, y = minetest.get_player_by_name(self.owner):getpos().y+1, z = minetest.get_player_by_name(self.owner):getpos().z+1})
-			    end
-		    end
-	    end
-        if self.name == "mobs:fox" and self.metadata2 == 1 then
-		    local pos = self.object:getpos()
-		    local all_objects = minetest.get_objects_inside_radius(pos, 15)
-		    local players = {}
-		    local k = 0
-		    local _,obj
-		    for _,obj in ipairs(all_objects) do
-			    if obj:is_player() then
-				    if self.owner == obj:get_player_name() then
-					    k = 1	
-				    end
-			    end
-		    end
-		    if k == 0 then
-			    if self.owner then
-				    if minetest.get_player_by_name(self.owner) then
-                        minetest.get_player_by_name(self.owner):get_inventory():set_size("fox",1)
-                        minetest.get_player_by_name(self.owner):get_inventory():set_size("foxfox",1)
-                        minetest.get_player_by_name(self.owner):get_inventory():set_size("r1248",6)
-					    self.object:setpos({x = minetest.get_player_by_name(self.owner):getpos().x, y = minetest.get_player_by_name(self.owner):getpos().y+1, z = minetest.get_player_by_name(self.owner):getpos().z+1})
-                        local numd = minetest.get_player_by_name(self.owner):get_inventory():get_stack("fox", 1):get_count()
-                        if numd == 50 then
-                            minetest.get_player_by_name(self.owner):get_inventory():add_item("main", "tutorial:fox_schluessel")
-                            minetest.get_player_by_name(self.owner):get_inventory():set_stack("fox", 1, "default:dirt 80")
-                        elseif numd == 80 then
-                        else
-                            minetest.get_player_by_name(self.owner):get_inventory():set_stack("fox", 1, "default:dirt "..1+numd)
-                        end
-                        local numdd = minetest.get_player_by_name(self.owner):get_inventory():get_stack("foxfox", 1):get_count()
-                        if numdd == 256 then
-                            local ra = math.random(6)
-                            if ra == 1 then
-                                minetest.get_player_by_name(self.owner):get_inventory():set_stack("r1248", 1, "default:dirt")
-                            elseif ra == 2 then
-                                minetest.get_player_by_name(self.owner):get_inventory():set_stack("r1248", 2, "default:dirt")
-                            elseif ra == 3 then  
-                                minetest.get_player_by_name(self.owner):get_inventory():set_stack("r1248", 3, "default:dirt")
-                            elseif ra == 4 then  
-                                minetest.get_player_by_name(self.owner):get_inventory():set_stack("r1248", 4, "default:dirt")
-                            elseif ra == 5 then  
-                                minetest.get_player_by_name(self.owner):get_inventory():set_stack("r1248", 5, "default:dirt")
-                            elseif ra == 6 then  
-                                minetest.get_player_by_name(self.owner):get_inventory():set_stack("r1248", 6, "default:dirt")
-                            end
-                            minetest.get_player_by_name(self.owner):get_inventory():set_stack("foxfox", 1, "")
-                        else
-                            minetest.get_player_by_name(self.owner):get_inventory():set_stack("foxfox", 1, "default:dirt "..1+numdd)
-                        end
-				    end
-                end
-		    end
-	    end
-        if self.name == "mobs:tortoise" and self.metadata2 == 1 then
-		    local pos = self.object:getpos()
-		    local all_objects = minetest.get_objects_inside_radius(pos, 15)
-		    local players = {}
-		    local k = 0
-		    local _,obj
-		    for _,obj in ipairs(all_objects) do
-			    if obj:is_player() then
-				    if self.owner == obj:get_player_name() then
-					    k = 1	
-				    end
-			    end
-		    end
-		    if k == 0 then
-			    if minetest.get_player_by_name(self.owner) then
-				    self.object:setpos({x = minetest.get_player_by_name(self.owner):getpos().x, y = minetest.get_player_by_name(self.owner):getpos().y+1, z = minetest.get_player_by_name(self.owner):getpos().z+1})
-                    minetest.get_player_by_name(self.owner):get_inventory():set_size("tortoise2",1)
-                    local numd = minetest.get_player_by_name(self.owner):get_inventory():get_stack("tortoise2", 1):get_count()
-                    if numd > 50 then
-                        if minetest.get_player_by_name(self.owner):get_inventory():get_stack("tortoise", 1):get_name() == "tutorial:dragon_crystal" then
-                            minetest.get_player_by_name(self.owner):get_inventory():add_item("main", "tutorial:geschenk_gem2")
-                        else
-                            minetest.get_player_by_name(self.owner):get_inventory():add_item("main", "tutorial:geschenk_tortoise")
-                        end
-                        minetest.get_player_by_name(self.owner):get_inventory():set_stack("tortoise2", 1, "")
-                    else
-                        minetest.get_player_by_name(self.owner):get_inventory():set_stack("tortoise2", 1, "default:dirt "..1+numd)
-                    end
-			    end
-		    end
-	    end
-        if self.name == "mobs:sheep" then
-            if self.owner then
-                self.object:set_properties({infotext=self.owner.."'s Sheep"})
-                if minetest.get_player_by_name(self.owner) then
-                    local col = minetest.get_player_by_name(self.owner):get_inventory():get_stack("sheep", 1):get_name()
-                    if col == "dye:white" then
-                        minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:white")
-                        self.object:set_properties({textures={"mobs_sheep_white.png"}})
-                    elseif col == "dye:grey" then
-                        minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:grey")
-                        self.object:set_properties({textures={"mobs_sheep_grey.png"}})
-                    elseif col == "dye:dark_grey" then
-                        minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:dark_grey")
-                        self.object:set_properties({textures={"mobs_sheep_dark_grey.png"}})
-                    elseif col == "dye:black" then
-                        minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:black")
-                        self.object:set_properties({textures={"mobs_sheep_black.png"}})
-                    elseif col == "dye:violet" then
-                        minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:violet")
-                        self.object:set_properties({textures={"mobs_sheep_violet.png"}})
-                    elseif col == "dye:blue" then
-                        minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:blue")
-                        self.object:set_properties({textures={"mobs_sheep_blue.png"}})
-                    elseif col == "dye:cyan" then
-                        minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:cyan")
-                        self.object:set_properties({textures={"mobs_sheep_cyan.png"}})
-                    elseif col == "dye:dark_green" then
-                        minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:dark_green")
-                        self.object:set_properties({textures={"mobs_sheep_dark_green.png"}})
-                    elseif col == "dye:green" then
-                        minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:green")
-                        self.object:set_properties({textures={"mobs_sheep_green.png"}})
-                    elseif col == "dye:yellow" then
-                        minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:yellow")
-                        self.object:set_properties({textures={"mobs_sheep_yellow.png"}})
-                    elseif col == "dye:brown" then
-                        minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:brown")
-                        self.object:set_properties({textures={"mobs_sheep_brown.png"}})
-                    elseif col == "dye:orange" then
-                        minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:orange")
-                        self.object:set_properties({textures={"mobs_sheep_orange.png"}})
-                    elseif col == "dye:red" then
-                        minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:red")
-                        self.object:set_properties({textures={"mobs_sheep_red.png"}})
-                    elseif col == "dye:magenta" then
-                        minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:magenta")
-                        self.object:set_properties({textures={"mobs_sheep_magenta.png"}})
-                    elseif col == "dye:pink" then
-                        minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:pink")
-                        self.object:set_properties({textures={"mobs_sheep_pink.png"}})
-                    else
-                        minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"")
-                        self.object:set_properties({textures={"mobs_sheep.png"}})
-                    end
-                end
-            end
-        end
-    end
+
+		if self.name == "mobs:dragon" then
+			if self.owner and minetest.get_player_by_name(self.owner) then
+				minetest.get_player_by_name(self.owner):set_attribute("dragonx", ""..math.floor(self.object:getpos().x+0.5))
+				minetest.get_player_by_name(self.owner):set_attribute("dragony", ""..math.floor(self.object:getpos().y+0.5))
+				minetest.get_player_by_name(self.owner):set_attribute("dragonz", ""..math.floor(self.object:getpos().z+0.5))
+			end
+		end
+		if self.name == "mobs:sheep" then
+			if self.owner and minetest.get_player_by_name(self.owner) then
+				minetest.get_player_by_name(self.owner):set_attribute("sheepx", ""..math.floor(self.object:getpos().x+0.5))
+				minetest.get_player_by_name(self.owner):set_attribute("sheepy", ""..math.floor(self.object:getpos().y+0.5))
+				minetest.get_player_by_name(self.owner):set_attribute("sheepz", ""..math.floor(self.object:getpos().z+0.5))
+			
+			end
+		end
+		if self.name == "mobs:fox" then
+			if self.owner and minetest.get_player_by_name(self.owner) then
+				minetest.get_player_by_name(self.owner):set_attribute("foxx", ""..math.floor(self.object:getpos().x+0.5))
+				minetest.get_player_by_name(self.owner):set_attribute("foxy", ""..math.floor(self.object:getpos().y+0.5))
+				minetest.get_player_by_name(self.owner):set_attribute("foxz", ""..math.floor(self.object:getpos().z+0.5))
+			end
+		end
+		if self.name == "mobs:tortoise" then
+			if self.owner and minetest.get_player_by_name(self.owner) then
+				minetest.get_player_by_name(self.owner):set_attribute("tortoisex", ""..math.floor(self.object:getpos().x+0.5))
+				minetest.get_player_by_name(self.owner):set_attribute("tortoisey", ""..math.floor(self.object:getpos().y+0.5))
+				minetest.get_player_by_name(self.owner):set_attribute("tortoisez", ""..math.floor(self.object:getpos().z+0.5))
+			end
+		end
+		if self.name == "mobs:knight_1248" then
+			if self.owner and minetest.get_player_by_name(self.owner) then
+				minetest.get_player_by_name(self.owner):set_attribute("knightx", ""..math.floor(self.object:getpos().x+0.5))
+				minetest.get_player_by_name(self.owner):set_attribute("knighty", ""..math.floor(self.object:getpos().y+0.5))
+				minetest.get_player_by_name(self.owner):set_attribute("knightz", ""..math.floor(self.object:getpos().z+0.5))
+			end
+		
+		end
+
+		if self.name == "mobs:dog" and self.metadata2 == 1 then
+			if self.owner and minetest.get_player_by_name(self.owner) then
+				minetest.get_player_by_name(self.owner):set_attribute("dogx", ""..math.floor(self.object:getpos().x+0.5))
+				minetest.get_player_by_name(self.owner):set_attribute("dogy", ""..math.floor(self.object:getpos().y+0.5))
+				minetest.get_player_by_name(self.owner):set_attribute("dogz", ""..math.floor(self.object:getpos().z+0.5))
+			end
+			local pos = self.object:getpos()
+			local all_objects = minetest.get_objects_inside_radius(pos, 15)
+			local players = {}
+			local k = 0
+			local _,obj
+			for _,obj in ipairs(all_objects) do
+				if obj:is_player() then
+					if self.owner == obj:get_player_name() then
+						k = 1	
+					end
+				end
+			end
+			if k == 0 then
+				if minetest.get_player_by_name(self.owner) then
+					self.object:setpos({x = minetest.get_player_by_name(self.owner):getpos().x, y = minetest.get_player_by_name(self.owner):getpos().y+1, z = minetest.get_player_by_name(self.owner):getpos().z+1})
+				end
+			end
+		end
+		if self.name == "mobs:cat" and self.metadata2 == 1 then
+			if self.owner and minetest.get_player_by_name(self.owner) then
+				minetest.get_player_by_name(self.owner):set_attribute("catx", ""..math.floor(self.object:getpos().x+0.5))
+				minetest.get_player_by_name(self.owner):set_attribute("caty", ""..math.floor(self.object:getpos().y+0.5))
+				minetest.get_player_by_name(self.owner):set_attribute("catz", ""..math.floor(self.object:getpos().z+0.5))
+			end
+			local pos = self.object:getpos()
+			local all_objects = minetest.get_objects_inside_radius(pos, 15)
+			local players = {}
+			local k = 0
+			local _,obj
+			for _,obj in ipairs(all_objects) do
+				if obj:is_player() then
+					if self.owner == obj:get_player_name() then
+						k = 1	
+					end
+				end
+			end
+			if k == 0 then
+				if minetest.get_player_by_name(self.owner) then
+					self.object:setpos({x = minetest.get_player_by_name(self.owner):getpos().x, y = minetest.get_player_by_name(self.owner):getpos().y+1, z = minetest.get_player_by_name(self.owner):getpos().z+1})
+				end
+			end
+		end
+		if self.name == "mobs:dragon" and self.metadata2 == 1 then
+			local pos = self.object:getpos()
+			local all_objects = minetest.get_objects_inside_radius(pos, 15)
+			local players = {}
+			local k = 0
+			local _,obj
+			for _,obj in ipairs(all_objects) do
+				if obj:is_player() then
+					if self.owner == obj:get_player_name() then
+						k = 1	
+					end
+				end
+			end
+			if k == 0 then
+				if self.owner then
+					if minetest.get_player_by_name(self.owner) then
+						minetest.get_player_by_name(self.owner):get_inventory():set_size("dragon2",1)
+						self.object:setpos({x = minetest.get_player_by_name(self.owner):getpos().x, y = minetest.get_player_by_name(self.owner):getpos().y+1, z = minetest.get_player_by_name(self.owner):getpos().z+1})
+						local numd = minetest.get_player_by_name(self.owner):get_inventory():get_stack("dragon2", 1):get_count()
+						if numd > 50 then
+							if minetest.get_player_by_name(self.owner):get_inventory():get_stack("dragon", 1):get_name() == "tutorial:dragon_crystal" then
+								minetest.get_player_by_name(self.owner):get_inventory():add_item("main", "tutorial:geschenk_gem")
+							else
+								minetest.get_player_by_name(self.owner):get_inventory():add_item("main", "tutorial:geschenk_dragon")
+							end
+							minetest.get_player_by_name(self.owner):get_inventory():set_stack("dragon2", 1, "")
+						else
+							minetest.get_player_by_name(self.owner):get_inventory():set_stack("dragon2", 1, "default:dirt "..1+numd)
+						end
+					end
+				end
+			end
+		end
+		if self.name == "mobs:sheep" and self.metadata2 == 1 then
+			local pos = self.object:getpos()
+			local all_objects = minetest.get_objects_inside_radius(pos, 15)
+			local players = {}
+			local k = 0
+			local _,obj
+			for _,obj in ipairs(all_objects) do
+				if obj:is_player() then
+					if self.owner == obj:get_player_name() then
+						k = 1	
+					end
+				end
+			end
+			if k == 0 then
+				if self.owner then
+					if minetest.get_player_by_name(self.owner) then
+						minetest.get_player_by_name(self.owner):get_inventory():set_size("sheep2",1)
+						minetest.get_player_by_name(self.owner):get_inventory():set_size("sheep3",1)
+						self.object:setpos({x = minetest.get_player_by_name(self.owner):getpos().x, y = minetest.get_player_by_name(self.owner):getpos().y+1, z = minetest.get_player_by_name(self.owner):getpos().z+1})
+						local numd = minetest.get_player_by_name(self.owner):get_inventory():get_stack("sheep2", 1):get_count()
+						if numd > 50 then
+							minetest.get_player_by_name(self.owner):get_inventory():add_item("main", minetest.get_player_by_name(self.owner):get_inventory():get_stack("sheep3", 1))
+							minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep2", 1, "")
+						else
+							minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep2", 1, "default:dirt "..1+numd)
+						end
+					end
+				end
+			end
+		end
+		if self.name == "mobs:knight_1248" and self.metadata2 == 1 then
+			local pos = self.object:getpos()
+			local all_objects = minetest.get_objects_inside_radius(pos, 15)
+			local players = {}
+			local k = 0
+			local _,obj
+			for _,obj in ipairs(all_objects) do
+				if obj:is_player() then
+					if self.owner == obj:get_player_name() then
+						k = 1	
+					end
+				end
+			end
+			if k == 0 then
+				if minetest.get_player_by_name(self.owner) then
+					self.object:setpos({x = minetest.get_player_by_name(self.owner):getpos().x, y = minetest.get_player_by_name(self.owner):getpos().y+1, z = minetest.get_player_by_name(self.owner):getpos().z+1})
+				end
+			end
+		end
+		if self.name == "mobs:fox" and self.metadata2 == 1 then
+			local pos = self.object:getpos()
+			local all_objects = minetest.get_objects_inside_radius(pos, 15)
+			local players = {}
+			local k = 0
+			local _,obj
+			for _,obj in ipairs(all_objects) do
+				if obj:is_player() then
+					if self.owner == obj:get_player_name() then
+						k = 1	
+					end
+				end
+			end
+			if k == 0 then
+				if self.owner then
+					if minetest.get_player_by_name(self.owner) then
+						minetest.get_player_by_name(self.owner):get_inventory():set_size("fox",1)
+						minetest.get_player_by_name(self.owner):get_inventory():set_size("foxfox",1)
+						minetest.get_player_by_name(self.owner):get_inventory():set_size("r1248",6)
+						self.object:setpos({x = minetest.get_player_by_name(self.owner):getpos().x, y = minetest.get_player_by_name(self.owner):getpos().y+1, z = minetest.get_player_by_name(self.owner):getpos().z+1})
+						local numd = minetest.get_player_by_name(self.owner):get_inventory():get_stack("fox", 1):get_count()
+						if numd == 50 then
+							minetest.get_player_by_name(self.owner):get_inventory():add_item("main", "tutorial:fox_schluessel")
+							minetest.get_player_by_name(self.owner):get_inventory():set_stack("fox", 1, "default:dirt 80")
+						elseif numd == 80 then
+						else
+							minetest.get_player_by_name(self.owner):get_inventory():set_stack("fox", 1, "default:dirt "..1+numd)
+						end
+						local numdd = minetest.get_player_by_name(self.owner):get_inventory():get_stack("foxfox", 1):get_count()
+						if numdd == 256 then
+							local ra = math.random(6)
+							if ra == 1 then
+								minetest.get_player_by_name(self.owner):get_inventory():set_stack("r1248", 1, "default:dirt")
+							elseif ra == 2 then
+								minetest.get_player_by_name(self.owner):get_inventory():set_stack("r1248", 2, "default:dirt")
+							elseif ra == 3 then  
+								minetest.get_player_by_name(self.owner):get_inventory():set_stack("r1248", 3, "default:dirt")
+							elseif ra == 4 then  
+								minetest.get_player_by_name(self.owner):get_inventory():set_stack("r1248", 4, "default:dirt")
+							elseif ra == 5 then  
+								minetest.get_player_by_name(self.owner):get_inventory():set_stack("r1248", 5, "default:dirt")
+							elseif ra == 6 then  
+								minetest.get_player_by_name(self.owner):get_inventory():set_stack("r1248", 6, "default:dirt")
+							end
+							minetest.get_player_by_name(self.owner):get_inventory():set_stack("foxfox", 1, "")
+						else
+							minetest.get_player_by_name(self.owner):get_inventory():set_stack("foxfox", 1, "default:dirt "..1+numdd)
+						end
+					end
+				end
+			end
+		end
+		if self.name == "mobs:tortoise" and self.metadata2 == 1 then
+			local pos = self.object:getpos()
+			local all_objects = minetest.get_objects_inside_radius(pos, 15)
+			local players = {}
+			local k = 0
+			local _,obj
+			for _,obj in ipairs(all_objects) do
+				if obj:is_player() then
+					if self.owner == obj:get_player_name() then
+						k = 1	
+					end
+				end
+			end
+			if k == 0 then
+				if minetest.get_player_by_name(self.owner) then
+					self.object:setpos({x = minetest.get_player_by_name(self.owner):getpos().x, y = minetest.get_player_by_name(self.owner):getpos().y+1, z = minetest.get_player_by_name(self.owner):getpos().z+1})
+					minetest.get_player_by_name(self.owner):get_inventory():set_size("tortoise2",1)
+					local numd = minetest.get_player_by_name(self.owner):get_inventory():get_stack("tortoise2", 1):get_count()
+					if numd > 50 then
+						if minetest.get_player_by_name(self.owner):get_inventory():get_stack("tortoise", 1):get_name() == "tutorial:dragon_crystal" then
+							minetest.get_player_by_name(self.owner):get_inventory():add_item("main", "tutorial:geschenk_gem2")
+						else
+							minetest.get_player_by_name(self.owner):get_inventory():add_item("main", "tutorial:geschenk_tortoise")
+						end
+						minetest.get_player_by_name(self.owner):get_inventory():set_stack("tortoise2", 1, "")
+					else
+						minetest.get_player_by_name(self.owner):get_inventory():set_stack("tortoise2", 1, "default:dirt "..1+numd)
+					end
+				end
+			end
+		end
+		if self.name == "mobs:sheep" then
+			if self.owner then
+				self.object:set_properties({infotext=self.owner.."'s Sheep"})
+				if minetest.get_player_by_name(self.owner) then
+					local col = minetest.get_player_by_name(self.owner):get_inventory():get_stack("sheep", 1):get_name()
+					if col == "dye:white" then
+						minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:white")
+						self.object:set_properties({textures={"mobs_sheep_white.png"}})
+					elseif col == "dye:grey" then
+						minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:grey")
+						self.object:set_properties({textures={"mobs_sheep_grey.png"}})
+					elseif col == "dye:dark_grey" then
+						minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:dark_grey")
+						self.object:set_properties({textures={"mobs_sheep_dark_grey.png"}})
+					elseif col == "dye:black" then
+						minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:black")
+						self.object:set_properties({textures={"mobs_sheep_black.png"}})
+					elseif col == "dye:violet" then
+						minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:violet")
+						self.object:set_properties({textures={"mobs_sheep_violet.png"}})
+					elseif col == "dye:blue" then
+						minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:blue")
+						self.object:set_properties({textures={"mobs_sheep_blue.png"}})
+					elseif col == "dye:cyan" then
+						minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:cyan")
+						self.object:set_properties({textures={"mobs_sheep_cyan.png"}})
+					elseif col == "dye:dark_green" then
+						minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:dark_green")
+						self.object:set_properties({textures={"mobs_sheep_dark_green.png"}})
+					elseif col == "dye:green" then
+						minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:green")
+						self.object:set_properties({textures={"mobs_sheep_green.png"}})
+					elseif col == "dye:yellow" then
+						minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:yellow")
+						self.object:set_properties({textures={"mobs_sheep_yellow.png"}})
+					elseif col == "dye:brown" then
+						minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:brown")
+						self.object:set_properties({textures={"mobs_sheep_brown.png"}})
+					elseif col == "dye:orange" then
+						minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:orange")
+						self.object:set_properties({textures={"mobs_sheep_orange.png"}})
+					elseif col == "dye:red" then
+						minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:red")
+						self.object:set_properties({textures={"mobs_sheep_red.png"}})
+					elseif col == "dye:magenta" then
+						minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:magenta")
+						self.object:set_properties({textures={"mobs_sheep_magenta.png"}})
+					elseif col == "dye:pink" then
+						minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"wool:pink")
+						self.object:set_properties({textures={"mobs_sheep_pink.png"}})
+					else
+						minetest.get_player_by_name(self.owner):get_inventory():set_stack("sheep3", 1,"")
+						self.object:set_properties({textures={"mobs_sheep.png"}})
+					end
+				end
+			end
+		end
+	end
 	if use_cmi then
 		cmi.notify_step(self.object, dtime)
 	end
@@ -4415,8 +4434,10 @@ function mobs:register_arrow(name, def)
 
 			if self.switch == 0
 			or self.timer > 150 then
-
-				self.object:remove() ; -- print ("removed arrow")
+				if self.name == "mobs:dog" or self.name == "mobs:cat" or self.name == "mobs:sheep" or self.name == "mobs:dragon" or self.name == "mobs:knight_1248" or self.name == "mobs:fox" or self.name == "mobs:tortoise" then
+				else
+					self.object:remove() ; -- print ("removed arrow")
+				end
 
 				return
 			end
@@ -4454,8 +4475,10 @@ function mobs:register_arrow(name, def)
 
 						minetest.add_item(self.lastpos, self.object:get_luaentity().name)
 					end
-
-					self.object:remove() ; -- print ("hit node")
+					if self.name == "mobs:dog" or self.name == "mobs:cat" or self.name == "mobs:sheep" or self.name == "mobs:dragon" or self.name == "mobs:knight_1248" or self.name == "mobs:fox" or self.name == "mobs:tortoise" then
+					else
+						self.object:remove() ; -- print ("hit node")
+					end
 
 					return
 				end
@@ -4469,7 +4492,10 @@ function mobs:register_arrow(name, def)
 					and player:is_player() then
 
 						self:hit_player(player)
-						self.object:remove() ; -- print ("hit player")
+						if self.name == "mobs:dog" or self.name == "mobs:cat" or self.name == "mobs:sheep" or self.name == "mobs:dragon" or self.name == "mobs:knight_1248" or self.name == "mobs:fox" or self.name == "mobs:tortoise" then
+						else
+							self.object:remove() ; -- print ("hit player")
+						end
 						return
 					end
 
@@ -4482,8 +4508,10 @@ function mobs:register_arrow(name, def)
 					and entity.name ~= self.object:get_luaentity().name then
 
 						self:hit_mob(player)
-
-						self.object:remove() ;  --print ("hit mob")
+						if self.name == "mobs:dog" or self.name == "mobs:cat" or self.name == "mobs:sheep" or self.name == "mobs:dragon" or self.name == "mobs:knight_1248" or self.name == "mobs:fox" or self.name == "mobs:tortoise" then
+						else
+							self.object:remove() ;  --print ("hit mob")
+						end
 
 						return
 					end
@@ -4685,8 +4713,10 @@ function mobs:force_capture(self, clicker)
 	else
 		minetest.add_item(clicker:get_pos(), new_stack)
 	end
-
-	self.object:remove()
+	if self.name == "mobs:dog" or self.name == "mobs:cat" or self.name == "mobs:sheep" or self.name == "mobs:dragon" or self.name == "mobs:knight_1248" or self.name == "mobs:fox" or self.name == "mobs:tortoise" then
+	else
+		self.object:remove()
+	end
 
 	self:mob_sound("default_place_node_hard")
 end
@@ -4799,8 +4829,10 @@ function mobs:capture_mob(self, clicker, chance_hand, chance_net, chance_lasso,
 			else
 				minetest.add_item(clicker:get_pos(), new_stack)
 			end
-
-			self.object:remove()
+			if self.name == "mobs:dog" or self.name == "mobs:cat" or self.name == "mobs:sheep" or self.name == "mobs:dragon" or self.name == "mobs:knight_1248" or self.name == "mobs:fox" or self.name == "mobs:tortoise" then
+			else
+				self.object:remove()
+			end
 
 			self:mob_sound("default_place_node_hard")
 
@@ -5033,8 +5065,10 @@ function mobs:alias_mob(old_name, new_name)
 			if minetest.registered_entities[new_name] then
 				minetest.add_entity(self.object:get_pos(), new_name)
 			end
-
-			self.object:remove()
+			if self.name == "mobs:dog" or self.name == "mobs:cat" or self.name == "mobs:sheep" or self.name == "mobs:dragon" or self.name == "mobs:knight_1248" or self.name == "mobs:fox" or self.name == "mobs:tortoise" then
+			else
+				self.object:remove()
+			end
 		end
 	})
 end

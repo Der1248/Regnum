@@ -12,6 +12,7 @@ mobs:register_mob("mobs:knight_1248", {
 	visual = "mesh",
 	mesh = "mobs_1248_knight.b3d",
 	attacks_monsters = true,
+	attack_npcs = false,
 	textures = {
 		{"mobs_1248_knight.png"},
 	},

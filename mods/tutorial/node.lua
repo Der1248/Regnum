@@ -141,7 +141,7 @@ minetest.register_node("tutorial:geschenk_gold",{
 	description = "Gift (gold)",
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk_gold.png"},
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},  
+	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
 	drop = {},
 })
 minetest.register_node("tutorial:geschenk_platin",{
@@ -189,7 +189,7 @@ for i = 1, 20, 1 do
     minetest.register_node("tutorial:level"..i.."_rot",{
 	    tiles  = {"tutorial_level"..i..".png^tutorial_level_rot.png"},
 	    description = "You are now in Level red "..i,
-	    groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2},
+	    groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,not_in_creative_inventory=1},
     })
 end
 minetest.register_node("tutorial:levelMAX_rot",{
@@ -201,7 +201,7 @@ for i = 1, 100, 1 do
     minetest.register_node("tutorial:level"..i.."_grau",{
 	    tiles  = {"tutorial_level"..i..".png^tutorial_level_grau.png"},
 	    description = "You are now in Level gray "..i,
-	    groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2},
+	    groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,not_in_creative_inventory=1},
     })
 end
 minetest.register_node("tutorial:levelMAX_grau",{
@@ -213,7 +213,7 @@ for i = 1, 20, 1 do
     minetest.register_node("tutorial:level"..i.."_blau",{
 	    tiles  = {"tutorial_level"..i..".png^tutorial_level_blau.png"},
 	    description = "You are now in Level blue "..i,
-	    groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2},
+	    groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,not_in_creative_inventory=1},
     })
 end
 minetest.register_node("tutorial:levelMAX_blau",{
@@ -225,7 +225,7 @@ for i = 1, 100, 1 do
     minetest.register_node("tutorial:level"..i,{
 	    tiles  = {"tutorial_level"..i..".png"},
 	    description = "You are now in Level green "..i,
-	    groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2},
+	    groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,not_in_creative_inventory=1},
     })
 end
 minetest.register_node("tutorial:levelMAX",{
@@ -316,7 +316,7 @@ minetest.register_node("tutorial:bottleS1", {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
 	},
-	groups = {vessel=1,dig_immediate=3,attached_node=1},
+	groups = {vessel=1,dig_immediate=3,attached_node=1,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:bottleS2", {
 	description = "Super magic bottle lv.2",
@@ -329,10 +329,10 @@ minetest.register_node("tutorial:bottleS2", {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
 	},
-	groups = {vessel=1,dig_immediate=3,attached_node=1},
+	groups = {vessel=1,dig_immediate=3,attached_node=1,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:bottleS3", {
-	description = "Super magic bottle lv.3",
+	description = "Super magic bottle lv.MAX",
 	drawtype = "plantlike",
 	tiles = {"tutorial_bottleS3.png"},
 	wield_image = "tutorial_bottleS3.png",
@@ -368,7 +368,7 @@ minetest.register_node("tutorial:bottle1", {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
 	},
-	groups = {vessel=1,dig_immediate=3,attached_node=1},
+	groups = {vessel=1,dig_immediate=3,attached_node=1,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:bottle2", {
 	description = "Magic bottle lv.2",
@@ -381,7 +381,7 @@ minetest.register_node("tutorial:bottle2", {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
 	},
-	groups = {vessel=1,dig_immediate=3,attached_node=1},
+	groups = {vessel=1,dig_immediate=3,attached_node=1,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:bottle3", {
 	description = "Magic bottle lv.3",
@@ -394,7 +394,7 @@ minetest.register_node("tutorial:bottle3", {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
 	},
-	groups = {vessel=1,dig_immediate=3,attached_node=1},
+	groups = {vessel=1,dig_immediate=3,attached_node=1,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:bottle4", {
 	description = "Magic bottle lv.4",
@@ -407,7 +407,7 @@ minetest.register_node("tutorial:bottle4", {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
 	},
-	groups = {vessel=1,dig_immediate=3,attached_node=1},
+	groups = {vessel=1,dig_immediate=3,attached_node=1,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:bottle5", {
 	description = "Magic bottle lv.5",
@@ -420,7 +420,7 @@ minetest.register_node("tutorial:bottle5", {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
 	},
-	groups = {vessel=1,dig_immediate=3,attached_node=1},
+	groups = {vessel=1,dig_immediate=3,attached_node=1,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:bottle6", {
 	description = "Magic bottle lv.6",
@@ -433,7 +433,7 @@ minetest.register_node("tutorial:bottle6", {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
 	},
-	groups = {vessel=1,dig_immediate=3,attached_node=1},
+	groups = {vessel=1,dig_immediate=3,attached_node=1,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:bottle7", {
 	description = "Magic bottle lv.7",
@@ -446,7 +446,7 @@ minetest.register_node("tutorial:bottle7", {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
 	},
-	groups = {vessel=1,dig_immediate=3,attached_node=1},
+	groups = {vessel=1,dig_immediate=3,attached_node=1,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:bottle8", {
 	description = "Magic bottle lv.8",
@@ -459,7 +459,7 @@ minetest.register_node("tutorial:bottle8", {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
 	},
-	groups = {vessel=1,dig_immediate=3,attached_node=1},
+	groups = {vessel=1,dig_immediate=3,attached_node=1,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:bottle9", {
 	description = "Magic bottle lv.9",
@@ -472,7 +472,7 @@ minetest.register_node("tutorial:bottle9", {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
 	},
-	groups = {vessel=1,dig_immediate=3,attached_node=1},
+	groups = {vessel=1,dig_immediate=3,attached_node=1,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:bottle10", {
 	description = "Magic bottle lv.10",
@@ -485,7 +485,7 @@ minetest.register_node("tutorial:bottle10", {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
 	},
-	groups = {vessel=1,dig_immediate=3,attached_node=1},
+	groups = {vessel=1,dig_immediate=3,attached_node=1,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:bottle11", {
 	description = "Magic bottle lv.11",
@@ -498,10 +498,10 @@ minetest.register_node("tutorial:bottle11", {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
 	},
-	groups = {vessel=1,dig_immediate=3,attached_node=1},
+	groups = {vessel=1,dig_immediate=3,attached_node=1,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:bottle12", {
-	description = "Magic bottle lv.12",
+	description = "Magic bottle lv.MAX",
 	drawtype = "plantlike",
 	tiles = {"tutorial_bottle12.png"},
 	wield_image = "tutorial_bottle12.png",
@@ -515,82 +515,82 @@ minetest.register_node("tutorial:bottle12", {
 })
 minetest.register_node("tutorial:megablock4",{
 	tiles  = {"tutorial_megablock4.png"},
-	description = "Mega block Lv.4",
+	description = "Mega block Lv.MAX",
 	groups = {snappy=6,choppy=0,oddly_breakable_by_hand=0,flammable=0},
 })
 minetest.register_node("tutorial:megablock3",{
 	tiles  = {"tutorial_megablock3.png"},
 	description = "Mega block Lv.3",
-	groups = {snappy=6,choppy=0,oddly_breakable_by_hand=0,flammable=0},
+	groups = {snappy=6,choppy=0,oddly_breakable_by_hand=0,flammable=0,not_in_creative_inventory=1},
 })
 --v.0.6.6
 minetest.register_node("tutorial:megablock2",{
 	tiles  = {"tutorial_megablock2.png"},
 	description = "Mega block Lv.2",
-	groups = {snappy=6,choppy=0,oddly_breakable_by_hand=0,flammable=0},
+	groups = {snappy=6,choppy=0,oddly_breakable_by_hand=0,flammable=0,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:megablock1",{
 		tiles  = {"tutorial_megablock1.png"},
 		description = "Mega block lv.1",
-		groups = {snappy=6,choppy=0,oddly_breakable_by_hand=0,flammable=0},
+		groups = {snappy=6,choppy=0,oddly_breakable_by_hand=0,flammable=0,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:diamondblock2",{
 	tiles  = {"tutorial_diamondblock2.png"},
-	description = "Diamond block lv.2",
+	description = "Diamond block lv.MAX",
 	groups = {snappy=6,choppy=0,oddly_breakable_by_hand=0,flammable=0},
 })
 minetest.register_node("tutorial:dunklematerie1",{
 	tiles  = {"tutorial_dunklematerie1.png"},
 	description = "Dark matter Lv.1",
-	groups = {snappy=6,choppy=0,oddly_breakable_by_hand=0,flammable=0},
+	groups = {snappy=6,choppy=0,oddly_breakable_by_hand=0,flammable=0,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:dunklematerie2",{
 	tiles  = {"tutorial_dunklematerie2.png"},
 	description = "Dark matter Lv.2",
-	groups = {snappy=6,choppy=0,oddly_breakable_by_hand=0,flammable=0},
+	groups = {snappy=6,choppy=0,oddly_breakable_by_hand=0,flammable=0,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:dunklematerie3",{
 	tiles  = {"tutorial_dunklematerie3.png"},
 	description = "Dark matter Lv.3",
-	groups = {snappy=6,choppy=0,oddly_breakable_by_hand=0,flammable=0},
+	groups = {snappy=6,choppy=0,oddly_breakable_by_hand=0,flammable=0,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:dunklematerie4",{
 	tiles  = {"tutorial_dunklematerie4.png"},
 	description = "Dark matter Lv.4",
-	groups = {snappy=6,choppy=0,oddly_breakable_by_hand=0,flammable=0},
+	groups = {snappy=6,choppy=0,oddly_breakable_by_hand=0,flammable=0,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:dunklematerie5",{
 	tiles  = {"tutorial_dunklematerie5.png"},
 	description = "Dark matter Lv.5",
-	groups = {snappy=6,choppy=0,oddly_breakable_by_hand=0,flammable=0},
+	groups = {snappy=6,choppy=0,oddly_breakable_by_hand=0,flammable=0,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:dunklematerie6",{
 	tiles  = {"tutorial_dunklematerie6.png"},
-	description = "Dark matter Lv.6",
+	description = "Dark matter Lv.MAX",
 	groups = {snappy=6,choppy=0,oddly_breakable_by_hand=0,flammable=0},
 })
 minetest.register_node("tutorial:obsidian2",{
 	tiles  = {"tutorial_obsidian2.png"},
 	description = "Obsidian Lv.2",
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=0},
+	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=0,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:obsidian3",{
 	tiles  = {"tutorial_obsidian3.png"},
 	description = "Obsidian Lv.3",
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=0},
+	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=0,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:obsidian4",{
 	tiles  = {"tutorial_obsidian4.png"},
 	description = "Obsidian Lv.4",
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=0},
+	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=0,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:obsidian5",{
 	tiles  = {"tutorial_obsidian5.png"},
 	description = "Obsidian Lv.5",
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=0},
+	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=0,not_in_creative_inventory=1},
 })
 minetest.register_node("tutorial:obsidian6",{
-	description = "Obsidian Lv.6",
+	description = "Obsidian Lv.MAX",
 	tiles  = {"tutorial_obsidian6.png"},
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=0},
 })

@@ -90,6 +90,9 @@ local no_destroy = {
 	["air"] = true,
 	["default:lava_source"] = true,
 	["default:lava_flowing"] = true,
+	["tutorial:stone_with_rot"] = true,
+	["tutorial:stone_with_blau"] = true,
+	["tutorial:stone_with_titan"] = true,
 }
 local function laser_shoot(player, range, particle_texture, sound)
 	local player_pos = player:getpos()
@@ -129,6 +132,7 @@ for _, m in pairs(mining_lasers_list) do
 	minetest.register_tool("technic:laser_mk"..m[1], {
 		description = S("Mining Laser Mk%d"):format(m[1]),
 		inventory_image = "technic_mining_laser_mk"..m[1]..".png",
+		groups = {not_in_creative_inventory=1},
 		stack_max = 1,
 		wear_represents = "technic_RE_charge",
 		on_refill = technic.refill_RE_charge,
@@ -306,29 +310,45 @@ local mining_lasers_list2 = {
 
 
 for _, m in pairs(mining_lasers_list2) do
-	technic.register_power_tool("technic:laser_mkS"..m[1], m[3])
-	minetest.register_tool("technic:laser_mkS"..m[1], {
-		description = S("Spezial Mining Laser lv.%d"):format(m[1]),
-		inventory_image = "technic_mining_laser_mkS"..m[1]..".png",
-		stack_max = 1,
-		wear_represents = "technic_RE_charge",
-		on_refill = technic.refill_RE_charge,
-		on_use = function(itemstack, user)
-			local meta = minetest.deserialize(itemstack:get_metadata())
-			if not meta or not meta.charge then
-				return
-			end
+	if tonumber(m[1]) < 150 then
+		technic.register_power_tool("technic:laser_mkS"..m[1], m[3])
+		minetest.register_tool("technic:laser_mkS"..m[1], {
+			description = S("Spezial Mining Laser lv.%d"):format(m[1]),
+			inventory_image = "technic_mining_laser_mkS"..m[1]..".png",
+			stack_max = 1,
+			wear_represents = "technic_RE_charge",
+			on_refill = technic.refill_RE_charge,
+			groups = {not_in_creative_inventory=1},
+			on_use = function(itemstack, user)
+				local meta = minetest.deserialize(itemstack:get_metadata())
+				if not meta or not meta.charge then
+					return
+				end
 
-			-- If there's enough charge left, fire the laser
-			if meta.charge >= m[4] then
-				meta.charge = meta.charge - m[4]
-				laser_shoot(user, m[2], "technic_laser_beam_mk"..m[1]..".png", "technic_laser_mk"..m[1])
-				technic.set_RE_wear(itemstack, meta.charge, m[3])
-				itemstack:set_metadata(minetest.serialize(meta))
-			end
-			return itemstack
-		end,
-	})
+				-- If there's enough charge left, fire the laser
+				if meta.charge >= m[4] then
+					meta.charge = meta.charge - m[4]
+					laser_shoot(user, m[2], "technic_laser_beam_mk"..m[1]..".png", "technic_laser_mk"..m[1])
+					technic.set_RE_wear(itemstack, meta.charge, m[3])
+					itemstack:set_metadata(minetest.serialize(meta))
+				end
+				return itemstack
+			end,
+		})
+	else
+		technic.register_power_tool("technic:laser_mkS"..m[1], m[3])
+		minetest.register_tool("technic:laser_mkS"..m[1], {
+			description = S("Spezial Mining Laser lv.MAX"),
+			inventory_image = "technic_mining_laser_mkS"..m[1]..".png",
+			stack_max = 1,
+			wear_represents = "technic_RE_charge",
+			on_refill = technic.refill_RE_charge,
+			on_use = function(itemstack, user)
+				laser_shoot(user, 30, "technic_laser_beam_mk1.png", "technic_laser_mk1")
+				return itemstack
+			end,
+		})
+	end
 end
 
 minetest.register_craft({

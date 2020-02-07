@@ -12,6 +12,7 @@ mobs:register_mob("mobs:sheep", {
 	visual = "mesh",
 	mesh = "mobs_sheep.x",
 	attacks_monsters = false,
+	attack_npcs = false,
 	textures = {
 		{"mobs_sheep.png"},
 	},
