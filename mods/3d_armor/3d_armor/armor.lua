@@ -7,7 +7,7 @@ minetest.register_tool("3d_armor:helmet_admin", {
     wield_image = "3d_armor_inv_helmet_admin.png",
 	groups = {armor_head=20, armor_heal=20, armor_use=0, armor_fire=1, armor_water=0.2},
 	wear = 0,
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("3d_armor:helmet_admin2")
@@ -22,7 +22,7 @@ minetest.register_tool("3d_armor:helmet_admin2", {
     wield_image = "3d_armor_inv_helmet_admin.png",
 	groups = {armor_head=20, armor_heal=20, armor_use=0, armor_fire=1, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("3d_armor:helmet_admin3")
@@ -37,7 +37,7 @@ minetest.register_tool("3d_armor:helmet_admin3", {
     wield_image = "3d_armor_inv_helmet_admin.png",
 	groups = {armor_head=20, armor_heal=20, armor_use=0, armor_fire=1, physics_jump=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("3d_armor:helmet_admin4")
@@ -52,7 +52,7 @@ minetest.register_tool("3d_armor:helmet_admin4", {
     wield_image = "3d_armor_inv_helmet_admin.png",
 	groups = {armor_head=20, armor_heal=20, armor_use=0, armor_fire=1, physics_jump=0.25, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("3d_armor:helmet_admin")
@@ -67,7 +67,7 @@ minetest.register_tool("3d_armor:chestplate_admin", {
     wield_image = "3d_armor_inv_chestplate_admin.png",
 	groups = {armor_torso=20, armor_heal=20, armor_use=0, armor_fire=1, armor_water=0.2},
 	wear = 0,
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("3d_armor:chestplate_admin2")
@@ -82,7 +82,7 @@ minetest.register_tool("3d_armor:chestplate_admin2", {
     wield_image = "3d_armor_inv_chestplate_admin.png",
 	groups = {armor_torso=20, armor_heal=20, armor_use=0, armor_fire=1, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("3d_armor:chestplate_admin3")
@@ -96,7 +96,7 @@ minetest.register_tool("3d_armor:chestplate_admin3", {
     wield_image = "3d_armor_inv_chestplate_admin.png",
 	groups = {armor_torso=20, armor_heal=20, armor_use=0, armor_fire=1, physics_jump=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("3d_armor:chestplate_admin4")
@@ -110,7 +110,7 @@ minetest.register_tool("3d_armor:chestplate_admin4", {
     wield_image = "3d_armor_inv_chestplate_admin.png",
 	groups = {armor_torso=20, armor_heal=20, armor_use=0, armor_fire=1, physics_jump=0.25, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("3d_armor:chestplate_admin")
@@ -124,7 +124,7 @@ minetest.register_tool("3d_armor:leggings_admin", {
 	inventory_image = "3d_armor_inv_leggings_admin.png^technic_tool_mode1.png",
 	groups = {armor_legs=20, armor_heal=20, armor_use=0, armor_fire=1, armor_water=0.2},
 	wear = 0,
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("3d_armor:leggings_admin2")
@@ -139,7 +139,7 @@ minetest.register_tool("3d_armor:leggings_admin2", {
 	inventory_image = "3d_armor_inv_leggings_admin.png^technic_tool_mode2.png",
 	groups = {armor_legs=20, armor_heal=20, armor_use=0, armor_fire=1, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("3d_armor:leggings_admin3")
@@ -154,7 +154,7 @@ minetest.register_tool("3d_armor:leggings_admin3", {
 	inventory_image = "3d_armor_inv_leggings_admin.png^technic_tool_mode3.png",
 	groups = {armor_legs=20, armor_heal=20, armor_use=0, armor_fire=1, physics_jump=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("3d_armor:leggings_admin4")
@@ -169,7 +169,7 @@ minetest.register_tool("3d_armor:leggings_admin4", {
     wield_image = "3d_armor_inv_leggings_admin.png",
 	groups = {armor_legs=20, armor_heal=20, armor_use=0, armor_fire=1, physics_jump=0.25, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("3d_armor:leggings_admin")
@@ -186,7 +186,7 @@ minetest.register_tool("3d_armor:boots_admin", {
     wield_image = "3d_armor_inv_boots_admin.png",
 	groups = {armor_feet=20, armor_heal=20, armor_use=0, armor_fire=1, armor_water=0.2},
 	wear = 0,
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("3d_armor:boots_admin2")
@@ -201,7 +201,7 @@ minetest.register_tool("3d_armor:boots_admin2", {
     wield_image = "3d_armor_inv_boots_admin.png",
 	groups = {armor_feet=20, armor_heal=20, armor_use=0, armor_fire=1, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("3d_armor:boots_admin3")
@@ -216,7 +216,7 @@ minetest.register_tool("3d_armor:boots_admin3", {
     wield_image = "3d_armor_inv_boots_admin.png",
 	groups = {armor_feet=20, armor_heal=20, armor_use=0, armor_fire=1, physics_jump=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("3d_armor:boots_admin4")
@@ -231,7 +231,7 @@ minetest.register_tool("3d_armor:boots_admin4", {
     wield_image = "3d_armor_inv_boots_admin.png",
 	groups = {armor_feet=20, armor_heal=20, armor_use=0, armor_fire=1, physics_jump=0.25, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("3d_armor:boots_admin")

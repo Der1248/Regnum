@@ -123,31 +123,27 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'tutorial:regnumbattleaxe2',
     recipe = {
-        {'tutorial:regnumbattleaxe1'},
+        {'', '', 'tutorial:regnum', '', ''},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'tutorial:regnum', 'tutorial:bottleSS', 'tutorial:superlegendenbattleaxe2', 'tutorial:bottleSS', 'tutorial:regnum'},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'', '', 'tutorial:regnum', '', ''},
     }
 })
 minetest.register_craft({
     output = 'tutorial:regnumbattleaxe3',
     recipe = {
-        {'tutorial:regnumbattleaxe2'},
+        {'', '', 'tutorial:regnum', '', ''},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'tutorial:regnum', 'tutorial:bottleSS', 'tutorial:superlegendenbattleaxe3', 'tutorial:bottleSS', 'tutorial:regnum'},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'', '', 'tutorial:regnum', '', ''},
     }
 })
 minetest.register_craft({
     output = 'tutorial:superlegendenbattleaxe1',
     recipe = {
         {'tutorial:lilabattleaxe2', 'tutorial:legendenbattleaxe6'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:superlegendenbattleaxe2',
-    recipe = {
-        {'tutorial:superlegendenbattleaxe1'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:superlegendenbattleaxe3',
-    recipe = {
-        {'tutorial:superlegendenbattleaxe2'},
     }
 })
 minetest.register_craft({
@@ -507,18 +503,6 @@ minetest.register_craft({
         {'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
         {'tutorial:arena_block', 'tutorial:ultrabattleaxe', 'tutorial:arena_block'},
         {'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:adminbattleaxe2',
-    recipe = {
-        {'tutorial:adminbattleaxe'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:adminbattleaxe3',
-    recipe = {
-        {'tutorial:adminbattleaxe2'},
     }
 })
 minetest.register_craft({

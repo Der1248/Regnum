@@ -101,6 +101,10 @@ minetest.register_chatcommand("regnum", {
         inv:set_size("tearpurple", 1)
         inv:set_size("tearyellow", 1)
         inv:set_size("tearcyan", 1)
+		inv:set_size("dgon", 1)
+        inv:set_size("ttoise", 1)
+		inv:add_item("dgon", "default:dirt")
+        inv:add_item("ttoise", "default:dirt")
         inv:add_item("artrew", "default:dirt")
         inv:add_item("medrew", "default:dirt")
         inv:add_item("trerew", "default:dirt")
@@ -442,12 +446,12 @@ minetest.register_chatcommand("admin", {
 	func = function(name, param)
 		local player = minetest.get_player_by_name(name)
 		local inv = player:get_inventory()
-		inv:add_item("main", "ban_hammer:hammer")			--admin tool 1
+		inv:add_item("main", "ban_hammer:hammer1")			--admin tool 1
 		inv:add_item("main", "tutorial:pistole")			--admin tool 2
 		inv:add_item("main", "tutorial:adminbattleaxe")		--admin tool 3
 		inv:add_item("main", "technic:laser_mkA1")			--admin tool 4
 		inv:add_item("main", "technic:chainsaw")			--admin tool 5
-		inv:add_item("main", "tutorial:server_hammer")		--admin tool 6
+		inv:add_item("main", "tutorial:server_hammer1")		--admin tool 6
 		inv:add_item("main", "tutorial:monster_remover")	--admin tool 7
         inv:add_item("main", "technic:mining_drill_mkA1")	--admin tool 8
         inv:add_item("main", "tutorial:adminwallplacer_1")	--admin tool 9

@@ -1,65 +1,150 @@
 minetest.register_node("tutorial:geschenk_gem",{
-	description = "Gift lv.1 (gem)",
+	description = "Gift (gem dragon)",
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk_gem.png"},
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-    drop = {},
+    drop = {
+		max_items = 1,
+		items = {
+			{items = {"tutorial:gem_fragment"},rarity = 2.5},
+			{items = {"tutorial:geschenk_legend"},rarity = 5},
+			{items = {""},rarity = 2.5},
+		}
+	}
 })
 minetest.register_node("tutorial:geschenk_dragon",{
 	description = "Gift (dragon)",
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk_dragon.png"},
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-    drop = {},
+    drop = {"default:coal_lump 20"},
 })
 minetest.register_node("tutorial:geschenk_dna",{
 	description = "Gift (DNA)",
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk_dna.png"},
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-	drop = {}
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {"mobs:watermob_crocodile_lg_egg"},rarity = 16},
+			{items = {"mobs:watermob_crocodile_md_egg"},rarity = 16},
+			{items = {"mobs:watermob_crocodile_sm_egg"},rarity = 16},
+			{items = {"mobs:watermob_clownfish_egg"},rarity = 16},
+			{items = {"mobs:watermob_tropical_fish_egg"},rarity = 16},
+			{items = {"mobs:watermob_jellyfish_egg"},rarity = 16},
+			{items = {"mobs:watermob_shark_sm_egg"},rarity = 16},
+			{items = {"mobs:watermob_shark_md_egg"},rarity = 16},
+			{items = {"mobs:watermob_shark_lg_egg"},rarity = 16},
+			{items = {"mobs:watermob_turtle_lg_egg"},rarity = 16},
+			{items = {"mobs:watermob_turtle_sm_egg"},rarity = 16},
+			{items = {"mobs:skymob_butterfly_egg"},rarity = 16},
+			{items = {"mobs:skymob_gull_egg"},rarity = 16},
+			{items = {"mobs:skymob_bird_sm_egg"},rarity = 16},
+			{items = {"mobs:skymob_bird_lg_egg"},rarity = 16},
+			{items = {"mobs:skymob_bat_egg"},rarity = 16},
+			{items = {"tutorial:geschenk_dna"}},
+		}
+	}
 })
 minetest.register_node("tutorial:geschenk_legend",{
 	description = "Gift (legendary)",
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk_legenden.png"},
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-	drop = {}
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {"gems:emerald_gem 2"},rarity = 16},
+			{items = {"gems:shadow_gem 2"},rarity = 8},
+			{items = {"gems:pearl_gem 2"},rarity = 8},
+			{items = {"gems:amethyst_gem 2"},rarity = 5.333},
+			{items = {"gems:ruby_gem 2"},rarity = 4},
+			{items = {"gems:sapphire_gem 2"},rarity = 4},
+			{items = {"tutorial:geschenk_legend"}},
+		}
+	}
 })
 minetest.register_node("tutorial:geschenk_regnum",{
 	description = "Gift (regnum)",
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk_regnum.png"},
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-	drop = {}
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {"tutorial:regnum_pixel_gold 20"},rarity = 5},
+			{items = {"tutorial:regnum_pixel_green 20"},rarity = 5},
+			{items = {"tutorial:regnum_pixel_purple 55"},rarity = 5},
+			{items = {"tutorial:regnum_pixel_red 185"},rarity = 5},
+			{items = {"tutorial:regnum_pixel_blue 185"},rarity = 5},
+			{items = {"tutorial:geschenk_regnum"}},
+		}
+	}
 })
 minetest.register_node("tutorial:geschenk_death_silber",{
 	description = "Deathgift (silver)",
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk_death_silber.png"},
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-	drop = {}
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {"default:mese_crystal"},rarity = 8.333},
+			{items = {"tutorial:lightstone"},rarity = 8.333},
+			{items = {"default:ice"},rarity = 8.333},
+			{items = {"tutorial:regnum_part 2"},rarity = 50},
+			{items = {"tutorial:geschenk_death_silber"}},
+		}
+	}
 })
 minetest.register_node("tutorial:geschenk_death_gold",{
 	description = "Deathgift (gold)",
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk_death_gold.png"},
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-	drop = {}
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {"default:mese_crystal 2"},rarity = 7.143},
+			{items = {"tutorial:lightstone 2"},rarity = 7.143},
+			{items = {"default:ice"},rarity = 7.143},
+			{items = {"tutorial:regnum_part 3"},rarity = 50},
+			{items = {"tutorial:geschenk_death_gold"}},
+		}
+	}
 })
 minetest.register_node("tutorial:geschenk_death_platin",{
 	description = "Deathgift (platinum)",
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk_death_platin.png"},
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-	drop = {}
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {"default:mese_crystal 3"},rarity = 6.25},
+			{items = {"tutorial:lightstone 2"},rarity = 5.556},
+			{items = {"default:ice"},rarity = 6.25},
+			{items = {"tutorial:regnum_part 4"},rarity = 50},
+			{items = {"tutorial:geschenk_death_platin"}},
+		}
+	}
 })
 minetest.register_node("tutorial:geschenk_death",{
 	description = "Deathgift",
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk_death.png"},
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-	drop = {}
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {"default:mese_crystal_fragment 4"},rarity = 10},
+			{items = {"tutorial:lightstone"},rarity = 10},
+			{items = {"default:ice"},rarity = 10},
+			{items = {"tutorial:regnum_part"},rarity = 50},
+			{items = {"tutorial:geschenk_death"}},
+		}
+	}
 })
 minetest.register_node("tutorial:stone_with_regnum", {
 	description = "Regnum ore",
@@ -121,14 +206,45 @@ minetest.register_node("tutorial:geschenk_wool2",{
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk_wool2.png"},
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-    drop = {},
+    drop = {
+		max_items = 1,
+		items = {
+			{items = {"wool:yellow 3"},rarity = 15},
+			{items = {"wool:white 3"},rarity = 15},
+			{items = {"wool:violet 3"},rarity = 15},
+			{items = {"wool:red 3"},rarity = 15},
+			{items = {"wool:pink 3"},rarity = 15},
+			{items = {"wool:orange 3"},rarity = 15},
+			{items = {"wool:magenta 3"},rarity = 15},
+			{items = {"wool:grey 3"},rarity = 15},
+			{items = {"wool:green 3"},rarity = 15},
+			{items = {"wool:dark_grey 3"},rarity = 15},
+			{items = {"wool:dark_green 3"},rarity = 15},
+			{items = {"wool:cyan 3"},rarity = 15},
+			{items = {"wool:brown 3"},rarity = 15},
+			{items = {"wool:blue 3"},rarity = 15},
+			{items = {"wool:black 3"},rarity = 15},
+			{items = {"tutorial:geschenk_wool2"}},
+		}
+	}
 })
 minetest.register_node("tutorial:geschenk_wool1",{
 	description = "Colored wool gift lv.1",
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk_wool1.png"},
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},  
-    drop = {},
+    drop = {
+		max_items = 1,
+		items = {
+			{items = {"wool:yellow 2"},rarity = 6},
+			{items = {"wool:white 2"},rarity = 6},
+			{items = {"wool:violet 2"},rarity = 6},
+			{items = {"wool:red 2"},rarity = 6},
+			{items = {"wool:orange 2"},rarity = 6},
+			{items = {"wool:blue 2"},rarity = 6},
+			{items = {"tutorial:geschenk_wool1"}},
+		}
+	}
 })
 minetest.register_node("tutorial:geschenk_wool",{
 	description = "Wool gift",
@@ -142,21 +258,56 @@ minetest.register_node("tutorial:geschenk_gold",{
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk_gold.png"},
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-	drop = {},
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {"mobs:dirt_monster_egg"},rarity = 17},
+			{items = {"mobs:stone_monster_egg"},rarity = 17},
+			{items = {"mobs:sand_monster_egg"},rarity = 17},
+			{items = {"mobs:desert_sand_monster_egg"},rarity = 17},
+			{items = {"mobs:snow_monster_egg"},rarity = 17},
+			{items = {"mobs:desert_stone_monster_egg"},rarity = 17},
+			{items = {"mobs:ice_monster_egg"},rarity = 17},
+			{items = {"mobs:grass_monster_egg"},rarity = 17},
+			{items = {"mobs:rainforest_litter_monster_egg"},rarity = 17},
+			{items = {"mobs:dry_grass_monster_egg"},rarity = 17},
+			{items = {"mobs:silver_sand_monster_egg"},rarity = 17},
+			{items = {"default:mese_crystal"},rarity = 2.833},
+			{items = {"tutorial:geschenk_gold"}},
+		}
+	}
 })
 minetest.register_node("tutorial:geschenk_platin",{
 	description = "Gift (platinum)",
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk_platin.png"},
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},  
-	drop = {},
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {"default:mese_crystal 2"},rarity = 2.5},
+			{items = {"tutorial:geschenk_wool"},rarity = 3.333},
+			{items = {"tutorial:geschenk_wool1"},rarity = 5},
+			{items = {"tutorial:geschenk_wool2"},rarity = 10},
+			{items = {"tutorial:geschenk_platin"}},
+		}
+	}
 })
 minetest.register_node("tutorial:geschenk_silber",{
 	description = "Gift (silver)",
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk_silber.png"},
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},  
-	drop = {},
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {"tutorial:lightstone 2"},rarity = 2.222},
+			{items = {"default:mese_crystal_fragment 4"},rarity = 2.5},
+			{items = {"tutorial:arena_block"},rarity = 10},
+			{items = {"tutorial:arena_glass"},rarity = 20},
+			{items = {"tutorial:geschenk_silber"}},
+		}
+	}
 })
 minetest.register_node("tutorial:stone_with_titan", {
 	description = "Titanium ore",
@@ -238,7 +389,16 @@ minetest.register_node("tutorial:geschenk",{
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk.png"},
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},  
-	drop = {},
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {"tutorial:lightstone"},rarity = 3.22},
+			{items = {"default:mese_crystal_fragment 2"},rarity = 3.625},
+			{items = {"default:ice"},rarity = 4.833},
+			{items = {"tutorial:dunklematerie4"},rarity = 9.667},
+			{items = {"tutorial:geschenk"}},
+		}
+	}
 })
 minetest.register_node("tutorial:stone_with_admin", {
 	description = "Admin ore",

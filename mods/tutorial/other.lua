@@ -316,7 +316,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
     if a19 == 1 then
         d1 = d1+1
     end
-    if a18 == 1 then
+    if a20 == 1 then
         d1 = d1+1
     end
     if a21 == 1 then
@@ -654,8 +654,8 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	end
 end)
 
-local rg18 = {}
-rg18.get_formspec = function(player, pos)
+local rg13 = {}
+rg13.get_formspec = function(player, pos)
 	if player == nil then
         return
     end
@@ -668,34 +668,35 @@ rg18.get_formspec = function(player, pos)
 		.."label[0,1;II. 4. Ores]"
         .."label[0,1.3;You can find ores in the depth.]"
         .."label[0,1.6;Where to find ores:]"
-        .."label[0,1.9;Silver: y < -2]"
-        .."label[0,2.2;Mithril: y < -512]"
-        .."label[0,2.5;Tin: y < 8]"
-        .."label[0,2.8;Coal: y < 0]"
-        .."label[0,3.1;Iron: y < 2]"
-        .."label[0,3.4;Mese: y < -64]"
-        .."label[0,3.7;Gold: y < -64]"
-        .."label[0,4.0;Diamond: y < -128]"
-        .."label[0,4.3;Copper: y < ?]"
-        .."label[0,4.6;Black/White: y < 2]"
-        .."label[0,4.9;Uranium: y < -128]"
-        .."label[0,5.2;Admin: y < -500]"
-        .."label[0,5.5;Titan: y < -400]"
-        .."label[0,5.8;Rot/Blau: y < -100]"
-        .."label[0,6.1;Regnum: y < -600]"
-        .."label[0,6.4;Technic Uranium: y < -80, y > -300]"
-        .."label[0,6.7;Cromium: y < -100]"
-        .."label[0,7.0;Zinc: y < 2]"
-        .."label[0,7.3;Ruby/Sapphire: y < -300]"
-        .."label[0,7.6;Amethyst: y < -600]"
-        .."label[0,7.9;Shadow/Pearl: y < -900]"
-        .."label[0,8.2;Emerald: y < -1200]"
-        .."button[2,10;   2,0.5;rg17;<]"
-        .."button[4,10;   2,0.5;rg19;>]"
+		.."label[0,1.9;(default) Coal: y < 65]"
+        .."label[0,2.2;(default) Iron: y < 1]"
+		.."label[0,2.5;(default) Copper: y < -15]"
+		.."label[0,2.8;(default) Tin: y < -31]"
+		.."label[0,3.1;(default) Gold: y < -63]"
+		.."label[0,3.4;(default) Mese: y < -63]"
+        .."label[0,3.7;(default) Diamond: y < -127]"
+		.."label[0,4.0;(moreores) Tin: y < 9]"
+		.."label[0,4.3;(moreores) Silver: y < -1]"
+		.."label[0,4.6;(moreores) Mithril: y < -511]"
+		.."label[0,4.9;(technic) Zinc: y < 3]"
+		.."label[0,5.2;(technic) Cromium: y < -99]"
+        .."label[0,5.5;(technic) Uranium: -301 < y < -79]"
+        .."label[0,5.8;(regnum) Black/White: y < 2 (can be digged with battleaxe-lv.21)]"
+        .."label[0,6.1;(regnum) Uranium: y < -128 (can be digged with battleaxe-lv.46)]"
+		.."label[0,6.4;(regnum) Ruby/Sapphire: y < -300 (can be digged with battleaxe-lv.52)]"
+		.."label[0,6.7;(regnum) Amethyst: y < -600 (can be digged with battleaxe-lv.62)]"
+        .."label[0,7.0;(regnum) Shadow/Pearl: y < -900 (can be digged with battleaxe-lv.64)]"
+        .."label[0,7.3;(regnum) Emerald: y < -1200 (can be digged with battleaxe-lv.71)]"
+        .."label[0,7.6;(regnum) Admin: y < -500 (can be digged with battleaxe-lv.74)]"
+		.."label[0,7.9;(regnum) Regnum: y < -600 (can be digged with battleaxe-lv.74)]"
+        .."label[0,8.2;(regnum) Titan: y < -400 (can be digged with battleaxe-lv.110 and titanremover)]"
+        .."label[0,8.5;(regnum) Rot/Blau: y < -100 (can be digged with battleaxe-lv.122 and purplebattleaxe)]"
+        .."button[2,10;   2,0.5;rg12;<]"
+        .."button[4,10;   2,0.5;rg14;>]"
 	return formspec		
 end
-local rg19 = {}
-rg19.get_formspec = function(player, pos)
+local rg14 = {}
+rg14.get_formspec = function(player, pos)
 	if player == nil then
         return
     end
@@ -706,8 +707,8 @@ rg19.get_formspec = function(player, pos)
         .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
         .."bgcolor[#080808BB;true]"
 		.."label[0,1;II. 5. Armor, Battleaxes & Guns]"
-        .."label[0,1.3;There are over 120 differend battleaxes and armors]"
-        .."label[0,1.6;Here you can see witch kind of armor/battleaxe/gun you have to craft:]"
+        .."label[0,1.3;There are over 120 differend battleaxes, armors and guns]"
+        .."label[0,1.6;Here you can see witch kind of armor, battleaxe and gun you have to craft:]"
         .."label[0,1.9;(starter)]"
         .."label[0,2.2;mega lv.1-20]"
         .."label[0,2.5;cloud lv.1-20]"
@@ -723,18 +724,23 @@ rg19.get_formspec = function(player, pos)
         .."label[0,5.5;legendary lv.1-6]"
         .."label[0,5.8;superlegendary]"
         .."label[0,6.1;regnum]"
-        .."label[0,6.4;There are differend modes for the superlegendary armor/battleaxe/gun]"
-        .."label[0,6.7;and also for the regnum:]"
-        .."label[0,7.0;With the armor you can jump higher and run faster,]"
-        .."label[0,7.3;with the battleaxe you can dig water/lava]"
-        .."label[0,7.3;and the gun will add thunder]"
-        .."label[0,7.6;The legendary battleaxe (or higher) will double some ores if you dig them.]"
-        .."button[2,10;   2,0.5;rg18;<]"
-        .."button[4,10;   2,0.5;rg20;>]"
+		.."label[0,6.4;The legendary battleaxe (or higher) will double some ores if you dig them.]"
+        .."label[0,6.7;There are differend modes for some battleaxes, armors and guns]"
+		.."label[0,7.0;With battleaxe Mode 2 you can dig water and lava]"
+		.."label[0,7.3;With battleaxe Mode 3 you can only hunt monster]"
+		.."label[0,7.6;With armor Mode 2 you can run faster]"
+        .."label[0,7.9;With armor Mode 3 you can jump higher]"
+        .."label[0,8.2;With armor Mode 4 you can run faster and jump higher]"
+		.."label[0,8.5;With gun Mode 2 you can only make damage to monsters]"
+		.."label[0,8.8;With gun Mode 3 you will also add thunder]"
+        .."label[0,9.1;For changing the mode of a tool (also Wallplacer and mining Drill),]"
+		.."label[0,9.4;you have to press the right mouse and sneak (don't point at a node)]"
+        .."button[2,10;   2,0.5;rg13;<]"
+        .."button[4,10;   2,0.5;rg15;>]"
 	return formspec		
 end
-local rg20 = {}
-rg20.get_formspec = function(player, pos)
+local rg15 = {}
+rg15.get_formspec = function(player, pos)
     if player == nil then
         return
     end
@@ -745,184 +751,16 @@ rg20.get_formspec = function(player, pos)
         .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
         .."bgcolor[#080808BB;true]"
 		.."label[0,1;II. 6. Chat commands]"
-        .."label[0,1.3;/admin for all admin tools]"
-        .."label[0,1.6;/regnum for all regnum things]"
+        .."label[0,1.3;/admin for all admin things (give priv needed)]"
+        .."label[0,1.6;/regnum for all regnum things (give priv needed)]"
         .."label[0,1.9;/rank to see your rank]"
-        .."button[2,10;   2,0.5;rg19;<]"
+        .."button[2,10;   2,0.5;rg14;<]"
+		.."button[4,10;   2,0.5;rg16;>]"
 	return formspec		
 end
-minetest.register_on_dignode(function(pos, node, player)
-	if player == nil then
-        return
-    end	
-	local name = player:get_player_name()
-	local inv = player:get_inventory()
-	if node.name == "tutorial:geschenk_dragon" then
-        local x = math.random(0,15)
-        if x == 8 then
-            inv:set_size("dgon", 1)
-            local dgon = inv:get_stack("dgon", 1):get_count()
-            if dgon == 0 then
-                inv:add_item("main", "tutorial:dragon_schluessel")
-                inv:add_item("dgon", "default:dirt")
-            end
-        else
-            inv:add_item("main", "default:coal_lump 20")
-        end
-	end
-    if node.name == "tutorial:geschenk_tortoise" then
-        local x = math.random(0,15)
-        if x == 8 then
-            inv:set_size("ttoise", 1)
-            local dgon = inv:get_stack("ttoise", 1):get_count()
-            if dgon == 0 then
-                inv:add_item("main", "tutorial:tortoise_schluessel")
-                inv:add_item("ttoise", "default:dirt")
-            end
-        else
-            inv:add_item("main", "default:coal_lump 20")
-        end
-	end
-    if node.name == "tutorial:geschenk_gem" then
-        local x = math.random(0,8)
-        if x == 2 then
-            inv:add_item("main", "tutorial:gem_fragment")
-        elseif x == 5 then
-            inv:add_item("main", "tutorial:geschenk_legend")
-        elseif x == 4 then
-            inv:add_item("main", "tutorial:geschenk_legend")
-        end
-	end
-    if node.name == "tutorial:geschenk_gem2" then
-        local x = math.random(0,8)
-        if x == 2 then
-            inv:add_item("main", "tutorial:gem_fragment2")
-        elseif x == 5 then
-            inv:add_item("main", "tutorial:geschenk_legend")
-        elseif x == 4 then
-            inv:add_item("main", "tutorial:geschenk_legend")
-        end
-	end
-    if node.name == "tutorial:geschenk" then
-        local x = math.random(1, 29)
-        if x < 10 then
-            inv:add_item("main", "tutorial:lightstone 1")
-        elseif x < 18 then
-            inv:add_item("main", "default:mese_crystal_fragment 2")
-        elseif x < 24 then
-            inv:add_item("main", "default:ice")
-        elseif x < 27 then
-            inv:add_item("main", "tutorial:dunklematerie4")
-        else
-            inv:add_item("main", "tutorial:geschenk")
-        end
-	end
-    if node.name == "tutorial:geschenk_silber" then
-        local x = math.random(1, 20)
-        if x < 10 then
-            inv:add_item("main", "tutorial:lightstone 2")
-        elseif x < 18 then
-            inv:add_item("main", "default:mese_crystal_fragment 4")
-        elseif x < 20 then
-            inv:add_item("main", "tutorial:arena_block")
-        else
-            inv:add_item("main", "tutorial:arena_glass")
-        end
-	end
-    if node.name == "tutorial:geschenk_gold" then
-        local x = math.random(1, 17)
-        if x < 2 then
-            inv:add_item("main", "mobs:dirt_monster_egg")
-        elseif x < 3 then
-            inv:add_item("main", "mobs:stone_monster_egg")
-        elseif x < 4 then
-            inv:add_item("main", "mobs:sand_monster_egg")
-        elseif x < 5 then
-            inv:add_item("main", "mobs:desert_sand_monster_egg")
-        elseif x < 6 then
-            inv:add_item("main", "mobs:snow_monster_egg")
-        elseif x < 7 then
-            inv:add_item("main", "mobs:desert_stone_monster_egg")
-        elseif x < 8 then
-            inv:add_item("main", "mobs:ice_monster_egg")
-        elseif x < 9 then
-            inv:add_item("main", "mobs:grass_monster_egg")
-        elseif x < 10 then
-            inv:add_item("main", "mobs:rainforest_litter_monster_egg")
-        elseif x < 11 then
-            inv:add_item("main", "mobs:dry_grass_monster_egg")
-        elseif x < 12 then
-            inv:add_item("main", "mobs:silver_sand_monster_egg")
-        else
-            inv:add_item("main", "default:mese_crystal")
-        end
-	end
-    if node.name == "tutorial:geschenk_platin" then
-        local x = math.random(1, 10)
-        if x < 5 then
-            inv:add_item("main", "default:mese_crystal 2")
-        elseif x < 8 then
-            inv:add_item("main", "tutorial:geschenk_wool")
-        elseif x < 10 then
-            inv:add_item("main", "tutorial:geschenk_wool1")
-        else
-            inv:add_item("main", "tutorial:geschenk_wool2")
-        end
-	end
-    if node.name == "tutorial:geschenk_wool1" then
-        local x = math.random(1, 6)
-        if x == 1 then
-            inv:add_item("main", "wool:yellow 2")
-        elseif x == 2 then
-            inv:add_item("main", "wool:white 2")
-        elseif x == 3 then
-            inv:add_item("main", "wool:violet 2")
-        elseif x == 4 then
-            inv:add_item("main", "wool:red 2")
-        elseif x == 5 then
-            inv:add_item("main", "wool:orange 2")
-        else
-            inv:add_item("main", "wool:blue 2")
-        end
-	end
-    if node.name == "tutorial:geschenk_wool2" then
-        local x = math.random(1, 15)
-        if x == 1 then
-            inv:add_item("main", "wool:yellow 3")
-        elseif x == 2 then
-            inv:add_item("main", "wool:white 3")
-        elseif x == 3 then
-            inv:add_item("main", "wool:violet 3")
-        elseif x == 4 then
-            inv:add_item("main", "wool:red 3")
-        elseif x == 5 then
-            inv:add_item("main", "wool:pink 3")
-        elseif x == 6 then
-            inv:add_item("main", "wool:orange 3")
-        elseif x == 7 then
-            inv:add_item("main", "wool:magenta 3")
-        elseif x == 8 then
-            inv:add_item("main", "wool:grey 3")
-        elseif x == 9 then
-            inv:add_item("main", "wool:green 3")
-        elseif x == 10 then
-            inv:add_item("main", "wool:dark_grey 3")
-        elseif x == 11 then
-            inv:add_item("main", "wool:dark_green 3")
-        elseif x == 12 then
-            inv:add_item("main", "wool:cyan 3")
-        elseif x == 13 then
-            inv:add_item("main", "wool:brown 3")
-        elseif x == 14 then
-            inv:add_item("main", "wool:blue 3")
-        else
-            inv:add_item("main", "wool:black 3")
-        end
-	end
-end)
-local rg14 = {}
-rg14.get_formspec = function(player, pos)
-	if player == nil then
+local rg16 = {}
+rg16.get_formspec = function(player, pos)
+    if player == nil then
         return
     end
 	formspec = "size[9,10.3]"
@@ -931,22 +769,27 @@ rg14.get_formspec = function(player, pos)
         .."background[9,10.3;1,1;gui_formbg.png;true]"
         .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
         .."bgcolor[#080808BB;true]"
-		.."label[0,1;I. 12. Gems]"
-        .."label[0,1.3;Use the gem inventory to get home and fast privs.]"
-        .."label[0,1.6;How to use Gems:]"
-        .."label[0,1.9;1. Craft a dragon in the DNA craft.]"
-        .."label[0,2.2;2. Craft a dragon crystal.]"
-        .."label[0,2.5;3. Place the drgagon crystal in the dragon inventory.]"
-        .."label[0,2.8;4. Collect gifts (gem).]"
-        .."label[0,3.1;5. Get gem fragents from then gift (gem).]"
-        .."label[0,3.4;6. Craft in the gem craft a magic gem.]"
-        .."label[0,3.7;7. Place the magic gems in the right order in the gems inventory.]"
-        .."button[2,10;   2,0.5;rg13;<]"
-        .."button[4,10;   2,0.5;rg21;>]"
+		.."label[0,1;II. 7. Keys]"
+        .."label[0,1.3;Bagkey: can be crafted with grey coins]"
+        .."label[0,1.6;Armorkey: can be crafted with a blue and a red ore]"
+        .."label[0,1.9;Levelkey: can be got as a reward for green level 50]"
+		.."label[0,2.2;Craftkey: can be crafted with purple coins]"
+		.."label[0,2.5;Legendkey: can be got as a reward for grey level 100]"
+		.."label[0,2.8;Regnumkey: can be crafted with a regnum ore]"
+		.."label[0,3.1;Pixeled Regnumkey: can be crafted with a pixeled regnum ore (make it in the regnum craft)]"
+		.."label[0,3.4;Dragonkey: can be got from a gift (dragon)]"
+		.."label[0,3.7;Foxkey: can be got from the fox after some time]"
+		.."label[0,4.0;Tortoisekey: can be got from a gift (tortoise)]"
+		.."label[0,4.3;Knightkey: can be got as a reward for all artifacts]"
+		.."label[0,4.6;Crystalkey: can be got as a reward for all medallions]"
+		.."label[0,4.9;Goldenkey: can be got as a reward for yellow level 100]"
+		.."label[0,5.2;Cookingkey: can be crafted with cyan coins]"
+		.."label[0,5.5;Protectionkey: can be got as a reward for all trophys]"
+        .."button[2,10;   2,0.5;rg15;<]"
 	return formspec		
 end
-local rg15 = {}
-rg15.get_formspec = function(player, pos)
+local rg10 = {}
+rg10.get_formspec = function(player, pos)
 	if player == nil then
         return
     end
@@ -974,12 +817,12 @@ rg15.get_formspec = function(player, pos)
         .."label[0,5.5;Colored wool gift lv.2: every wool]"
         .."label[0,5.8;Gift (dragon): coal lump, dragon key]"
         .."label[0,6.1;Gift (gem): gift (legendary), gem fragment]"
-        .."button[2,10;   2,0.5;rg25;<]"
-        .."button[4,10;   2,0.5;rg16;>]"
+        .."button[2,10;   2,0.5;rg9;<]"
+        .."button[4,10;   2,0.5;rg11;>]"
 	return formspec		
 end
-local rg16 = {}
-rg16.get_formspec = function(player, pos)
+local rg11 = {}
+rg11.get_formspec = function(player, pos)
 	if player == nil then
         return
     end
@@ -995,18 +838,18 @@ rg16.get_formspec = function(player, pos)
         .."label[0,1.9;You can get water and sky animals from the dna gift.]"
         .."label[0,2.2;There are turtles, sharks, gulls and many other.]"
         .."label[0,2.5;If you use the DNA craft you can get pets.]"
-        .."label[0,2.8;The dog and the cat will kill monsters and collect the wrapping paper]"
+        .."label[0,2.8;The dog and the cat will kill monsters and collect the wrapping paper and DNA strings]"
         .."label[0,3.1;The sheep will produce wool.]"
         .."label[0,3.4;The dagon will produce a dragon gift or a gem gift if you have a regnum crystal.]"
         .."label[0,3.7;The fox will produce a fox key and treasures.]"
         .."label[0,4.0;The tortoise will produce a tortoise gift or a gem gift if you have a regnum crystal.]"
-        .."label[0,4.3;You can chage the color of the pets and they can folow you.]"
-        .."button[2,10;   2,0.5;rg15;<]"
-        .."button[4,10;   2,0.5;rg17;>]"
+        .."label[0,4.3;You can change the color of the pets and they can follow you.]"
+        .."button[2,10;   2,0.5;rg10;<]"
+        .."button[4,10;   2,0.5;rg12;>]"
 	return formspec		
 end
-local rg17 = {}
-rg17.get_formspec = function(player, pos)
+local rg12 = {}
+rg12.get_formspec = function(player, pos)
 	if player == nil then
         return
     end
@@ -1036,81 +879,12 @@ rg17.get_formspec = function(player, pos)
         .."label[0,6.1;Look in the xp guide for your xp and how much xp you need.]"
         .."label[0,6.4;If you reach a new level you will get a reward]"
         .."label[0,6.7;Look in Xp items for the reward]"
-        .."button[2,10;   2,0.5;rg16;<]"
-        .."button[4,10;   2,0.5;rg18;>]"
-	return formspec		
-end
-local rg10 = {}
-rg10.get_formspec = function(player, pos)
-	if player == nil then
-        return
-    end
-	formspec = "size[9,10.3]"
-		.."button[0,0;2,0.5;inven;Back]"
-		.."button[2,0;2,0.5;main;Main]"
-        .."background[9,10.3;1,1;gui_formbg.png;true]"
-        .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
-        .."bgcolor[#080808BB;true]"
-		.."label[0,1;I. 8. Achievements]"
-        .."label[0,1.3;Here you can see your achievement]"
-        .."label[0,1.6;If you have all 50 achievements,]"
-        .."label[0,1.9;you will have all Regnum things and you have completed the Regnum Game]"
-        .."label[0,2.2;If you have 25 or 50 achivements you will get a reward]"
-        .."label[0,2.5;There is also one spezial achievment.]"
-        .."label[0,2.8;You will get it for one year Regnum.]"
-        .."label[0,3.1;How to use Achievements:]"
-        .."label[0,3.4;1. Craft the needed items]"
-        .."label[0,3.7;2. Place them at the right place in the inventory]"
-        .."label[0,4.0;3. Get 25 or 50 achievements]"
-        .."label[0,4.3;4. Presse 'reward']"
-        .."label[0,4.6;5. Presse also 'spezial']"
-        .."button[2,10;   2,0.5;rg9;<]"
-        .."button[4,10;   2,0.5;rg11;>]"
-	return formspec		
-end
-local rg11 = {}
-rg11.get_formspec = function(player, pos)
-	if player == nil then
-        return
-    end
-	formspec = "size[9,10.3]"
-		.."button[0,0;2,0.5;inven;Back]"
-		.."button[2,0;2,0.5;main;Main]"
-        .."background[9,10.3;1,1;gui_formbg.png;true]"
-        .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
-        .."bgcolor[#080808BB;true]"
-		.."label[0,1;I. 9. Regnum Guide]"
-        .."label[0,1.3;You can read something about the subgame]"
-        .."label[0,1.6;How to use Regnum Guide:]"
-        .."label[0,1.9;1. Read]"
-        .."button[2,10;   2,0.5;rg10;<]"
-        .."button[4,10;   2,0.5;rg12;>]"
-	return formspec		
-end
-local rg12 = {}
-rg12.get_formspec = function(player, pos)
-	if player == nil then
-        return
-    end
-	formspec = "size[9,10.3]"
-		.."button[0,0;2,0.5;inven;Back]"
-		.."button[2,0;2,0.5;main;Main]"
-        .."background[9,10.3;1,1;gui_formbg.png;true]"
-        .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
-        .."bgcolor[#080808BB;true]"
-		.."label[0,1;I. 10. Awards]"
-        .."label[0,1.3;Here you can see your awards]"
-        .."label[0,1.6;If you have all awards, you will get the 'all awards' achievement.]"
-        .."label[0,1.9;How to use Awards:]"
-        .."label[0,2.2;1. Dig for the ores]"
-        .."label[0,2.5;2. For the '???' awards you have to die next to a block]"
-        .."label[0,2.8;3. Find out which block]"
         .."button[2,10;   2,0.5;rg11;<]"
         .."button[4,10;   2,0.5;rg13;>]"
 	return formspec		
 end
-local rg13 = {}
-rg13.get_formspec = function(player, pos)
+local rg7 = {}
+rg7.get_formspec = function(player, pos)
 	if player == nil then
         return
     end
@@ -1120,75 +894,19 @@ rg13.get_formspec = function(player, pos)
         .."background[9,10.3;1,1;gui_formbg.png;true]"
         .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
         .."bgcolor[#080808BB;true]"
-		.."label[0,1;I. 11. Xp items]"
-        .."label[0,1.3;Here you can get your rewards if you reach a new level.]"
-        .."label[0,1.6;How to use Xp items:]"
-        .."label[0,1.9;1. Reach a new level]"
-        .."label[0,2.2;2. Take coins/max level blocks/keys/battleaxes/xp blocks from the 1st page]"
-        .."label[0,2.5;3. Take green level blocks from the 2nd page]"
-        .."label[0,2.8;4. Take red/blue level blocks from the 3rd page]"
-        .."label[0,3.1;5. Take grey level blocks from the 4th page]"
-        .."label[0,3.4;6. Take yellow level blocks from the 5th page]"
-        .."label[0,3.7;7. Take cyan level blocks from the 6th page]"
-        .."button[2,10;   2,0.5;rg12;<]"
-        .."button[4,10;   2,0.5;rg14;>]"
-	return formspec		
-end
-local rg8 = {}
-rg8.get_formspec = function(player, pos)
-	if player == nil then
-        return
-    end
-	formspec = "size[9,10.3]"
-		.."button[0,0;2,0.5;inven;Back]"
-		.."button[2,0;2,0.5;main;Main]"
-        .."background[9,10.3;1,1;gui_formbg.png;true]"
-        .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
-        .."bgcolor[#080808BB;true]"
-		.."label[0,1;I. 6. Craft Guide]"
-        .."label[0,1.3;Here you can see how to craft items]"
-        .."label[0,1.6;Click on one item to see the crafting]"
-        .."label[0,1.9;You can also see 4x4 and 5x5 craftings,]"
-        .."label[0,2.2;You can see the craftings for battleaxes/armor/gun]"
-        .."label[0,2.5;in the Regnum Craft Guide.]"
-        .."label[0,2.8;How to use Craft guide:]"
-        .."label[0,3.1;1. Click on one item and you see the crafting above]"
-        .."label[0,3.4;2. Click on the arrows below to switch to an other page]"
-        .."label[0,3.7;3. Click on the arrows below 'main' to see the last]"
-        .."label[0,4.0;   crafting you use]"
-        .."label[0,4.3;4. Click on the arrows above and below the item to see]"
-        .."label[0,4.6;   differend craftings for the same things]"
-        .."label[0,4.9;5. Click on the 'Regnum' for armor/battleaxe/gun crafts]"
-        .."button[2,10;   2,0.5;rg7;<]"
-        .."button[4,10;   2,0.5;rg9;>]"
-	return formspec		
-end
-local rg9 = {}
-rg9.get_formspec = function(player, pos)
-	if player == nil then
-        return
-    end
-	formspec = "size[9,10.3]"
-		.."button[0,0;2,0.5;inven;Back]"
-		.."button[2,0;2,0.5;main;Main]"
-        .."background[9,10.3;1,1;gui_formbg.png;true]"
-        .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
-        .."bgcolor[#080808BB;true]"
-		.."label[0,1;I. 7. Crystals]"
-        .."label[0,1.3;Here you can get legendary fire balls]"
-        .."label[0,1.6;If you dig a legendary gift you can get a legendary crystal]"
-        .."label[0,1.9;With every new cristal you get, get can get better fire balls]"
-        .."label[0,2.2;After some time you will get the fire ball]"
-        .."label[0,2.5;If you have a crystalkey,the time will be halved]"
-        .."label[0,2.8;How to use Cristals:]"
-        .."label[0,3.1;1. Craft legendary gifts and dig them]"
-        .."label[0,3.4;2. If you have a cristal,click on a]"
-        .."label[0,3.7;   ball damage, thunder damage and thunder length level]"
-        .."label[0,4.0;3. Click on create]"
-        .."label[0,4.3;4. Get the crystalkey]"
-        .."label[0,4.6;5. wait (seconds above 'crate') and you will get a fire ball]"
-        .."button[2,10;   2,0.5;rg8;<]"
-        .."button[4,10;   2,0.5;rg10;>]"
+		.."label[0,1;I. 5. Quests]"
+		.."label[0.0,1.3;a) Awards]"
+        .."label[0.2,1.6;Here you can see your awards.]"
+		.."label[0.2,1.9;Dig some ores to get an award.]"
+        .."label[0.2,2.2;If you have all awards, you will get the 'all awards' achievement.]"
+		.."label[0.0,2.5;b) Achievements]"
+        .."label[0.2,2.8;Here you can see your achievement]"
+        .."label[0.2,3.1;If you have all 50 achievements,]"
+        .."label[0.2,3.4;you will have all Regnum things and you have completed the Regnum Game]"
+        .."label[0.2,3.7;If you have 25 or 50 achivements you will get a reward]"
+        .."label[0.2,4.0;You will get spezial achievments for every aniversary.]"
+        .."button[2,10;   2,0.5;rg6;<]"
+        .."button[4,10;   2,0.5;rg8;>]"
 	return formspec		
 end
 local xpi0 = {}
@@ -1211,6 +929,7 @@ xpi0.get_formspec = function(player, pos)
 			return 0
 		end,
 	})
+	
 	xpi01_inv:set_size("xpi01", 15)
 	player_inv:set_size("xpi01", 15)
     xpi01_inv:set_size("xpi02", 15)
@@ -1428,6 +1147,47 @@ xpi3.get_formspec = function(player, pos)
         .."button[9,12;2,0.5;xpi4;>]"
 	return formspec		
 end
+local rg4 = {}
+rg4.get_formspec = function(player, pos)
+	if player == nil then
+        return
+    end
+	formspec = "size[9,10.3]"
+		.."button[0,0;2,0.5;inven;Back]"
+		.."button[2,0;2,0.5;main;Main]"
+        .."background[9,10.3;1,1;gui_formbg.png;true]"
+        .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
+        .."bgcolor[#080808BB;true]"
+		.."label[0,1;I. 2. Crafting]"
+        .."label[0,1.3;There are 11 differend crafts:]"
+        .."label[0,1.6;The '4x4 craft' and 5x5 to craft in a 4x4 and 5x5 field]"
+		.."label[0,1.9;Look in the Craft Guide which item you can craft in 4x4 and 5x5]"
+        .."label[0,2.2;The Regnum craft to craft a pixeled regnum]"
+		.."label[0,2.5;You will need regnum pixels. (You can get them from Regnum gifts)]"
+		.."label[0,2.8;The DNA craft to get mobs and ??? monster spawn-egg]"
+		.."label[0,3.1;You will need dna strings for pets (You can get them from monsters) ]"
+		.."label[0,3.4;and big dna for ???-monster spawn-egg. (You can craft them in the 5x5 craft)]"
+		.."label[0,3.7;If you press 'Mob Position' you can see the positions of your pets.]"
+		.."label[0,4.0;The Gem craft to get magic gems]"
+        .."label[0,4.3;You will need gem fragments and uranium ingots]"
+		.."label[0,4.6;The Cooking craft, works like furnaces but with (regnum) uranium (every level) as fuel]"
+		.."label[0,4.9;If you have the Cookingkey you will get more fuel.]"
+		.."label[0,5.2;The Mine craft to level your mining laser/drill up.]"
+        .."label[0,5.5;You will need the mining laser/drill and green coins.]"
+        .."label[0,5.8;The Medallion craft to get medallions]"
+		.."label[0,6.1;You will need Medallion pieces.(You will get them if you run around)]"
+        .."label[0,6.4;The Crystal craft to get crystalbottles]"
+		.."label[0,6.7;You have to wait 500s to get two crystallbottles.]"
+		.."label[0,7.0;You will get one bottle more for each crystal you have]"
+		.."label[0,7.3;and if you have a pixeled regnum key you only have to wait 250s.]"
+        .."label[0,7.6;The Trophy craft to get trophys]"
+		.."label[0,7.9;You will need Tears. (You can get them from monsters spawned by the ??? monster spawn-egg)]"
+		.."label[0,8.2;The Reverse craft to get your items back, if you craft the wrong one.]"
+		.."label[0,8.5;You can only use some items.]"
+        .."button[2,10;   2,0.5;rg3;<]"
+        .."button[4,10;   2,0.5;rg5;>]"
+	return formspec		
+end
 local rg6 = {}
 rg6.get_formspec = function(player, pos)
 	if player == nil then
@@ -1439,41 +1199,27 @@ rg6.get_formspec = function(player, pos)
         .."background[9,10.3;1,1;gui_formbg.png;true]"
         .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
         .."bgcolor[#080808BB;true]"
-		.."label[0,1;I. 4. Crafting]"
-        .."label[0,1.3;There are 10 differend crafts:]"
-        .."label[0,1.6;The '4x4 craft' to craft in a 4x4 field]"
-        .."label[0,1.9;The '5x5 craft' to craft in a 5x5 field]"
-        .."label[0,2.2;The Regnum craft to craft a pixeled regnum]"
-        .."label[0,2.5;The DNA craft to get mobs]"
-        .."label[0,2.8;The Gem craft to get magic gems]"
-        .."label[0,3.1;The Mine craft to level you mining laser/drill up.]"
-        .."label[0,3.4;The Cooking craft, works like furnaces but without fuel]"
-        .."label[0,3.7;The Medallion craft to get medallions]"
-        .."label[0,4.0;The Crystal craft to get crystalbottles]"
-        .."label[0,4.3;The Trophy craft to get trophys]"
-        .."label[0,4.6;Look in the Craft Guide which item you can craft in 4x4 and 5x5]"
-        .."label[0,4.9;For Regnum craft you need regnum pixel.You can get them from Regnum gifts.]"
-        .."label[0,5.2;For DNA craft you need dna strings.You can get them from monsters.]"
-        .."label[0,5.5;You will get an animal spawn-egg if this animal has 100%.]"
-        .."label[0,5.8;For Gem craft you need gem fragments and uranium ingots]"
-        .."label[0,6.1;For Cooking use uranium to get fuel]"
-        .."label[0,6.4;For Mine craft you need the mining laser/drill and green coins]"
-        .."label[0,6.7;to level you mining laser/drill up.]"
-        .."label[0,7.0;For Medallion craft you need Medallions.You will get them if you run around.]"
-        .."label[0,7.3;For Crystal craft you have to wait.]"
-        .."label[0,7.6;For each crystal you have, the crafting will take 200s less.]"
-        .."label[0,7.9;For Trophy craft you need Tears.You can get them from monsters in the same color.]"
-        .."label[0,8.2;How to use Crafting:]"
-        .."label[0,8.5;1. For 4x4, 5x5, Regnum, Gem, Medallion craft and Cooking you need a key]"
-        .."label[0,8.8;2. Craft the key and put the needed items in the fields]"
-        .."label[0,9.1;3. Press 'craft/use/build DNA']"
+		.."label[0,1;I. 4. Spezial]"
+		.."label[0.0,1.3;a) Crystals]"
+		.."label[0.2,1.6;Here you can get legendary fire balls]"
+        .."label[0.2,1.9;If you dig a legendary gift you can get a legendary crystal]"
+        .."label[0.2,2.2;With every new cristal you get, get can get better fire balls]"
+        .."label[0.2,2.5;After some time you will get the fire ball]"
+        .."label[0.2,2.8;If you have a crystalkey,the time will be halved]"
+		.."label[0.0,3.1;b) Xp items]"
+		.."label[0.2,3.4;Here you can get your rewards if you reach a new level.]"
+		.."label[0.2,3.7;You will also get a block for every level.]"
+		.."label[0.0,4.0;c) Gems]"
+		.."label[0.2,4.3;You have to craft some magic gems in the gem craft.]"
+		.."label[0.2,4.6;If you have 5, you will get the home priv.]"
+		.."label[0.2,4.9;If you have 10, you will get the fast priv.]"
         .."button[2,10;   2,0.5;rg5;<]"
         .."button[4,10;   2,0.5;rg7;>]"
 	return formspec		
 end
-local rg7 = {}
-rg7.get_formspec = function(player, pos)
-	if player == nil then
+local rg8 = {}
+rg8.get_formspec = function(player, pos)
+    if player == nil then
         return
     end
 	formspec = "size[9,10.3]"
@@ -1482,19 +1228,40 @@ rg7.get_formspec = function(player, pos)
         .."background[9,10.3;1,1;gui_formbg.png;true]"
         .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
         .."bgcolor[#080808BB;true]"
-		.."label[0,1;I. 5. Skins]"
-        .."label[0,1.3;Here you can change your skin]"
-        .."label[0,1.6;Click on one skin to change your skin]"
-        .."label[0,1.9;If you have the pixeled Regnum key you can use the see-through skin]"
-        .."label[0,2.2;If you have the knight Regnum key you can use the knight skins]"
-        .."label[0,2.5;How to use Skins:]"
-        .."label[0,2.8;1. Click on one skin]"
-        .."label[0,3.1;2. Craft the Pixeled Regnum key]"
-        .."label[0,3.4;3. Press 'see-through skin']"
-        .."label[0,3.7;4. Craft the Knight key]"
-        .."label[0,4.0;5. Press 'knight']"
-        .."button[2,10;   2,0.5;rg6;<]"
-        .."button[4,10;   2,0.5;rg8;>]"
+		.."label[0,1;I. 6. Color items]"
+		.."label[0.0,1.3;a) Artifacts]"
+        .."label[0.2,1.6;If you run around you will get artifacts]"
+        .."label[0.2,1.9;Collect 71 artifacts to get the Knightkey as a reward]"
+		.."label[0.0,2.2;b) Medallion]"
+        .."label[0.2,2.5;craft medallions in the medallion craft]"
+        .."label[0.2,2.8;Collect 7 medallions to get the Crystalkey as a reward]"
+		.."label[0.0,3.1;c) Treasures]"
+        .."label[0.2,3.4;get treasures from the fox]"
+        .."label[0.2,3.7;Collect 6 treasures to get the legend stick as a reward]"
+		.."label[0.0,4.0;d) Trophys]"
+        .."label[0.2,4.3;get trophys in the trophy craft]"
+        .."label[0.2,4.6;Collect 24 trothys to get the Protectionkey as a reward]"
+        .."button[2,10;   2,0.5;rg7;<]"
+        .."button[4,10;   2,0.5;rg9;>]"
+	return formspec		
+end
+local rg9 = {}
+rg9.get_formspec = function(player, pos)
+    if player == nil then
+        return
+    end
+	formspec = "size[9,10.3]"
+		.."button[0,0;2,0.5;inven;Back]"
+		.."button[2,0;2,0.5;main;Main]"
+        .."background[9,10.3;1,1;gui_formbg.png;true]"
+        .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
+        .."bgcolor[#080808BB;true]"
+		.."label[0,1;I. 7. Music]"
+        .."label[0,1.3;Enable Background Music.]"
+        .."label[0,1.6;Choose Themes to be randomly selected]"
+        .."label[0,1.9;and listen to the Regnum Themes.]"
+        .."button[2,10;   2,0.5;rg8;<]"
+        .."button[4,10;   2,0.5;rg10;>]"
 	return formspec		
 end
 local rg2 = {}
@@ -1510,30 +1277,21 @@ rg2.get_formspec = function(player, pos)
         .."bgcolor[#080808BB;true]"
 		.."label[0,1;                                     CONTENS]"
         .."label[0,1.3; I. Inventory]"
-        .."label[0,1.6;   1. Bags]"
-        .."label[0,1.9;   2. Armor]"
-        .."label[0,2.2;   3. XP Guide]"
-        .."label[0,2.5;   4. Crafting]"
-        .."label[0,2.8;   5. Skins]"
-        .."label[0,3.1;   6. Craft Guide]"
-        .."label[0,3.4;   7. Crystals]"
-        .."label[0,3.7;   8. Achievements]"
-        .."label[0,4.0;   9. Regnum guide]"
-        .."label[0,4.3;   10. Awards]"
-        .."label[0,4.6;   11. Xp items]"
-        .."label[0,4.9;   12. Gems]"
-        .."label[0,5.2;   13. Artifacts]"
-        .."label[0,5.5;   14. Medallion]"
-        .."label[0,5.8;   15. Treasures]"
-        .."label[0,6.1;   16. Trophys]"
-        .."label[0,6.4;   17. Music]"
-        .."label[0,6.7; II. Game]"
-        .."label[0,7.0;   1. Gifts]"
-        .."label[0,7.3;   2. Mobs]"
-        .."label[0,7.6;   3. Xp & Level]"
-        .."label[0,7.9;   4. Ores]"
-        .."label[0,8.2;   5. Armor, Battleaxes & Guns]"
-        .."label[0,8.5;   6. Chat commands]"
+        .."label[0,1.6;   1. Equipment]"
+        .."label[0,1.9;   2. Crafting]"
+        .."label[0,2.2;   3. Help]"
+        .."label[0,2.5;   4. Spezial]"
+        .."label[0,2.8;   5. Quests]"
+        .."label[0,3.1;   6. Color items]"
+        .."label[0,3.4;   7. Music]"
+        .."label[0,3.7; II. Game]"
+        .."label[0,4.0;   1. Gifts]"
+        .."label[0,4.3;   2. Mobs]"
+        .."label[0,4.6;   3. Xp & Level]"
+        .."label[0,4.9;   4. Ores]"
+        .."label[0,5.2;   5. Armor, Battleaxes & Guns]"
+        .."label[0,5.5;   6. Chat commands]"
+		.."label[0,5.8;   7. Keys]"
         .."button[2,10;   2,0.5;rg1;<]"
         .."button[4,10;   2,0.5;rg3;>]"
 	return formspec		
@@ -1549,50 +1307,31 @@ rg3.get_formspec = function(player, pos)
         .."background[9,10.3;1,1;gui_formbg.png;true]"
         .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
         .."bgcolor[#080808BB;true]"
-		.."label[0,1;I. 1. Bags]"
-        .."label[0,1.3;You can use bags to take more things with you.]"
-        .."label[0,1.6;You can have up to eight bags, every bag has eight level.]"
-        .."label[0,1.9;Every level for a bag give you more space for it.]"
-        .."label[0,2.2;If you want more then four bags you need also a bagkey.]"
-        .."label[0,2.5;With each new bagkey level you can get one more bag.]"
-        .."label[0,2.8;How to use bags:]"
-        .."label[0,3.1;1. You have to craft a bag (look in the craft guide how).]"
-        .."label[0,3.4;2. Put the bag in one of the fields and use the button below.]"
-        .."label[0,3.7;3. You can put your items in the new inventory.]"
-        .."label[0,4.0;4. If you put the bag in the lower field and you have no bagkey]"
-        .."label[0,4.3;    you can not use it]"
-        .."label[0,4.6;5. You can use shift to move items quickly (as you use for chests)]"
+		.."label[0,1;I. 1. Equipment]"
+		.."label[0.0,1.3;a) Skins]"
+		.."label[0.2,1.6;Here you can change your skin]"
+        .."label[0.2,1.9;Click on one skin to change your skin]"
+        .."label[0.2,2.2;If you have the pixeled Regnum key you can use the see-through skin]"
+        .."label[0.2,2.5;If you have the knight Regnum key you can use the knight skins]"
+		.."label[0.0,2.8;b) Bags]"
+        .."label[0.2,3.1;You can use bags to take more things with you.]"
+        .."label[0.2,3.4;You can have up to eight bags, every bag has eight level.]"
+		.."label[0.2,3.7;Craft a bag (look in the craft guide how).]"
+        .."label[0.2,4.0;Put the bag in one of the fields and use the button below.]"
+		.."label[0.2,4.3;You can put your items in the new inventory.]"
+        .."label[0.2,4.6;Every level for a bag give you more space for it.]"
+        .."label[0.2,4.9;If you want more then four bags you need also a bagkey.]"
+        .."label[0.2,5.2;With each new Bagkey level you can get one more bag.]"
+		.."label[0.0,5.5;c) Armor]"
+		.."label[0.2,5.8;Craft some armor (look in the craft guide how).]"
+        .."label[0.2,6.1;You can use armor to save you from monsters.]"
+        .."label[0.2,6.4;There are 5 differend armor parts.]"
+		.."label[0.2,6.7;Helmets, chestplates, leggings, boots and shields]"
+		.."label[0.2,7.0;If you have afull regnum armor you can't burn or drown.]"
+        .."label[0.2,7.3;If you have the armor key you can make your armor invisible to other.]"
+		.."label[0.2,7.6;If you have the protection key you will have a higher protection.]"
         .."button[2,10;   2,0.5;rg2;<]"
         .."button[4,10;   2,0.5;rg4;>]"
-	return formspec		
-end
-local rg4 = {}
-rg4.get_formspec = function(player, pos)
-	if player == nil then
-        return
-    end
-	formspec = "size[9,10.3]"
-		.."button[0,0;2,0.5;inven;Back]"
-		.."button[2,0;2,0.5;main;Main]"
-        .."background[9,10.3;1,1;gui_formbg.png;true]"
-        .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
-        .."bgcolor[#080808BB;true]"
-		.."label[0,1;I. 2. Armor]"
-        .."label[0,1.3;You can use armor to save you from monsters.]"
-        .."label[0,1.6;There are 5 differend armor parts.]"
-        .."label[0,1.9;Make your armor invisible to other when you have the armorkey.]"
-        .."label[0,2.2;Some armor will also save you from lava and fire]"
-        .."label[0,2.5;and there is also armor that regenerate you.]"
-        .."label[0,2.8;Get the Protectionkey to get a save bonus]"
-        .."label[0,3.1;How to use Armor:]"
-        .."label[0,3.4;1. You have to craft some armor (look in the craft guide how).]"
-        .."label[0,3.7;2. You can see five fields on the left.]"
-        .."label[0,4.0;3. You have to put the helmet at the top and the boots at the bottom.(like in minecraft)]"
-        .."label[0,4.3;4. You have to put the shield in the right field]"
-        .."label[0,4.6;5. Craft the armor key and than you can press 'armor off']"
-        .."label[0,4.9;6. Craft the protectionkey to get a save bonus]"
-        .."button[2,10;   2,0.5;rg3;<]"
-        .."button[4,10;   2,0.5;rg5;>]"
 	return formspec		
 end
 local rg5 = {}
@@ -1606,16 +1345,22 @@ rg5.get_formspec = function(player, pos)
         .."background[9,10.3;1,1;gui_formbg.png;true]"
         .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
         .."bgcolor[#080808BB;true]"
-		.."label[0,1;I. 3. XP Guide]"
-        .."label[0,1.3;If you dig uranium/red ore/blue ore/Xp block/Xp Block (yellow)]"
-        .."label[0,1.6;or you place a Crystalbottle, you will get xp.]"
-        .."label[0,1.9;Use the Xp Guide to see how many xp you have]"
-        .."label[0,2.2;If you want to see how many xp you need for the next level]"
-        .."label[0,2.5;you have to use the xp key]"
-        .."label[0,2.8;There are 6 differend kinds of xp.]"
-        .."label[0,3.1;How to use Xp Guide:]"
-        .."label[0,3.4;1. On the left you can see how many xp you have]"
-        .."label[0,3.7;2. Craft the xp key and than you can press 'xp green/red/blue/grey/yellow/cyan you need']"
+		.."label[0,1;I. 3. Help]"
+		.."label[0.0,1.3;a) Regnum Guide]"
+		.."label[0.2,1.6;You can read something about the Regnum Game :)]"
+		.."label[0.0,1.9;b) Craft Guide]"
+		.."label[0.2,2.2;Here you can see how to craft items]"
+        .."label[0.2,2.5;Click on one item to see the crafting]"
+        .."label[0.2,2.8;You can also see 4x4 and 5x5 craftings,]"
+        .."label[0.2,3.1;You can see the craftings for battleaxes/armor/gun]"
+        .."label[0.2,3.4;in the Regnum Craft Guide.]"
+		.."label[0.0,3.7;c) Xp Guide]"
+        .."label[0.2,4.0;If you dig uranium (not from the technic mod), red ore, blue ore,]"
+        .."label[0.2,4.3;Xp block (grey), Xp Block (yellow) or you place a Crystalbottle, you will get xp.]"
+		.."label[0.2,4.6;There are 6 differend kinds of xp.]"
+        .."label[0.2,4.9;Use the Xp Guide to see how many xp you have]"
+        .."label[0.2,5.2;If you want to see how many xp you need for the next level]"
+        .."label[0.2,5.5;you will need the Xpkey]"
         .."button[2,10;   2,0.5;rg4;<]"
         .."button[4,10;   2,0.5;rg6;>]"
 	return formspec		
@@ -1633,59 +1378,15 @@ rg.get_formspec = function(player, pos)
         .."bgcolor[#080808BB;true]"
 	    .."label[0,1;This is the first page of the Regnum guide.]"
         .."label[0,1.3;Here you can get some basic informations]"
-        .."label[0,1.6;about my subgame:Regnum]"
-        .."label[0,1.9;I develop the Regnum subgame over the last 5 years]"
+        .."label[0,1.6;about my game: Regnum]"
+        .."label[0,1.9;I develop the Regnum game over the last 8 years]"
         .."label[0,2.2;Thanks to:]"
-        .."label[0,2.5;NightmareLP who build a mod for my subgame]"
+        .."label[0,2.5;NightmareLP who build a mod for my game]"
         .."label[0,2.8;et77 who had some great ideas]"
-        .."label[0,3.1;wuschel1912 who tests the subgame]"
+        .."label[0,3.1;wuschel1912 who tested the game]"
         .."button[4,10;2,0.5;rg2;>]"
 	return formspec		
 end
-minetest.register_on_dignode(function(pos, node, player)
-	if player == nil then
-        return
-    end	
-	local name = player:get_player_name()
-	local inv = player:get_inventory()
-	if node.name == "tutorial:geschenk_dna" then
-		local x = math.random(0,15)
-		print (x)
-		if x == 0 then
-			inv:add_item("main", "mobs:watermob_crocodile_lg_egg")
-		elseif x == 1 then
-			inv:add_item("main", "mobs:watermob_crocodile_md_egg")
-		elseif x == 2 then
-			inv:add_item("main", "mobs:watermob_crocodile_sm_egg")
-		elseif x == 3 then
-			inv:add_item("main", "mobs:watermob_clownfish_egg")
-		elseif x == 4 then
-			inv:add_item("main", "mobs:watermob_tropical_fish_egg")
-		elseif x == 5 then
-			inv:add_item("main", "mobs:watermob_jellyfish_egg")
-		elseif x == 6 then
-			inv:add_item("main", "mobs:watermob_shark_sm_egg")
-		elseif x == 7 then
-			inv:add_item("main", "mobs:watermob_shark_md_egg")
-		elseif x == 8 then
-			inv:add_item("main", "mobs:watermob_shark_lg_egg")
-		elseif x == 9 then
-			inv:add_item("main", "mobs:watermob_turtle_lg_egg")
-		elseif x == 10 then
-			inv:add_item("main", "mobs:watermob_turtle_sm_egg")
-		elseif x == 11 then
-			inv:add_item("main", "mobs:skymob_butterfly_egg")
-		elseif x == 12 then
-			inv:add_item("main", "mobs:skymob_gull_egg")
-		elseif x == 13 then
-			inv:add_item("main", "mobs:skymob_bird_sm_egg")
-		elseif x == 14 then
-			inv:add_item("main", "mobs:skymob_bird_lg_egg")
-		elseif x == 15 then
-			inv:add_item("main", "mobs:skymob_bat_egg")
-		end
-	end
-end)
 local dna = {}
 dna.get_formspec = function(player, pos)
 	if player == nil then
@@ -1934,20 +1635,8 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
     if fields.rg15 then
 		inventory_plus.set_inventory_formspec(player, rg15.get_formspec(player))
 	end
-    if fields.rg16 then
+	if fields.rg16 then
 		inventory_plus.set_inventory_formspec(player, rg16.get_formspec(player))
-	end
-    if fields.rg17 then
-		inventory_plus.set_inventory_formspec(player, rg17.get_formspec(player))
-	end
-    if fields.rg18 then
-		inventory_plus.set_inventory_formspec(player, rg18.get_formspec(player))
-	end
-    if fields.rg19 then
-		inventory_plus.set_inventory_formspec(player, rg19.get_formspec(player))
-	end
-    if fields.rg20 then
-		inventory_plus.set_inventory_formspec(player, rg20.get_formspec(player))
 	end
     if fields.crafting5 then
 		inventory_plus.set_inventory_formspec(player, crafting5.get_formspec(player))
@@ -2021,8 +1710,9 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
             player_inv:set_stack("dna", 6, "tutorial:big_dna_string "..(y6-1))
             player_inv:set_stack("dna", 7, "tutorial:big_dna_string "..(y7-1))
             player_inv:set_stack("dna", 8, "tutorial:big_dna_string "..(y8-1))
-            player_inv:add_item("main","mobs:random_monster_egg")
+            player_inv:add_item("main","mobs:random_monster_egg 6")
         end
+		inventory_plus.set_inventory_formspec(player, dna.get_formspec(player))
 	end
 end)
 local ach = {}
@@ -2359,44 +2049,44 @@ ach2.get_formspec = function(player, pos)
 		.."label[0.8,5.9;Regnumkey]"
 		.."label[0.8,6.7;Pixeled Regnumkey]"
 		.."label[0.8,7.5;8 Regnum Trolleys]"
-		.."label[0.8,8.3;8 Legend crystals]"
+		.."label[0.8,8.3;8 Legend Crystals]"
 		.."label[0.8,9.1;Xp green Lv.MAX]"
 		.."label[0.8,9.9;Xp red Lv.MAX]"
 		.."label[0.8,10.7;Xp blue Lv.MAX]"
-		.."label[3.3,1.1;Xp gray Lv.MAX]"
-		.."label[3.3,1.9;dog spawn-egg]"
-		.."label[3.3,2.7;cat spawn-egg]"
-        .."label[3.3,3.5;sheep spawn-egg]"
-        .."label[3.3,4.3;dragon spawn-egg]"
-        .."label[3.3,5.1;mining laser lv.150]"
-        .."label[3.3,5.9;all awards]"
-        .."label[3.3,6.7;mining drill lv.150]"
-        .."label[3.3,7.5;Dragon key]"
-        .."label[3.3,8.3;5 magic gems]"
+		.."label[3.3,1.1;Xp grey Lv.MAX]"
+		.."label[3.3,1.9;Dog spawn-egg]"
+		.."label[3.3,2.7;Cat spawn-egg]"
+        .."label[3.3,3.5;Sheep spawn-egg]"
+        .."label[3.3,4.3;Dragon spawn-egg]"
+        .."label[3.3,5.1;Mining Laser lv.150]"
+        .."label[3.3,5.9;All awards]"
+        .."label[3.3,6.7;Mining Drill lv.150]"
+        .."label[3.3,7.5;Dragonkey]"
+        .."label[3.3,8.3;10 magic gems]"
         .."label[3.3,9.1;Regnumhelmet]"
         .."label[3.3,9.9;Regnumchestplate]"
         .."label[3.3,10.7;Regnumleggings]"
         .."label[5.8,1.1;Regnumboots]"
         .."label[5.8,1.9;Regnumshield]"
-        .."label[5.8,2.7;fox spawn-egg]"
-        .."label[5.8,3.5;tortoise spawn-egg]"
+        .."label[5.8,2.7;Fox spawn-egg]"
+        .."label[5.8,3.5;Tortoise spawn-egg]"
         .."label[5.8,4.3;Foxkey]"
-        .."label[5.8,5.1;10 magic gems]"
+        .."label[5.8,5.1;5 magic gems]"
         .."label[5.8,5.9;Wallplacer lv.MAX]"
         .."label[5.8,6.7;Xp yellow Lv.MAX]"
-        .."label[5.8,7.5;all artifacts]"
+        .."label[5.8,7.5;All artifacts]"
         .."label[5.8,8.3;Tortoisekey]"
         .."label[5.8,9.1;Knightkey]"
-        .."label[5.8,9.9;all medallions]"
+        .."label[5.8,9.9;All medallions]"
         .."label[5.8,10.7;Crystalkey]"
         .."label[8.3,1.1;2 Regnum crystal]"
         .."label[8.3,1.9;Goldenkey]"
         .."label[8.3,2.7;Xp cyan Lv.MAX]"
         .."label[8.3,3.5;Cookingkey Lv.MAX]"
         .."label[8.3,4.3;2 Pixeled Regnumkeys]"
-        .."label[8.3,5.1;all trophys]"
+        .."label[8.3,5.1;All trophys]"
         .."label[8.3,5.9;Protectionkey lv.MAX]"
-        .."label[8.3,6.7;all treasures]"
+        .."label[8.3,6.7;All treasures]"
         .."label[8.3,7.5;Legendstick lv.MAX]"
         .."label[8.3,8.3;Regnumgun]"
         .."label[8.3,9.1;Colorstick (broken)]"
@@ -2408,10 +2098,11 @@ ach3.get_formspec = function(player, pos)
         return
     end
 	local player_inv = player:get_inventory()
-    player_inv:set_size("year", 3)
+    player_inv:set_size("year", 4)
 	local year = player_inv:get_stack("year", 1):get_count()
     local year2 = player_inv:get_stack("year", 2):get_count()
 	local year3 = player_inv:get_stack("year", 3):get_count()
+	local year4 = player_inv:get_stack("year", 4):get_count()
     local d = 0
     if year == 1 then
         d = d+1
@@ -2422,19 +2113,24 @@ ach3.get_formspec = function(player, pos)
 	if year3 == 1 then
         d = d+1
     end
+	if year4 == 1 then
+        d = d+1
+    end
     formspec= "size[10.5,11.3]"
         .."background[10.5,11.3;1,1;gui_formbg.png;true]"
         .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
         .."bgcolor[#080808BB;true]"
 		.."button[0,0;2,0.5;ach;Back]"
 		.."button[2,0;2,0.5;main;Main]"
-        .."label[0.8,1.1;one year Trophy]"
-        .."label[0.8,1.9;two years Trophy]"
-		.."label[0.8,2.7;three years Trophy]"
-        .."label[5.5,0;"..d.."/3]"
+        .."label[0.8,1.1;One year Trophy]"
+        .."label[0.8,1.9;Two years Trophy]"
+		.."label[0.8,2.7;Three years Trophy]"
+		.."label[0.8,3.5;Four years Trophy]"
+        .."label[5.5,0;"..d.."/4]"
         .."image[0,1;0.8,0.8;tutorial_"..year..".png]"
         .."image[0,1.8;0.8,0.8;tutorial_"..year2..".png]"
 		.."image[0,2.6;0.8,0.8;tutorial_"..year3..".png]"
+		.."image[0,3.4;0.8,0.8;tutorial_"..year4..".png]"
 	return formspec
 end
 for j = 1, 8, 1 do
@@ -2547,19 +2243,18 @@ for k = 1, 8, 1 do
 	end
 end
 local mode_text = {
-	{"Give player Enemy rank. (revoke all privs)"},
-	{"Give player Member rank. (interact,shout)"},
-	{"Give player Premium rank. (interact,shout,fly,fast,home)"},
-	{"Give player VIP rank. (interact,shout,fly,fast,home,teleport)"},
-	{"Give player Hero rank. (interact,shout,fly,fast,home,teleport,noclip,debug)"},
-	{"Give player Legend rank (interact,shout,fly,fast,home,teleport,noclip,debug,bring,settime)"},
-	{"Give player Admin rank (all privs)"},
-	{"Mark player as a youtuber "},
+	{"give player Enemy rank. (revoke all privs)"},
+	{"give player Member rank. (interact,shout)"},
+	{"give player Premium rank. (interact,shout,fly,fast,home)"},
+	{"give player VIP rank. (interact,shout,fly,fast,home,teleport)"},
+	{"give player Hero rank. (interact,shout,fly,fast,home,teleport,noclip,debug)"},
+	{"give player Legend rank (interact,shout,fly,fast,home,teleport,noclip,debug,bring,settime)"},
+	{"give player Admin rank (all privs)"},
+	{"mark player as a youtuber"},
 }
 local function server_hammer_setmode(user, itemstack, mode, keys)
 	local puncher = user:get_player_name()
 	if keys["sneak"] == false and mode == 0 then
-		minetest.chat_send_player(puncher, "Hold shift and use to change server hammer modes.")
 		return 
 	end
 	if keys["sneak"] == true then
@@ -2770,19 +2465,34 @@ minetest.register_craftitem("tutorial:server_hammer", {
 	description = "Admin tool 6: Server Hammer",
 	inventory_image = "ban_hammer.png",
 	stack_max = 1,
+	groups = {not_in_creative_inventory=1},
+	on_secondary_use = function(itemstack, user, pointed_thing)
+		local mode = 0
+		server_hammer_handler(itemstack, user, pointed_thing, mode)
+		return itemstack
+	end,
 	on_use = function(itemstack, user, pointed_thing)
 		local mode = 0
 		server_hammer_handler(itemstack, user, pointed_thing, mode)
 		return itemstack
 	end,
 })
-for i = 1, 8 do
+minetest.register_craftitem("tutorial:server_hammer1", {
+		description = "Admin tool 6: Server Hammer Mode 1 ("..mode_text[1][1]..")",
+		inventory_image = "ban_hammer.png^technic_tool_mode1.png",
+		wield_image = "ban_hammer.png",
+		on_secondary_use = function(itemstack, user, pointed_thing)
+			server_hammer_handler(itemstack, user, pointed_thing, 1)
+			return itemstack
+		end,
+	})
+for i = 2, 8 do
 	minetest.register_craftitem("tutorial:server_hammer"..i, {
-		description = "Admin tool 6: Server Hammer in Mode "..i,
+		description = "Admin tool 6: Server Hammer in Mode "..i.." ("..mode_text[i][1]..")",
 		inventory_image = "ban_hammer.png^technic_tool_mode"..i..".png",
 		wield_image = "ban_hammer.png",
 		groups = {not_in_creative_inventory=1},
-		on_use = function(itemstack, user, pointed_thing)
+		on_secondary_use = function(itemstack, user, pointed_thing)
 			local mode = i
 			server_hammer_handler(itemstack, user, pointed_thing, mode)
 			return itemstack
@@ -2854,6 +2564,7 @@ kri.get_formspec = function(player, pos)
 	else
 		time = "nil"
 	end
+	
 	formspec = "size[10,12.3]"
 		.."button[0,0;2,0.5;inven;Back]"
 		.."button[2,0;2,0.5;main;Main]"
@@ -2884,7 +2595,7 @@ kri.get_formspec = function(player, pos)
 		formspec = formspec .."button[2,5.75;1,0.5;adem;1]"
 		    .."button[2,6.75;1,0.5;athu;1]"
 		    .."button[2,7.75;1,0.5;athl;1]"
-            if time ~= "nil" then
+            if time ~= "nil" and tes == 0 then
                 formspec = formspec .."label[7,3;creating..]"
             end
 	end
@@ -3034,11 +2745,11 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
         local g3 = player_inv:get_stack("gem", 3):get_name()
         local g4 = player_inv:get_stack("gem", 4):get_name()
         local g5 = player_inv:get_stack("gem", 5):get_name()
-        local g11 = player_inv:get_stack("gem2", 1):get_name()
-        local g12 = player_inv:get_stack("gem2", 2):get_name()
-        local g13 = player_inv:get_stack("gem2", 3):get_name()
-        local g14 = player_inv:get_stack("gem2", 4):get_name()
-        local g15 = player_inv:get_stack("gem2", 5):get_name()
+        local g11 = player_inv:get_stack("2gem", 1):get_name()
+        local g12 = player_inv:get_stack("2gem", 2):get_name()
+        local g13 = player_inv:get_stack("2gem", 3):get_name()
+        local g14 = player_inv:get_stack("2gem", 4):get_name()
+        local g15 = player_inv:get_stack("2gem", 5):get_name()
         local ar1 = player_inv:get_stack("armor", 1):get_name()
         local ar2 = player_inv:get_stack("armor", 2):get_name()
         local ar3 = player_inv:get_stack("armor", 3):get_name()
@@ -3183,7 +2894,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	end
     if fields.achc then
         local player_inv = player:get_inventory()
-        player_inv:set_size("year", 3)
+        player_inv:set_size("year", 4)
         if player:get_inventory():contains_item("main", "tutorial:trophy_year1") then
             player_inv:set_stack("year", 1,"tutorial:dirt")
 		end
@@ -3192,6 +2903,9 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		end
 		if player:get_inventory():contains_item("main", "tutorial:trophy_year3") then
             player_inv:set_stack("year", 3,"tutorial:dirt")
+		end
+		if player:get_inventory():contains_item("main", "tutorial:trophy_year4") then
+            player_inv:set_stack("year", 4,"tutorial:dirt")
 		end
 		inventory_plus.set_inventory_formspec(player, ach3.get_formspec(player))
 	end
@@ -3343,49 +3057,6 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		end)
 	end
 end)
-minetest.register_on_dignode(function(pos, node, player)
-	if player == nil then
-        return
-    end	
-	local name = player:get_player_name()
-	local inv = player:get_inventory()
-	if node.name == "tutorial:geschenk_legend" then
-		local x = math.random(20)
-		if x == 16 then
-			local y = math.random(8)
-			inv:set_stack("kri", y,"tutorial:legenden_kristall_"..y)
-        else
-        local z = math.random(16)
-          if z == 1 then
-            inv:add_item("main","gems:emerald_gem 2")
-          elseif z < 3 then
-            inv:add_item("main","gems:shadow_gem 2")
-          elseif z < 5 then
-            inv:add_item("main","gems:pearl_gem 2")
-          elseif z < 8 then
-            inv:add_item("main","gems:amethyst_gem 2")
-          elseif z < 12 then
-            inv:add_item("main","gems:ruby_gem 2")
-          else
-            inv:add_item("main","gems:sapphire_gem 2")
-          end
-		end
-	end
-	if node.name == "tutorial:geschenk_regnum" then
-		local x = math.random(1, 5)
-		if x == 1 then
-			inv:add_item("main", "tutorial:regnum_pixel_gold 20")
-		elseif x == 2 then
-			inv:add_item("main", "tutorial:regnum_pixel_green 20")
-		elseif x == 3 then
-			inv:add_item("main", "tutorial:regnum_pixel_purple 55")
-		elseif x == 4 then
-			inv:add_item("main", "tutorial:regnum_pixel_red 185")
-		elseif x == 5 then
-			inv:add_item("main", "tutorial:regnum_pixel_blue 185")
-		end
-	end
-end)
 local crafting4 = {}
 crafting4.get_formspec = function(player, pos)
 	if player == nil then
@@ -3436,16 +3107,6 @@ minetest.register_on_dignode(function(pos, node, player)
 			else
 				minetest.get_player_by_name(name):set_hp(0)
 			end
-		elseif x < 36 then 
-			inv:add_item("main", "default:mese_crystal_fragment 4")
-		elseif x < 41 then 
-			inv:add_item("main", "tutorial:lightstone")
-		elseif x < 46 then 
-			inv:add_item("main", "default:ice")
-		elseif x < 50 then 
-			inv:add_item("main", "tutorial:geschenk_death")
-		elseif x == 50 then 
-			inv:add_item("main", "tutorial:regnum_part")
 		end
 	end
 	if node.name == "tutorial:geschenk_death_silber" then
@@ -3463,17 +3124,6 @@ minetest.register_on_dignode(function(pos, node, player)
 			else
 				minetest.get_player_by_name(name):set_hp(0)
 			end
-		elseif x < 32 then 
-			inv:add_item("main", "default:mese_crystal")
-		elseif x < 38 then 
-			inv:add_item("main", "tutorial:lightstone")
-		elseif x < 44 then 
-			inv:add_item("main", "default:ice")
-		elseif x < 50 then 
-			inv:add_item("main", "tutorial:geschenk_death_silber")
-		elseif x == 50 then 
-			local y = math.random(1,2)
-			inv:add_item("main", "tutorial:regnum_part "..y)
 		end
 	end
 	if node.name == "tutorial:geschenk_death_gold" then
@@ -3491,17 +3141,6 @@ minetest.register_on_dignode(function(pos, node, player)
 			else
 				minetest.get_player_by_name(name):set_hp(0)
 			end
-		elseif x < 28 then 
-			inv:add_item("main", "default:mese_crystal 2")
-		elseif x < 35 then 
-			inv:add_item("main", "tutorial:lightstone 2")
-		elseif x < 42 then 
-			inv:add_item("main", "default:ice")
-		elseif x < 50 then 
-			inv:add_item("main", "tutorial:geschenk_death_gold")
-		elseif x == 50 then
-			local y = math.random(1,3)
-			inv:add_item("main", "tutorial:regnum_part "..y)
 		end
 	end
 	if node.name == "tutorial:geschenk_death_platin" then
@@ -3519,17 +3158,35 @@ minetest.register_on_dignode(function(pos, node, player)
 			else
 				minetest.get_player_by_name(name):set_hp(0)
 			end
-		elseif x < 24 then 
-			inv:add_item("main", "default:mese_crystal 3")
-		elseif x < 33 then 
-			inv:add_item("main", "tutorial:lightstone 2")
-		elseif x < 41 then 
-			inv:add_item("main", "default:ice")
-		elseif x < 50 then 
-			inv:add_item("main", "tutorial:geschenk_death_platin")
-		elseif x == 50 then
-			local y = math.random(1,4)
-			inv:add_item("main", "tutorial:regnum_part "..y)
+		end
+	end
+	if node.name == "tutorial:geschenk_dragon" then
+        local x = math.random(1,25)
+        if x == 8 then
+            inv:set_size("dgon", 1)
+            local dgon = inv:get_stack("dgon", 1):get_count()
+            if dgon == 0 and inv:room_for_item("main", "tutorial:dragon_schluessel") then
+                inv:add_item("main", "tutorial:dragon_schluessel")
+                inv:add_item("dgon", "default:dirt")
+            end
+        end
+	end
+    if node.name == "tutorial:geschenk_tortoise" then
+        local x = math.random(1,25)
+        if x == 8 then
+            inv:set_size("ttoise", 1)
+            local ttoise = inv:get_stack("ttoise", 1):get_count()
+            if ttoise == 0 and inv:room_for_item("main", "tutorial:tortoise_schluessel") then
+                inv:add_item("main", "tutorial:tortoise_schluessel")
+                inv:add_item("ttoise", "default:dirt")
+            end
+        end
+	end
+	if node.name == "tutorial:geschenk_legend" then
+		local x = math.random(10)
+		if x == 8 then
+			local y = math.random(8)
+			inv:set_stack("kri", y,"tutorial:legenden_kristall_"..y)
 		end
 	end
 end)
@@ -3840,9 +3497,10 @@ cr.get_formspec = function(player,pos)
         .."button[8,2.5;2,0.5;"..image6..";Cooking]"
         .."button[10,2.5;2,0.5;"..image7..";Medallion craft]"
         .."button[12,2.5;2,0.5;"..image8..";Crystal craft]"
-		.."button[4,3.5;2,0.5;dna;DNA craft]"
-        .."button[6,3.5;2,0.5;mine;Mining craft]"
-        .."button[8,3.5;2,0.5;troph;Trophy craft]"
+		.."button[3,3.5;2,0.5;dna;DNA craft]"
+        .."button[5,3.5;2,0.5;mine;Mining craft]"
+        .."button[7,3.5;2,0.5;troph;Trophy craft]"
+		.."button[9,3.5;2,0.5;backward;Backward craft]"
 		.."label[0.5,1.8;Craftkey]"
 		.."label[2.4,1.8;Legendkey]"
 		.."label[4.35,1.8;Regnumkey]"

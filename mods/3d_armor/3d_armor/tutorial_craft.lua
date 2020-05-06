@@ -3625,3 +3625,126 @@ minetest.register_craft({
 		{'', '', 'tutorial:regnum', '', ''},
     }
 })
+
+minetest.register_craft({
+    output = '3d_armor:regnumboots2',
+    recipe = {
+        {'', '', 'tutorial:regnum', '', ''},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'tutorial:regnum', 'tutorial:bottleSS', '3d_armor:superlegendenboots2', 'tutorial:bottleSS', 'tutorial:regnum'},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'', '', 'tutorial:regnum', '', ''},
+    }
+})
+minetest.register_craft({
+    output = '3d_armor:regnumchestplate2',
+    recipe = {
+        {'', '', 'tutorial:regnum', '', ''},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'tutorial:regnum', 'tutorial:bottleSS', '3d_armor:superlegendenchestplate2', 'tutorial:bottleSS', 'tutorial:regnum'},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'', '', 'tutorial:regnum', '', ''},
+    }
+})
+minetest.register_craft({
+    output = '3d_armor:regnumhelmet2',
+    recipe = {
+        {'', '', 'tutorial:regnum', '', ''},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'tutorial:regnum', 'tutorial:bottleSS', '3d_armor:superlegendenhelmet2', 'tutorial:bottleSS', 'tutorial:regnum'},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'', '', 'tutorial:regnum', '', ''},
+    }
+})
+minetest.register_craft({
+    output = '3d_armor:regnumleggings2',
+    recipe = {
+        {'', '', 'tutorial:regnum', '', ''},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'tutorial:regnum', 'tutorial:bottleSS', '3d_armor:superlegendenleggings2', 'tutorial:bottleSS', 'tutorial:regnum'},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'', '', 'tutorial:regnum', '', ''},
+    }
+})
+
+minetest.register_craft({
+    output = '3d_armor:regnumboots3',
+    recipe = {
+        {'', '', 'tutorial:regnum', '', ''},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'tutorial:regnum', 'tutorial:bottleSS', '3d_armor:superlegendenboots3', 'tutorial:bottleSS', 'tutorial:regnum'},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'', '', 'tutorial:regnum', '', ''},
+    }
+})
+minetest.register_craft({
+    output = '3d_armor:regnumchestplate3',
+    recipe = {
+        {'', '', 'tutorial:regnum', '', ''},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'tutorial:regnum', 'tutorial:bottleSS', '3d_armor:superlegendenchestplate3', 'tutorial:bottleSS', 'tutorial:regnum'},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'', '', 'tutorial:regnum', '', ''},
+    }
+})
+minetest.register_craft({
+    output = '3d_armor:regnumhelmet3',
+    recipe = {
+        {'', '', 'tutorial:regnum', '', ''},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'tutorial:regnum', 'tutorial:bottleSS', '3d_armor:superlegendenhelmet3', 'tutorial:bottleSS', 'tutorial:regnum'},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'', '', 'tutorial:regnum', '', ''},
+    }
+})
+minetest.register_craft({
+    output = '3d_armor:regnumleggings3',
+    recipe = {
+        {'', '', 'tutorial:regnum', '', ''},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'tutorial:regnum', 'tutorial:bottleSS', '3d_armor:superlegendenleggings3', 'tutorial:bottleSS', 'tutorial:regnum'},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'', '', 'tutorial:regnum', '', ''},
+    }
+})
+
+minetest.register_craft({
+    output = '3d_armor:regnumboots4',
+    recipe = {
+        {'', '', 'tutorial:regnum', '', ''},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'tutorial:regnum', 'tutorial:bottleSS', '3d_armor:superlegendenboots4', 'tutorial:bottleSS', 'tutorial:regnum'},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'', '', 'tutorial:regnum', '', ''},
+    }
+})
+minetest.register_craft({
+    output = '3d_armor:regnumchestplate4',
+    recipe = {
+        {'', '', 'tutorial:regnum', '', ''},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'tutorial:regnum', 'tutorial:bottleSS', '3d_armor:superlegendenchestplate4', 'tutorial:bottleSS', 'tutorial:regnum'},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'', '', 'tutorial:regnum', '', ''},
+    }
+})
+minetest.register_craft({
+    output = '3d_armor:regnumhelmet4',
+    recipe = {
+        {'', '', 'tutorial:regnum', '', ''},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'tutorial:regnum', 'tutorial:bottleSS', '3d_armor:superlegendenhelmet4', 'tutorial:bottleSS', 'tutorial:regnum'},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'', '', 'tutorial:regnum', '', ''},
+    }
+})
+minetest.register_craft({
+    output = '3d_armor:regnumleggings4',
+    recipe = {
+        {'', '', 'tutorial:regnum', '', ''},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'tutorial:regnum', 'tutorial:bottleSS', '3d_armor:superlegendenleggings4', 'tutorial:bottleSS', 'tutorial:regnum'},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'', '', 'tutorial:regnum', '', ''},
+    }
+})

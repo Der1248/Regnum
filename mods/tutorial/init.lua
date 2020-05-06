@@ -6,7 +6,7 @@ minetest.register_on_joinplayer(function(player)
 		offset = {x=0, y=10},
 		alignment = {x=1, y=0},
 		number = 0xFFFFFF ,
-		text = "For Minetest 	  :  5.1.x",
+		text = "For Minetest 	  :  5.2.0",
 	})
 	player:hud_add({
 		hud_elem_type = "text",
@@ -14,7 +14,7 @@ minetest.register_on_joinplayer(function(player)
 		offset = {x=0, y=30},
 		alignment = {x=1, y=0},
 		number = 0xFFFFFF ,
-		text = "Game Version	 :  3.4.0",
+		text = "Game Version	 :  3.5.0",
 	})
 end)
 
@@ -30,6 +30,35 @@ dofile(minetest.get_modpath("tutorial").."/other.lua")
 dofile(minetest.get_modpath("tutorial").."/alias.lua")
 
 --v.2.0.0+
+local backward = {}
+backward.get_formspec = function(player, pos)
+    if player == nil then
+        return
+    end
+	local player_inv = player:get_inventory()
+	player_inv:set_size("backward", 1)
+	formspec = "size[8,7.5]"
+		.."button[0,0;2,0.5;cr;Back]"
+		.."button[2,0;2,0.5;main;Main]"
+        .."background[8,7.5;1,1;gui_formbg.png;true]"
+        .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
+        .."bgcolor[#080808BB;true]"
+        .."button[3,2.6;2,0.5;backwardcra;Get items back]"
+        .."list[current_player;main;0,3.75;8,4;]"
+        .."list[current_player;backward;3.5,1;1,1;]"
+        .."listring[current_player;main]"
+		.."listring[current_player;backward]"
+		.."label[5,0.7;You can get your items back from:]"
+		.."label[5,1.0;superlegend & regnum armor/gun]"
+		.."label[5,1.3;Spezial Mining Laser/Drill lv.1-149]"
+		.."label[5,1.6;Craftkey lv.1-6]"
+		.."label[5,1.9;Spezial grey coin lv.1-MAX]"
+		.."label[5,2.2;Bagkey lv.1-3]"
+		.."label[5,2.5;Wallplacer lv.1-4]"
+		.."label[5,2.8;Cookingkey lv.1-3]"
+	return formspec		
+end
+
 minetest.register_craft({
         output = "tutorial:spawn_egg",
         recipe = {
@@ -51,28 +80,7 @@ minetest.register_craftitem("tutorial:spawn_egg", {
 		end
 	end,
 })
-local rg25 = {}
-rg25.get_formspec = function(player, pos)
-    if player == nil then
-        return
-    end
-	formspec = "size[9,10.3]"
-		.."button[0,0;2,0.5;inven;Back]"
-		.."button[2,0;2,0.5;main;Main]"
-        .."background[9,10.3;1,1;gui_formbg.png;true]"
-        .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
-        .."bgcolor[#080808BB;true]"
-		.."label[0,1;I. 17. Music]"
-        .."label[0,1.3;Enable Background Music.]"
-        .."label[0,1.6;Choose one Theme or two to be randomly selected]"
-        .."label[0,1.9;and listen to the Regnum Themes.]"
-        .."label[0,2.2;How to use Music:]"
-        .."label[0,2.5;1. Enable Background Music.]"
-        .."label[0,2.8;2. Choose Themes]"
-        .."button[2,10;   2,0.5;rg24;<]"
-        .."button[4,10;   2,0.5;rg15;>]"
-	return formspec		
-end
+
 minetest.register_craft({
     output = 'tutorial:colorstick_empty',
     recipe = {
@@ -95,7 +103,7 @@ minetest.register_alias("homedecor:trophy_year1", "tutorial:trophy_year1")
 minetest.register_node("tutorial:trophy_year1", {
     description = "One year Regnum!!",
 	tiles = {
-		"moreores_mithril_block.png"
+		"tutorial_trophy_year1.png"
 	},
     groups = { snappy=3 },
     drawtype = "nodebox",
@@ -127,7 +135,7 @@ minetest.register_node("tutorial:trophy_year1", {
 minetest.register_node("tutorial:trophy_year2", {
     description = "Two years Regnum!!",
 	tiles = {
-		"moreores_mithril_block.png"
+		"tutorial_trophy_year2.png"
 	},
     groups = { snappy=3 },
     drawtype = "nodebox",
@@ -159,7 +167,39 @@ minetest.register_node("tutorial:trophy_year2", {
 minetest.register_node("tutorial:trophy_year3", {
     description = "Three years Regnum!!",
 	tiles = {
-		"moreores_mithril_block.png"
+		"tutorial_trophy_year3.png"
+	},
+    groups = { snappy=3 },
+    drawtype = "nodebox",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.125, -0.5, -0.125, 0.1875, -0.4375, 0.1875}, -- NodeBox1
+			{-0.0625, -0.4375, -0.0625, 0.125, -0.375, 0.125}, -- NodeBox2
+			{-0.02, -0.375, -0.02, 0.0825, -0.1875, 0.0825}, -- NodeBox3
+			{-0.0625, -0.1875, -0.0625, 0.125, -0.125, 0.125}, -- NodeBox4
+			{-0.125, -0.1875, -0.0625, -0.0625, 0.125, 0.125}, -- NodeBox5
+			{0.125, -0.1875, -0.0625, 0.1875, 0.125, 0.125}, -- NodeBox6
+			{-0.125, -0.1875, 0.125, 0.1875, 0.125, 0.1875}, -- NodeBox7
+			{-0.125, -0.1875, -0.125, 0.1875, 0.125, -0.0625}, -- NodeBox8
+			{-0.0625, -0.25, -0.0625, 0.125, -0.1875, 0.125}, -- NodeBox9
+			{0.1875, 0.05, 0, 0.23, 0.0925, 0.0625}, -- NodeBox10
+			{0.1875, -0.15, 0, 0.23, -0.11, 0.0625}, -- NodeBox11
+			{0.23, -0.15, 0, 0.2725, 0.0925, 0.0625}, -- NodeBox12
+			{-0.1675, -0.15, 0, -0.125, -0.11, 0.0625}, -- NodeBox13
+			{-0.1675, 0.05, 0, -0.125, 0.0925, 0.0625}, -- NodeBox14
+			{-0.21, -0.15, 0, -0.1675, 0.0925, 0.0625}, -- NodeBox15
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.21, -0.5, -0.125, 0.2725, 0.125, 0.1875 }
+	}
+})
+minetest.register_node("tutorial:trophy_year4", {
+    description = "Four years Regnum!!",
+	tiles = {
+		"tutorial_trophy_year4.png"
 	},
     groups = { snappy=3 },
     drawtype = "nodebox",
@@ -557,48 +597,6 @@ minetest.register_craft({
 		{'tutorial:lila_erz3', 'tutorial:lila_erz3', 'tutorial:lila_erz3'},
     }
 })
-local rg23 = {}
-rg23.get_formspec = function(player, pos)
-    if player == nil then
-        return
-    end
-	formspec = "size[9,10.3]"
-		.."button[0,0;2,0.5;inven;Back]"
-		.."button[2,0;2,0.5;main;Main]"
-        .."background[9,10.3;1,1;gui_formbg.png;true]"
-        .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
-        .."bgcolor[#080808BB;true]"
-		.."label[0,1;I. 15. Treasures]"
-        .."label[0,1.3;get treasures from the fox]"
-        .."label[0,1.6;Collect 6 treasures to get the legend stick]"
-        .."label[0,1.9;How to use artifacts:]"
-        .."label[0,2.2;1. get 6 treasures]"
-        .."label[0,2.5;2. press 'reward']"
-        .."button[2,10;   2,0.5;rg22;<]"
-        .."button[4,10;   2,0.5;rg24;>]"
-	return formspec		
-end
-local rg24 = {}
-rg24.get_formspec = function(player, pos)
-    if player == nil then
-        return
-    end
-	formspec = "size[9,10.3]"
-		.."button[0,0;2,0.5;inven;Back]"
-		.."button[2,0;2,0.5;main;Main]"
-        .."background[9,10.3;1,1;gui_formbg.png;true]"
-        .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
-        .."bgcolor[#080808BB;true]"
-		.."label[0,1;I. 16. Trophys]"
-        .."label[0,1.3;get trophys in the trophy craft]"
-        .."label[0,1.6;Collect 24 trothys to get the Protectionkey]"
-        .."label[0,1.9;How to use trophys:]"
-        .."label[0,2.2;1. get 24 trophys]"
-        .."label[0,2.5;2. press 'reward']"
-        .."button[2,10;   2,0.5;rg23;<]"
-        .."button[4,10;   2,0.5;rg25;>]"
-	return formspec		
-end
 local troph = {}
 troph.get_formspec = function(player, pos)
 	if player == nil then
@@ -1015,11 +1013,6 @@ minetest.register_on_joinplayer(function(player)
     player:set_physics_override(override_table)
     local player_inv = player:get_inventory()
     player_inv:set_stack("crtime", 1, nil)
-	--player_inv:set_size("year", 3)
-	--if player_inv:room_for_item("main", "tutorial:trophy_year3") and player_inv:get_stack("year", 3):get_count() == 0 then
-	--	player_inv:add_item("main", "tutorial:trophy_year3")
-	--	player_inv:set_stack("year", 3, "default:dirt")
-	--end
 end)
 minetest.register_craftitem("tutorial:cooking_schluessel1", {
 	description = "Cookingkey lv.1",
@@ -1049,7 +1042,7 @@ minetest.register_craftitem("tutorial:crystal_schluessel", {
 	inventory_image = "tutorial_crystal_schluessel.png",
 })
 minetest.register_craftitem("tutorial:medallion", {
-	description = "Medallion",
+	description = "Medallion piece",
 	inventory_image = "tutorial_medallion.png",
     stack_max = 1000,
 })
@@ -1336,50 +1329,6 @@ medallion.get_formspec = function(player, pos)
     player_inv:set_stack("meme", 1 , "default:dirt "..p)
 	return formspec		
 end
-local rg21 = {}
-rg21.get_formspec = function(player, pos)
-    if player == nil then
-        return
-    end
-	formspec = "size[9,10.3]"
-		.."button[0,0;2,0.5;inven;Back]"
-		.."button[2,0;2,0.5;main;Main]"
-        .."background[9,10.3;1,1;gui_formbg.png;true]"
-        .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
-        .."bgcolor[#080808BB;true]"
-		.."label[0,1;I. 13. Artifacts]"
-        .."label[0,1.3;If you run around you will get artifacts]"
-        .."label[0,1.6;Collect 71 artifacts to get the Knight key]"
-        .."label[0,1.9;How to use artifacts:]"
-        .."label[0,2.2;1. run around]"
-        .."label[0,2.5;2. get 71 artifacts]"
-        .."label[0,2.8;3. press 'reward']"
-        .."button[2,10;   2,0.5;rg14;<]"
-        .."button[4,10;   2,0.5;rg22;>]"
-	return formspec		
-end
-local rg22 = {}
-rg22.get_formspec = function(player, pos)
-    if player == nil then
-        return
-    end
-	formspec = "size[9,10.3]"
-		.."button[0,0;2,0.5;inven;Back]"
-		.."button[2,0;2,0.5;main;Main]"
-        .."background[9,10.3;1,1;gui_formbg.png;true]"
-        .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
-        .."bgcolor[#080808BB;true]"
-		.."label[0,1;I. 14. Medallion]"
-        .."label[0,1.3;craft medallions in the medallion craft]"
-        .."label[0,1.6;Collect 7 medallions to get the Crystalkey]"
-        .."label[0,1.9;How to use artifacts:]"
-        .."label[0,2.2;1. craft medallions]"
-        .."label[0,2.5;2. get 7 medallions]"
-        .."label[0,2.8;3. press 'reward']"
-        .."button[2,10;   2,0.5;rg21;<]"
-        .."button[4,10;   2,0.5;rg23;>]"
-	return formspec		
-end
 local timer = 0
 local oldpos = {}
 local newpos = {}
@@ -1390,6 +1339,13 @@ minetest.register_globalstep(function(dtime)
 		for _,player in ipairs(players) do
 			local pri = minetest.get_player_privs(player:get_player_name())
 			local player_inv = player:get_inventory()
+			
+			player_inv:set_size("year", 4)
+			if player_inv:room_for_item("main", "tutorial:trophy_year4") and player_inv:get_stack("year", 4):get_count() == 0 then
+				player_inv:add_item("main", "tutorial:trophy_year4")
+				player_inv:set_stack("year", 4, "default:dirt")
+			end
+	
 			player_inv:set_size("youtube", 1)
 			local c = player_inv:get_stack("youtube",1):get_count()
 			if c == 0 then
@@ -1459,22 +1415,29 @@ minetest.register_globalstep(function(dtime)
 	end
 end)
 minetest.register_craftitem("tutorial:gem_fragment2", {
-    description = "Gem fragment lv.2",
+    description = "Gem fragment (tortoise)",
 	inventory_image = "tutorial_gem_fragment2.png",
 })
 minetest.register_node("tutorial:geschenk_tortoise",{
 	description = "Gift (tortoise)",
 	is_ground_content = true,
-	tiles  = {"tutorial_geschenk_dragon.png"},
+	tiles  = {"tutorial_geschenk_tortoise.png"},
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-    drop = {},
+    drop = "default:coal_lump 20",
 })
 minetest.register_node("tutorial:geschenk_gem2",{
-	description = "Gift lv.2 (gem)",
+	description = "Gift (gem tortoise)",
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk_gem2.png"},
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
-    drop = {},
+    drop = {
+		max_items = 1,
+		items = {
+			{items = {"tutorial:gem_fragment2"},rarity = 2.5},
+			{items = {"tutorial:geschenk_legend"},rarity = 5},
+			{items = {""},rarity = 2.5},
+		}
+	}
 })
 local artifacts = {}
 artifacts.get_formspec = function(player, pos)
@@ -1727,7 +1690,7 @@ minetest.register_craft({
     }
 })
 minetest.register_craftitem("tutorial:wallplacer1", {
-	description = "Wallplacer lv.1",
+	description = "Wallplacer lv.1 (place 3x3 wall)",
 	inventory_image = "tutorial_block_placer1.png",
 	groups = {not_in_creative_inventory=1},
 	on_place = function(itemstack, placer, pointed_thing)
@@ -1842,11 +1805,11 @@ minetest.register_craftitem("tutorial:wallplacer1", {
 	end,
 })
 minetest.register_craftitem("tutorial:wallplacer2_2", {
-	description = "Wallplacer lv.2",
+	description = "Wallplacer lv.2 Mode 2 (place 5x5 wall)",
 	inventory_image = "tutorial_block_placer2.png^technic_tool_mode2.png",
     wield_image = "tutorial_block_placer2.png",
 	groups = {not_in_creative_inventory=1},
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("tutorial:wallplacer2_1")
@@ -1965,11 +1928,11 @@ minetest.register_craftitem("tutorial:wallplacer2_2", {
 	end,
 })
 minetest.register_craftitem("tutorial:wallplacer2_1", {
-	description = "Wallplacer lv.2",
+	description = "Wallplacer lv.2 Mode 1 (place 3x3 wall)",
 	inventory_image = "tutorial_block_placer2.png^technic_tool_mode1.png",
     wield_image = "tutorial_block_placer2.png",
 	groups = {not_in_creative_inventory=1},
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("tutorial:wallplacer2_2")
@@ -2088,11 +2051,11 @@ minetest.register_craftitem("tutorial:wallplacer2_1", {
 	end,
 })
 minetest.register_craftitem("tutorial:wallplacer3_1", {
-	description = "Wallplacer lv.3",
+	description = "Wallplacer lv.3 Mode 1 (place 3x3 wall)",
 	inventory_image = "tutorial_block_placer3.png^technic_tool_mode1.png",
     wield_image = "tutorial_block_placer3.png",
 	groups = {not_in_creative_inventory=1},
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("tutorial:wallplacer3_2")
@@ -2211,11 +2174,11 @@ minetest.register_craftitem("tutorial:wallplacer3_1", {
 	end,
 })
 minetest.register_craftitem("tutorial:wallplacer3_2", {
-	description = "Wallplacer lv.3",
+	description = "Wallplacer lv.3 Mode 2 (place 5x5 wall)",
 	inventory_image = "tutorial_block_placer3.png^technic_tool_mode2.png",
     wield_image = "tutorial_block_placer3.png",
 	groups = {not_in_creative_inventory=1},
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("tutorial:wallplacer3_3")
@@ -2334,11 +2297,11 @@ minetest.register_craftitem("tutorial:wallplacer3_2", {
 	end,
 })
 minetest.register_craftitem("tutorial:wallplacer3_3", {
-	description = "Wallplacer lv.3",
+	description = "Wallplacer lv.3 Mode 3 (place 7x7 wall)",
 	inventory_image = "tutorial_block_placer3.png^technic_tool_mode3.png",
     wield_image = "tutorial_block_placer3.png",
 	groups = {not_in_creative_inventory=1},
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("tutorial:wallplacer3_1")
@@ -2457,11 +2420,11 @@ minetest.register_craftitem("tutorial:wallplacer3_3", {
 	end,
 })
 minetest.register_craftitem("tutorial:wallplacer4_1", {
-	description = "Wallplacer lv.4",
+	description = "Wallplacer lv.4 Mode 1 (place 3x3 wall)",
 	inventory_image = "tutorial_block_placer4.png^technic_tool_mode1.png",
     wield_image = "tutorial_block_placer4.png",
 	groups = {not_in_creative_inventory=1},
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("tutorial:wallplacer4_2")
@@ -2580,11 +2543,11 @@ minetest.register_craftitem("tutorial:wallplacer4_1", {
 	end,
 })
 minetest.register_craftitem("tutorial:wallplacer4_2", {
-	description = "Wallplacer lv.4",
+	description = "Wallplacer lv.4 Mode 2 (place 5x5 wall)",
 	inventory_image = "tutorial_block_placer4.png^technic_tool_mode2.png",
     wield_image = "tutorial_block_placer4.png",
 	groups = {not_in_creative_inventory=1},
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("tutorial:wallplacer4_3")
@@ -2703,11 +2666,11 @@ minetest.register_craftitem("tutorial:wallplacer4_2", {
 	end,
 })
 minetest.register_craftitem("tutorial:wallplacer4_3", {
-	description = "Wallplacer lv.4",
+	description = "Wallplacer lv.4 Mode 3 (place 7x7 wall)",
 	inventory_image = "tutorial_block_placer4.png^technic_tool_mode3.png",
     wield_image = "tutorial_block_placer4.png",
 	groups = {not_in_creative_inventory=1},
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("tutorial:wallplacer4_4")
@@ -2826,11 +2789,11 @@ minetest.register_craftitem("tutorial:wallplacer4_3", {
 	end,
 })
 minetest.register_craftitem("tutorial:wallplacer4_4", {
-	description = "Wallplacer lv.4",
+	description = "Wallplacer lv.4 Mode 4 (place 9x9 wall)",
 	inventory_image = "tutorial_block_placer4.png^technic_tool_mode4.png",
     wield_image = "tutorial_block_placer4.png",
 	groups = {not_in_creative_inventory=1},
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("tutorial:wallplacer4_1")
@@ -2949,10 +2912,10 @@ minetest.register_craftitem("tutorial:wallplacer4_4", {
 	end,
 })
 minetest.register_craftitem("tutorial:wallplacer5_1", {
-	description = "Wallplacer lv.MAX",
+	description = "Wallplacer lv.MAX Mode 1 (place 3x3 wall)",
 	inventory_image = "tutorial_block_placer5.png^technic_tool_mode1.png",
     wield_image = "tutorial_block_placer5.png",
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("tutorial:wallplacer5_2")
@@ -3071,11 +3034,11 @@ minetest.register_craftitem("tutorial:wallplacer5_1", {
 	end,
 })
 minetest.register_craftitem("tutorial:wallplacer5_2", {
-	description = "Wallplacer lv.MAX",
+	description = "Wallplacer lv.MAX Mode 2 (place 5x5 wall)",
 	inventory_image = "tutorial_block_placer5.png^technic_tool_mode2.png",
     wield_image = "tutorial_block_placer5.png",
 	groups = {not_in_creative_inventory=1},
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("tutorial:wallplacer5_3")
@@ -3194,11 +3157,11 @@ minetest.register_craftitem("tutorial:wallplacer5_2", {
 	end,
 })
 minetest.register_craftitem("tutorial:wallplacer5_3", {
-	description = "Wallplacer lv.MAX",
+	description = "Wallplacer lv.MAX Mode 3 (place 7x7 wall)",
 	inventory_image = "tutorial_block_placer5.png^technic_tool_mode3.png",
     wield_image = "tutorial_block_placer5.png",
 	groups = {not_in_creative_inventory=1},
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("tutorial:wallplacer5_4")
@@ -3317,11 +3280,11 @@ minetest.register_craftitem("tutorial:wallplacer5_3", {
 	end,
 })
 minetest.register_craftitem("tutorial:wallplacer5_4", {
-	description = "Wallplacer lv.MAX",
+	description = "Wallplacer lv.MAX Mode 4 (place 9x9 wall)",
 	inventory_image = "tutorial_block_placer5.png^technic_tool_mode4.png",
     wield_image = "tutorial_block_placer5.png",
 	groups = {not_in_creative_inventory=1},
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("tutorial:wallplacer5_5")
@@ -3440,11 +3403,11 @@ minetest.register_craftitem("tutorial:wallplacer5_4", {
 	end,
 })
 minetest.register_craftitem("tutorial:wallplacer5_5", {
-	description = "Wallplacer lv.MAX",
+	description = "Wallplacer lv.MAX Mode 5 (place 11x11 wall)",
 	inventory_image = "tutorial_block_placer5.png^technic_tool_mode5.png",
     wield_image = "tutorial_block_placer5.png",
 	groups = {not_in_creative_inventory=1},
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("tutorial:wallplacer5_1")
@@ -3566,7 +3529,7 @@ minetest.register_craftitem("tutorial:adminwallplacer_1", {
 	description = "Admin tool 9: Wallplacer",
 	inventory_image = "tutorial_block_placerAdmin.png^technic_tool_mode1.png",
     wield_image = "tutorial_block_placerAdmin.png",
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("tutorial:adminwallplacer_2")
@@ -3689,7 +3652,7 @@ minetest.register_craftitem("tutorial:adminwallplacer_2", {
 	inventory_image = "tutorial_block_placerAdmin.png^technic_tool_mode2.png",
     wield_image = "tutorial_block_placerAdmin.png",
 	groups = {not_in_creative_inventory=1},
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("tutorial:adminwallplacer_3")
@@ -3812,7 +3775,7 @@ minetest.register_craftitem("tutorial:adminwallplacer_3", {
 	inventory_image = "tutorial_block_placerAdmin.png^technic_tool_mode3.png",
     wield_image = "tutorial_block_placerAdmin.png",
 	groups = {not_in_creative_inventory=1},
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("tutorial:adminwallplacer_4")
@@ -3935,7 +3898,7 @@ minetest.register_craftitem("tutorial:adminwallplacer_4", {
 	inventory_image = "tutorial_block_placerAdmin.png^technic_tool_mode4.png",
     wield_image = "tutorial_block_placerAdmin.png",
 	groups = {not_in_creative_inventory=1},
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("tutorial:adminwallplacer_5")
@@ -4058,7 +4021,7 @@ minetest.register_craftitem("tutorial:adminwallplacer_5", {
 	inventory_image = "tutorial_block_placerAdmin.png^technic_tool_mode5.png",
     wield_image = "tutorial_block_placerAdmin.png",
 	groups = {not_in_creative_inventory=1},
-    on_use = function(itemstack, user, pointed_thing)
+    on_secondary_use = function(itemstack, user, pointed_thing)
         local keys = user:get_player_control()
         if keys["sneak"] == true then
             itemstack:set_name("tutorial:adminwallplacer_1")
@@ -4176,946 +4139,938 @@ minetest.register_craftitem("tutorial:adminwallplacer_5", {
         end
 	end,
 })
-
 minetest.register_craft({
-    output = 'tutorial:gun',
-    recipe = {
-        {'group:wood', 'group:wood', 'group:wood'},
+	output = 'tutorial:gun',
+	recipe = {
+		{'group:wood', 'group:wood', 'group:wood'},
 		{'', 'default:stick', 'group:wood'},
 		{'', '', 'default:stick'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_mega1',
-    recipe = {
-        {'tutorial:obsidian4', 'tutorial:obsidian4', 'tutorial:obsidian4'},
-        {'tutorial:obsidian4', 'tutorial:gun', 'tutorial:obsidian4'},
-        {'tutorial:thunder', 'tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_mega2',
-    recipe = {
-        {'tutorial:obsidian4', 'tutorial:obsidian4', 'tutorial:obsidian4'},
-        {'tutorial:obsidian4','tutorial:gun_mega1','tutorial:obsidian4'},
-        {'tutorial:thunder', 'tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_mega3',
-    recipe = {
-        {'tutorial:obsidian5', 'tutorial:obsidian5', 'tutorial:obsidian5'},
-        {'tutorial:obsidian5','tutorial:gun_mega2','tutorial:obsidian5'},
-        {'tutorial:thunder', 'tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_mega4',
-    recipe = {
-        {'tutorial:obsidian6', 'tutorial:obsidian6', 'tutorial:obsidian6'},
-        {'tutorial:obsidian6','tutorial:gun_mega3','tutorial:obsidian6'},
-        {'tutorial:thunder', 'tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_mega5',
-    recipe = {
-		{'tutorial:dunklematerie4','tutorial:dunklematerie4', 'tutorial:dunklematerie4'},
-		{'tutorial:dunklematerie4','tutorial:gun_mega4','tutorial:dunklematerie4'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_mega6',
-    recipe = {
-		{'tutorial:dunklematerie4','tutorial:dunklematerie4', 'tutorial:dunklematerie4'},
-		{'tutorial:dunklematerie4','tutorial:gun_mega5','tutorial:dunklematerie4'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_mega7',
-    recipe = {
-		{'tutorial:dunklematerie5','tutorial:dunklematerie5', 'tutorial:dunklematerie5'},
-		{'tutorial:dunklematerie5','tutorial:gun_mega6','tutorial:dunklematerie5'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_mega8',
-    recipe = {
-		{'tutorial:dunklematerie6','tutorial:dunklematerie6', 'tutorial:dunklematerie6'},
-		{'tutorial:dunklematerie6','tutorial:gun_mega7','tutorial:dunklematerie6'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_mega9',
-    recipe = {
-		{'tutorial:diamondblock2','tutorial:diamondblock2', 'tutorial:diamondblock2'},
-		{'tutorial:diamondblock2','tutorial:gun_mega8','tutorial:diamondblock2'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_mega10',
-    recipe = {
-		{'tutorial:diamondblock2','tutorial:diamondblock2', 'tutorial:diamondblock2'},
-		{'tutorial:diamondblock2','tutorial:gun_mega9','tutorial:diamondblock2'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_mega11',
-    recipe = {
-		{'tutorial:diamondblock2','tutorial:diamondblock2', 'tutorial:diamondblock2'},
-		{'tutorial:diamondblock2','tutorial:gun_mega10','tutorial:diamondblock2'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_mega12',
-    recipe = {
-		{'tutorial:diamondblock2','tutorial:diamondblock2', 'tutorial:diamondblock2'},
-		{'tutorial:diamondblock2','tutorial:gun_mega11','tutorial:diamondblock2'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_mega13',
-    recipe = {
-		{'default:goldblock','default:goldblock', 'default:goldblock'},
-		{'default:goldblock','tutorial:gun_mega12','default:goldblock'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_mega14',
-    recipe = {
-		{'default:nyancat_rainbow','default:nyancat_rainbow', 'default:nyancat_rainbow'},
-		{'default:nyancat_rainbow','tutorial:gun_mega13','default:nyancat_rainbow'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_mega15',
-    recipe = {
-		{'default:nyancat_rainbow','default:nyancat_rainbow', 'default:nyancat_rainbow'},
-		{'default:nyancat_rainbow','tutorial:gun_mega14','default:nyancat_rainbow'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_mega16',
-    recipe = {
-		{'tutorial:megablock1','tutorial:megablock1', 'tutorial:megablock1'},
-		{'tutorial:megablock1','tutorial:gun_mega15','tutorial:megablock1'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_mega17',
-    recipe = {
-		{'tutorial:megablock1','tutorial:megablock1', 'tutorial:megablock1'},
-		{'tutorial:megablock1','tutorial:gun_mega16','tutorial:megablock1'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_mega18',
-    recipe = {
-		{'tutorial:megablock1','tutorial:megablock1', 'tutorial:megablock1'},
-		{'tutorial:megablock1','tutorial:gun_mega17','tutorial:megablock1'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_mega19',
-    recipe = {
-		{'tutorial:megablock1','tutorial:megablock1', 'tutorial:megablock1'},
-		{'tutorial:megablock1','tutorial:gun_mega18','tutorial:megablock1'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_mega20',
-    recipe = {
-		{'tutorial:megablock2','tutorial:megablock2', 'tutorial:megablock2'},
-		{'tutorial:megablock2','tutorial:gun_mega19','tutorial:megablock2'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega25',
-    recipe = {
-        {'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
-        {'tutorial:superblock9', 'tutorial:cloudgun_mega24', 'tutorial:superblock9'},
-        {'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega24',
-    recipe = {
-        {'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
-        {'tutorial:superblock9', 'tutorial:cloudgun_mega23', 'tutorial:superblock9'},
-        {'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega23',
-    recipe = {
-        {'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
-        {'tutorial:superblock9', 'tutorial:cloudgun_mega22', 'tutorial:superblock9'},
-        {'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega22',
-    recipe = {
-        {'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
-        {'tutorial:superblock9', 'tutorial:cloudgun_mega21', 'tutorial:superblock9'},
-        {'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega21',
-    recipe = {
-        {'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
-        {'tutorial:superblock9', 'tutorial:cloudgun_mega20', 'tutorial:superblock9'},
-        {'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega20',
-    recipe = {
-        {'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
-        {'tutorial:superblock8', 'tutorial:cloudgun_mega19', 'tutorial:superblock8'},
-        {'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega19',
-    recipe = {
-        {'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
-        {'tutorial:superblock8', 'tutorial:cloudgun_mega18', 'tutorial:superblock8'},
-        {'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega18',
-    recipe = {
-        {'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
-        {'tutorial:superblock8', 'tutorial:cloudgun_mega17', 'tutorial:superblock8'},
-        {'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega17',
-    recipe = {
-        {'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
-        {'tutorial:superblock8', 'tutorial:cloudgun_mega16', 'tutorial:superblock8'},
-        {'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega16',
-    recipe = {
-        {'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
-        {'tutorial:superblock8', 'tutorial:cloudgun_mega15', 'tutorial:superblock8'},
-        {'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega15',
-    recipe = {
-        {'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
-        {'tutorial:superblock7', 'tutorial:cloudgun_mega14', 'tutorial:superblock7'},
-        {'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega14',
-    recipe = {
-        {'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
-        {'tutorial:superblock7', 'tutorial:cloudgun_mega13', 'tutorial:superblock7'},
-        {'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega13',
-    recipe = {
-        {'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
-        {'tutorial:superblock7', 'tutorial:cloudgun_mega12', 'tutorial:superblock7'},
-        {'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega12',
-    recipe = {
-        {'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
-        {'tutorial:superblock7', 'tutorial:cloudgun_mega11', 'tutorial:superblock7'},
-        {'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega11',
-    recipe = {
-        {'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
-        {'tutorial:superblock7', 'tutorial:cloudgun_mega10', 'tutorial:superblock7'},
-        {'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega10',
-    recipe = {
-        {'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
-        {'tutorial:superblock6', 'tutorial:cloudgun_mega9', 'tutorial:superblock6'},
-        {'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega9',
-    recipe = {
-        {'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
-        {'tutorial:superblock6', 'tutorial:cloudgun_mega8', 'tutorial:superblock6'},
-        {'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega8',
-    recipe = {
-        {'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
-        {'tutorial:superblock6', 'tutorial:cloudgun_mega7', 'tutorial:superblock6'},
-        {'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega7',
-    recipe = {
-        {'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
-        {'tutorial:superblock6', 'tutorial:cloudgun_mega6', 'tutorial:superblock6'},
-        {'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega6',
-    recipe = {
-        {'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
-        {'tutorial:superblock6', 'tutorial:cloudgun_mega5', 'tutorial:superblock6'},
-        {'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega5',
-    recipe = {
-        {'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
-        {'tutorial:superblock5', 'tutorial:cloudgun_mega4', 'tutorial:superblock5'},
-        {'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega4',
-    recipe = {
-        {'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
-        {'tutorial:superblock5', 'tutorial:cloudgun_mega3', 'tutorial:superblock5'},
-        {'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega3',
-    recipe = {
-        {'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
-        {'tutorial:superblock5', 'tutorial:cloudgun_mega2', 'tutorial:superblock5'},
-        {'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega2',
-    recipe = {
-        {'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
-        {'tutorial:superblock5', 'tutorial:cloudgun_mega1', 'tutorial:superblock5'},
-        {'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudgun_mega1',
-    recipe = {
-        {'tutorial:cloudentverner21', 'tutorial:gun_mega20'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:supergun4',
-    recipe = {
-        {'tutorial:whiteblock6', 'tutorial:thunder', 'tutorial:blackblock6'},
-        {'tutorial:whiteblock6', 'tutorial:supergun3', 'tutorial:blackblock6'},
-        {'tutorial:whiteblock6', 'tutorial:thunder', 'tutorial:blackblock6'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:supergun3',
-    recipe = {
-        {'tutorial:whiteblock6', 'tutorial:thunder', 'tutorial:blackblock6'},
-        {'tutorial:whiteblock6', 'tutorial:supergun2', 'tutorial:blackblock6'},
-        {'tutorial:whiteblock6', 'tutorial:thunder', 'tutorial:blackblock6'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:supergun2',
-    recipe = {
-        {'tutorial:whiteblock5', 'tutorial:thunder', 'tutorial:blackblock5'},
-        {'tutorial:whiteblock5', 'tutorial:supergun1', 'tutorial:blackblock5'},
-        {'tutorial:whiteblock5', 'tutorial:thunder', 'tutorial:blackblock5'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:supergun1',
-    recipe = {
-        {'tutorial:zauberstab9', 'tutorial:cloudgun_mega25', 'tutorial:swored_zauber9'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:uraniumgun2',
-    recipe = {
-        {'tutorial:uranium9', 'tutorial:uranium9', 'tutorial:uranium9'},
-        {'tutorial:uranium9', 'tutorial:uraniumgun1', 'tutorial:uranium9'},
-        {'tutorial:uranium9', 'tutorial:uranium9', 'tutorial:uranium9'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:uraniumgun1',
-    recipe = {
-        {'tutorial:uranium8', 'tutorial:uranium8', 'tutorial:uranium8'},
-        {'tutorial:uranium8', 'tutorial:supergun4', 'tutorial:uranium8'},
-        {'tutorial:uranium8', 'tutorial:uranium8', 'tutorial:uranium8'},
-    }
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energygun12',
-    cooktime = 1000,
-	output = 'tutorial:superenergygun1',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:superenergygun1',
-    cooktime = 1200,
-	output = 'tutorial:superenergygun2',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:superenergygun2',
-    cooktime = 1400,
-	output = 'tutorial:superenergygun3',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:superenergygun3',
-    cooktime = 1600,
-	output = 'tutorial:superenergygun4',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:superenergygun4',
-    cooktime = 1800,
-	output = 'tutorial:superenergygun5',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:superenergygun5',
-    cooktime = 2000,
-	output = 'tutorial:superenergygun6',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:superenergygun6',
-    cooktime = 2500,
-	output = 'tutorial:superenergygun7',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:uraniumgun2',
-    cooktime = 100,
-	output = 'tutorial:energygun1',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energygun1',
-    cooktime = 100,
-	output = 'tutorial:energygun2',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energygun2',
-    cooktime = 200,
-	output = 'tutorial:energygun3',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energygun3',
-    cooktime = 300,
-	output = 'tutorial:energygun4',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energygun4',
-    cooktime = 400,
-	output = 'tutorial:energygun5',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energygun5',
-    cooktime = 500,
-	output = 'tutorial:energygun6',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energygun6',
-    cooktime = 600,
-	output = 'tutorial:energygun7',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energygun7',
-    cooktime = 700,
-	output = 'tutorial:energygun8',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energygun8',
-    cooktime = 800,
-	output = 'tutorial:energygun9',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energygun9',
-    cooktime = 900,
-	output = 'tutorial:energygun10',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energygun10',
-    cooktime = 1000,
-	output = 'tutorial:energygun11',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energygun11',
-    cooktime = 1500,
-	output = 'tutorial:energygun12',
-})
-minetest.register_craft({
-    output = 'tutorial:kristallgun5',
-    recipe = {
-        {'tutorial:admin', 'tutorial:thunder', 'tutorial:admin'},
-        {'tutorial:admin', 'tutorial:kristallgun4', 'tutorial:admin'},
-        {'tutorial:admin', 'tutorial:thunder', 'tutorial:admin'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:kristallgun4',
-    recipe = {
-        {'gems:emerald_block', 'tutorial:thunder', 'gems:emerald_block'},
-        {'gems:emerald_block', 'tutorial:kristallgun3', 'gems:emerald_block'},
-        {'gems:emerald_block', 'tutorial:thunder', 'gems:emerald_block'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:kristallgun3',
-    recipe = {
-        {'gems:pearl_block', 'tutorial:thunder', 'gems:shadow_block'},
-        {'gems:pearl_block', 'tutorial:kristallgun2', 'gems:shadow_block'},
-        {'gems:pearl_block', 'tutorial:thunder', 'gems:shadow_block'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:kristallgun2',
-    recipe = {
-        {'gems:amethyst_block', 'tutorial:thunder', 'gems:amethyst_block'},
-        {'gems:amethyst_block', 'tutorial:kristallgun1', 'gems:amethyst_block'},
-        {'gems:amethyst_block', 'tutorial:thunder', 'gems:amethyst_block'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:kristallgun1',
-    recipe = {
-        {'gems:ruby_block', 'tutorial:thunder', 'gems:sapphire_block'},
-        {'gems:ruby_block', 'tutorial:superenergygun7', 'gems:sapphire_block'},
-        {'gems:ruby_block', 'tutorial:thunder', 'gems:sapphire_block'},
-    }
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun24',
-    cooktime = 5000,
-	output = 'tutorial:ultragun25',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun23',
-    cooktime = 4800,
-	output = 'tutorial:ultragun24',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun22',
-    cooktime = 4600,
-	output = 'tutorial:ultragun23',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun21',
-    cooktime = 4400,
-	output = 'tutorial:ultragun22',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun20',
-    cooktime = 4200,
-	output = 'tutorial:ultragun21',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun19',
-    cooktime = 4000,
-	output = 'tutorial:ultragun20',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun18',
-    cooktime = 3800,
-	output = 'tutorial:ultragun19',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun17',
-    cooktime = 3600,
-	output = 'tutorial:ultragun18',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun16',
-    cooktime = 3400,
-	output = 'tutorial:ultragun17',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun15',
-    cooktime = 3200,
-	output = 'tutorial:ultragun16',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun14',
-    cooktime = 3000,
-	output = 'tutorial:ultragun15',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun13',
-    cooktime = 2800,
-	output = 'tutorial:ultragun14',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun12',
-    cooktime = 2600,
-	output = 'tutorial:ultragun13',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun11',
-    cooktime = 2400,
-	output = 'tutorial:ultragun12',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun10',
-    cooktime = 2200,
-	output = 'tutorial:ultragun11',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun9',
-    cooktime = 2000,
-	output = 'tutorial:ultragun10',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun8',
-    cooktime = 1800,
-	output = 'tutorial:ultragun9',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun7',
-    cooktime = 1600,
-	output = 'tutorial:ultragun8',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun6',
-    cooktime = 1400,
-	output = 'tutorial:ultragun7',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun5',
-    cooktime = 1200,
-	output = 'tutorial:ultragun6',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun4',
-    cooktime = 1000,
-	output = 'tutorial:ultragun5',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun3',
-    cooktime = 800,
-	output = 'tutorial:ultragun4',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun2',
-    cooktime = 600,
-	output = 'tutorial:ultragun3',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun1',
-    cooktime = 400,
-	output = 'tutorial:ultragun2',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:kristallgun5',
-    cooktime = 200,
-	output = 'tutorial:ultragun1',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultragun25',
-    cooktime = 10000,
-	output = 'tutorial:ultragun',
-})
-minetest.register_craft({
-    output = 'tutorial:arenagun4',
-    recipe = {
-        {'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
-        {'tutorial:arena_block', 'tutorial:arenagun3', 'tutorial:arena_block'},
-        {'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:arenagun3',
-    recipe = {
-        {'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
-        {'tutorial:arena_block', 'tutorial:arenagun2', 'tutorial:arena_block'},
-        {'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:arenagun2',
-    recipe = {
-        {'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
-        {'tutorial:arena_block', 'tutorial:arenagun1', 'tutorial:arena_block'},
-        {'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:arenagun1',
-    recipe = {
-        {'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
-        {'tutorial:arena_block', 'tutorial:ultragun', 'tutorial:arena_block'},
-        {'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:titangun10',
-    recipe = {
-        {'', 'tutorial:titan', ''},
-        {'tutorial:titan', 'tutorial:titangun9', 'tutorial:titan'},
-        {'', 'tutorial:titan', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:titangun9',
-    recipe = {
-        {'', 'tutorial:titan', ''},
-        {'tutorial:titan', 'tutorial:titangun8', 'tutorial:titan'},
-        {'', 'tutorial:titan', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:titangun8',
-    recipe = {
-        {'', 'tutorial:titan', ''},
-        {'tutorial:titan', 'tutorial:titangun7', 'tutorial:titan'},
-        {'', 'tutorial:titan', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:titangun7',
-    recipe = {
-        {'', 'tutorial:titan', ''},
-        {'tutorial:titan', 'tutorial:titangun6', 'tutorial:titan'},
-        {'', 'tutorial:titan', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:titangun6',
-    recipe = {
-        {'', 'tutorial:titan', ''},
-        {'tutorial:titan', 'tutorial:titangun5', 'tutorial:titan'},
-        {'', 'tutorial:titan', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:titangun5',
-    recipe = {
-        {'', 'tutorial:titan', ''},
-        {'tutorial:titan', 'tutorial:titangun4', 'tutorial:titan'},
-        {'', 'tutorial:titan', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:titangun4',
-    recipe = {
-        {'', 'tutorial:titan', ''},
-        {'tutorial:titan', 'tutorial:titangun3', 'tutorial:titan'},
-        {'', 'tutorial:titan', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:titangun3',
-    recipe = {
-        {'', 'tutorial:titan', ''},
-        {'tutorial:titan', 'tutorial:titangun2', 'tutorial:titan'},
-        {'', 'tutorial:titan', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:titangun2',
-    recipe = {
-        {'', 'tutorial:titan', ''},
-        {'tutorial:titan', 'tutorial:titangun1', 'tutorial:titan'},
-        {'', 'tutorial:titan', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:titangun1',
-    recipe = {
-        {'', 'tutorial:titan', ''},
-        {'tutorial:titan', 'tutorial:arena_gun4', 'tutorial:titan'},
-        {'', 'tutorial:titan', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:legendengun1',
-    recipe = {
-        {'tutorial:titangun10', 'default:grass_1', 'default:grass_1', 'tutorial:bottle5'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'tutorial:bottle5', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:legendengun2',
-    recipe = {
-        {'tutorial:legendengun1', 'default:grass_1', 'default:grass_1', 'tutorial:bottle7'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'tutorial:bottle7', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:legendengun3',
-    recipe = {
-        {'tutorial:legendengun2', 'default:grass_1', 'default:grass_1', 'tutorial:bottle9'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'tutorial:bottle9', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:legendengun4',
-    recipe = {
-        {'tutorial:legendengun3', 'default:grass_1', 'default:grass_1', 'tutorial:bottle11'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'tutorial:bottle11', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:legendengun5',
-    recipe = {
-        {'tutorial:legendengun4', 'default:grass_1', 'default:grass_1', 'tutorial:bottleS1'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'tutorial:bottleS1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:legendengun6',
-    recipe = {
-        {'tutorial:legendengun5', 'default:grass_1', 'default:grass_1', 'tutorial:bottleS3'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'tutorial:bottleS3', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:superlegendengun1',
-    recipe = {
-        {'tutorial:lilabattleaxe2', 'tutorial:legendengun6'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:superlegendengun1',
-    recipe = {
-        {'tutorial:superlegendengun2'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:superlegendengun2',
-    recipe = {
-        {'tutorial:superlegendengun1'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:regnumgun1',
-    recipe = {
-        {'', '', 'tutorial:regnum', '', ''},
+	}
+})
+local guns = {}
+for _, m in pairs({"","_2"}) do
+	minetest.register_craft({
+		output = 'tutorial:gun_mega1'..m,
+		recipe = {
+			{'tutorial:obsidian4', 'tutorial:obsidian4', 'tutorial:obsidian4'},
+			{'tutorial:obsidian4', 'tutorial:gun'..m, 'tutorial:obsidian4'},
+			{'tutorial:thunder', 'tutorial:thunder', 'tutorial:thunder'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:gun_mega2'..m,
+		recipe = {
+			{'tutorial:obsidian4', 'tutorial:obsidian4', 'tutorial:obsidian4'},
+			{'tutorial:obsidian4','tutorial:gun_mega1'..m,'tutorial:obsidian4'},
+			{'tutorial:thunder', 'tutorial:thunder', 'tutorial:thunder'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:gun_mega3'..m,
+		recipe = {
+			{'tutorial:obsidian5', 'tutorial:obsidian5', 'tutorial:obsidian5'},
+			{'tutorial:obsidian5','tutorial:gun_mega2'..m,'tutorial:obsidian5'},
+			{'tutorial:thunder', 'tutorial:thunder', 'tutorial:thunder'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:gun_mega4'..m,
+		recipe = {
+			{'tutorial:obsidian6', 'tutorial:obsidian6', 'tutorial:obsidian6'},
+			{'tutorial:obsidian6','tutorial:gun_mega3'..m,'tutorial:obsidian6'},
+			{'tutorial:thunder', 'tutorial:thunder', 'tutorial:thunder'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:gun_mega5'..m,
+		recipe = {
+			{'tutorial:dunklematerie4','tutorial:dunklematerie4', 'tutorial:dunklematerie4'},
+			{'tutorial:dunklematerie4','tutorial:gun_mega4'..m,'tutorial:dunklematerie4'},
+			{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:gun_mega6'..m,
+		recipe = {
+			{'tutorial:dunklematerie4','tutorial:dunklematerie4', 'tutorial:dunklematerie4'},
+			{'tutorial:dunklematerie4','tutorial:gun_mega5'..m,'tutorial:dunklematerie4'},
+			{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:gun_mega7'..m,
+		recipe = {
+			{'tutorial:dunklematerie5','tutorial:dunklematerie5', 'tutorial:dunklematerie5'},
+			{'tutorial:dunklematerie5','tutorial:gun_mega6'..m,'tutorial:dunklematerie5'},
+			{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:gun_mega8'..m,
+		recipe = {
+			{'tutorial:dunklematerie6','tutorial:dunklematerie6', 'tutorial:dunklematerie6'},
+			{'tutorial:dunklematerie6','tutorial:gun_mega7'..m,'tutorial:dunklematerie6'},
+			{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:gun_mega9'..m,
+		recipe = {
+			{'tutorial:diamondblock2','tutorial:diamondblock2', 'tutorial:diamondblock2'},
+			{'tutorial:diamondblock2','tutorial:gun_mega8'..m,'tutorial:diamondblock2'},
+			{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:gun_mega10'..m,
+		recipe = {
+			{'tutorial:diamondblock2','tutorial:diamondblock2', 'tutorial:diamondblock2'},
+			{'tutorial:diamondblock2','tutorial:gun_mega9'..m,'tutorial:diamondblock2'},
+			{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:gun_mega11'..m,
+		recipe = {
+			{'tutorial:diamondblock2','tutorial:diamondblock2', 'tutorial:diamondblock2'},
+			{'tutorial:diamondblock2','tutorial:gun_mega10'..m,'tutorial:diamondblock2'},
+			{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:gun_mega12'..m,
+		recipe = {
+			{'tutorial:diamondblock2','tutorial:diamondblock2', 'tutorial:diamondblock2'},
+			{'tutorial:diamondblock2','tutorial:gun_mega11'..m,'tutorial:diamondblock2'},
+			{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:gun_mega13'..m,
+		recipe = {
+			{'default:goldblock','default:goldblock', 'default:goldblock'},
+			{'default:goldblock','tutorial:gun_mega12'..m,'default:goldblock'},
+			{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:gun_mega14'..m,
+		recipe = {
+			{'default:nyancat_rainbow','default:nyancat_rainbow', 'default:nyancat_rainbow'},
+			{'default:nyancat_rainbow','tutorial:gun_mega13'..m,'default:nyancat_rainbow'},
+			{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:gun_mega15'..m,
+		recipe = {
+			{'default:nyancat_rainbow','default:nyancat_rainbow', 'default:nyancat_rainbow'},
+			{'default:nyancat_rainbow','tutorial:gun_mega14'..m,'default:nyancat_rainbow'},
+			{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:gun_mega16'..m,
+		recipe = {
+			{'tutorial:megablock1','tutorial:megablock1', 'tutorial:megablock1'},
+			{'tutorial:megablock1','tutorial:gun_mega15'..m,'tutorial:megablock1'},
+			{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:gun_mega17'..m,
+		recipe = {
+			{'tutorial:megablock1','tutorial:megablock1', 'tutorial:megablock1'},
+			{'tutorial:megablock1','tutorial:gun_mega16'..m,'tutorial:megablock1'},
+			{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:gun_mega18'..m,
+		recipe = {
+			{'tutorial:megablock1','tutorial:megablock1', 'tutorial:megablock1'},
+			{'tutorial:megablock1','tutorial:gun_mega17'..m,'tutorial:megablock1'},
+			{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:gun_mega19'..m,
+		recipe = {
+			{'tutorial:megablock1','tutorial:megablock1', 'tutorial:megablock1'},
+			{'tutorial:megablock1','tutorial:gun_mega18'..m,'tutorial:megablock1'},
+			{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:gun_mega20'..m,
+		recipe = {
+			{'tutorial:megablock2','tutorial:megablock2', 'tutorial:megablock2'},
+			{'tutorial:megablock2','tutorial:gun_mega19'..m,'tutorial:megablock2'},
+			{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega25'..m,
+		recipe = {
+			{'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
+			{'tutorial:superblock9', 'tutorial:cloudgun_mega24'..m, 'tutorial:superblock9'},
+			{'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega24'..m,
+		recipe = {
+			{'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
+			{'tutorial:superblock9', 'tutorial:cloudgun_mega23'..m, 'tutorial:superblock9'},
+			{'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega23'..m,
+		recipe = {
+			{'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
+			{'tutorial:superblock9', 'tutorial:cloudgun_mega22'..m, 'tutorial:superblock9'},
+			{'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega22'..m,
+		recipe = {
+			{'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
+			{'tutorial:superblock9', 'tutorial:cloudgun_mega21'..m, 'tutorial:superblock9'},
+			{'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega21'..m,
+		recipe = {
+			{'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
+			{'tutorial:superblock9', 'tutorial:cloudgun_mega20'..m, 'tutorial:superblock9'},
+			{'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega20'..m,
+		recipe = {
+			{'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
+			{'tutorial:superblock8', 'tutorial:cloudgun_mega19'..m, 'tutorial:superblock8'},
+			{'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega19'..m,
+		recipe = {
+			{'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
+			{'tutorial:superblock8', 'tutorial:cloudgun_mega18'..m, 'tutorial:superblock8'},
+			{'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega18'..m,
+		recipe = {
+			{'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
+			{'tutorial:superblock8', 'tutorial:cloudgun_mega17'..m, 'tutorial:superblock8'},
+			{'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega17'..m,
+		recipe = {
+			{'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
+			{'tutorial:superblock8', 'tutorial:cloudgun_mega16'..m, 'tutorial:superblock8'},
+			{'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega16'..m,
+		recipe = {
+			{'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
+			{'tutorial:superblock8', 'tutorial:cloudgun_mega15'..m, 'tutorial:superblock8'},
+			{'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega15'..m,
+		recipe = {
+			{'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
+			{'tutorial:superblock7', 'tutorial:cloudgun_mega14'..m, 'tutorial:superblock7'},
+			{'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega14'..m,
+		recipe = {
+			{'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
+			{'tutorial:superblock7', 'tutorial:cloudgun_mega13'..m, 'tutorial:superblock7'},
+			{'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega13'..m,
+		recipe = {
+			{'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
+			{'tutorial:superblock7', 'tutorial:cloudgun_mega12'..m, 'tutorial:superblock7'},
+			{'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega12'..m,
+		recipe = {
+			{'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
+			{'tutorial:superblock7', 'tutorial:cloudgun_mega11'..m, 'tutorial:superblock7'},
+			{'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega11'..m,
+		recipe = {
+			{'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
+			{'tutorial:superblock7', 'tutorial:cloudgun_mega10'..m, 'tutorial:superblock7'},
+			{'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega10'..m,
+		recipe = {
+			{'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
+			{'tutorial:superblock6', 'tutorial:cloudgun_mega9'..m, 'tutorial:superblock6'},
+			{'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega9'..m,
+		recipe = {
+			{'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
+			{'tutorial:superblock6', 'tutorial:cloudgun_mega8'..m, 'tutorial:superblock6'},
+			{'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega8'..m,
+		recipe = {
+			{'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
+			{'tutorial:superblock6', 'tutorial:cloudgun_mega7'..m, 'tutorial:superblock6'},
+			{'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega7'..m,
+		recipe = {
+			{'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
+			{'tutorial:superblock6', 'tutorial:cloudgun_mega6'..m, 'tutorial:superblock6'},
+			{'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega6'..m,
+		recipe = {
+			{'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
+			{'tutorial:superblock6', 'tutorial:cloudgun_mega5'..m, 'tutorial:superblock6'},
+			{'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega5'..m,
+		recipe = {
+			{'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
+			{'tutorial:superblock5', 'tutorial:cloudgun_mega4'..m, 'tutorial:superblock5'},
+			{'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega4'..m,
+		recipe = {
+			{'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
+			{'tutorial:superblock5', 'tutorial:cloudgun_mega3'..m, 'tutorial:superblock5'},
+			{'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega3'..m,
+		recipe = {
+			{'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
+			{'tutorial:superblock5', 'tutorial:cloudgun_mega2'..m, 'tutorial:superblock5'},
+			{'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega2'..m,
+		recipe = {
+			{'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
+			{'tutorial:superblock5', 'tutorial:cloudgun_mega1'..m, 'tutorial:superblock5'},
+			{'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:cloudgun_mega1'..m,
+		recipe = {
+			{'tutorial:cloudentverner21', 'tutorial:gun_mega20'..m},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:supergun4'..m,
+		recipe = {
+			{'tutorial:whiteblock6', 'tutorial:thunder', 'tutorial:blackblock6'},
+			{'tutorial:whiteblock6', 'tutorial:supergun3'..m, 'tutorial:blackblock6'},
+			{'tutorial:whiteblock6', 'tutorial:thunder', 'tutorial:blackblock6'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:supergun3'..m,
+		recipe = {
+			{'tutorial:whiteblock6', 'tutorial:thunder', 'tutorial:blackblock6'},
+			{'tutorial:whiteblock6', 'tutorial:supergun2'..m, 'tutorial:blackblock6'},
+			{'tutorial:whiteblock6', 'tutorial:thunder', 'tutorial:blackblock6'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:supergun2'..m,
+		recipe = {
+			{'tutorial:whiteblock5', 'tutorial:thunder', 'tutorial:blackblock5'},
+			{'tutorial:whiteblock5', 'tutorial:supergun1'..m, 'tutorial:blackblock5'},
+			{'tutorial:whiteblock5', 'tutorial:thunder', 'tutorial:blackblock5'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:supergun1'..m,
+		recipe = {
+			{'tutorial:zauberstab9', 'tutorial:cloudgun_mega25'..m, 'tutorial:swored_zauber9'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:uraniumgun2'..m,
+		recipe = {
+			{'tutorial:uranium9', 'tutorial:uranium9', 'tutorial:uranium9'},
+			{'tutorial:uranium9', 'tutorial:uraniumgun1'..m, 'tutorial:uranium9'},
+			{'tutorial:uranium9', 'tutorial:uranium9', 'tutorial:uranium9'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:uraniumgun1'..m,
+		recipe = {
+			{'tutorial:uranium8', 'tutorial:uranium8', 'tutorial:uranium8'},
+			{'tutorial:uranium8', 'tutorial:supergun4'..m, 'tutorial:uranium8'},
+			{'tutorial:uranium8', 'tutorial:uranium8', 'tutorial:uranium8'},
+		}
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:energygun12'..m,
+		cooktime = 1000,
+		output = 'tutorial:superenergygun1'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:superenergygun1'..m,
+		cooktime = 1200,
+		output = 'tutorial:superenergygun2'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:superenergygun2'..m,
+		cooktime = 1400,
+		output = 'tutorial:superenergygun3'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:superenergygun3'..m,
+		cooktime = 1600,
+		output = 'tutorial:superenergygun4'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:superenergygun4'..m,
+		cooktime = 1800,
+		output = 'tutorial:superenergygun5'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:superenergygun5'..m,
+		cooktime = 2000,
+		output = 'tutorial:superenergygun6'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:superenergygun6'..m,
+		cooktime = 2500,
+		output = 'tutorial:superenergygun7'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:uraniumgun2'..m,
+		cooktime = 100,
+		output = 'tutorial:energygun1'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:energygun1'..m,
+		cooktime = 100,
+		output = 'tutorial:energygun2'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:energygun2'..m,
+		cooktime = 200,
+		output = 'tutorial:energygun3'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:energygun3'..m,
+		cooktime = 300,
+		output = 'tutorial:energygun4'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:energygun4'..m,
+		cooktime = 400,
+		output = 'tutorial:energygun5'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:energygun5'..m,
+		cooktime = 500,
+		output = 'tutorial:energygun6'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:energygun6'..m,
+		cooktime = 600,
+		output = 'tutorial:energygun7'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:energygun7'..m,
+		cooktime = 700,
+		output = 'tutorial:energygun8'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:energygun8'..m,
+		cooktime = 800,
+		output = 'tutorial:energygun9'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:energygun9'..m,
+		cooktime = 900,
+		output = 'tutorial:energygun10'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:energygun10'..m,
+		cooktime = 1000,
+		output = 'tutorial:energygun11'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:energygun11'..m,
+		cooktime = 1500,
+		output = 'tutorial:energygun12'..m,
+	})
+	minetest.register_craft({
+		output = 'tutorial:kristallgun5'..m,
+		recipe = {
+			{'tutorial:admin', 'tutorial:thunder', 'tutorial:admin'},
+			{'tutorial:admin', 'tutorial:kristallgun4'..m, 'tutorial:admin'},
+			{'tutorial:admin', 'tutorial:thunder', 'tutorial:admin'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:kristallgun4'..m,
+		recipe = {
+			{'gems:emerald_block', 'tutorial:thunder', 'gems:emerald_block'},
+			{'gems:emerald_block', 'tutorial:kristallgun3'..m, 'gems:emerald_block'},
+			{'gems:emerald_block', 'tutorial:thunder', 'gems:emerald_block'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:kristallgun3'..m,
+		recipe = {
+			{'gems:pearl_block', 'tutorial:thunder', 'gems:shadow_block'},
+			{'gems:pearl_block', 'tutorial:kristallgun2'..m, 'gems:shadow_block'},
+			{'gems:pearl_block', 'tutorial:thunder', 'gems:shadow_block'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:kristallgun2'..m,
+		recipe = {
+			{'gems:amethyst_block', 'tutorial:thunder', 'gems:amethyst_block'},
+			{'gems:amethyst_block', 'tutorial:kristallgun1'..m, 'gems:amethyst_block'},
+			{'gems:amethyst_block', 'tutorial:thunder', 'gems:amethyst_block'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:kristallgun1'..m,
+		recipe = {
+			{'gems:ruby_block', 'tutorial:thunder', 'gems:sapphire_block'},
+			{'gems:ruby_block', 'tutorial:superenergygun7'..m, 'gems:sapphire_block'},
+			{'gems:ruby_block', 'tutorial:thunder', 'gems:sapphire_block'},
+		}
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun24'..m,
+		cooktime = 5000,
+		output = 'tutorial:ultragun25'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun23'..m,
+		cooktime = 4800,
+		output = 'tutorial:ultragun24'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun22'..m,
+		cooktime = 4600,
+		output = 'tutorial:ultragun23'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun21'..m,
+		cooktime = 4400,
+		output = 'tutorial:ultragun22'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun20'..m,
+		cooktime = 4200,
+		output = 'tutorial:ultragun21'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun19'..m,
+		cooktime = 4000,
+		output = 'tutorial:ultragun20'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun18'..m,
+		cooktime = 3800,
+		output = 'tutorial:ultragun19'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun17'..m,
+		cooktime = 3600,
+		output = 'tutorial:ultragun18'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun16'..m,
+		cooktime = 3400,
+		output = 'tutorial:ultragun17'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun15'..m,
+		cooktime = 3200,
+		output = 'tutorial:ultragun16'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun14'..m,
+		cooktime = 3000,
+		output = 'tutorial:ultragun15'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun13'..m,
+		cooktime = 2800,
+		output = 'tutorial:ultragun14'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun12'..m,
+		cooktime = 2600,
+		output = 'tutorial:ultragun13'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun11'..m,
+		cooktime = 2400,
+		output = 'tutorial:ultragun12'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun10'..m,
+		cooktime = 2200,
+		output = 'tutorial:ultragun11'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun9'..m,
+		cooktime = 2000,
+		output = 'tutorial:ultragun10'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun8'..m,
+		cooktime = 1800,
+		output = 'tutorial:ultragun9'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun7'..m,
+		cooktime = 1600,
+		output = 'tutorial:ultragun8'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun6'..m,
+		cooktime = 1400,
+		output = 'tutorial:ultragun7'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun5'..m,
+		cooktime = 1200,
+		output = 'tutorial:ultragun6'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun4'..m,
+		cooktime = 1000,
+		output = 'tutorial:ultragun5'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun3'..m,
+		cooktime = 800,
+		output = 'tutorial:ultragun4'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun2'..m,
+		cooktime = 600,
+		output = 'tutorial:ultragun3'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun1'..m,
+		cooktime = 400,
+		output = 'tutorial:ultragun2'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:kristallgun5'..m,
+		cooktime = 200,
+		output = 'tutorial:ultragun1'..m,
+	})
+	minetest.register_craft({
+		type = 'cooking',
+		recipe = 'tutorial:ultragun25'..m,
+		cooktime = 10000,
+		output = 'tutorial:ultragun'..m,
+	})
+	minetest.register_craft({
+		output = 'tutorial:arenagun4'..m,
+		recipe = {
+			{'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
+			{'tutorial:arena_block', 'tutorial:arenagun3'..m, 'tutorial:arena_block'},
+			{'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:arenagun3'..m,
+		recipe = {
+			{'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
+			{'tutorial:arena_block', 'tutorial:arenagun2'..m, 'tutorial:arena_block'},
+			{'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:arenagun2'..m,
+		recipe = {
+			{'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
+			{'tutorial:arena_block', 'tutorial:arenagun1'..m, 'tutorial:arena_block'},
+			{'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:arenagun1'..m,
+		recipe = {
+			{'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
+			{'tutorial:arena_block', 'tutorial:ultragun'..m, 'tutorial:arena_block'},
+			{'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:titangun10'..m,
+		recipe = {
+			{'', 'tutorial:titan', ''},
+			{'tutorial:titan', 'tutorial:titangun9'..m, 'tutorial:titan'},
+			{'', 'tutorial:titan', ''},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:titangun9'..m,
+		recipe = {
+			{'', 'tutorial:titan', ''},
+			{'tutorial:titan', 'tutorial:titangun8'..m, 'tutorial:titan'},
+			{'', 'tutorial:titan', ''},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:titangun8'..m,
+		recipe = {
+			{'', 'tutorial:titan', ''},
+			{'tutorial:titan', 'tutorial:titangun7'..m, 'tutorial:titan'},
+			{'', 'tutorial:titan', ''},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:titangun7'..m,
+		recipe = {
+			{'', 'tutorial:titan', ''},
+			{'tutorial:titan', 'tutorial:titangun6'..m, 'tutorial:titan'},
+			{'', 'tutorial:titan', ''},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:titangun6'..m,
+		recipe = {
+			{'', 'tutorial:titan', ''},
+			{'tutorial:titan', 'tutorial:titangun5'..m, 'tutorial:titan'},
+			{'', 'tutorial:titan', ''},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:titangun5'..m,
+		recipe = {
+			{'', 'tutorial:titan', ''},
+			{'tutorial:titan', 'tutorial:titangun4'..m, 'tutorial:titan'},
+			{'', 'tutorial:titan', ''},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:titangun4'..m,
+		recipe = {
+			{'', 'tutorial:titan', ''},
+			{'tutorial:titan', 'tutorial:titangun3'..m, 'tutorial:titan'},
+			{'', 'tutorial:titan', ''},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:titangun3'..m,
+		recipe = {
+			{'', 'tutorial:titan', ''},
+			{'tutorial:titan', 'tutorial:titangun2'..m, 'tutorial:titan'},
+			{'', 'tutorial:titan', ''},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:titangun2'..m,
+		recipe = {
+			{'', 'tutorial:titan', ''},
+			{'tutorial:titan', 'tutorial:titangun1'..m, 'tutorial:titan'},
+			{'', 'tutorial:titan', ''},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:titangun1'..m,
+		recipe = {
+			{'', 'tutorial:titan', ''},
+			{'tutorial:titan', 'tutorial:arenagun4'..m, 'tutorial:titan'},
+			{'', 'tutorial:titan', ''},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:legendengun1'..m,
+		recipe = {
+			{'tutorial:titangun10'..m, 'default:grass_1', 'default:grass_1', 'tutorial:bottle5'},
+			{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
+			{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
+			{'tutorial:bottle5', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:legendengun2'..m,
+		recipe = {
+			{'tutorial:legendengun1'..m, 'default:grass_1', 'default:grass_1', 'tutorial:bottle7'},
+			{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
+			{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
+			{'tutorial:bottle7', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:legendengun3'..m,
+		recipe = {
+			{'tutorial:legendengun2'..m, 'default:grass_1', 'default:grass_1', 'tutorial:bottle9'},
+			{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
+			{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
+			{'tutorial:bottle9', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:legendengun4'..m,
+		recipe = {
+			{'tutorial:legendengun3'..m, 'default:grass_1', 'default:grass_1', 'tutorial:bottle11'},
+			{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
+			{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
+			{'tutorial:bottle11', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:legendengun5'..m,
+		recipe = {
+			{'tutorial:legendengun4'..m, 'default:grass_1', 'default:grass_1', 'tutorial:bottleS1'},
+			{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
+			{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
+			{'tutorial:bottleS1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
+		}
+	})
+	minetest.register_craft({
+		output = 'tutorial:legendengun6'..m,
+		recipe = {
+			{'tutorial:legendengun5'..m, 'default:grass_1', 'default:grass_1', 'tutorial:bottleS3'},
+			{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
+			{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
+			{'tutorial:bottleS3', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
+		}
+	})
+end
+minetest.register_craft({
+	output = 'tutorial:superlegendengun1',
+	recipe = {
+		{'tutorial:lilabattleaxe2', 'tutorial:legendengun6'},
+	}
+})
+minetest.register_craft({
+	output = 'tutorial:superlegendengun2',
+	recipe = {
+		{'tutorial:lilabattleaxe2', 'tutorial:legendengun6_2'},
+	}
+})
+minetest.register_craft({
+	output = 'tutorial:regnumgun1',
+	recipe = {
+		{'', '', 'tutorial:regnum', '', ''},
 		{'', '', 'tutorial:bottleSS', '', ''},
 		{'tutorial:regnum', 'tutorial:bottleSS', 'tutorial:superlegendengun1', 'tutorial:bottleSS', 'tutorial:regnum'},
 		{'', '', 'tutorial:bottleSS', '', ''},
 		{'', '', 'tutorial:regnum', '', ''},
-    }
+	}
 })
 minetest.register_craft({
-    output = 'tutorial:regnumgun2',
-    recipe = {
-        {'tutorial:regnumgun1'},
-    }
+	output = 'tutorial:regnumgun2',
+	recipe = {
+		{'', '', 'tutorial:regnum', '', ''},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'tutorial:regnum', 'tutorial:bottleSS', 'tutorial:superlegendengun2', 'tutorial:bottleSS', 'tutorial:regnum'},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'', '', 'tutorial:regnum', '', ''},
+	}
 })
 minetest.register_craft({
-    output = 'tutorial:regnumgun1',
-    recipe = {
-        {'tutorial:regnumgun2'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_admin1',
-    recipe = {
-        {'tutorial:gun_admin2'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:gun_admin2',
-    recipe = {
-        {'tutorial:gun_admin1'},
-    }
+	output = 'tutorial:regnumgun3',
+	recipe = {
+		{'', '', 'tutorial:regnum', '', ''},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'tutorial:regnum', 'tutorial:bottleSS', 'tutorial:superlegendengun3', 'tutorial:bottleSS', 'tutorial:regnum'},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'', '', 'tutorial:regnum', '', ''},
+	}
 })
 minetest.register_craft({
     output = 'tutorial:xp_block_yellow 16',
@@ -5400,342 +5355,209 @@ for i = 0, 127 do
     end
     minetest.register_entity("tutorial:tb_"..i, XTRAORES_TB)
 end
-minetest.register_tool("tutorial:gun", {
-	    description = "Gun\nGun-lv.0",
-	    inventory_image = "tutorial_gun.png",
-		groups = {not_in_creative_inventory=1},
-	    on_use = function(itemstack, user, pointed_thing)
-		    local inv = user:get_inventory()
-		    local pos = user:getpos()
-		    local dir = user:get_look_dir()
-		    local yaw = user:get_look_yaw()
-		    if pos and dir and yaw then
-			    pos.y = pos.y + 1.6
-			    local obj = minetest.add_entity(pos, "tutorial:tb_0")
-			    if obj then
-				    minetest.sound_play("shot", {object=obj})
-				    obj:setvelocity({x=dir.x * 60, y=dir.y * 60, z=dir.z * 60})
-				    obj:setacceleration({x=dir.x * -0, y=-0, z=dir.z * -0})
-				    obj:setyaw(yaw + math.pi)
-				    local ent = obj:get_luaentity()
-				    if ent then
-					    ent.player = user
-				    end
+for i = 0, 127 do
+    local XTRAORES_TB2 = {
+	    physical = false,
+	    timer = 0,
+	    visual = "sprite",
+	    visual_size = {x=0.075, y=0.075,},
+	    textures = {'tutorial_titanium_shot.png'},
+	    lastpos= {},
+	    collisionbox = {0, 0, 0, 0, 0, 0},
+        metadata = "",
+    }
+    XTRAORES_TB2.on_step = function(self, dtime)
+	    self.timer = self.timer + dtime
+        local ki = 0
+        if i == 0 then
+            ki = 1
+        elseif i == 122 then
+            ki = 122
+        elseif i == 123 then
+            ki = 150
+        elseif i == 124 then
+            ki = 122
+        elseif i == 125 then
+            ki = 150
+        elseif i == 126 then
+            ki = 500
+        elseif i == 127 then
+            ki = 500
+        else
+            ki = i
+        end
+        local l = 0
+        if i == 0 then
+            l = 1
+        elseif i < 21 then
+            l = 2
+        elseif i < 46 then
+            l = 3
+        elseif i < 50 then
+            l = 4
+        elseif i < 52 then
+            l = 5
+        elseif i < 64 then
+            l = 6
+        elseif i < 71 then
+            l = 7
+        elseif i < 76 then
+            l = 8
+        elseif i < 101 then
+            l = 9
+        elseif i < 102 then
+            l = 10
+        elseif i < 106 then
+            l = 11
+        elseif i < 116 then
+            l = 12
+        elseif i < 122 then
+            l = 13
+        elseif i < 123 then
+            l = 14
+        elseif i < 124 then
+            l = 15
+        elseif i < 125 then
+            l = 14
+        elseif i < 126 then
+            l = 15
+        elseif i < 128 then
+            l = 20
+        end
+	    local pos = self.object:getpos()
+	    local node = minetest.get_node(pos)
+	    if self.timer > 0.08 then
+		    local objs = minetest.get_objects_inside_radius({x = pos.x, y = pos.y, z = pos.z}, l)
+		    for k, obj in pairs(objs) do
+                local damage = ki
+			    if obj:get_luaentity() ~= nil then
+					if string.match(obj:get_luaentity().name, "monster") or string.match(obj:get_luaentity().name, "mobs_bat") or string.match(obj:get_luaentity().name, "mobs_birds") or string.match(obj:get_luaentity().name, "mobs_butterfly") or string.match(obj:get_luaentity().name, "mobs_crocs") or string.match(obj:get_luaentity().name, "mobs_fish") or string.match(obj:get_luaentity().name, "mobs_jellyfish") or string.match(obj:get_luaentity().name, "mobs_sharks") or string.match(obj:get_luaentity().name, "mobs_turtles") or string.match(obj:get_luaentity().name, "mummy") then
+						if obj:get_luaentity().name ~= "tutorial:tb_"..i and obj:get_luaentity().name ~= "__builtin:item" then
+							obj:punch(self.object, 1.0, {full_punch_interval = 1.0, damage_groups= {fleshy = damage}}, nil)
+							minetest.sound_play("default_dig_cracky", {pos = self.lastpos, gain = 0.8})
+						end
+					end
 			    end
 		    end
-		    return itemstack
-	    end,
-    })
+	    end
+	    if self.lastpos.x ~= nil then
+		    if minetest.registered_nodes[node.name].walkable then
+			    if not minetest.setting_getbool("creative_mode") then
+				    minetest.add_item(self.lastpos, "")
+			    end
+                if i > 126 then
+                    if minetest.get_node({x = pos.x, y = pos.y+1, z = pos.z+1}).name == "air" then
+                        minetest.set_node({x = pos.x, y = pos.y+1, z = pos.z+1}, {name="tutorial:legend_thunderadmin"})
+                    end
+                    if minetest.get_node({x = pos.x, y = pos.y+1, z = pos.z-1}).name == "air" then
+                        minetest.set_node({x = pos.x, y = pos.y+1, z = pos.z-1}, {name="tutorial:legend_thunderadmin"})
+                    end
+                    if minetest.get_node({x = pos.x+1, y = pos.y+1, z = pos.z}).name == "air" then
+                        minetest.set_node({x = pos.x+1, y = pos.y+1, z = pos.z}, {name="tutorial:legend_thunderadmin"})
+                    end
+                    if minetest.get_node({x = pos.x-1, y = pos.y+1, z = pos.z}).name == "air" then
+                        minetest.set_node({x = pos.x-1, y = pos.y+1, z = pos.z}, {name="tutorial:legend_thunderadmin"})
+                    end
+                    if minetest.get_node({x = pos.x+1, y = pos.y+1, z = pos.z+1}).name == "air" then
+                        minetest.set_node({x = pos.x+1, y = pos.y+1, z = pos.z+1}, {name="tutorial:legend_thunderadmin"})
+                    end
+                    if minetest.get_node({x = pos.x+1, y = pos.y+1, z = pos.z-1}).name == "air" then
+                        minetest.set_node({x = pos.x+1, y = pos.y+1, z = pos.z-1}, {name="tutorial:legend_thunderadmin"})
+                    end
+                    if minetest.get_node({x = pos.x-1, y = pos.y+1, z = pos.z+1}).name == "air" then
+                        minetest.set_node({x = pos.x-1, y = pos.y+1, z = pos.z+1}, {name="tutorial:legend_thunderadmin"})
+                    end
+                    if minetest.get_node({x = pos.x-1, y = pos.y+1, z = pos.z-1}).name == "air" then
+                        minetest.set_node({x = pos.x-1, y = pos.y+1, z = pos.z-1}, {name="tutorial:legend_thunderadmin"})
+                    end
+                    if minetest.get_node({x = pos.x, y = pos.y+1, z = pos.z}).name == "air" then
+                        minetest.set_node({x = pos.x, y = pos.y+1, z = pos.z}, {name="tutorial:legend_thunderadmin"})
+                    end
+			        minetest.sound_play("default_dig_cracky", {pos = self.lastpos, gain = 0.8})
+                elseif i >= 124 and i ~= 126 then
+                    if minetest.get_node({x = pos.x, y = pos.y+1, z = pos.z+1}).name == "air" then
+                        minetest.set_node({x = pos.x, y = pos.y+1, z = pos.z+1}, {name="tutorial:legend_thunder_8_8"})
+                    end
+                    if minetest.get_node({x = pos.x, y = pos.y+1, z = pos.z-1}).name == "air" then
+                        minetest.set_node({x = pos.x, y = pos.y+1, z = pos.z-1}, {name="tutorial:legend_thunder_8_8"})
+                    end
+                    if minetest.get_node({x = pos.x+1, y = pos.y+1, z = pos.z}).name == "air" then
+                        minetest.set_node({x = pos.x+1, y = pos.y+1, z = pos.z}, {name="tutorial:legend_thunder_8_8"})
+                    end
+                    if minetest.get_node({x = pos.x-1, y = pos.y+1, z = pos.z}).name == "air" then
+                        minetest.set_node({x = pos.x-1, y = pos.y+1, z = pos.z}, {name="tutorial:legend_thunder_8_8"})
+                    end
+                    if minetest.get_node({x = pos.x+1, y = pos.y+1, z = pos.z+1}).name == "air" then
+                        minetest.set_node({x = pos.x+1, y = pos.y+1, z = pos.z+1}, {name="tutorial:legend_thunder_8_8"})
+                    end
+                    if minetest.get_node({x = pos.x+1, y = pos.y+1, z = pos.z-1}).name == "air" then
+                        minetest.set_node({x = pos.x+1, y = pos.y+1, z = pos.z-1}, {name="tutorial:legend_thunder_8_8"})
+                    end
+                    if minetest.get_node({x = pos.x-1, y = pos.y+1, z = pos.z+1}).name == "air" then
+                        minetest.set_node({x = pos.x-1, y = pos.y+1, z = pos.z+1}, {name="tutorial:legend_thunder_8_8"})
+                    end
+                    if minetest.get_node({x = pos.x-1, y = pos.y+1, z = pos.z-1}).name == "air" then
+                        minetest.set_node({x = pos.x-1, y = pos.y+1, z = pos.z-1}, {name="tutorial:legend_thunder_8_8"})
+                    end
+                    if minetest.get_node({x = pos.x, y = pos.y+1, z = pos.z}).name == "air" then
+                        minetest.set_node({x = pos.x, y = pos.y+1, z = pos.z}, {name="tutorial:legend_thunder_8_8"})
+                    end
+			        minetest.sound_play("default_dig_cracky", {pos = self.lastpos, gain = 0.8})
+                end
+			    self.object:remove()
+		    end
+	    end
+	    self.lastpos= {x = pos.x, y = pos.y, z = pos.z}
+    end
+    minetest.register_entity("tutorial:tb2_"..i, XTRAORES_TB2)
+end
+
+
+local guns = {}
+table.insert(guns, {0,"tutorial:gun","Gun","tutorial_gun.png"})
 for i = 1, 20 do
-    minetest.register_tool("tutorial:gun_mega"..i, {
-	    description = "Mega Gun lv."..i.."\nGun-lv."..i,
-	    inventory_image = "tutorial_gun_mega"..i..".png",
-		groups = {not_in_creative_inventory=1},
-	    on_use = function(itemstack, user, pointed_thing)
-		    local inv = user:get_inventory()
-		    local pos = user:getpos()
-		    local dir = user:get_look_dir()
-		    local yaw = user:get_look_yaw()
-		    if pos and dir and yaw then
-			    pos.y = pos.y + 1.6
-			    local obj = minetest.add_entity(pos, "tutorial:tb_"..i)
-			    if obj then
-				    minetest.sound_play("shot", {object=obj})
-				    obj:setvelocity({x=dir.x * 60, y=dir.y * 60, z=dir.z * 60})
-				    obj:setacceleration({x=dir.x * -0, y=-0, z=dir.z * -0})
-				    obj:setyaw(yaw + math.pi)
-				    local ent = obj:get_luaentity()
-				    if ent then
-					    ent.player = user
-				    end
-			    end
-		    end
-		    return itemstack
-	    end,
-    })
+	table.insert(guns, {i,"tutorial:gun_mega"..i,"Mega Gun lv."..i,"tutorial_gun_mega"..i..".png"})
 end
 for i = 1, 25 do
-    minetest.register_tool("tutorial:cloudgun_mega"..i, {
-	    description = "Cloudgun lv."..i.."\nGun-lv."..(i+20),
-	    inventory_image = "tutorial_cloudgun_mega"..i..".png",
-		groups = {not_in_creative_inventory=1},
-	    on_use = function(itemstack, user, pointed_thing)
-		    local inv = user:get_inventory()
-		    local pos = user:getpos()
-		    local dir = user:get_look_dir()
-		    local yaw = user:get_look_yaw()
-		    if pos and dir and yaw then
-			    pos.y = pos.y + 1.6
-			    local obj = minetest.add_entity(pos, "tutorial:tb_"..(i+20))
-			    if obj then
-				    minetest.sound_play("shot", {object=obj})
-				    obj:setvelocity({x=dir.x * 60, y=dir.y * 60, z=dir.z * 60})
-				    obj:setacceleration({x=dir.x * -0, y=-0, z=dir.z * -0})
-				    obj:setyaw(yaw + math.pi)
-				    local ent = obj:get_luaentity()
-				    if ent then
-					    ent.player = user
-				    end
-			    end
-		    end
-		    return itemstack
-	    end,
-    })
+	table.insert(guns, {i+20,"tutorial:cloudgun_mega"..i,"Cloudgun lv."..i,"tutorial_cloudgun_mega"..i..".png"})
 end
 for i = 1, 4 do
-    minetest.register_tool("tutorial:supergun"..i, {
-	    description = "Supergun lv."..i.."\nGun-lv."..(i+45),
-	    inventory_image = "tutorial_supergun"..i..".png",
-		groups = {not_in_creative_inventory=1},
-	    on_use = function(itemstack, user, pointed_thing)
-		    local inv = user:get_inventory()
-		    local pos = user:getpos()
-		    local dir = user:get_look_dir()
-		    local yaw = user:get_look_yaw()
-		    if pos and dir and yaw then
-			    pos.y = pos.y + 1.6
-			    local obj = minetest.add_entity(pos, "tutorial:tb_"..(i+45))
-			    if obj then
-				    minetest.sound_play("shot", {object=obj})
-				    obj:setvelocity({x=dir.x * 60, y=dir.y * 60, z=dir.z * 60})
-				    obj:setacceleration({x=dir.x * -0, y=-0, z=dir.z * -0})
-				    obj:setyaw(yaw + math.pi)
-				    local ent = obj:get_luaentity()
-				    if ent then
-					    ent.player = user
-				    end
-			    end
-		    end
-		    return itemstack
-	    end,
-    })
+	table.insert(guns, {i+45,"tutorial:supergun"..i,"Supergun lv."..i,"tutorial_supergun"..i..".png"})
 end
 for i = 1, 2 do
-    minetest.register_tool("tutorial:uraniumgun"..i, {
-	    description = "Uraniumgun lv."..i.."\nGun-lv."..(i+49),
-	    inventory_image = "tutorial_uraniumgun"..i..".png",
-		groups = {not_in_creative_inventory=1},
-	    on_use = function(itemstack, user, pointed_thing)
-		    local inv = user:get_inventory()
-		    local pos = user:getpos()
-		    local dir = user:get_look_dir()
-		    local yaw = user:get_look_yaw()
-		    if pos and dir and yaw then
-			    pos.y = pos.y + 1.6
-			    local obj = minetest.add_entity(pos, "tutorial:tb_"..(i+49))
-			    if obj then
-				    minetest.sound_play("shot", {object=obj})
-				    obj:setvelocity({x=dir.x * 60, y=dir.y * 60, z=dir.z * 60})
-				    obj:setacceleration({x=dir.x * -0, y=-0, z=dir.z * -0})
-				    obj:setyaw(yaw + math.pi)
-				    local ent = obj:get_luaentity()
-				    if ent then
-					    ent.player = user
-				    end
-			    end
-		    end
-		    return itemstack
-	    end,
-    })
+	table.insert(guns, {i+49,"tutorial:uraniumgun"..i,"Uraniumgun lv."..i,"tutorial_uraniumgun"..i..".png"})
+end
+for i = 1, 2 do
+	table.insert(guns, {i+49,"tutorial:uraniumgun"..i,"Uraniumgun lv."..i,"tutorial_uraniumgun"..i..".png"})
 end
 for i = 1, 12 do
-    minetest.register_tool("tutorial:energygun"..i, {
-	    description = "Energygun lv."..i.."\nGun-lv."..(i+51),
-	    inventory_image = "tutorial_energygun"..i..".png",
-		groups = {not_in_creative_inventory=1},
-	    on_use = function(itemstack, user, pointed_thing)
-		    local inv = user:get_inventory()
-		    local pos = user:getpos()
-		    local dir = user:get_look_dir()
-		    local yaw = user:get_look_yaw()
-		    if pos and dir and yaw then
-			    pos.y = pos.y + 1.6
-			    local obj = minetest.add_entity(pos, "tutorial:tb_"..(i+51))
-			    if obj then
-				    minetest.sound_play("shot", {object=obj})
-				    obj:setvelocity({x=dir.x * 60, y=dir.y * 60, z=dir.z * 60})
-				    obj:setacceleration({x=dir.x * -0, y=-0, z=dir.z * -0})
-				    obj:setyaw(yaw + math.pi)
-				    local ent = obj:get_luaentity()
-				    if ent then
-					    ent.player = user
-				    end
-			    end
-		    end
-		    return itemstack
-	    end,
-    })
+	table.insert(guns, {i+51,"tutorial:energygun"..i,"Energygun lv."..i,"tutorial_energygun"..i..".png"})
 end
 for i = 1, 7 do
-    minetest.register_tool("tutorial:superenergygun"..i, {
-	    description = "Superenergygun lv."..i.."\nGun-lv."..(i+63),
-	    inventory_image = "tutorial_superenergygun"..i..".png",
-		groups = {not_in_creative_inventory=1},
-	    on_use = function(itemstack, user, pointed_thing)
-		    local inv = user:get_inventory()
-		    local pos = user:getpos()
-		    local dir = user:get_look_dir()
-		    local yaw = user:get_look_yaw()
-		    if pos and dir and yaw then
-			    pos.y = pos.y + 1.6
-			    local obj = minetest.add_entity(pos, "tutorial:tb_"..(i+63))
-			    if obj then
-				    minetest.sound_play("shot", {object=obj})
-				    obj:setvelocity({x=dir.x * 60, y=dir.y * 60, z=dir.z * 60})
-				    obj:setacceleration({x=dir.x * -0, y=-0, z=dir.z * -0})
-				    obj:setyaw(yaw + math.pi)
-				    local ent = obj:get_luaentity()
-				    if ent then
-					    ent.player = user
-				    end
-			    end
-		    end
-		    return itemstack
-	    end,
-    })
+	table.insert(guns, {i+63,"tutorial:superenergygun"..i,"Superenergygun lv."..i,"tutorial_superenergygun"..i..".png"})
 end
 for i = 1, 5 do
-    minetest.register_tool("tutorial:kristallgun"..i, {
-	    description = "Crystalgun lv."..i.."\nGun-lv."..(i+70),
-	    inventory_image = "tutorial_kristallgun"..i..".png",
-		groups = {not_in_creative_inventory=1},
-	    on_use = function(itemstack, user, pointed_thing)
-		    local inv = user:get_inventory()
-		    local pos = user:getpos()
-		    local dir = user:get_look_dir()
-		    local yaw = user:get_look_yaw()
-		    if pos and dir and yaw then
-			    pos.y = pos.y + 1.6
-			    local obj = minetest.add_entity(pos, "tutorial:tb_"..(i+70))
-			    if obj then
-				    minetest.sound_play("shot", {object=obj})
-				    obj:setvelocity({x=dir.x * 60, y=dir.y * 60, z=dir.z * 60})
-				    obj:setacceleration({x=dir.x * -0, y=-0, z=dir.z * -0})
-				    obj:setyaw(yaw + math.pi)
-				    local ent = obj:get_luaentity()
-				    if ent then
-					    ent.player = user
-				    end
-			    end
-		    end
-		    return itemstack
-	    end,
-    })
+	table.insert(guns, {i+70,"tutorial:kristallgun"..i,"Crystalgun lv."..i,"tutorial_kristallgun"..i..".png"})
 end
 for i = 1, 25 do
-    minetest.register_tool("tutorial:ultragun"..i, {
-	    description = "Ultragun lv."..i.."\nGun-lv."..(i+75),
-	    inventory_image = "tutorial_ultragun"..i..".png",
-		groups = {not_in_creative_inventory=1},
-	    on_use = function(itemstack, user, pointed_thing)
-		    local inv = user:get_inventory()
-		    local pos = user:getpos()
-		    local dir = user:get_look_dir()
-		    local yaw = user:get_look_yaw()
-		    if pos and dir and yaw then
-			    pos.y = pos.y + 1.6
-			    local obj = minetest.add_entity(pos, "tutorial:tb_"..(i+75))
-			    if obj then
-				    minetest.sound_play("shot", {object=obj})
-				    obj:setvelocity({x=dir.x * 60, y=dir.y * 60, z=dir.z * 60})
-				    obj:setacceleration({x=dir.x * -0, y=-0, z=dir.z * -0})
-				    obj:setyaw(yaw + math.pi)
-				    local ent = obj:get_luaentity()
-				    if ent then
-					    ent.player = user
-				    end
-			    end
-		    end
-		    return itemstack
-	    end,
-    })
+	table.insert(guns, {i+75,"tutorial:ultragun"..i,"Ultragun lv."..i,"tutorial_ultragun"..i..".png"})
 end
-minetest.register_tool("tutorial:ultragun", {
-	description = "Superultragun\nGun-lv.101",
-	inventory_image = "tutorial_superultragun.png",
-	groups = {not_in_creative_inventory=1},
-	on_use = function(itemstack, user, pointed_thing)
-		local inv = user:get_inventory()
-		local pos = user:getpos()
-		local dir = user:get_look_dir()
-		local yaw = user:get_look_yaw()
-		if pos and dir and yaw then
-			pos.y = pos.y + 1.6
-			local obj = minetest.add_entity(pos, "tutorial:tb_101")
-			if obj then
-				minetest.sound_play("shot", {object=obj})
-				obj:setvelocity({x=dir.x * 60, y=dir.y * 60, z=dir.z * 60})
-				obj:setacceleration({x=dir.x * -0, y=-0, z=dir.z * -0})
-				obj:setyaw(yaw + math.pi)
-				local ent = obj:get_luaentity()
-				if ent then
-					ent.player = user
-				end
-			end
-		end
-		return itemstack
-	end,
-})
+table.insert(guns, {101,"tutorial:ultragun","Superultragun","tutorial_superultragun.png"})
 for i = 1, 4 do
-    minetest.register_tool("tutorial:arenagun"..i, {
-	    description = "Arenagun lv."..i.."\nGun-lv."..(i+101),
-	    inventory_image = "tutorial_arenagun"..i..".png",
-		groups = {not_in_creative_inventory=1},
-	    on_use = function(itemstack, user, pointed_thing)
-		    local inv = user:get_inventory()
-		    local pos = user:getpos()
-		    local dir = user:get_look_dir()
-		    local yaw = user:get_look_yaw()
-		    if pos and dir and yaw then
-			    pos.y = pos.y + 1.6
-			    local obj = minetest.add_entity(pos, "tutorial:tb_"..(i+101))
-			    if obj then
-				    minetest.sound_play("shot", {object=obj})
-				    obj:setvelocity({x=dir.x * 60, y=dir.y * 60, z=dir.z * 60})
-				    obj:setacceleration({x=dir.x * -0, y=-0, z=dir.z * -0})
-				    obj:setyaw(yaw + math.pi)
-				    local ent = obj:get_luaentity()
-				    if ent then
-					    ent.player = user
-				    end
-			    end
-		    end
-		    return itemstack
-	    end,
-    })
+	table.insert(guns, {i+101,"tutorial:arenagun"..i,"Arenagun lv."..i,"tutorial_arenagun"..i..".png"})
 end
 for i = 1, 10 do
-    minetest.register_tool("tutorial:titangun"..i, {
-	    description = "Titangun lv."..i.."\nGun-lv."..(i+105),
-	    inventory_image = "tutorial_titangun"..i..".png",
-		groups = {not_in_creative_inventory=1},
-	    on_use = function(itemstack, user, pointed_thing)
-		    local inv = user:get_inventory()
-		    local pos = user:getpos()
-		    local dir = user:get_look_dir()
-		    local yaw = user:get_look_yaw()
-		    if pos and dir and yaw then
-			    pos.y = pos.y + 1.6
-			    local obj = minetest.add_entity(pos, "tutorial:tb_"..(i+105))
-			    if obj then
-				    minetest.sound_play("shot", {object=obj})
-				    obj:setvelocity({x=dir.x * 60, y=dir.y * 60, z=dir.z * 60})
-				    obj:setacceleration({x=dir.x * -0, y=-0, z=dir.z * -0})
-				    obj:setyaw(yaw + math.pi)
-				    local ent = obj:get_luaentity()
-				    if ent then
-					    ent.player = user
-				    end
-			    end
-		    end
-		    return itemstack
-	    end,
-    })
+	table.insert(guns, {i+105,"tutorial:titangun"..i,"Titangun lv."..i,"tutorial_titangun"..i..".png"})
 end
 for i = 1, 6 do
-    minetest.register_tool("tutorial:legendengun"..i, {
-	    description = "Legendgun lv."..i.."\nGun-lv."..(i+115),
-	    inventory_image = "tutorial_legendengun"..i..".png",
+	table.insert(guns, {i+115,"tutorial:legendengun"..i,"Legendgun lv."..i,"tutorial_legendengun"..i..".png"})
+end
+
+for _, m in pairs(guns) do
+    minetest.register_tool(m[2], {
+	    description = m[3].." Mode 1 (damage to players and no thunder)\nGun-lv."..m[1],
+	    inventory_image = m[4].."^technic_tool_mode1.png",
+		wield_image = m[4],
 		groups = {not_in_creative_inventory=1},
 	    on_use = function(itemstack, user, pointed_thing)
 		    local inv = user:get_inventory()
@@ -5744,7 +5566,7 @@ for i = 1, 6 do
 		    local yaw = user:get_look_yaw()
 		    if pos and dir and yaw then
 			    pos.y = pos.y + 1.6
-			    local obj = minetest.add_entity(pos, "tutorial:tb_"..(i+115))
+			    local obj = minetest.add_entity(pos, "tutorial:tb_"..m[1])
 			    if obj then
 				    minetest.sound_play("shot", {object=obj})
 				    obj:setvelocity({x=dir.x * 60, y=dir.y * 60, z=dir.z * 60})
@@ -5758,10 +5580,51 @@ for i = 1, 6 do
 		    end
 		    return itemstack
 	    end,
+		on_secondary_use = function(itemstack, user, pointed_thing)
+			local keys = user:get_player_control()
+			if keys["sneak"] == true then
+				itemstack:set_name(m[2].."_2")
+			end
+			return itemstack
+		end,
+    })
+	minetest.register_tool(m[2].."_2", {
+	    description = m[3].." Mode 2 (no damage to players and no thunder)\nGun-lv."..m[1],
+	    inventory_image = m[4].."^technic_tool_mode2.png",
+		wield_image = m[4],
+		groups = {not_in_creative_inventory=1},
+	    on_use = function(itemstack, user, pointed_thing)
+		    local inv = user:get_inventory()
+		    local pos = user:getpos()
+		    local dir = user:get_look_dir()
+		    local yaw = user:get_look_yaw()
+		    if pos and dir and yaw then
+			    pos.y = pos.y + 1.6
+			    local obj = minetest.add_entity(pos, "tutorial:tb2_"..m[1])
+			    if obj then
+				    minetest.sound_play("shot", {object=obj})
+				    obj:setvelocity({x=dir.x * 60, y=dir.y * 60, z=dir.z * 60})
+				    obj:setacceleration({x=dir.x * -0, y=-0, z=dir.z * -0})
+				    obj:setyaw(yaw + math.pi)
+				    local ent = obj:get_luaentity()
+				    if ent then
+					    ent.player = user
+				    end
+			    end
+		    end
+		    return itemstack
+	    end,
+		on_secondary_use = function(itemstack, user, pointed_thing)
+			local keys = user:get_player_control()
+			if keys["sneak"] == true then
+				itemstack:set_name(m[2])
+			end
+			return itemstack
+		end,
     })
 end
 minetest.register_tool("tutorial:superlegendengun1", {
-	description = "Superlegendgun Mode 1. Add no thunder\nGun-lv.122",
+	description = "Superlegendgun Mode 1 (damage to players and no thunder)\nGun-lv.122",
 	inventory_image = "tutorial_superlegendengun.png^technic_tool_mode1.png",
     wield_image = "tutorial_superlegendengun.png",
 	groups = {not_in_creative_inventory=1},
@@ -5786,10 +5649,17 @@ minetest.register_tool("tutorial:superlegendengun1", {
 		end
 		return itemstack
 	end,
+	on_secondary_use = function(itemstack, user, pointed_thing)
+        local keys = user:get_player_control()
+        if keys["sneak"] == true then
+            itemstack:set_name("tutorial:superlegendengun3")
+        end
+        return itemstack
+    end,
 })
 minetest.register_tool("tutorial:superlegendengun2", {
-	description = "Superlegendgun Mode 2. Add thunder\nGun-lv.122",
-	inventory_image = "tutorial_superlegendengun.png^technic_tool_mode2.png",
+	description = "Superlegendgun Mode 3 (damage to players and thunder)\nGun-lv.122",
+	inventory_image = "tutorial_superlegendengun.png^technic_tool_mode3.png",
     wield_image = "tutorial_superlegendengun.png",
 	groups = {not_in_creative_inventory=1},
 	on_use = function(itemstack, user, pointed_thing)
@@ -5813,9 +5683,51 @@ minetest.register_tool("tutorial:superlegendengun2", {
 		end
 		return itemstack
 	end,
+	on_secondary_use = function(itemstack, user, pointed_thing)
+        local keys = user:get_player_control()
+        if keys["sneak"] == true then
+            itemstack:set_name("tutorial:superlegendengun1")
+        end
+        return itemstack
+    end,
 })
+minetest.register_tool("tutorial:superlegendengun3", {
+	description = "Superlegendgun Mode 2. (no damage to players and no thunder)\nGun-lv.122",
+	inventory_image = "tutorial_superlegendengun.png^technic_tool_mode2.png",
+    wield_image = "tutorial_superlegendengun.png",
+	groups = {not_in_creative_inventory=1},
+	on_use = function(itemstack, user, pointed_thing)
+		local inv = user:get_inventory()
+		local pos = user:getpos()
+		local dir = user:get_look_dir()
+		local yaw = user:get_look_yaw()
+		if pos and dir and yaw then
+			pos.y = pos.y + 1.6
+			local obj = minetest.add_entity(pos, "tutorial:tb2_122")
+			if obj then
+				minetest.sound_play("shot", {object=obj})
+				obj:setvelocity({x=dir.x * 60, y=dir.y * 60, z=dir.z * 60})
+				obj:setacceleration({x=dir.x * -0, y=-0, z=dir.z * -0})
+				obj:setyaw(yaw + math.pi)
+				local ent = obj:get_luaentity()
+				if ent then
+					ent.player = user
+				end
+			end
+		end
+		return itemstack
+	end,
+	on_secondary_use = function(itemstack, user, pointed_thing)
+        local keys = user:get_player_control()
+        if keys["sneak"] == true then
+            itemstack:set_name("tutorial:superlegendengun2")
+        end
+        return itemstack
+    end,
+})
+
 minetest.register_tool("tutorial:regnumgun1", {
-	description = "Regnumgun Mode 1. Add no thunder\nGun-lv.MAX",
+	description = "Regnumgun Mode 1 (damage to players and no thunder)\nGun-lv.MAX",
 	inventory_image = "tutorial_regnumgun.png^technic_tool_mode1.png",
     wield_image = "tutorial_regnumgun.png",
 	on_use = function(itemstack, user, pointed_thing)
@@ -5839,10 +5751,17 @@ minetest.register_tool("tutorial:regnumgun1", {
 		end
 		return itemstack
 	end,
+	on_secondary_use = function(itemstack, user, pointed_thing)
+        local keys = user:get_player_control()
+        if keys["sneak"] == true then
+            itemstack:set_name("tutorial:regnumgun3")
+        end
+        return itemstack
+    end,
 })
 minetest.register_tool("tutorial:regnumgun2", {
-	description = "Regnumgun Mode 2. Add thunder\nGun-lv.MAX",
-	inventory_image = "tutorial_regnumgun.png^technic_tool_mode2.png",
+	description = "Regnumgun Mode 3 (damage to players and thunder)\nGun-lv.MAX",
+	inventory_image = "tutorial_regnumgun.png^technic_tool_mode3.png",
     wield_image = "tutorial_regnumgun.png",
 	groups = {not_in_creative_inventory=1},
 	on_use = function(itemstack, user, pointed_thing)
@@ -5866,9 +5785,53 @@ minetest.register_tool("tutorial:regnumgun2", {
 		end
 		return itemstack
 	end,
+	on_secondary_use = function(itemstack, user, pointed_thing)
+        local keys = user:get_player_control()
+        if keys["sneak"] == true then
+            itemstack:set_name("tutorial:regnumgun1")
+        end
+        return itemstack
+    end,
 })
+
+minetest.register_tool("tutorial:regnumgun3", {
+	description = "Regnumgun Mode 2 (no damage to players and no thunder)\nGun-lv.MAX",
+	inventory_image = "tutorial_regnumgun.png^technic_tool_mode2.png",
+    wield_image = "tutorial_regnumgun.png",
+	groups = {not_in_creative_inventory=1},
+	on_use = function(itemstack, user, pointed_thing)
+		local inv = user:get_inventory()
+		local pos = user:getpos()
+		local dir = user:get_look_dir()
+		local yaw = user:get_look_yaw()
+		if pos and dir and yaw then
+			pos.y = pos.y + 1.6
+			local obj = minetest.add_entity(pos, "tutorial:tb2_123")
+			if obj then
+				minetest.sound_play("shot", {object=obj})
+				obj:setvelocity({x=dir.x * 60, y=dir.y * 60, z=dir.z * 60})
+				obj:setacceleration({x=dir.x * -0, y=-0, z=dir.z * -0})
+				obj:setyaw(yaw + math.pi)
+				local ent = obj:get_luaentity()
+				if ent then
+					ent.player = user
+				end
+			end
+		end
+		return itemstack
+	end,
+	on_secondary_use = function(itemstack, user, pointed_thing)
+        local keys = user:get_player_control()
+        if keys["sneak"] == true then
+            itemstack:set_name("tutorial:regnumgun2")
+        end
+        return itemstack
+    end,
+})
+
+
 minetest.register_tool("tutorial:gun_admin1", {
-	description = "Admin tool 11: Gun Mode 1. Add no thunder",
+	description = "Admin tool 11: Gun Mode 1 (damage to players and no thunder)",
 	inventory_image = "tutorial_admingun.png^technic_tool_mode1.png",
     wield_image = "tutorial_admingun.png",
 	on_use = function(itemstack, user, pointed_thing)
@@ -5892,10 +5855,17 @@ minetest.register_tool("tutorial:gun_admin1", {
 		end
 		return itemstack
 	end,
+	on_secondary_use = function(itemstack, user, pointed_thing)
+        local keys = user:get_player_control()
+        if keys["sneak"] == true then
+            itemstack:set_name("tutorial:gun_admin3")
+        end
+        return itemstack
+    end,
 })
 minetest.register_tool("tutorial:gun_admin2", {
-	description = "Admin tool 11: Gun Mode 2. Add thunder",
-	inventory_image = "tutorial_admingun.png^technic_tool_mode2.png",
+	description = "Admin tool 11: Gun Mode 3 (damage to players and thunder)",
+	inventory_image = "tutorial_admingun.png^technic_tool_mode3.png",
     wield_image = "tutorial_admingun.png",
 	groups = {not_in_creative_inventory=1},
 	on_use = function(itemstack, user, pointed_thing)
@@ -5919,7 +5889,50 @@ minetest.register_tool("tutorial:gun_admin2", {
 		end
 		return itemstack
 	end,
+	on_secondary_use = function(itemstack, user, pointed_thing)
+        local keys = user:get_player_control()
+        if keys["sneak"] == true then
+            itemstack:set_name("tutorial:gun_admin1")
+        end
+        return itemstack
+    end,
 })
+
+minetest.register_tool("tutorial:gun_admin3", {
+	description = "Admin tool 11: Gun Mode 2 (no damage to players and no thunder)",
+	inventory_image = "tutorial_admingun.png^technic_tool_mode2.png",
+    wield_image = "tutorial_admingun.png",
+	groups = {not_in_creative_inventory=1},
+	on_use = function(itemstack, user, pointed_thing)
+		local inv = user:get_inventory()
+		local pos = user:getpos()
+		local dir = user:get_look_dir()
+		local yaw = user:get_look_yaw()
+		if pos and dir and yaw then
+			pos.y = pos.y + 1.6
+			local obj = minetest.add_entity(pos, "tutorial:tb2_126")
+			if obj then
+				minetest.sound_play("shot", {object=obj})
+				obj:setvelocity({x=dir.x * 60, y=dir.y * 60, z=dir.z * 60})
+				obj:setacceleration({x=dir.x * -0, y=-0, z=dir.z * -0})
+				obj:setyaw(yaw + math.pi)
+				local ent = obj:get_luaentity()
+				if ent then
+					ent.player = user
+				end
+			end
+		end
+		return itemstack
+	end,
+	on_secondary_use = function(itemstack, user, pointed_thing)
+        local keys = user:get_player_control()
+        if keys["sneak"] == true then
+            itemstack:set_name("tutorial:gun_admin2")
+        end
+        return itemstack
+    end,
+})
+
 local mine = {}
 mine.get_formspec = function(player, pos)
 	if player == nil then
@@ -6363,6 +6376,9 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
     if fields.troph then
 		inventory_plus.set_inventory_formspec(player, troph.get_formspec(player))
 	end
+	if fields.backward then
+		inventory_plus.set_inventory_formspec(player, backward.get_formspec(player))
+	end
     if fields.trophys then
 		inventory_plus.set_inventory_formspec(player, trophys.get_formspec(player))
 	end
@@ -6460,6 +6476,158 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
         end
 		inventory_plus.set_inventory_formspec(player, troph.get_formspec(player))
 	end
+	if fields.backwardcra then  
+        local player_inv = player:get_inventory()
+        player_inv:set_size("backward", 1)
+		local name = player_inv:get_stack("backward", 1):get_name()
+		local item1 = ""
+		local item2 = ""
+		local item3 = ""
+		local item4 = ""
+		local re = false
+		if name == "3d_armor:superlegendenboots" or name == "3d_armor:superlegendenboots2" or name == "3d_armor:superlegendenboots3" or name == "3d_armor:superlegendenboots4" then
+			item1 = "3d_armor:legendenboots6"
+			item2 = "tutorial:lilabattleaxe2"
+			re = true
+		elseif name == "3d_armor:superlegendenchestplate" or name == "3d_armor:superlegendenchestplate2" or name == "3d_armor:superlegendenchestplate3" or name == "3d_armor:superlegendenchestplate4" then
+			item1 = "3d_armor:legendenchestplate6"
+			item2 = "tutorial:lilabattleaxe2"
+			re = true
+		elseif name == "3d_armor:superlegendenhelmet" or name == "3d_armor:superlegendenhelmet2" or name == "3d_armor:superlegendenhelmet3" or name == "3d_armor:superlegendenhelmet4" then
+			item1 = "3d_armor:legendenhelmet6"
+			item2 = "tutorial:lilabattleaxe2"
+			re = true
+		elseif name == "3d_armor:superlegendenleggings" or name == "3d_armor:superlegendenleggings2" or name == "3d_armor:superlegendenleggings3" or name == "3d_armor:superlegendenleggings4" then
+			item1 = "3d_armor:legendenleggings6"
+			item2 = "tutorial:lilabattleaxe2"
+			re = true
+		elseif name == "shields:superlegendenshield" or name == "shields:superlegendenshield2" or name == "shields:superlegendenshield3" or name == "shields:superlegendenshield4" then
+			item1 = "shields:legendenshield6"
+			item2 = "tutorial:lilabattleaxe2"
+			re = true
+		elseif name == "tutorial:superlegendengun1" or name == "tutorial:superlegendengun2" then
+			item1 = "tutorial:legendengun6"
+			item2 = "tutorial:lilabattleaxe2"
+			re = true
+		elseif name == "tutorial:superlegendengun3" then
+			item1 = "tutorial:legendengun6_2"
+			item2 = "tutorial:lilabattleaxe2"
+			re = true
+		elseif name == "3d_armor:regnumboots" or name == "3d_armor:regnumboots2" or name == "3d_armor:regnumboots3" or name == "3d_armor:regnumboots4" then
+			item1 = "3d_armor:legendenboots6"
+			item2 = "tutorial:lilabattleaxe2"
+			item3 = "tutorial:bottleSS 4"
+			item4 = "tutorial:regnum 4"
+			re = true
+		elseif name == "3d_armor:regnumhelmet" or name == "3d_armor:regnumhelmet2" or name == "3d_armor:regnumhelmet3" or name == "3d_armor:regnumhelmet4" then
+			item1 = "3d_armor:legendenhelmet6"
+			item2 = "tutorial:lilabattleaxe2"
+			item3 = "tutorial:bottleSS 4"
+			item4 = "tutorial:regnum 4"
+			re = true
+		elseif name == "3d_armor:regnumleggings" or name == "3d_armor:regnumleggings2" or name == "3d_armor:regnumleggings3" or name == "3d_armor:regnumleggings4" then
+			item1 = "3d_armor:legendenleggings6"
+			item2 = "tutorial:lilabattleaxe2"
+			item3 = "tutorial:bottleSS 4"
+			item4 = "tutorial:regnum 4"
+			re = true
+		elseif name == "3d_armor:regnumchestplate" or name == "3d_armor:regnumchestplate2" or name == "3d_armor:regnumchestplate3" or name == "3d_armor:regnumchestplate4" then
+			item1 = "3d_armor:legendenchestplate6"
+			item2 = "tutorial:lilabattleaxe2"
+			item3 = "tutorial:bottleSS 4"
+			item4 = "tutorial:regnum 4"
+			re = true
+		elseif name == "shields:regnumshield" or name == "shields:regnumshield2" or name == "shields:regnumshield3" or name == "shields:regnumshield4" then
+			item1 = "shields:legendenshield6"
+			item2 = "tutorial:lilabattleaxe2"
+			item3 = "tutorial:bottleSS 4"
+			item4 = "tutorial:regnum 4"
+			re = true
+		elseif name == "tutorial:regnumgun1" or name == "tutorial:regnumgun2" then
+			item1 = "tutorial:legendengun6"
+			item2 = "tutorial:lilabattleaxe2"
+			item3 = "tutorial:bottleSS 4"
+			item4 = "tutorial:regnum 4"
+			re = true
+		elseif name == "tutorial:regnumgun3" then
+			item1 = "tutorial:legendengun6_2"
+			item2 = "tutorial:lilabattleaxe2"
+			item3 = "tutorial:bottleSS 4"
+			item4 = "tutorial:regnum 4"
+			re = true
+		end
+		if string.match(name, "tutorial:bag_schluessel") then
+			local level = string.gsub(name, "tutorial:bag_schluessel", "")
+			if tonumber(level) > 0 and tonumber(level) < 4 then
+				item1 = "tutorial:coin_grau "..(level*120)
+				item2 = "tutorial:obsidian6 "..level
+				item3 = "default:stick 2"
+				re = true
+			end
+		elseif string.match(name, "technic:laser_mkS") then
+			local level = string.gsub(name, "technic:laser_mkS", "")
+			if tonumber(level) > 0 and tonumber(level) < 150 then
+				item1 = "tutorial:coin "..(level-1)*8+3
+				item2 = "tutorial:admin"
+				item3 = "moreores:mithril_ingot 2"
+				re = true
+			end
+		elseif string.match(name, "technic:drill_mkS") then
+			local level = string.gsub(name, "technic:drill_mkS", "")
+			local level = string.gsub(level, "_1", "")
+			local level = string.gsub(level, "_2", "")
+			local level = string.gsub(level, "_3", "")
+			local level = string.gsub(level, "_4", "")
+			local level = string.gsub(level, "_5", "")
+			minetest.chat_send_all(level)
+			if tonumber(level) > 0 and tonumber(level) < 150 then
+				item1 = "tutorial:coin2 "..(level-1)*8+3
+				item2 = "tutorial:admin"
+				item3 = "moreores:mithril_ingot 2"
+				re = true
+			end
+		elseif string.match(name, "tutorial:cooking_schluessel") then
+			local level = string.gsub(name, "tutorial:cooking_schluessel", "")
+			if tonumber(level) > 0 and tonumber(level) < 4 then
+				item1 = "tutorial:coin_cyan "..(level-1)*8+6
+				re = true
+			end
+		elseif string.match(name, "tutorial:craft_schluessel") then
+			local level = string.gsub(name, "tutorial:craft_schluessel", "")
+			if tonumber(level) > 0 and tonumber(level) < 7 then
+				item1 = "tutorial:coin_lila "..(level-1)*8+7
+				item2 = "default:stick 2"
+				re = true
+			end
+		elseif string.match(name, "tutorial:wallplacer") then
+			local level = string.gsub(name, "tutorial:wallplacer", "")
+			local level = string.gsub(level, "_1", "")
+			local level = string.gsub(level, "_2", "")
+			local level = string.gsub(level, "_3", "")
+			local level = string.gsub(level, "_4", "")
+			local level = string.gsub(level, "_5", "")
+			minetest.chat_send_all(level)
+			if tonumber(level) > 0 and tonumber(level) < 5 then
+				item1 = "tutorial:coin_gelb "..(level-1)*24+8
+				re = true
+			end
+		elseif string.match(name, "tutorial:coin_grau") and name ~= "tutorial:coin_grau" then
+			local level = string.gsub(name, "tutorial:coin_grau", "")
+			if tonumber(level) > 0 and tonumber(level) < 20 then
+				item1 = "tutorial:coin_grau "..(level)*8
+				item2 = "tutorial:obsidian6"
+				re = true
+			end
+		end
+		if re == true and player_inv:room_for_item("main", item1) and player_inv:room_for_item("main", item2) and player_inv:room_for_item("main", item3) and player_inv:room_for_item("main", item4) then
+			player_inv:remove_item("backward", name)
+			player_inv:add_item("main", item1)
+			player_inv:add_item("main", item2)
+			player_inv:add_item("main", item3)
+			player_inv:add_item("main", item4)
+		end
+		inventory_plus.set_inventory_formspec(player, backward.get_formspec(player))
+	end
     if fields.cre2 then
 		local player_inv = player:get_inventory()
         player_inv:set_size("kri", 8)
@@ -6470,7 +6638,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		    end
 	    end
 
-        local time = 500-(k*50)
+        local time = 500
         player_inv:set_stack("crtime", 1, "default:dirt")
         player_inv:set_size("pixkey", 1)
         local name = player_inv:get_stack("pixkey", 1):get_name()
@@ -6487,7 +6655,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 				inventory_plus.set_inventory_formspec(player, crafting8.get_formspec(player))
 			end
 			player_inv:set_stack("crtime", 1, nil)
-            player_inv:add_item("main", "tutorial:bottle_crystal")
+            player_inv:add_item("main", "tutorial:bottle_crystal "..(k+2))
 		end)
 	end
     if fields.meda1 then
@@ -6589,21 +6757,6 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
             player_inv:remove_item("medall", "tutorial:medallion")
         end
 		inventory_plus.set_inventory_formspec(player, meda.get_formspec(player))
-	end
-    if fields.rg21 then
-		inventory_plus.set_inventory_formspec(player, rg21.get_formspec(player))
-	end
-    if fields.rg22 then
-		inventory_plus.set_inventory_formspec(player, rg22.get_formspec(player))
-	end
-    if fields.rg23 then
-		inventory_plus.set_inventory_formspec(player, rg23.get_formspec(player))
-	end
-    if fields.rg24 then
-		inventory_plus.set_inventory_formspec(player, rg24.get_formspec(player))
-	end
-    if fields.rg25 then
-		inventory_plus.set_inventory_formspec(player, rg25.get_formspec(player))
 	end
     if fields.medallion then
 		inventory_plus.set_inventory_formspec(player, medallion.get_formspec(player))
@@ -7421,14 +7574,8 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		inventory_plus.set_inventory_formspec(player, recraft.get_formspec(player))
 	end
 end)
-minetest.register_craft({
-    output = 'tutorial:adminbattleaxe',
-    recipe = {
-        {'tutorial:adminbattleaxe3'},
-    }
-})
 minetest.register_tool("tutorial:adminbattleaxe3", {
-	description = "Admin tool 3: Admin battleaxe Mode 3. Only for hunting mobs",
+	description = "Admin tool 3: Admin battleaxe Mode 3 (for hunting mobs)",
 	inventory_image = "tutorial_adminbattleaxe.png^technic_tool_mode3.png",
     wield_image = "tutorial_adminbattleaxe.png",
 	groups = {not_in_creative_inventory=1},
@@ -7440,9 +7587,16 @@ minetest.register_tool("tutorial:adminbattleaxe3", {
 		damage_groups = {fleshy=4000}
 	},
 	liquids_pointable = false,
+	on_secondary_use = function(itemstack, user, pointed_thing)
+        local keys = user:get_player_control()
+        if keys["sneak"] == true then
+            itemstack:set_name("tutorial:adminbattleaxe")
+        end
+        return itemstack
+    end,
 })
 minetest.register_tool("tutorial:superlegendenbattleaxe3", {
-	description = "Superlegendbattleaxe Mode 3. Only for hunting mobs\nBattleaxe-lv.122",
+	description = "Superlegendbattleaxe Mode 3 (for hunting mobs)\nBattleaxe-lv.122",
 	inventory_image = "tutorial_superlegendenbattleaxe.png^technic_tool_mode3.png",
     wield_image = "tutorial_superlegendenbattleaxe.png",
 	groups = {not_in_creative_inventory=1},
@@ -7454,21 +7608,16 @@ minetest.register_tool("tutorial:superlegendenbattleaxe3", {
 		damage_groups = {fleshy=244}
 	},
 	liquids_pointable = false,
-})
-minetest.register_craft({
-    output = 'tutorial:superlegendenbattleaxe1',
-    recipe = {
-        {'tutorial:superlegendenbattleaxe3'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:regnumbattleaxe1',
-    recipe = {
-        {'tutorial:regnumbattleaxe3'},
-    }
+	on_secondary_use = function(itemstack, user, pointed_thing)
+        local keys = user:get_player_control()
+        if keys["sneak"] == true then
+            itemstack:set_name("tutorial:superlegendenbattleaxe1")
+        end
+        return itemstack
+    end,
 })
 minetest.register_tool("tutorial:regnumbattleaxe3", {
-	description = "Regnumbattleaxe Mode 3. Only for hunting mobs\nBattleaxe-lv.MAX",
+	description = "Regnumbattleaxe Mode 3 (for hunting mobs)\nBattleaxe-lv.MAX",
 	inventory_image = "tutorial_regnumbattleaxe.png^technic_tool_mode3.png",
     wield_image = "tutorial_regnumbattleaxe.png",
 	groups = {not_in_creative_inventory=1},
@@ -7480,6 +7629,13 @@ minetest.register_tool("tutorial:regnumbattleaxe3", {
 		damage_groups = {fleshy=150}
 	},
 	liquids_pointable = false,
+	on_secondary_use = function(itemstack, user, pointed_thing)
+        local keys = user:get_player_control()
+        if keys["sneak"] == true then
+            itemstack:set_name("tutorial:regnumbattleaxe1")
+        end
+        return itemstack
+    end,
 })
 minetest.register_craft({
     output = 'tutorial:bottleSS',

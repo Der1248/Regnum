@@ -892,3 +892,47 @@ minetest.register_craft({
         {'tutorial:lilabattleaxe2', 'shields:legendenshield6'},
     }
 })
+
+minetest.register_craft({
+    output = 'shields:regnumshield',
+    recipe = {
+        {'', '', 'tutorial:regnum', '', ''},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'tutorial:regnum', 'tutorial:bottleSS', 'shields:superlegendenshield', 'tutorial:bottleSS', 'tutorial:regnum'},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'', '', 'tutorial:regnum', '', ''},
+    }
+})
+
+minetest.register_craft({
+    output = 'shields:regnumshield2',
+    recipe = {
+        {'', '', 'tutorial:regnum', '', ''},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'tutorial:regnum', 'tutorial:bottleSS', 'shields:superlegendenshield2', 'tutorial:bottleSS', 'tutorial:regnum'},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'', '', 'tutorial:regnum', '', ''},
+    }
+})
+
+minetest.register_craft({
+    output = 'shields:regnumshield3',
+    recipe = {
+        {'', '', 'tutorial:regnum', '', ''},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'tutorial:regnum', 'tutorial:bottleSS', 'shields:superlegendenshield3', 'tutorial:bottleSS', 'tutorial:regnum'},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'', '', 'tutorial:regnum', '', ''},
+    }
+})
+
+minetest.register_craft({
+    output = 'shields:regnumshield4',
+    recipe = {
+        {'', '', 'tutorial:regnum', '', ''},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'tutorial:regnum', 'tutorial:bottleSS', 'shields:superlegendenshield4', 'tutorial:bottleSS', 'tutorial:regnum'},
+		{'', '', 'tutorial:bottleSS', '', ''},
+		{'', '', 'tutorial:regnum', '', ''},
+    }
+})

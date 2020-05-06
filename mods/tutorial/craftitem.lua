@@ -19,7 +19,7 @@ minetest.register_craftitem("tutorial:magic_gem5", {
 	inventory_image = "tutorial_gem5.png",
 })
 minetest.register_craftitem("tutorial:gem_fragment", {
-    description = "Gem fragment lv.2",
+    description = "Gem fragment (dragon)",
 	inventory_image = "tutorial_gem_fragment.png",
 })
 minetest.register_craftitem("tutorial:dragon_crystal", {

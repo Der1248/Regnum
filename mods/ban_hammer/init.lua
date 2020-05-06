@@ -7,17 +7,16 @@ dofile(minetest.get_modpath("ban_hammer").."/settings.txt")
 -----------------------------------------------------------------------------------------------
 
 local mode_text = {
-	{"Ban punched player."},
-	{"Kick punched player."},
-	{"Remove shout privilege of punched player."},
-	{"Remove fly privilege of punched player."},
-	{"Remove noclip privilege of punched player."},
+	{"ban punched player"},
+	{"kick punched player"},
+	{"remove shout privilege of punched player"},
+	{"remove fly privilege of punched player"},
+	{"remove noclip privilege of punched player"},
 }
 
 local function ban_hammer_setmode(user, itemstack, mode, keys)
 	local puncher = user:get_player_name()
 	if keys["sneak"] == false and mode == 0 then
-		minetest.chat_send_player(puncher, "Hold shift and use to change ban hammer modes.")
 		return 
 	end
 	if keys["sneak"] == true then
@@ -25,7 +24,6 @@ local function ban_hammer_setmode(user, itemstack, mode, keys)
 		if mode == 6 then 
 			mode = 1
 		end
-		minetest.chat_send_player(puncher, "Ban hammer mode : "..mode.." - "..mode_text[mode][1] )
 	end
 	itemstack:set_name("ban_hammer:hammer"..mode)
 	itemstack:set_metadata(mode)
@@ -92,7 +90,12 @@ end
 minetest.register_craftitem("ban_hammer:hammer", {
 	description = "Admin tool 1: Ban Hammer",
 	inventory_image = "ban_hammer.png",
-		
+	groups = {not_in_creative_inventory=1},	
+	on_secondary_use = function(itemstack, user, pointed_thing)
+		local mode = 0
+		ban_hammer_handler(itemstack, user, pointed_thing, mode)
+		return itemstack
+	end,
 	on_use = function(itemstack, user, pointed_thing)
 		local mode = 0
 		ban_hammer_handler(itemstack, user, pointed_thing, mode)
@@ -100,20 +103,31 @@ minetest.register_craftitem("ban_hammer:hammer", {
 	end,
 })
 
-for i = 1, 5 do
+for i = 2, 5 do
 	minetest.register_craftitem("ban_hammer:hammer"..i, {
-		description = "Admin tool 1: Ban Hammer in Mode "..i,
+		description = "Admin tool 1: Ban Hammer Mode "..i.." ("..mode_text[i][1]..")",
 		inventory_image = "ban_hammer.png^technic_tool_mode"..i..".png",
 		wield_image = "ban_hammer.png",
 		groups = {not_in_creative_inventory=1},
-  stack_max = 1,
-		on_use = function(itemstack, user, pointed_thing)
+		stack_max = 1,
+		on_secondary_use = function(itemstack, user, pointed_thing)
 			local mode = i
 			ban_hammer_handler(itemstack, user, pointed_thing, mode)
 			return itemstack
 		end,
-		})
+	})
 end
+
+minetest.register_craftitem("ban_hammer:hammer1", {
+	description = "Admin tool 1: Ban Hammer Mode 1 ("..mode_text[1][1]..")",
+	inventory_image = "ban_hammer.png^technic_tool_mode1.png",
+	wield_image = "ban_hammer.png",
+	stack_max = 1,
+	on_secondary_use = function(itemstack, user, pointed_thing)
+		ban_hammer_handler(itemstack, user, pointed_thing, 1)
+		return itemstack
+	end,
+})
 -----------------------------------------------------------------------------------------------
 print("[Mod] "..title.." ["..version.."] ["..mname.."] Loaded...")
 -----------------------------------------------------------------------------------------------
