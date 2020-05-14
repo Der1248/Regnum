@@ -14,7 +14,7 @@ minetest.register_on_joinplayer(function(player)
 		offset = {x=0, y=30},
 		alignment = {x=1, y=0},
 		number = 0xFFFFFF ,
-		text = "Game Version	 :  3.5.0",
+		text = "Game Version	 :  3.5.1",
 	})
 end)
 
@@ -1340,11 +1340,11 @@ minetest.register_globalstep(function(dtime)
 			local pri = minetest.get_player_privs(player:get_player_name())
 			local player_inv = player:get_inventory()
 			
-			player_inv:set_size("year", 4)
-			if player_inv:room_for_item("main", "tutorial:trophy_year4") and player_inv:get_stack("year", 4):get_count() == 0 then
-				player_inv:add_item("main", "tutorial:trophy_year4")
-				player_inv:set_stack("year", 4, "default:dirt")
-			end
+			--player_inv:set_size("year", 4)
+			--if player_inv:room_for_item("main", "tutorial:trophy_year4") and player_inv:get_stack("year", 4):get_count() == 0 then
+			--	player_inv:add_item("main", "tutorial:trophy_year4")
+			--	player_inv:set_stack("year", 4, "default:dirt")
+			--end
 	
 			player_inv:set_size("youtube", 1)
 			local c = player_inv:get_stack("youtube",1):get_count()
