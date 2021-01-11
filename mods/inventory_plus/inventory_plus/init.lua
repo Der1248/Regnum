@@ -40,7 +40,7 @@ inven.get_formspec = function(player, pos)
         .."button[5,2;2,0.5;set;Music]"
 		.."button[2,4;2,0.5;skins;Skins]"
 		.."button[2,5.5;2,0.5;kri;Crystals]"
-        .."button[4,5.5;2,0.5;xpi0;Xp items]"
+        .."button[4,5.5;2,0.5;xpi0;Xp Items]"
         .."button[6,5.5;2,0.5;gem;Gems]"
         .."button[0,7;2,0.5;artifacts;Artifacts]"
         .."button[2,7;2,0.5;medallion;Medallion]"

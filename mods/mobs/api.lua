@@ -932,7 +932,10 @@ function mob_class:do_env_damage()
 	end
 
 	local nodef = minetest.registered_nodes[self.standing_in]
-
+	
+	if (pos) == nil then
+        return
+    end
 	pos.y = pos.y + 1 -- for particle effect position
 
 	-- water
@@ -1693,6 +1696,9 @@ function mob_class:general_attack()
 	end
 
 	local s = self.object:get_pos()
+	if s == nil then
+        return
+    end
 	local objs = minetest.get_objects_inside_radius(s, self.view_range)
 
 	-- remove entities we aren't interested in

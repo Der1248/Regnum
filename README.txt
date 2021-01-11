@@ -4,6 +4,7 @@ Thanks to:
 NightmareLP for building a mod
 et77 for great ideas
 wuschel1912 for testing
+jumali for testing
 
 Info:
 50 achievements to earn,11 differend monsters to hunt,
