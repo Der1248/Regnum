@@ -1378,11 +1378,11 @@ rg.get_formspec = function(player, pos)
         .."label[0,1.3;Here you can get some basic informations]"
         .."label[0,1.6;about my game: Regnum]"
         .."label[0,1.9;I develop the Regnum game over the last 8 years.]"
-        .."label[0,2.2;Thanks to:]"
-        .."label[0,2.5;NightmareLP who build a mod for my game]"
-        .."label[0,2.8;et77 who had some great ideas]"
-        .."label[0,3.1;wuschel1912 who tested the game]"
-		.."label[0,3.4;jumali who tested the game]"
+        .."label[0,2.5;Thanks to:]"
+        .."label[0,2.8;NightmareLP for building a mod]"
+        .."label[0,3.1;et77 for great ideas]"
+        .."label[0,3.4;wuschel1912 for testing]"
+		.."label[0,3.7;jumali for testing]"
         .."button[4,10;2,0.5;rg2;>]"
 	return formspec		
 end

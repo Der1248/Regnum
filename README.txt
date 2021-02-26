@@ -22,3 +22,4 @@ Every code written by me is LGPLv2.1
 
 Notes:
 sfinv mod changed
+mtg_craftguide mod deleted
