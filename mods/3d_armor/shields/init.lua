@@ -31,13 +31,6 @@ minetest.register_tool("shields:shield_admin", {
     wield_image = "shields_inv_shield_admin.png",
 	groups = {armor_shield=20, armor_heal=20, armor_use=0, armor_fire=1, armor_water=0.2},
 	wear = 0,
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("shields:shield_admin2")
-        end
-        return itemstack
-    end,
 })
 
 minetest.register_tool("shields:shield_admin2", {
@@ -46,13 +39,6 @@ minetest.register_tool("shields:shield_admin2", {
     wield_image = "shields_inv_shield_admin.png",
 	groups = {armor_shield=20, armor_heal=20, armor_use=0, armor_fire=1, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("shields:shield_admin3")
-        end
-        return itemstack
-    end,
 })
 
 minetest.register_tool("shields:shield_admin3", {
@@ -61,13 +47,6 @@ minetest.register_tool("shields:shield_admin3", {
     wield_image = "shields_inv_shield_admin.png",
 	groups = {armor_shield=20, armor_heal=20, armor_use=0, armor_fire=1, physics_jump=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("shields:shield_admin4")
-        end
-        return itemstack
-    end,
 })
 
 minetest.register_tool("shields:shield_admin4", {
@@ -76,11 +55,4 @@ minetest.register_tool("shields:shield_admin4", {
     wield_image = "shields_inv_shield_admin.png",
 	groups = {armor_shield=20, armor_heal=20, armor_use=0, armor_fire=1, physics_jump=0.25, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("shields:shield_admin")
-        end
-        return itemstack
-    end,
 })

@@ -6,7 +6,7 @@ minetest.register_on_joinplayer(function(player)
 		offset = {x=0, y=10},
 		alignment = {x=1, y=0},
 		number = 0xFFFFFF ,
-		text = "For Minetest 	  :  5.4.0",
+		text = "For Minetest 	  :  5.4.x",
 	})
 	player:hud_add({
 		hud_elem_type = "text",
@@ -14,7 +14,7 @@ minetest.register_on_joinplayer(function(player)
 		offset = {x=0, y=30},
 		alignment = {x=1, y=0},
 		number = 0xFFFFFF ,
-		text = "Game Version	 :  3.5.7",
+		text = "Game Version	 :  3.6.0",
 	})
 end)
 
@@ -30,6 +30,57 @@ dofile(minetest.get_modpath("tutorial").."/other.lua")
 dofile(minetest.get_modpath("tutorial").."/alias.lua")
 
 --v.2.0.0+
+minetest.register_on_chatcommand(function(name, command, params)
+	local player = minetest.get_player_by_name(name)
+	if command == "killme" then
+		player = minetest.get_player_by_name(name)
+	end
+	if command == "kill" then
+		if params ~= "" then
+			player = minetest.get_player_by_name(params)
+		else
+			player = minetest.get_player_by_name(name)
+		end
+	end
+	local can_access = minetest.check_player_privs(name, {server=true})
+	if (command == "killme" or (command == "kill" and can_access )) and minetest.settings:get_bool("enable_damage") then
+		if player then
+			local inv = player:get_inventory()
+			if inv:get_stack("armor", 1):get_name() == "3d_armor:helmet_admin"  
+			and inv:get_stack("armor", 2):get_name() == "3d_armor:chestplate_admin" 
+			and inv:get_stack("armor", 3):get_name() == "3d_armor:leggings_admin"
+			and inv:get_stack("armor", 4):get_name() == "3d_armor:boots_admin"
+			and inv:get_stack("armor", 5):get_name() == "shields:shield_admin" then
+			else
+				while player:get_hp() ~= 0 do
+					player:set_hp(0)
+				end
+			end
+		end
+	end
+	if command == "kill" and player and can_access and minetest.settings:get_bool("enable_damage") then
+		return true
+	end
+end)
+
+local S = minetest.get_translator("sfinv")
+sfinv.override_page("sfinv:crafting", {
+	title = S("Crafting"),
+	get = function(self, player, context)
+		return sfinv.make_formspec(player, context, [[
+				list[current_player;craft;1.75,0.5;3,3;]
+				list[current_player;craftpreview;5.75,1.5;1,1;]
+				image[4.75,1.5;1,1;sfinv_crafting_arrow.png]
+				listring[current_player;main]
+				listring[current_player;craft]
+				image_button[0,0;1.6,1.6;inventory_plus_inven.png;inven;]
+				label[0.3,1.5;selection]
+				button[6.6,1.4;1.5,0.5;craft10;Craft (10)]
+				button[6.6,2.2;1.5,0.5;craft99;Craft (99)]
+			]], true)
+	end
+})
+
 local backward = {}
 backward.get_formspec = function(player, pos)
     if player == nil then
@@ -200,6 +251,38 @@ minetest.register_node("tutorial:trophy_year4", {
     description = "Four years Regnum!!",
 	tiles = {
 		"tutorial_trophy_year4.png"
+	},
+    groups = { snappy=3 },
+    drawtype = "nodebox",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.125, -0.5, -0.125, 0.1875, -0.4375, 0.1875}, -- NodeBox1
+			{-0.0625, -0.4375, -0.0625, 0.125, -0.375, 0.125}, -- NodeBox2
+			{-0.02, -0.375, -0.02, 0.0825, -0.1875, 0.0825}, -- NodeBox3
+			{-0.0625, -0.1875, -0.0625, 0.125, -0.125, 0.125}, -- NodeBox4
+			{-0.125, -0.1875, -0.0625, -0.0625, 0.125, 0.125}, -- NodeBox5
+			{0.125, -0.1875, -0.0625, 0.1875, 0.125, 0.125}, -- NodeBox6
+			{-0.125, -0.1875, 0.125, 0.1875, 0.125, 0.1875}, -- NodeBox7
+			{-0.125, -0.1875, -0.125, 0.1875, 0.125, -0.0625}, -- NodeBox8
+			{-0.0625, -0.25, -0.0625, 0.125, -0.1875, 0.125}, -- NodeBox9
+			{0.1875, 0.05, 0, 0.23, 0.0925, 0.0625}, -- NodeBox10
+			{0.1875, -0.15, 0, 0.23, -0.11, 0.0625}, -- NodeBox11
+			{0.23, -0.15, 0, 0.2725, 0.0925, 0.0625}, -- NodeBox12
+			{-0.1675, -0.15, 0, -0.125, -0.11, 0.0625}, -- NodeBox13
+			{-0.1675, 0.05, 0, -0.125, 0.0925, 0.0625}, -- NodeBox14
+			{-0.21, -0.15, 0, -0.1675, 0.0925, 0.0625}, -- NodeBox15
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.21, -0.5, -0.125, 0.2725, 0.125, 0.1875 }
+	}
+})
+minetest.register_node("tutorial:trophy_year5", {
+    description = "Five years Regnum!!",
+	tiles = {
+		"tutorial_trophy_year5.png"
 	},
     groups = { snappy=3 },
     drawtype = "nodebox",
@@ -1332,20 +1415,226 @@ end
 local timer = 0
 local oldpos = {}
 local newpos = {}
+local mode_tools = {
+	{"tutorial:regnumbattleaxe1","tutorial:regnumbattleaxe2",""},
+	{"tutorial:regnumbattleaxe2","tutorial:regnumbattleaxe3",""},
+	{"tutorial:regnumbattleaxe3","tutorial:regnumbattleaxe1",""},
+	{"tutorial:adminbattleaxe","tutorial:adminbattleaxe2",""},
+	{"tutorial:adminbattleaxe2","tutorial:adminbattleaxe3",""},
+	{"tutorial:adminbattleaxe3","tutorial:adminbattleaxe",""},
+	{"tutorial:superlegendenbattleaxe1","tutorial:superlegendenbattleaxe2",""},
+	{"tutorial:superlegendenbattleaxe2","tutorial:superlegendenbattleaxe3",""},
+	{"tutorial:superlegendenbattleaxe3","tutorial:superlegendenbattleaxe1",""},
+	{"3d_armor:superlegendenboots","3d_armor:superlegendenboots2",""},
+	{"3d_armor:superlegendenboots2","3d_armor:superlegendenboots3",""},
+	{"3d_armor:superlegendenboots3","3d_armor:superlegendenboots4",""},
+	{"3d_armor:superlegendenboots4","3d_armor:superlegendenboots",""},
+	{"3d_armor:superlegendenchestplate","3d_armor:superlegendenchestplate2",""},
+	{"3d_armor:superlegendenchestplate2","3d_armor:superlegendenchestplate3",""},
+	{"3d_armor:superlegendenchestplate3","3d_armor:superlegendenchestplate4",""},
+	{"3d_armor:superlegendenchestplate4","3d_armor:superlegendenchestplate",""},
+	{"3d_armor:superlegendenhelmet","3d_armor:superlegendenhelmet2",""},
+	{"3d_armor:superlegendenhelmet2","3d_armor:superlegendenhelmet3",""},
+	{"3d_armor:superlegendenhelmet3","3d_armor:superlegendenhelmet4",""},
+	{"3d_armor:superlegendenhelmet4","3d_armor:superlegendenhelmet",""},
+	{"3d_armor:superlegendenleggings","3d_armor:superlegendenleggings2",""},
+	{"3d_armor:superlegendenleggings2","3d_armor:superlegendenleggings3",""},
+	{"3d_armor:superlegendenleggings3","3d_armor:superlegendenleggings4",""},
+	{"3d_armor:superlegendenleggings4","3d_armor:superlegendenleggings",""},
+	{"3d_armor:regnumboots","3d_armor:regnumboots2",""},
+	{"3d_armor:regnumboots2","3d_armor:regnumboots3",""},
+	{"3d_armor:regnumboots3","3d_armor:regnumboots4",""},
+	{"3d_armor:regnumboots4","3d_armor:regnumboots",""},
+	{"3d_armor:regnumchestplate","3d_armor:regnumchestplate2",""},
+	{"3d_armor:regnumchestplate2","3d_armor:regnumchestplate3",""},
+	{"3d_armor:regnumchestplate3","3d_armor:regnumchestplate4",""},
+	{"3d_armor:regnumchestplate4","3d_armor:regnumchestplate",""},
+	{"3d_armor:regnumhelmet","3d_armor:regnumhelmet2",""},
+	{"3d_armor:regnumhelmet2","3d_armor:regnumhelmet3",""},
+	{"3d_armor:regnumhelmet3","3d_armor:regnumhelmet4",""},
+	{"3d_armor:regnumhelmet4","3d_armor:regnumhelmet",""},
+	{"3d_armor:regnumleggings","3d_armor:regnumleggings2",""},
+	{"3d_armor:regnumleggings2","3d_armor:regnumleggings3",""},
+	{"3d_armor:regnumleggings3","3d_armor:regnumleggings4",""},
+	{"3d_armor:regnumleggings4","3d_armor:regnumleggings",""},
+	{"3d_armor:helmet_admin","3d_armor:helmet_admin2",""},
+	{"3d_armor:helmet_admin2","3d_armor:helmet_admin3",""},
+	{"3d_armor:helmet_admin3","3d_armor:helmet_admin4",""},
+	{"3d_armor:helmet_admin4","3d_armor:helmet_admin",""},
+	{"3d_armor:chestplate_admin","3d_armor:chestplate_admin2",""},
+	{"3d_armor:chestplate_admin2","3d_armor:chestplate_admin3",""},
+	{"3d_armor:chestplate_admin3","3d_armor:chestplate_admin4",""},
+	{"3d_armor:chestplate_admin4","3d_armor:chestplate_admin",""},
+	{"3d_armor:leggings_admin","3d_armor:leggings_admin2",""},
+	{"3d_armor:leggings_admin2","3d_armor:leggings_admin3",""},
+	{"3d_armor:leggings_admin3","3d_armor:leggings_admin4",""},
+	{"3d_armor:leggings_admin4","3d_armor:leggings_admin",""},
+	{"3d_armor:boots_admin","3d_armor:boots_admin2",""},
+	{"3d_armor:boots_admin2","3d_armor:boots_admin3",""},
+	{"3d_armor:boots_admin3","3d_armor:boots_admin4",""},
+	{"3d_armor:boots_admin4","3d_armor:boots_admin",""},
+	{"shields:superlegendenshield","shields:superlegendenshield2",""},
+	{"shields:superlegendenshield2","shields:superlegendenshield3",""},
+	{"shields:superlegendenshield3","shields:superlegendenshield4",""},
+	{"shields:superlegendenshield4","shields:superlegendenshield",""},
+	{"shields:regnumshield","shields:regnumshield2",""},
+	{"shields:regnumshield2","shields:regnumshield3",""},
+	{"shields:regnumshield3","shields:regnumshield4",""},
+	{"shields:regnumshield4","shields:regnumshield",""},
+	{"shields:shield_admin","shields:shield_admin2",""},
+	{"shields:shield_admin2","shields:shield_admin3",""},
+	{"shields:shield_admin3","shields:shield_admin4",""},
+	{"shields:shield_admin4","shields:shield_admin",""},
+	{"tutorial:server_hammer1","tutorial:server_hammer2",""},
+	{"tutorial:server_hammer2","tutorial:server_hammer3",""},
+	{"tutorial:server_hammer3","tutorial:server_hammer4",""},
+	{"tutorial:server_hammer4","tutorial:server_hammer5",""},
+	{"tutorial:server_hammer5","tutorial:server_hammer6",""},
+	{"tutorial:server_hammer6","tutorial:server_hammer7",""},
+	{"tutorial:server_hammer7","tutorial:server_hammer8",""},
+	{"tutorial:server_hammer8","tutorial:server_hammer1",""},
+	{"ban_hammer:hammer1","ban_hammer:hammer2",""},
+	{"ban_hammer:hammer2","ban_hammer:hammer3",""},
+	{"ban_hammer:hammer3","ban_hammer:hammer4",""},
+	{"ban_hammer:hammer4","ban_hammer:hammer5",""},
+	{"ban_hammer:hammer5","ban_hammer:hammer1",""},
+	{"tutorial:wallplacer2_1","tutorial:wallplacer2_2",""},
+	{"tutorial:wallplacer2_2","tutorial:wallplacer2_1",""},
+	{"tutorial:wallplacer3_1","tutorial:wallplacer3_2",""},
+	{"tutorial:wallplacer3_2","tutorial:wallplacer3_3",""},
+	{"tutorial:wallplacer3_3","tutorial:wallplacer3_1",""},
+	{"tutorial:wallplacer4_1","tutorial:wallplacer4_2",""},
+	{"tutorial:wallplacer4_2","tutorial:wallplacer4_3",""},
+	{"tutorial:wallplacer4_3","tutorial:wallplacer4_4",""},
+	{"tutorial:wallplacer4_4","tutorial:wallplacer4_1",""},
+	{"tutorial:wallplacer5_1","tutorial:wallplacer5_2",""},
+	{"tutorial:wallplacer5_2","tutorial:wallplacer5_3",""},
+	{"tutorial:wallplacer5_3","tutorial:wallplacer5_4",""},
+	{"tutorial:wallplacer5_4","tutorial:wallplacer5_5",""},
+	{"tutorial:wallplacer5_5","tutorial:wallplacer5_1",""},
+	{"tutorial:adminwallplacer_1","tutorial:adminwallplacer_2",""},
+	{"tutorial:adminwallplacer_2","tutorial:adminwallplacer_3",""},
+	{"tutorial:adminwallplacer_3","tutorial:adminwallplacer_4",""},
+	{"tutorial:adminwallplacer_4","tutorial:adminwallplacer_5",""},
+	{"tutorial:adminwallplacer_5","tutorial:adminwallplacer_1",""},
+	
+	
+	{"tutorial:superlegendengun1","tutorial:superlegendengun3",""},
+	{"tutorial:superlegendengun2","tutorial:superlegendengun1",""},
+	{"tutorial:superlegendengun3","tutorial:superlegendengun2",""},
+	
+	{"tutorial:regnumgun1","tutorial:regnumgun3",""},
+	{"tutorial:regnumgun2","tutorial:regnumgun1",""},
+	{"tutorial:regnumgun3","tutorial:regnumgun2",""},
+	
+	{"tutorial:gun_admin1","tutorial:gun_admin3",""},
+	{"tutorial:gun_admin2","tutorial:gun_admin1",""},
+	{"tutorial:gun_admin3","tutorial:gun_admin2",""},
+}
+
+table.insert(mode_tools, {"tutorial:gun","tutorial:gun_2",""})
+table.insert(mode_tools, {"tutorial:gun_2","tutorial:gun",""})
+for i = 1, 20 do
+	table.insert(mode_tools, {"tutorial:gun_mega"..i,"tutorial:gun_mega"..i.."_2"})
+	table.insert(mode_tools, {"tutorial:gun_mega"..i.."_2","tutorial:gun_mega"..i})
+end
+for i = 1, 25 do
+	table.insert(mode_tools, {"tutorial:cloudgun_mega"..i,"tutorial:cloudgun_mega"..i.."_2"})
+	table.insert(mode_tools, {"tutorial:cloudgun_mega"..i.."_2","tutorial:cloudgun_mega"..i})
+end
+for i = 1, 4 do
+	table.insert(mode_tools, {"tutorial:supergun"..i,"tutorial:supergun"..i.."_2"})
+	table.insert(mode_tools, {"tutorial:supergun"..i.."_2","tutorial:supergun"..i})
+end
+for i = 1, 2 do
+	table.insert(mode_tools, {"tutorial:uraniumgun"..i,"tutorial:uraniumgun"..i.."_2"})
+	table.insert(mode_tools, {"tutorial:uraniumgun"..i.."_2","tutorial:uraniumgun"..i})
+end
+for i = 1, 12 do
+	table.insert(mode_tools, {"tutorial:energygun"..i,"tutorial:energygun"..i.."_2"})
+	table.insert(mode_tools, {"tutorial:energygun"..i.."_2","tutorial:energygun"..i})
+end
+for i = 1, 7 do
+	table.insert(mode_tools, {"tutorial:superenergygun"..i,"tutorial:superenergygun"..i.."_2"})
+	table.insert(mode_tools, {"tutorial:superenergygun"..i.."_2","tutorial:superenergygun"..i})
+end
+for i = 1, 5 do
+	table.insert(mode_tools, {"tutorial:kristallgun"..i,"tutorial:kristallgun"..i.."_2"})
+	table.insert(mode_tools, {"tutorial:kristallgun"..i.."_2","tutorial:kristallgun"..i})
+end
+for i = 1, 25 do
+	table.insert(mode_tools, {"tutorial:ultragun"..i,"tutorial:ultragun"..i.."_2"})
+	table.insert(mode_tools, {"tutorial:ultragun"..i.."_2","tutorial:ultragun"..i})
+end
+table.insert(mode_tools, {"tutorial:ultragun","tutorial:ultragun_2"})
+table.insert(mode_tools, {"tutorial:ultragun_2","tutorial:ultragun"})
+for i = 1, 4 do
+	table.insert(mode_tools, {"tutorial:arenagun"..i,"tutorial:arenagun"..i.."_2"})
+	table.insert(mode_tools, {"tutorial:arenagun"..i.."_2","tutorial:arenagun"..i})
+end
+for i = 1, 10 do
+	table.insert(mode_tools, {"tutorial:titangun"..i,"tutorial:titangun"..i.."_2"})
+	table.insert(mode_tools, {"tutorial:titangun"..i.."_2","tutorial:titangun"..i})
+end
+for i = 1, 6 do
+	table.insert(mode_tools, {"tutorial:legendengun"..i,"tutorial:legendengun"..i.."_2"})
+	table.insert(mode_tools, {"tutorial:legendengun"..i.."_2","tutorial:legendengun"..i})
+end
+
 minetest.register_globalstep(function(dtime)
 	timer = timer + dtime
+	local k = 0
+	local players = minetest.get_connected_players()
+	for _,player in ipairs(players) do
+		local keys = player:get_player_control()
+		local player_inv = player:get_inventory()
+		if keys["sneak"] == true then
+			
+			player:set_attribute("sneaking", "true")
+		else
+			player:set_attribute("sneaking", "false")
+		end
+		if keys["RMB"] == true then
+			if player:get_attribute("sneaking") == "true" and player:get_attribute("rightclick") == "false" then
+				local item = player:get_wielded_item():get_name()
+				local itemstack = player:get_wielded_item()
+				local kk = 0
+				for _,tool in ipairs(mode_tools) do
+					if item == tool[1] and kk == 0 then
+						player:set_wielded_item(tool[2])
+						kk = 1
+					end
+				end
+				for i=1,150 do
+					for j=1,5 do
+						if item == "technic:drill_mkS"..i.."_"..j and kk == 0 then
+							technic.mining_drill_setmode(player,itemstack)
+							kk = 1
+						end
+					end
+				end
+				for j=1,5 do
+					if item == "technic:mining_drill_mkA1_"..j and kk == 0 then
+						technic.mining_drill_setmode(player,itemstack)
+						kk = 1
+					end
+				end
+			end
+			player:set_attribute("rightclick", "true")
+		else
+			player:set_attribute("rightclick", "false")
+		end
+	end
 	if (timer >= 1) then
 		local players = minetest.get_connected_players()
 		for _,player in ipairs(players) do
 			local pri = minetest.get_player_privs(player:get_player_name())
 			local player_inv = player:get_inventory()
-			
-			--player_inv:set_size("year", 4)
-			--if player_inv:room_for_item("main", "tutorial:trophy_year4") and player_inv:get_stack("year", 4):get_count() == 0 then
-			--	player_inv:add_item("main", "tutorial:trophy_year4")
-			--	player_inv:set_stack("year", 4, "default:dirt")
-			--end
-	
+			player_inv:set_size("year", 5)
+			if player_inv:room_for_item("main", "tutorial:trophy_year5") and player_inv:get_stack("year", 5):get_count() == 0 then
+				player_inv:add_item("main", "tutorial:trophy_year5")
+				player_inv:set_stack("year", 5, "default:dirt")
+			end
 			player_inv:set_size("youtube", 1)
 			local c = player_inv:get_stack("youtube",1):get_count()
 			if c == 0 then
@@ -1809,13 +2098,6 @@ minetest.register_craftitem("tutorial:wallplacer2_2", {
 	inventory_image = "tutorial_block_placer2.png^technic_tool_mode2.png",
     wield_image = "tutorial_block_placer2.png",
 	groups = {not_in_creative_inventory=1},
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:wallplacer2_1")
-        end
-        return itemstack
-    end,
 	on_place = function(itemstack, placer, pointed_thing)
 		local main = placer:get_wield_index()+1
         local inv = placer:get_inventory()
@@ -1932,13 +2214,6 @@ minetest.register_craftitem("tutorial:wallplacer2_1", {
 	inventory_image = "tutorial_block_placer2.png^technic_tool_mode1.png",
     wield_image = "tutorial_block_placer2.png",
 	groups = {not_in_creative_inventory=1},
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:wallplacer2_2")
-        end
-        return itemstack
-    end,
 	on_place = function(itemstack, placer, pointed_thing)
 		local main = placer:get_wield_index()+1
         local inv = placer:get_inventory()
@@ -2055,13 +2330,6 @@ minetest.register_craftitem("tutorial:wallplacer3_1", {
 	inventory_image = "tutorial_block_placer3.png^technic_tool_mode1.png",
     wield_image = "tutorial_block_placer3.png",
 	groups = {not_in_creative_inventory=1},
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:wallplacer3_2")
-        end
-        return itemstack
-    end,
 	on_place = function(itemstack, placer, pointed_thing)
 		local main = placer:get_wield_index()+1
         local inv = placer:get_inventory()
@@ -2178,13 +2446,6 @@ minetest.register_craftitem("tutorial:wallplacer3_2", {
 	inventory_image = "tutorial_block_placer3.png^technic_tool_mode2.png",
     wield_image = "tutorial_block_placer3.png",
 	groups = {not_in_creative_inventory=1},
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:wallplacer3_3")
-        end
-        return itemstack
-    end,
 	on_place = function(itemstack, placer, pointed_thing)
 		local main = placer:get_wield_index()+1
         local inv = placer:get_inventory()
@@ -2301,13 +2562,6 @@ minetest.register_craftitem("tutorial:wallplacer3_3", {
 	inventory_image = "tutorial_block_placer3.png^technic_tool_mode3.png",
     wield_image = "tutorial_block_placer3.png",
 	groups = {not_in_creative_inventory=1},
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:wallplacer3_1")
-        end
-        return itemstack
-    end,
 	on_place = function(itemstack, placer, pointed_thing)
 		local main = placer:get_wield_index()+1
         local inv = placer:get_inventory()
@@ -2424,13 +2678,6 @@ minetest.register_craftitem("tutorial:wallplacer4_1", {
 	inventory_image = "tutorial_block_placer4.png^technic_tool_mode1.png",
     wield_image = "tutorial_block_placer4.png",
 	groups = {not_in_creative_inventory=1},
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:wallplacer4_2")
-        end
-        return itemstack
-    end,
 	on_place = function(itemstack, placer, pointed_thing)
 		local main = placer:get_wield_index()+1
         local inv = placer:get_inventory()
@@ -2547,13 +2794,6 @@ minetest.register_craftitem("tutorial:wallplacer4_2", {
 	inventory_image = "tutorial_block_placer4.png^technic_tool_mode2.png",
     wield_image = "tutorial_block_placer4.png",
 	groups = {not_in_creative_inventory=1},
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:wallplacer4_3")
-        end
-        return itemstack
-    end,
 	on_place = function(itemstack, placer, pointed_thing)
 		local main = placer:get_wield_index()+1
         local inv = placer:get_inventory()
@@ -2670,13 +2910,6 @@ minetest.register_craftitem("tutorial:wallplacer4_3", {
 	inventory_image = "tutorial_block_placer4.png^technic_tool_mode3.png",
     wield_image = "tutorial_block_placer4.png",
 	groups = {not_in_creative_inventory=1},
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:wallplacer4_4")
-        end
-        return itemstack
-    end,
 	on_place = function(itemstack, placer, pointed_thing)
 		local main = placer:get_wield_index()+1
         local inv = placer:get_inventory()
@@ -2793,13 +3026,6 @@ minetest.register_craftitem("tutorial:wallplacer4_4", {
 	inventory_image = "tutorial_block_placer4.png^technic_tool_mode4.png",
     wield_image = "tutorial_block_placer4.png",
 	groups = {not_in_creative_inventory=1},
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:wallplacer4_1")
-        end
-        return itemstack
-    end,
 	on_place = function(itemstack, placer, pointed_thing)
 		local main = placer:get_wield_index()+1
         local inv = placer:get_inventory()
@@ -2915,13 +3141,6 @@ minetest.register_craftitem("tutorial:wallplacer5_1", {
 	description = "Wallplacer lv.MAX Mode 1 (place 3x3 wall)",
 	inventory_image = "tutorial_block_placer5.png^technic_tool_mode1.png",
     wield_image = "tutorial_block_placer5.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:wallplacer5_2")
-        end
-        return itemstack
-    end,
 	on_place = function(itemstack, placer, pointed_thing)
 		local main = placer:get_wield_index()+1
         local inv = placer:get_inventory()
@@ -3038,13 +3257,6 @@ minetest.register_craftitem("tutorial:wallplacer5_2", {
 	inventory_image = "tutorial_block_placer5.png^technic_tool_mode2.png",
     wield_image = "tutorial_block_placer5.png",
 	groups = {not_in_creative_inventory=1},
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:wallplacer5_3")
-        end
-        return itemstack
-    end,
 	on_place = function(itemstack, placer, pointed_thing)
 		local main = placer:get_wield_index()+1
         local inv = placer:get_inventory()
@@ -3161,13 +3373,6 @@ minetest.register_craftitem("tutorial:wallplacer5_3", {
 	inventory_image = "tutorial_block_placer5.png^technic_tool_mode3.png",
     wield_image = "tutorial_block_placer5.png",
 	groups = {not_in_creative_inventory=1},
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:wallplacer5_4")
-        end
-        return itemstack
-    end,
 	on_place = function(itemstack, placer, pointed_thing)
 		local main = placer:get_wield_index()+1
         local inv = placer:get_inventory()
@@ -3284,13 +3489,6 @@ minetest.register_craftitem("tutorial:wallplacer5_4", {
 	inventory_image = "tutorial_block_placer5.png^technic_tool_mode4.png",
     wield_image = "tutorial_block_placer5.png",
 	groups = {not_in_creative_inventory=1},
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:wallplacer5_5")
-        end
-        return itemstack
-    end,
 	on_place = function(itemstack, placer, pointed_thing)
 		local main = placer:get_wield_index()+1
         local inv = placer:get_inventory()
@@ -3407,13 +3605,6 @@ minetest.register_craftitem("tutorial:wallplacer5_5", {
 	inventory_image = "tutorial_block_placer5.png^technic_tool_mode5.png",
     wield_image = "tutorial_block_placer5.png",
 	groups = {not_in_creative_inventory=1},
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:wallplacer5_1")
-        end
-        return itemstack
-    end,
 	on_place = function(itemstack, placer, pointed_thing)
 		local main = placer:get_wield_index()+1
         local inv = placer:get_inventory()
@@ -3526,16 +3717,9 @@ minetest.register_craftitem("tutorial:wallplacer5_5", {
 	end,
 })
 minetest.register_craftitem("tutorial:adminwallplacer_1", {
-	description = "Admin tool 9: Wallplacer",
+	description = "Admin tool 9: Wallplacer Mode 1 (place 3x3 wall)",
 	inventory_image = "tutorial_block_placerAdmin.png^technic_tool_mode1.png",
     wield_image = "tutorial_block_placerAdmin.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:adminwallplacer_2")
-        end
-        return itemstack
-    end,
 	on_place = function(itemstack, placer, pointed_thing)
 		local main = placer:get_wield_index()+1
         local inv = placer:get_inventory()
@@ -3648,17 +3832,10 @@ minetest.register_craftitem("tutorial:adminwallplacer_1", {
 	end,
 })
 minetest.register_craftitem("tutorial:adminwallplacer_2", {
-	description = "Admin tool 9: Wallplacer",
+	description = "Admin tool 9: Wallplacer Mode 2 (place 5x5 wall)",
 	inventory_image = "tutorial_block_placerAdmin.png^technic_tool_mode2.png",
     wield_image = "tutorial_block_placerAdmin.png",
 	groups = {not_in_creative_inventory=1},
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:adminwallplacer_3")
-        end
-        return itemstack
-    end,
 	on_place = function(itemstack, placer, pointed_thing)
 		local main = placer:get_wield_index()+1
         local inv = placer:get_inventory()
@@ -3771,17 +3948,10 @@ minetest.register_craftitem("tutorial:adminwallplacer_2", {
 	end,
 })
 minetest.register_craftitem("tutorial:adminwallplacer_3", {
-	description = "Admin tool 9: Wallplacer",
+	description = "Admin tool 9: Wallplacer Mode 3 (place 7x7 wall)",
 	inventory_image = "tutorial_block_placerAdmin.png^technic_tool_mode3.png",
     wield_image = "tutorial_block_placerAdmin.png",
 	groups = {not_in_creative_inventory=1},
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:adminwallplacer_4")
-        end
-        return itemstack
-    end,
 	on_place = function(itemstack, placer, pointed_thing)
 		local main = placer:get_wield_index()+1
         local inv = placer:get_inventory()
@@ -3894,17 +4064,10 @@ minetest.register_craftitem("tutorial:adminwallplacer_3", {
 	end,
 })
 minetest.register_craftitem("tutorial:adminwallplacer_4", {
-	description = "Admin tool 9: Wallplacer",
+	description = "Admin tool 9: Wallplacer Mode 4 (place 9x9 wall)",
 	inventory_image = "tutorial_block_placerAdmin.png^technic_tool_mode4.png",
     wield_image = "tutorial_block_placerAdmin.png",
 	groups = {not_in_creative_inventory=1},
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:adminwallplacer_5")
-        end
-        return itemstack
-    end,
 	on_place = function(itemstack, placer, pointed_thing)
 		local main = placer:get_wield_index()+1
         local inv = placer:get_inventory()
@@ -4017,17 +4180,10 @@ minetest.register_craftitem("tutorial:adminwallplacer_4", {
 	end,
 })
 minetest.register_craftitem("tutorial:adminwallplacer_5", {
-	description = "Admin tool 9: Wallplacer",
+	description = "Admin tool 9: Wallplacer Mode 5 (place 11x11 wall)",
 	inventory_image = "tutorial_block_placerAdmin.png^technic_tool_mode5.png",
     wield_image = "tutorial_block_placerAdmin.png",
 	groups = {not_in_creative_inventory=1},
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:adminwallplacer_1")
-        end
-        return itemstack
-    end,
 	on_place = function(itemstack, placer, pointed_thing)
 		local main = placer:get_wield_index()+1
         local inv = placer:get_inventory()
@@ -5527,9 +5683,6 @@ end
 for i = 1, 2 do
 	table.insert(guns, {i+49,"tutorial:uraniumgun"..i,"Uraniumgun lv."..i,"tutorial_uraniumgun"..i..".png"})
 end
-for i = 1, 2 do
-	table.insert(guns, {i+49,"tutorial:uraniumgun"..i,"Uraniumgun lv."..i,"tutorial_uraniumgun"..i..".png"})
-end
 for i = 1, 12 do
 	table.insert(guns, {i+51,"tutorial:energygun"..i,"Energygun lv."..i,"tutorial_energygun"..i..".png"})
 end
@@ -5580,13 +5733,6 @@ for _, m in pairs(guns) do
 		    end
 		    return itemstack
 	    end,
-		on_secondary_use = function(itemstack, user, pointed_thing)
-			local keys = user:get_player_control()
-			if keys["sneak"] == true then
-				itemstack:set_name(m[2].."_2")
-			end
-			return itemstack
-		end,
     })
 	minetest.register_tool(m[2].."_2", {
 	    description = m[3].." Mode 2 (no damage to players and no thunder)\nGun-lv."..m[1],
@@ -5614,13 +5760,6 @@ for _, m in pairs(guns) do
 		    end
 		    return itemstack
 	    end,
-		on_secondary_use = function(itemstack, user, pointed_thing)
-			local keys = user:get_player_control()
-			if keys["sneak"] == true then
-				itemstack:set_name(m[2])
-			end
-			return itemstack
-		end,
     })
 end
 minetest.register_tool("tutorial:superlegendengun1", {
@@ -5649,13 +5788,6 @@ minetest.register_tool("tutorial:superlegendengun1", {
 		end
 		return itemstack
 	end,
-	on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:superlegendengun3")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("tutorial:superlegendengun2", {
 	description = "Superlegendgun Mode 3 (damage to players and thunder)\nGun-lv.122",
@@ -5683,13 +5815,6 @@ minetest.register_tool("tutorial:superlegendengun2", {
 		end
 		return itemstack
 	end,
-	on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:superlegendengun1")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("tutorial:superlegendengun3", {
 	description = "Superlegendgun Mode 2. (no damage to players and no thunder)\nGun-lv.122",
@@ -5717,13 +5842,6 @@ minetest.register_tool("tutorial:superlegendengun3", {
 		end
 		return itemstack
 	end,
-	on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:superlegendengun2")
-        end
-        return itemstack
-    end,
 })
 
 minetest.register_tool("tutorial:regnumgun1", {
@@ -5751,13 +5869,6 @@ minetest.register_tool("tutorial:regnumgun1", {
 		end
 		return itemstack
 	end,
-	on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:regnumgun3")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("tutorial:regnumgun2", {
 	description = "Regnumgun Mode 3 (damage to players and thunder)\nGun-lv.MAX",
@@ -5785,13 +5896,6 @@ minetest.register_tool("tutorial:regnumgun2", {
 		end
 		return itemstack
 	end,
-	on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:regnumgun1")
-        end
-        return itemstack
-    end,
 })
 
 minetest.register_tool("tutorial:regnumgun3", {
@@ -5820,13 +5924,6 @@ minetest.register_tool("tutorial:regnumgun3", {
 		end
 		return itemstack
 	end,
-	on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:regnumgun2")
-        end
-        return itemstack
-    end,
 })
 
 
@@ -5855,13 +5952,6 @@ minetest.register_tool("tutorial:gun_admin1", {
 		end
 		return itemstack
 	end,
-	on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:gun_admin3")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("tutorial:gun_admin2", {
 	description = "Admin tool 11: Gun Mode 3 (damage to players and thunder)",
@@ -5889,13 +5979,6 @@ minetest.register_tool("tutorial:gun_admin2", {
 		end
 		return itemstack
 	end,
-	on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:gun_admin1")
-        end
-        return itemstack
-    end,
 })
 
 minetest.register_tool("tutorial:gun_admin3", {
@@ -5924,13 +6007,6 @@ minetest.register_tool("tutorial:gun_admin3", {
 		end
 		return itemstack
 	end,
-	on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:gun_admin2")
-        end
-        return itemstack
-    end,
 })
 
 local mine = {}
@@ -6579,7 +6655,6 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 			local level = string.gsub(level, "_3", "")
 			local level = string.gsub(level, "_4", "")
 			local level = string.gsub(level, "_5", "")
-			minetest.chat_send_all(level)
 			if tonumber(level) > 0 and tonumber(level) < 150 then
 				item1 = "tutorial:coin2 "..(level-1)*8+3
 				item2 = "tutorial:admin"
@@ -6606,7 +6681,6 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 			local level = string.gsub(level, "_3", "")
 			local level = string.gsub(level, "_4", "")
 			local level = string.gsub(level, "_5", "")
-			minetest.chat_send_all(level)
 			if tonumber(level) > 0 and tonumber(level) < 5 then
 				item1 = "tutorial:coin_gelb "..(level-1)*24+8
 				re = true
@@ -7587,13 +7661,6 @@ minetest.register_tool("tutorial:adminbattleaxe3", {
 		damage_groups = {fleshy=4000}
 	},
 	liquids_pointable = false,
-	on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:adminbattleaxe")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("tutorial:superlegendenbattleaxe3", {
 	description = "Superlegendbattleaxe Mode 3 (for hunting mobs)\nBattleaxe-lv.122",
@@ -7608,13 +7675,6 @@ minetest.register_tool("tutorial:superlegendenbattleaxe3", {
 		damage_groups = {fleshy=244}
 	},
 	liquids_pointable = false,
-	on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:superlegendenbattleaxe1")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("tutorial:regnumbattleaxe3", {
 	description = "Regnumbattleaxe Mode 3 (for hunting mobs)\nBattleaxe-lv.MAX",
@@ -7629,13 +7689,6 @@ minetest.register_tool("tutorial:regnumbattleaxe3", {
 		damage_groups = {fleshy=150}
 	},
 	liquids_pointable = false,
-	on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:regnumbattleaxe1")
-        end
-        return itemstack
-    end,
 })
 minetest.register_craft({
     output = 'tutorial:bottleSS',

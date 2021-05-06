@@ -14,25 +14,9 @@ local mode_text = {
 	{"remove noclip privilege of punched player"},
 }
 
-local function ban_hammer_setmode(user, itemstack, mode, keys)
-	local puncher = user:get_player_name()
-	if keys["sneak"] == false and mode == 0 then
-		return 
-	end
-	if keys["sneak"] == true then
-		mode = mode + 1
-		if mode == 6 then 
-			mode = 1
-		end
-	end
-	itemstack:set_name("ban_hammer:hammer"..mode)
-	itemstack:set_metadata(mode)
-	return itemstack, mode
-end
 
 local function ban_hammer_handler(itemstack, user, pointed_thing, mode)
 	local keys = user:get_player_control()
-	ban_hammer_setmode(user, itemstack, mode, keys)
 	if pointed_thing.type ~= "object" then
 		return
 	end
@@ -86,22 +70,6 @@ local function ban_hammer_handler(itemstack, user, pointed_thing, mode)
 	end
 	return itemstack
 end
-	
-minetest.register_craftitem("ban_hammer:hammer", {
-	description = "Admin tool 1: Ban Hammer",
-	inventory_image = "ban_hammer.png",
-	groups = {not_in_creative_inventory=1},	
-	on_secondary_use = function(itemstack, user, pointed_thing)
-		local mode = 0
-		ban_hammer_handler(itemstack, user, pointed_thing, mode)
-		return itemstack
-	end,
-	on_use = function(itemstack, user, pointed_thing)
-		local mode = 0
-		ban_hammer_handler(itemstack, user, pointed_thing, mode)
-		return itemstack
-	end,
-})
 
 for i = 2, 5 do
 	minetest.register_craftitem("ban_hammer:hammer"..i, {
@@ -110,7 +78,7 @@ for i = 2, 5 do
 		wield_image = "ban_hammer.png",
 		groups = {not_in_creative_inventory=1},
 		stack_max = 1,
-		on_secondary_use = function(itemstack, user, pointed_thing)
+		on_use = function(itemstack, user, pointed_thing)
 			local mode = i
 			ban_hammer_handler(itemstack, user, pointed_thing, mode)
 			return itemstack
@@ -123,7 +91,7 @@ minetest.register_craftitem("ban_hammer:hammer1", {
 	inventory_image = "ban_hammer.png^technic_tool_mode1.png",
 	wield_image = "ban_hammer.png",
 	stack_max = 1,
-	on_secondary_use = function(itemstack, user, pointed_thing)
+	on_use = function(itemstack, user, pointed_thing)
 		ban_hammer_handler(itemstack, user, pointed_thing, 1)
 		return itemstack
 	end,

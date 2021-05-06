@@ -177,6 +177,90 @@ minetest.register_craftitem("mobs:desert_stone_monster_egg", {
 	end,
 })
 
+minetest.register_craftitem("mobs:dry_dirt_monster_egg", {
+	description = "Dry dirt monster spawn-egg",
+	inventory_image = "tutorial_mummy_egg.png",
+	liquids_pointable = false,
+	stack_max = 99,
+	on_place = function(itemstack, placer, pointed_thing)
+		if pointed_thing.type == "node" then
+			minetest.env:add_entity(pointed_thing.above,"mobs:dry_dirt_monster")
+			if not minetest.setting_getbool("creative_mode") then itemstack:take_item() end
+			return itemstack
+		end
+	end,
+})
+
+minetest.register_craftitem("mobs:clay_monster_egg", {
+	description = "Clay monster spawn-egg",
+	inventory_image = "tutorial_mummy_egg.png",
+	liquids_pointable = false,
+	stack_max = 99,
+	on_place = function(itemstack, placer, pointed_thing)
+		if pointed_thing.type == "node" then
+			minetest.env:add_entity(pointed_thing.above,"mobs:clay_monster")
+			if not minetest.setting_getbool("creative_mode") then itemstack:take_item() end
+			return itemstack
+		end
+	end,
+})
+
+minetest.register_craftitem("mobs:gravel_monster_egg", {
+	description = "Gravel monster spawn-egg",
+	inventory_image = "tutorial_mummy_egg.png",
+	liquids_pointable = false,
+	stack_max = 99,
+	on_place = function(itemstack, placer, pointed_thing)
+		if pointed_thing.type == "node" then
+			minetest.env:add_entity(pointed_thing.above,"mobs:gravel_monster")
+			if not minetest.setting_getbool("creative_mode") then itemstack:take_item() end
+			return itemstack
+		end
+	end,
+})
+
+minetest.register_craftitem("mobs:coniferous_litter_monster_egg", {
+	description = "Coniferous litter monster spawn-egg",
+	inventory_image = "tutorial_mummy_egg.png",
+	liquids_pointable = false,
+	stack_max = 99,
+	on_place = function(itemstack, placer, pointed_thing)
+		if pointed_thing.type == "node" then
+			minetest.env:add_entity(pointed_thing.above,"mobs:coniferous_litter_monster")
+			if not minetest.setting_getbool("creative_mode") then itemstack:take_item() end
+			return itemstack
+		end
+	end,
+})
+
+minetest.register_craftitem("mobs:moss_monster_egg", {
+	description = "Moss monster spawn-egg",
+	inventory_image = "tutorial_mummy_egg.png",
+	liquids_pointable = false,
+	stack_max = 99,
+	on_place = function(itemstack, placer, pointed_thing)
+		if pointed_thing.type == "node" then
+			minetest.env:add_entity(pointed_thing.above,"mobs:moss_monster")
+			if not minetest.setting_getbool("creative_mode") then itemstack:take_item() end
+			return itemstack
+		end
+	end,
+})
+
+minetest.register_craftitem("mobs:permafrost_monster_egg", {
+	description = "Permafrost monster spawn-egg",
+	inventory_image = "tutorial_mummy_egg.png",
+	liquids_pointable = false,
+	stack_max = 99,
+	on_place = function(itemstack, placer, pointed_thing)
+		if pointed_thing.type == "node" then
+			minetest.env:add_entity(pointed_thing.above,"mobs:permafrost_monster")
+			if not minetest.setting_getbool("creative_mode") then itemstack:take_item() end
+			return itemstack
+		end
+	end,
+})
+
 minetest.register_craftitem("mobs:dog_egg", {
 	description = "Dog spawn-egg",
 	inventory_image = "tutorial_mummy_egg.png",

@@ -1,7 +1,7 @@
 minetest.register_node("gems:ruby_ore", {
 	  description = "ruby ore",
       light_source = 8,
-	  tiles = {"ruby_ruby_ore.png"},
+	  tiles = {"default_stone.png^ruby_ruby_ore.png"},
 	  is_ground_content = true,
 	  groups = {cracky=6},
 	  sounds = default.node_sound_defaults(),
@@ -11,7 +11,7 @@ minetest.register_node("gems:ruby_ore", {
 minetest.register_node("gems:emerald_ore", {
 	  description = "emerald ore",
       light_source = 8,
-	  tiles = {"gems_emerald_ore.png"},
+	  tiles = {"default_stone.png^gems_emerald_ore.png"},
 	  is_ground_content = true,
 	  groups = {cracky=9},
 	  sounds = default.node_sound_defaults(),
@@ -21,7 +21,7 @@ minetest.register_node("gems:emerald_ore", {
 minetest.register_node("gems:sapphire_ore", {
 	  description = "sapphire ore",
       light_source = 8,
-	  tiles = {"gems_sapphire_ore.png"},
+	  tiles = {"default_stone.png^gems_sapphire_ore.png"},
 	  is_ground_content = true,
 	  groups = {cracky=6},
 	  sounds = default.node_sound_defaults(),
@@ -31,7 +31,7 @@ minetest.register_node("gems:sapphire_ore", {
 minetest.register_node("gems:amethyst_ore", {
 	  description = "amethyst ore",
       light_source = 8,
-	  tiles = {"gems_amethyst_ore.png"},
+	  tiles = {"default_stone.png^gems_amethyst_ore.png"},
 	  is_ground_content = true,
 	  groups = {cracky=7} ,
 	  sounds = default.node_sound_defaults(),
@@ -41,7 +41,7 @@ minetest.register_node("gems:amethyst_ore", {
 minetest.register_node("gems:shadow_ore", {
 	  description = "shadow ore",
       light_source = 8,
-	  tiles = {"shadow_ore.png"},
+	  tiles = {"default_stone.png^shadow_ore.png"},
 	  is_ground_content = true,
 	  groups = {cracky=8},
 	  sounds = default.node_sound_defaults(),
@@ -51,7 +51,7 @@ minetest.register_node("gems:shadow_ore", {
 minetest.register_node("gems:pearl_ore", {
 	  description = "pearl ore",
       light_source = 8,
-	  tiles = {"gems_pearl_ore.png"},
+	  tiles = {"default_stone.png^gems_pearl_ore.png"},
 	  is_ground_content = true,
 	  groups = {cracky=8},
 	  sounds = default.node_sound_defaults(),

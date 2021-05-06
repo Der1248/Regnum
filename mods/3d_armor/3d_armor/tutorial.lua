@@ -342,13 +342,6 @@ minetest.register_tool("3d_armor:superlegendenboots", {
 	groups = {armor_feet=12.2, armor_heal=12, armor_use=0,armor_fire=0.61, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_superlegendenboots.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:superlegendenboots2")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:superlegendenboots2", {
 	description = "Superlegendboots Mode 2 (speed and no jump)\nBoots-lv.122",
@@ -356,13 +349,6 @@ minetest.register_tool("3d_armor:superlegendenboots2", {
 	groups = {armor_feet=12.2, armor_heal=12, armor_use=0,armor_fire=0.61, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_superlegendenboots.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:superlegendenboots3")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:superlegendenboots3", {
 	description = "Superlegendboots Mode 3 (no speed and jump)\nBoots-lv.122",
@@ -370,13 +356,6 @@ minetest.register_tool("3d_armor:superlegendenboots3", {
 	groups = {armor_feet=12.2, armor_heal=12, armor_use=0,armor_fire=0.61, physics_jump=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_superlegendenboots.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:superlegendenboots4")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:superlegendenboots4", {
 	description = "Superlegendboots Mode 4 (speed and jump)\nBoots-lv.122",
@@ -384,13 +363,6 @@ minetest.register_tool("3d_armor:superlegendenboots4", {
 	groups = {armor_feet=12.2, armor_heal=12, armor_use=0,armor_fire=0.61, physics_jump=0.25, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_superlegendenboots.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:superlegendenboots")
-        end
-        return itemstack
-    end,
 })
 
 minetest.register_tool("3d_armor:superlegendenchestplate", {
@@ -399,13 +371,6 @@ minetest.register_tool("3d_armor:superlegendenchestplate", {
 	groups = {armor_torso=12.2, armor_heal=12, armor_use=0, armor_fire=0.61, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_superlegendenchestplate.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:superlegendenchestplate2")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:superlegendenchestplate2", {
 	description = "Superlegendchestplate Mode 2 (speed and no jump)\nChestplate-lv.122",
@@ -413,13 +378,6 @@ minetest.register_tool("3d_armor:superlegendenchestplate2", {
 	groups = {armor_torso=12.2, armor_heal=12, armor_use=0, armor_fire=0.61, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_superlegendenchestplate.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:superlegendenchestplate3")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:superlegendenchestplate3", {
 	description = "Superlegendchestplate Mode 3 (no speed and jump)\nChestplate-lv.122",
@@ -427,13 +385,6 @@ minetest.register_tool("3d_armor:superlegendenchestplate3", {
 	groups = {armor_torso=12.2, armor_heal=12, armor_use=0, armor_fire=0.61, physics_jump=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_superlegendenchestplate.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:superlegendenchestplate4")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:superlegendenchestplate4", {
 	description = "Superlegendchestplate Mode 4 (speed and jump)\nChestplate-lv.122",
@@ -441,13 +392,6 @@ minetest.register_tool("3d_armor:superlegendenchestplate4", {
 	groups = {armor_torso=12.2, armor_heal=12, armor_use=0, armor_fire=0.61, physics_jump=0.25, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_superlegendenchestplate.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:superlegendenchestplate")
-        end
-        return itemstack
-    end,
 })
 
 minetest.register_tool("3d_armor:superlegendenhelmet", {
@@ -456,13 +400,6 @@ minetest.register_tool("3d_armor:superlegendenhelmet", {
 	groups = {armor_head=12.2, armor_heal=12, armor_use=0,armor_fire=0.61, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_superlegendenhelmet.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:superlegendenhelmet2")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:superlegendenhelmet2", {
 	description = "Superlegendhelmet Mode 2 (speed and no jump)\nHelmet-lv.122",
@@ -470,13 +407,6 @@ minetest.register_tool("3d_armor:superlegendenhelmet2", {
 	groups = {armor_head=12.2, armor_heal=12, armor_use=0,armor_fire=0.61, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_superlegendenhelmet.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:superlegendenhelmet3")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:superlegendenhelmet3", {
 	description = "Superlegendhelmet Mode 3 (no speed and jump)\nHelmet-lv.122",
@@ -484,13 +414,6 @@ minetest.register_tool("3d_armor:superlegendenhelmet3", {
 	groups = {armor_head=12.2, armor_heal=12, armor_use=0,armor_fire=0.61, physics_jump=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_superlegendenhelmet.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:superlegendenhelmet4")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:superlegendenhelmet4", {
 	description = "Superlegendhelmet Mode 4 (speed and jump)\nHelmet-lv.122",
@@ -498,13 +421,6 @@ minetest.register_tool("3d_armor:superlegendenhelmet4", {
 	groups = {armor_head=12.2, armor_heal=12, armor_use=0,armor_fire=0.61, physics_jump=0.25, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_superlegendenhelmet.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:superlegendenhelmet")
-        end
-        return itemstack
-    end,
 })
 
 minetest.register_tool("3d_armor:superlegendenleggings", {
@@ -513,13 +429,6 @@ minetest.register_tool("3d_armor:superlegendenleggings", {
 	groups = {armor_legs=12.2, armor_heal=12, armor_use=0,armor_fire=0.61, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_superlegendenleggings.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:superlegendenleggings2")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:superlegendenleggings2", {
 	description = "Superlegendleggings Mode 2 (speed and no jump)\nLeggings-lv.122",
@@ -527,13 +436,6 @@ minetest.register_tool("3d_armor:superlegendenleggings2", {
 	groups = {armor_legs=12.2, armor_heal=12, armor_use=0,armor_fire=0.61, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_superlegendenleggings.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:superlegendenleggings3")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:superlegendenleggings3", {
 	description = "Superlegendleggings Mode 3 (no speed and jump)\nLeggings-lv.122",
@@ -541,13 +443,6 @@ minetest.register_tool("3d_armor:superlegendenleggings3", {
 	groups = {armor_legs=12.2, armor_heal=12, armor_use=0,armor_fire=0.61, physics_jump=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_superlegendenleggings.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:superlegendenleggings4")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:superlegendenleggings4", {
 	description = "Superlegendleggings Mode 4 (speed and jump)\nLeggings-lv.122",
@@ -555,13 +450,6 @@ minetest.register_tool("3d_armor:superlegendenleggings4", {
 	groups = {armor_legs=12.2, armor_heal=12, armor_use=0,armor_fire=0.61, physics_jump=0.25, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_superlegendenleggings.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:superlegendenleggings")
-        end
-        return itemstack
-    end,
 })
 
 
@@ -571,13 +459,6 @@ minetest.register_tool("3d_armor:regnumboots", {
 	groups = {armor_feet=15.0, armor_heal=13, armor_use=0,armor_fire=1, armor_water=0.2},
 	wear = 0,
     wield_image = "3d_armor_inv_regnumboots.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:regnumboots2")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:regnumboots2", {
 	description = "Regnumboots Mode 2 (speed and no jump)\nBoots-lv.MAX",
@@ -585,13 +466,6 @@ minetest.register_tool("3d_armor:regnumboots2", {
 	groups = {armor_feet=15.0, armor_heal=13, armor_use=0,armor_fire=1, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_regnumboots.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:regnumboots3")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:regnumboots3", {
 	description = "Regnumboots Mode 3 (no speed and jump)\nBoots-lv.MAX",
@@ -599,13 +473,6 @@ minetest.register_tool("3d_armor:regnumboots3", {
 	groups = {armor_feet=15.0, armor_heal=13, armor_use=0,armor_fire=1, physics_jump=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_regnumboots.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:regnumboots4")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:regnumboots4", {
 	description = "Regnumboots Mode 4 (speed and jump)\nBoots-lv.MAX",
@@ -613,13 +480,6 @@ minetest.register_tool("3d_armor:regnumboots4", {
 	groups = {armor_feet=15.0, armor_heal=13, armor_use=0,armor_fire=1, physics_jump=0.25, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_regnumboots.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:regnumboots")
-        end
-        return itemstack
-    end,
 })
 
 minetest.register_tool("3d_armor:regnumchestplate", {
@@ -628,13 +488,6 @@ minetest.register_tool("3d_armor:regnumchestplate", {
 	groups = {armor_torso=15.0, armor_heal=13, armor_use=0, armor_fire=1, armor_water=0.2},
 	wear = 0,
     wield_image = "3d_armor_inv_regnumchestplate.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:regnumchestplate2")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:regnumchestplate2", {
 	description = "Regnumchestplate Mode 2 (speed and no jump)\nChestplate-lv.MAX",
@@ -642,13 +495,6 @@ minetest.register_tool("3d_armor:regnumchestplate2", {
 	groups = {armor_torso=15.0, armor_heal=13, armor_use=0, armor_fire=1, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_regnumchestplate.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:regnumchestplate3")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:regnumchestplate3", {
 	description = "Regnumchestplate Mode 3 (no speed and jump)\nChestplate-lv.MAX",
@@ -656,13 +502,6 @@ minetest.register_tool("3d_armor:regnumchestplate3", {
 	groups = {armor_torso=15.0, armor_heal=13, armor_use=0, armor_fire=1, physics_jump=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_regnumchestplate.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:regnumchestplate4")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:regnumchestplate4", {
 	description = "Regnumchestplate Mode 4 (speed and jump)\nChestplate-lv.MAX",
@@ -670,13 +509,6 @@ minetest.register_tool("3d_armor:regnumchestplate4", {
 	groups = {armor_torso=15.0, armor_heal=13, armor_use=0, armor_fire=1, physics_jump=0.25, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_regnumchestplate.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:regnumchestplate")
-        end
-        return itemstack
-    end,
 })
 
 minetest.register_tool("3d_armor:regnumhelmet", {
@@ -685,13 +517,6 @@ minetest.register_tool("3d_armor:regnumhelmet", {
 	groups = {armor_head=15.0, armor_heal=13, armor_use=0,armor_fire=1, armor_water=0.2},
 	wear = 0,
     wield_image = "3d_armor_inv_regnumhelmet.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:regnumhelmet2")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:regnumhelmet2", {
 	description = "Regnumhelmet Mode 2 (speed and no jump)\nHelmet-lv.MAX",
@@ -699,13 +524,6 @@ minetest.register_tool("3d_armor:regnumhelmet2", {
 	groups = {armor_head=15.0, armor_heal=13, armor_use=0,armor_fire=1, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_regnumhelmet.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:regnumhelmet3")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:regnumhelmet3", {
 	description = "Regnumhelmet Mode 3 (no speed and jump)\nHelmet-lv.MAX",
@@ -713,13 +531,6 @@ minetest.register_tool("3d_armor:regnumhelmet3", {
 	groups = {armor_head=15.0, armor_heal=13, armor_use=0,armor_fire=1, physics_jump=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_regnumhelmet.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:regnumhelmet4")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:regnumhelmet4", {
 	description = "Regnumhelmet Mode 4 (speed and jump)\nHelmet-lv.MAX",
@@ -727,13 +538,6 @@ minetest.register_tool("3d_armor:regnumhelmet4", {
 	groups = {armor_head=15.0, armor_heal=13, armor_use=0,armor_fire=1, physics_jump=0.25, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_regnumhelmet.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:regnumhelmet")
-        end
-        return itemstack
-    end,
 })
 
 minetest.register_tool("3d_armor:regnumleggings", {
@@ -742,13 +546,6 @@ minetest.register_tool("3d_armor:regnumleggings", {
 	groups = {armor_legs=15.0, armor_heal=13, armor_use=0,armor_fire=1, armor_water=0.2},
 	wear = 0,
     wield_image = "3d_armor_inv_regnumleggings.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:regnumleggings2")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:regnumleggings2", {
 	description = "Regnumleggings Mode 2 (speed and no jump)\nLeggings-lv.MAX",
@@ -756,13 +553,6 @@ minetest.register_tool("3d_armor:regnumleggings2", {
 	groups = {armor_legs=15.0, armor_heal=13, armor_use=0,armor_fire=1, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_regnumleggings.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:regnumleggings3")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:regnumleggings3", {
 	description = "Regnumleggings Mode 3 (no speed and jump)\nLeggings-lv.MAX",
@@ -770,13 +560,6 @@ minetest.register_tool("3d_armor:regnumleggings3", {
 	groups = {armor_legs=15.0, armor_heal=13, armor_use=0,armor_fire=1, physics_jump=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_regnumleggings.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:regnumleggings4")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("3d_armor:regnumleggings4", {
 	description = "Regnumleggings Mode 4 (speed and jump)\nLeggings-lv.MAX",
@@ -784,11 +567,4 @@ minetest.register_tool("3d_armor:regnumleggings4", {
 	groups = {armor_legs=15.0, armor_heal=13, armor_use=0,armor_fire=1, physics_jump=0.25, physics_speed=0.25, armor_water=0.2, not_in_creative_inventory=1},
 	wear = 0,
     wield_image = "3d_armor_inv_regnumleggings.png",
-    on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("3d_armor:regnumleggings")
-        end
-        return itemstack
-    end,
 })

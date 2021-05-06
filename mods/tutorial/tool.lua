@@ -64,13 +64,6 @@ minetest.register_tool("tutorial:regnumbattleaxe1", {
 		damage_groups = {fleshy=150}
 	},
 	liquids_pointable = false,
-	on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:regnumbattleaxe2")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("tutorial:regnumbattleaxe2", {
 	description = "Regnumbattleaxe Mode 2 (dig water and lava)\nBattleaxe-lv.MAX",
@@ -90,13 +83,6 @@ minetest.register_tool("tutorial:regnumbattleaxe2", {
 		damage_groups = {fleshy=150}
 	},
 	liquids_pointable = true,
-	on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:regnumbattleaxe3")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("tutorial:superlegendenbattleaxe1", {
 	description = "Superlegendbattleaxe Mode 1 (dig water and lava)\nBattleaxe-lv.122",
@@ -116,13 +102,6 @@ minetest.register_tool("tutorial:superlegendenbattleaxe1", {
 		damage_groups = {fleshy=122}
 	},
 	liquids_pointable = true,
-	on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:superlegendenbattleaxe2")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("tutorial:superlegendenbattleaxe2", {
 	description = "Superlegendbattleaxe Mode 2 (dig no water and lava)\nBattleaxe-lv.122",
@@ -142,13 +121,6 @@ minetest.register_tool("tutorial:superlegendenbattleaxe2", {
 		damage_groups = {fleshy=122}
 	},
 	liquids_pointable = false,
-	on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:superlegendenbattleaxe3")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("tutorial:lilabattleaxe2", {
 	description = "Purplebattleaxe Lv.MAX",
@@ -553,13 +525,6 @@ minetest.register_tool("tutorial:adminbattleaxe", {
 		damage_groups = {fleshy=2000}
 	},
 	liquids_pointable = false,
-	on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:adminbattleaxe2")
-        end
-        return itemstack
-    end,
 })
 minetest.register_tool("tutorial:adminbattleaxe2", {
 	description = "Admin tool 3: Admin battleaxe Mode 2 (dig no water and lava)",
@@ -580,13 +545,6 @@ minetest.register_tool("tutorial:adminbattleaxe2", {
 		damage_groups = {fleshy=2000}
 	},
 	liquids_pointable = true,
-	on_secondary_use = function(itemstack, user, pointed_thing)
-        local keys = user:get_player_control()
-        if keys["sneak"] == true then
-            itemstack:set_name("tutorial:adminbattleaxe3")
-        end
-        return itemstack
-    end,
 })
 --v.0.17.0
 --v.0.16.0

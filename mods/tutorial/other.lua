@@ -725,23 +725,13 @@ rg14.get_formspec = function(player, pos)
         .."label[0,5.8;superlegendary]"
         .."label[0,6.1;regnum]"
 		.."label[0,6.4;The legendary battleaxe (or higher) will double some ores if you dig them.]"
-        .."label[0,6.7;There are differend modes for some battleaxes, armors and guns.]"
-		.."label[0,7.0;With battleaxe Mode 2 you can dig water and lava.]"
-		.."label[0,7.3;With battleaxe Mode 3 you can only hunt monster.]"
-		.."label[0,7.6;With armor Mode 2 you can run faster.]"
-        .."label[0,7.9;With armor Mode 3 you can jump higher.]"
-        .."label[0,8.2;With armor Mode 4 you can run faster and jump higher.]"
-		.."label[0,8.5;With gun Mode 2 you can only make damage to monsters.]"
-		.."label[0,8.8;With gun Mode 3 you will also add thunder.]"
-        .."label[0,9.1;For changing the mode of a tool (also Wallplacer and mining Drill),]"
-		.."label[0,9.4;you have to press the right mouse and sneak (don't point at a node)]"
         .."button[2,10;   2,0.5;rg13;<]"
         .."button[4,10;   2,0.5;rg15;>]"
 	return formspec		
 end
 local rg15 = {}
 rg15.get_formspec = function(player, pos)
-    if player == nil then
+	if player == nil then
         return
     end
 	formspec = "size[9,10.3]"
@@ -750,12 +740,31 @@ rg15.get_formspec = function(player, pos)
         .."background[9,10.3;1,1;gui_formbg.png;true]"
         .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
         .."bgcolor[#080808BB;true]"
-		.."label[0,1;II. 6. Chat commands]"
-        .."label[0,1.3;/admin for all admin things (give priv needed)]"
-        .."label[0,1.6;/regnum for all regnum things (give priv needed)]"
-        .."label[0,1.9;/rank to see your rank]"
-        .."button[2,10;   2,0.5;rg14;<]"
-		.."button[4,10;   2,0.5;rg16;>]"
+		.."label[0,1;II. 6. Tool Modes]"
+        .."label[0,1.3;There are differend modes for some tools.]"
+		.."label[0,1.6;For changing the mode of a tool,]"
+		.."label[0,1.9;you have to press the right mouse and sneak (don't point at a node)]"
+		
+		.."label[0,2.5;With (superlegendary/regnum) battleaxe mode 1 you can not dig water and lava,]"
+		.."label[0,2.8;with mode 2 you can dig water and lava, with mode 3 you can only hunt monster.]"
+		
+		.."label[0,3.4;With (superlegendary/regnum) armor mode 1 you can not run faster and jump higher,]"
+		.."label[0,3.7;with mode 2 you can run faster, with mode 3 you can jump higher,]"
+		.."label[0,4.0;with mode 4 you can run faster and jump higher.]"
+		
+		.."label[0,4.6;With (superlegendary/regnum) gun mode 1 you will not add thunder,]"
+		.."label[0,4.9;with mode 2 you can only make damage to monsters, with mde 3 you will also add thunder.]"
+		
+		.."label[0,5.5;With mining drill mode 1 you will dig a singel node,]"
+		.."label[0,5.8;with mode 2 you will dig 3 nodes deep, with mode 3 you will dig 3 nodes wide,]"
+		.."label[0,6.1;with mode 4 you will dig 3 nodes tall, with mode 5 you will dig 3x3 nodes.]"
+		
+		.."label[0,6.7;With wallplacer mode 1 you will place a 3x3 wall,]"
+		.."label[0,7.0;with mode 2 you will place a 5x5 wall, with mode 3 you will place a 7x7 wall,]"
+		.."label[0,7.3;with mode 4 you will place a 9x9 wall, with mode 5 you will place a 11x11 wall.]"
+        
+		.."button[2,10;   2,0.5;rg14;<]"
+        .."button[4,10;   2,0.5;rg16;>]"
 	return formspec		
 end
 local rg16 = {}
@@ -769,7 +778,26 @@ rg16.get_formspec = function(player, pos)
         .."background[9,10.3;1,1;gui_formbg.png;true]"
         .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
         .."bgcolor[#080808BB;true]"
-		.."label[0,1;II. 7. Keys]"
+		.."label[0,1;II. 7. Chat Commands]"
+        .."label[0,1.3;/admin for all admin things (give priv needed)]"
+        .."label[0,1.6;/regnum for all regnum things (give priv needed)]"
+        .."label[0,1.9;/rank to see your rank]"
+        .."button[2,10;   2,0.5;rg15;<]"
+		.."button[4,10;   2,0.5;rg17;>]"
+	return formspec		
+end
+local rg17 = {}
+rg17.get_formspec = function(player, pos)
+    if player == nil then
+        return
+    end
+	formspec = "size[9,10.3]"
+		.."button[0,0;2,0.5;inven;Back]"
+		.."button[2,0;2,0.5;main;Main]"
+        .."background[9,10.3;1,1;gui_formbg.png;true]"
+        .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
+        .."bgcolor[#080808BB;true]"
+		.."label[0,1;II. 8. Keys]"
         .."label[0,1.3;Bagkey: can be crafted with grey coins]"
         .."label[0,1.6;Armorkey: can be crafted with a blue and a red ore]"
         .."label[0,1.9;Levelkey: can be got as a reward for green level 50]"
@@ -785,7 +813,7 @@ rg16.get_formspec = function(player, pos)
 		.."label[0,4.9;Goldenkey: can be got as a reward for yellow level 100]"
 		.."label[0,5.2;Cookingkey: can be crafted with cyan coins]"
 		.."label[0,5.5;Protectionkey: can be got as a reward for all trophys]"
-        .."button[2,10;   2,0.5;rg15;<]"
+        .."button[2,10;   2,0.5;rg16;<]"
 	return formspec		
 end
 local rg10 = {}
@@ -1228,7 +1256,7 @@ rg8.get_formspec = function(player, pos)
         .."background[9,10.3;1,1;gui_formbg.png;true]"
         .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
         .."bgcolor[#080808BB;true]"
-		.."label[0,1;I. 6. Color items]"
+		.."label[0,1;I. 6. Color Items]"
 		.."label[0.0,1.3;a) Artifacts]"
         .."label[0.2,1.6;If you run around you will get artifacts.]"
         .."label[0.2,1.9;Collect 71 artifacts to get the knight key as a reward.]"
@@ -1281,7 +1309,7 @@ rg2.get_formspec = function(player, pos)
         .."label[0,2.2;   3. Help]"
         .."label[0,2.5;   4. Spezial]"
         .."label[0,2.8;   5. Quests]"
-        .."label[0,3.1;   6. Color items]"
+        .."label[0,3.1;   6. Color Items]"
         .."label[0,3.4;   7. Music]"
         .."label[0,3.7; II. Game]"
         .."label[0,4.0;   1. Gifts]"
@@ -1289,8 +1317,9 @@ rg2.get_formspec = function(player, pos)
         .."label[0,4.6;   3. Xp & Level]"
         .."label[0,4.9;   4. Ores]"
         .."label[0,5.2;   5. Armor, Battleaxes & Guns]"
-        .."label[0,5.5;   6. Chat commands]"
-		.."label[0,5.8;   7. Keys]"
+		.."label[0,5.5;   6. Tool Modes]"
+        .."label[0,5.8;   7. Chat Commands]"
+		.."label[0,6.1;   8. Keys]"
         .."button[2,10;   2,0.5;rg1;<]"
         .."button[4,10;   2,0.5;rg3;>]"
 	return formspec		
@@ -1636,6 +1665,9 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	end
 	if fields.rg16 then
 		inventory_plus.set_inventory_formspec(player, rg16.get_formspec(player))
+	end
+	if fields.rg17 then
+		inventory_plus.set_inventory_formspec(player, rg17.get_formspec(player))
 	end
     if fields.crafting5 then
 		inventory_plus.set_inventory_formspec(player, crafting5.get_formspec(player))
@@ -2097,11 +2129,11 @@ ach3.get_formspec = function(player, pos)
         return
     end
 	local player_inv = player:get_inventory()
-    player_inv:set_size("year", 4)
 	local year = player_inv:get_stack("year", 1):get_count()
     local year2 = player_inv:get_stack("year", 2):get_count()
 	local year3 = player_inv:get_stack("year", 3):get_count()
 	local year4 = player_inv:get_stack("year", 4):get_count()
+	local year5 = player_inv:get_stack("year", 5):get_count()
     local d = 0
     if year == 1 then
         d = d+1
@@ -2115,6 +2147,9 @@ ach3.get_formspec = function(player, pos)
 	if year4 == 1 then
         d = d+1
     end
+	if year5 == 1 then
+        d = d+1
+    end
     formspec= "size[10.5,11.3]"
         .."background[10.5,11.3;1,1;gui_formbg.png;true]"
         .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
@@ -2125,11 +2160,13 @@ ach3.get_formspec = function(player, pos)
         .."label[0.8,1.9;Two years Trophy]"
 		.."label[0.8,2.7;Three years Trophy]"
 		.."label[0.8,3.5;Four years Trophy]"
-        .."label[5.5,0;"..d.."/4]"
+		.."label[0.8,4.3;Five years Trophy]"
+        .."label[5.5,0;"..d.."/5]"
         .."image[0,1;0.8,0.8;tutorial_"..year..".png]"
         .."image[0,1.8;0.8,0.8;tutorial_"..year2..".png]"
 		.."image[0,2.6;0.8,0.8;tutorial_"..year3..".png]"
 		.."image[0,3.4;0.8,0.8;tutorial_"..year4..".png]"
+		.."image[0,4.2;0.8,0.8;tutorial_"..year5..".png]"
 	return formspec
 end
 for j = 1, 8, 1 do
@@ -2251,25 +2288,8 @@ local mode_text = {
 	{"give player Admin rank (all privs)"},
 	{"mark player as a youtuber"},
 }
-local function server_hammer_setmode(user, itemstack, mode, keys)
-	local puncher = user:get_player_name()
-	if keys["sneak"] == false and mode == 0 then
-		return 
-	end
-	if keys["sneak"] == true then
-		mode = mode + 1
-		if mode == 9 then 
-			mode = 1
-		end
-		minetest.chat_send_player(puncher, "Ban hammer mode : "..mode.." - "..mode_text[mode][1] )
-	end
-	itemstack:set_name("tutorial:server_hammer"..mode)
-	itemstack:set_metadata(mode)
-	return itemstack, mode
-end
 local function server_hammer_handler(itemstack, user, pointed_thing, mode)
 	local keys = user:get_player_control()
-	server_hammer_setmode(user, itemstack, mode, keys)
 	if pointed_thing.type ~= "object" then
 		return
 	end
@@ -2460,27 +2480,11 @@ local function server_hammer_handler(itemstack, user, pointed_thing, mode)
 	end
 	return itemstack
 end
-minetest.register_craftitem("tutorial:server_hammer", {
-	description = "Admin tool 6: Server Hammer",
-	inventory_image = "ban_hammer.png",
-	stack_max = 1,
-	groups = {not_in_creative_inventory=1},
-	on_secondary_use = function(itemstack, user, pointed_thing)
-		local mode = 0
-		server_hammer_handler(itemstack, user, pointed_thing, mode)
-		return itemstack
-	end,
-	on_use = function(itemstack, user, pointed_thing)
-		local mode = 0
-		server_hammer_handler(itemstack, user, pointed_thing, mode)
-		return itemstack
-	end,
-})
 minetest.register_craftitem("tutorial:server_hammer1", {
 		description = "Admin tool 6: Server Hammer Mode 1 ("..mode_text[1][1]..")",
 		inventory_image = "ban_hammer.png^technic_tool_mode1.png",
 		wield_image = "ban_hammer.png",
-		on_secondary_use = function(itemstack, user, pointed_thing)
+		on_use = function(itemstack, user, pointed_thing)
 			server_hammer_handler(itemstack, user, pointed_thing, 1)
 			return itemstack
 		end,
@@ -2491,7 +2495,7 @@ for i = 2, 8 do
 		inventory_image = "ban_hammer.png^technic_tool_mode"..i..".png",
 		wield_image = "ban_hammer.png",
 		groups = {not_in_creative_inventory=1},
-		on_secondary_use = function(itemstack, user, pointed_thing)
+		on_use = function(itemstack, user, pointed_thing)
 			local mode = i
 			server_hammer_handler(itemstack, user, pointed_thing, mode)
 			return itemstack
@@ -2893,7 +2897,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	end
     if fields.achc then
         local player_inv = player:get_inventory()
-        player_inv:set_size("year", 4)
+        player_inv:set_size("year", 5)
         if player:get_inventory():contains_item("main", "tutorial:trophy_year1") then
             player_inv:set_stack("year", 1,"tutorial:dirt")
 		end
@@ -2905,6 +2909,9 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		end
 		if player:get_inventory():contains_item("main", "tutorial:trophy_year4") then
             player_inv:set_stack("year", 4,"tutorial:dirt")
+		end
+		if player:get_inventory():contains_item("main", "tutorial:trophy_year5") then
+            player_inv:set_stack("year", 5,"tutorial:dirt")
 		end
 		inventory_plus.set_inventory_formspec(player, ach3.get_formspec(player))
 	end
@@ -3493,7 +3500,7 @@ cr.get_formspec = function(player,pos)
 		.."button[2,2.5;2,0.5;"..image3..";5x5 craft]"
 		.."button[4,2.5;2,0.5;"..image4..";Regnum craft]"
         .."button[6,2.5;2,0.5;"..image5..";Gem craft]"
-        .."button[8,2.5;2,0.5;"..image6..";Cooking]"
+        .."button[8,2.5;2,0.5;"..image6..";Cooking craft]"
         .."button[10,2.5;2,0.5;"..image7..";Medallion craft]"
         .."button[12,2.5;2,0.5;"..image8..";Crystal craft]"
 		.."button[3,3.5;2,0.5;dna;DNA craft]"

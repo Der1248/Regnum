@@ -14,10 +14,6 @@ sfinv.register_page("sfinv:crafting", {
 				image[4.75,1.5;1,1;sfinv_crafting_arrow.png]
 				listring[current_player;main]
 				listring[current_player;craft]
-				image_button[0,0;1.6,1.6;inventory_plus_inven.png;inven;]
-				label[0.3,1.5;selection]
-				button[6.6,1.4;1.5,0.5;craft10;Craft (10)]
-				button[6.6,2.2;1.5,0.5;craft99;Craft (99)]
 			]], true)
 	end
 })

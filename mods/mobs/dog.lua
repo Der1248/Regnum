@@ -26,6 +26,8 @@ mobs:register_mob("mobs:dog", {
 	lava_damage = 0,
 	light_damage = 0,
 	fall_damage = 0,
+	suffocation = 0,
+	knock_back = false,
 	metadata = 1,
 	metadata2 = 1,
 	animation = {
