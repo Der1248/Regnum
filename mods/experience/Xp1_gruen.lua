@@ -303,6 +303,9 @@ minetest.register_entity("experience:orb", {
 			self.object:remove()
 		end
 		local p = self.object:getpos()
+		if p == nil then
+			return
+		end
 		local nn = minetest.env:get_node(p).name
 		noder = minetest.env:get_node(p).name
 		p.y = p.y - 0.3
