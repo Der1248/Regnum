@@ -6,7 +6,7 @@ minetest.register_on_joinplayer(function(player)
 		offset = {x=0, y=10},
 		alignment = {x=1, y=0},
 		number = 0xFFFFFF ,
-		text = "For Minetest 	  :  5.5.0",
+		text = "For Minetest 	  :  5.5.x",
 	})
 	player:hud_add({
 		hud_elem_type = "text",
@@ -14,7 +14,7 @@ minetest.register_on_joinplayer(function(player)
 		offset = {x=0, y=30},
 		alignment = {x=1, y=0},
 		number = 0xFFFFFF ,
-		text = "Game Version	 :  3.6.2",
+		text = "Game Version	 :  3.6.3",
 	})
 end)
 
@@ -315,6 +315,38 @@ minetest.register_node("tutorial:trophy_year6", {
     description = "Six years Regnum!!",
 	tiles = {
 		"tutorial_trophy_year6.png"
+	},
+    groups = { snappy=3 },
+    drawtype = "nodebox",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.125, -0.5, -0.125, 0.1875, -0.4375, 0.1875}, -- NodeBox1
+			{-0.0625, -0.4375, -0.0625, 0.125, -0.375, 0.125}, -- NodeBox2
+			{-0.02, -0.375, -0.02, 0.0825, -0.1875, 0.0825}, -- NodeBox3
+			{-0.0625, -0.1875, -0.0625, 0.125, -0.125, 0.125}, -- NodeBox4
+			{-0.125, -0.1875, -0.0625, -0.0625, 0.125, 0.125}, -- NodeBox5
+			{0.125, -0.1875, -0.0625, 0.1875, 0.125, 0.125}, -- NodeBox6
+			{-0.125, -0.1875, 0.125, 0.1875, 0.125, 0.1875}, -- NodeBox7
+			{-0.125, -0.1875, -0.125, 0.1875, 0.125, -0.0625}, -- NodeBox8
+			{-0.0625, -0.25, -0.0625, 0.125, -0.1875, 0.125}, -- NodeBox9
+			{0.1875, 0.05, 0, 0.23, 0.0925, 0.0625}, -- NodeBox10
+			{0.1875, -0.15, 0, 0.23, -0.11, 0.0625}, -- NodeBox11
+			{0.23, -0.15, 0, 0.2725, 0.0925, 0.0625}, -- NodeBox12
+			{-0.1675, -0.15, 0, -0.125, -0.11, 0.0625}, -- NodeBox13
+			{-0.1675, 0.05, 0, -0.125, 0.0925, 0.0625}, -- NodeBox14
+			{-0.21, -0.15, 0, -0.1675, 0.0925, 0.0625}, -- NodeBox15
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.21, -0.5, -0.125, 0.2725, 0.125, 0.1875 }
+	}
+})
+minetest.register_node("tutorial:trophy_year7", {
+    description = "Seven years Regnum!!",
+	tiles = {
+		"tutorial_trophy_year7.png"
 	},
     groups = { snappy=3 },
     drawtype = "nodebox",
@@ -1662,10 +1694,10 @@ minetest.register_globalstep(function(dtime)
 		for _,player in ipairs(players) do
 			local pri = minetest.get_player_privs(player:get_player_name())
 			local player_inv = player:get_inventory()
-			player_inv:set_size("year", 6)
-			if player_inv:room_for_item("main", "tutorial:trophy_year6") and player_inv:get_stack("year", 6):get_count() == 0 then
-				player_inv:add_item("main", "tutorial:trophy_year6")
-				player_inv:set_stack("year", 6, "default:dirt")
+			player_inv:set_size("year", 7)
+			if player_inv:room_for_item("main", "tutorial:trophy_year7") and player_inv:get_stack("year", 7):get_count() == 0 then
+				player_inv:add_item("main", "tutorial:trophy_year7")
+				player_inv:set_stack("year", 7, "default:dirt")
 			end
 			player_inv:set_size("youtube", 1)
 			local c = player_inv:get_stack("youtube",1):get_count()

@@ -182,7 +182,7 @@ minetest.register_globalstep(function()
 	for _, player in pairs(minetest.get_connected_players()) do
 		local name = player:get_player_name()
 		local player_data = players[name]
-		local model = models[player_data.model]
+		local model = player_data and models[player_data.model]
 		if model and not player_attached[name] then
 			local controls = player:get_player_control()
 			local animation_speed_mod = model.animation_speed or 30
@@ -218,6 +218,6 @@ for _, api_function in pairs({"get_animation", "set_animation", "set_model", "se
 			minetest.log("warning", api_function .. " called on offline player")
 			return
 		end
-		original_function(player, ...)
+		return original_function(player, ...)
 	end
 end
