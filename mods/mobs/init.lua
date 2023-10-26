@@ -26,8 +26,9 @@ minetest.register_globalstep(function(dtime)
 	if timer >= 1 then
 		local players = minetest.get_connected_players()
 		for _,player in ipairs(players) do
+			local player_meta = player:get_meta()
 			for _, m in pairs(animals) do
-				if player:get_attribute(m[1].."x") then
+				if player_meta:contains(m[1].."x") then
 					local all_objects = minetest.get_objects_inside_radius({x=tonumber(player:get_attribute(m[1].."x")), y=tonumber(player:get_attribute(m[1].."y")), z=tonumber(player:get_attribute(m[1].."z"))}, 30)
 					local is_player = false
 					for _,obj in ipairs(all_objects) do
@@ -195,7 +196,7 @@ function first_activate(self)
 					self.walk_velocity = 1
 					self.run_velocity = 3
                     self.jump = true
-                    
+
 				end
 				if self.metadata2 == 2 then
 					self.walk_velocity = 0
@@ -212,7 +213,7 @@ function first_activate(self)
 				self.walk_velocity = 1
 				self.run_velocity = 3
                 self.jump = true
-                    
+
 			end
 			if self.metadata2 == 2 then
 				self.walk_velocity = 0
@@ -310,7 +311,7 @@ function first_step(self,dtime)
 				minetest.get_player_by_name(self.owner):set_attribute("sheepz", ""..math.floor(self.object:getpos().z+0.5))
 				minetest.get_player_by_name(self.owner):set_attribute("sheep_meta1", ""..self.metadata)
 				minetest.get_player_by_name(self.owner):set_attribute("sheep_meta2", ""..self.metadata2)
-			
+
 			end
 		end
 		if self.name == "mobs:fox" then
@@ -358,7 +359,7 @@ function first_step(self,dtime)
 				minetest.get_player_by_name(self.owner):set_attribute("cat_meta2", ""..self.metadata2)
 			end
 		end
-		
+
 		if self.name == "mobs:dog" and self.metadata2 == 1 then
 			local pos = self.object:getpos()
 			local all_objects = minetest.get_objects_inside_radius(pos, 15)
@@ -368,7 +369,7 @@ function first_step(self,dtime)
 			for _,obj in ipairs(all_objects) do
 				if obj:is_player() then
 					if self.owner == obj:get_player_name() then
-						k = 1	
+						k = 1
 					end
 				end
 			end
@@ -387,7 +388,7 @@ function first_step(self,dtime)
 			for _,obj in ipairs(all_objects) do
 				if obj:is_player() then
 					if self.owner == obj:get_player_name() then
-						k = 1	
+						k = 1
 					end
 				end
 			end
@@ -406,7 +407,7 @@ function first_step(self,dtime)
 			for _,obj in ipairs(all_objects) do
 				if obj:is_player() then
 					if self.owner == obj:get_player_name() then
-						k = 1	
+						k = 1
 					end
 				end
 			end
@@ -439,7 +440,7 @@ function first_step(self,dtime)
 			for _,obj in ipairs(all_objects) do
 				if obj:is_player() then
 					if self.owner == obj:get_player_name() then
-						k = 1	
+						k = 1
 					end
 				end
 			end
@@ -469,7 +470,7 @@ function first_step(self,dtime)
 			for _,obj in ipairs(all_objects) do
 				if obj:is_player() then
 					if self.owner == obj:get_player_name() then
-						k = 1	
+						k = 1
 					end
 				end
 			end
@@ -488,7 +489,7 @@ function first_step(self,dtime)
 			for _,obj in ipairs(all_objects) do
 				if obj:is_player() then
 					if self.owner == obj:get_player_name() then
-						k = 1	
+						k = 1
 					end
 				end
 			end
@@ -514,13 +515,13 @@ function first_step(self,dtime)
 								minetest.get_player_by_name(self.owner):get_inventory():set_stack("r1248", 1, "default:dirt")
 							elseif ra == 2 then
 								minetest.get_player_by_name(self.owner):get_inventory():set_stack("r1248", 2, "default:dirt")
-							elseif ra == 3 then  
+							elseif ra == 3 then
 								minetest.get_player_by_name(self.owner):get_inventory():set_stack("r1248", 3, "default:dirt")
-							elseif ra == 4 then  
+							elseif ra == 4 then
 								minetest.get_player_by_name(self.owner):get_inventory():set_stack("r1248", 4, "default:dirt")
-							elseif ra == 5 then  
+							elseif ra == 5 then
 								minetest.get_player_by_name(self.owner):get_inventory():set_stack("r1248", 5, "default:dirt")
-							elseif ra == 6 then  
+							elseif ra == 6 then
 								minetest.get_player_by_name(self.owner):get_inventory():set_stack("r1248", 6, "default:dirt")
 							end
 							minetest.get_player_by_name(self.owner):get_inventory():set_stack("foxfox", 1, "")
@@ -540,7 +541,7 @@ function first_step(self,dtime)
 			for _,obj in ipairs(all_objects) do
 				if obj:is_player() then
 					if self.owner == obj:get_player_name() then
-						k = 1	
+						k = 1
 					end
 				end
 			end
@@ -795,7 +796,7 @@ function update(self, clicker)
 			minetest.show_formspec(player_name, "npcf_"..self.owner.."'s Fox", formspec)
 		else
 			local inv = minetest.get_player_by_name(self.owner):get_inventory()
-			
+
 			local player_name = clicker:get_player_name()
 			local formspec = "size[8,8.5]"
             .."label[0,1.2;Fox produce a Foxkey and Treasures after some time]"
@@ -964,7 +965,7 @@ function receive_fields(self, fields, sender)
 			end
 		end
 	end
-end	
+end
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	for _,ref in pairs(minetest.luaentities) do
 		if ref.object and ref.type and ref.npc_name then
@@ -972,7 +973,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 				ref.on_receive_fields(ref, fields, player)
 			end
 		end
-	end				
+	end
 end)
 
 --[[
