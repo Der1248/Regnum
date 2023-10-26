@@ -102,7 +102,7 @@ local entitydef_default = {
 		if not def.entity then
 			return
 		end
-		def.entity:setpos(vector.add(self._pos, def.offset))
+		def.entity:set_pos(vector.add(self._pos, def.offset))
 		def.entity:setvelocity(self._velocity)
 		def.entity:setacceleration(self._acceleration)
 	end,
@@ -177,20 +177,20 @@ local entitydef_default = {
 	getid = function(self)
 		return self._id
 	end,
-	getpos = function(self)
+	get_pos = function(self)
 		return vector.new(self._pos)
 	end,
-	setpos = function(self, pos)
+	set_pos = function(self, pos)
 		self._pos = vector.new(pos)
 		--for _, entity in pairs(self._attached_entities) do
 		--	if entity.entity then
-		--		entity.entity:setpos(vector.add(self._pos, entity.offset))
+		--		entity.entity:set_pos(vector.add(self._pos, entity.offset))
 		--	end
 		--end
 		local master = self._attached_entities_master
 		if master then
 			local master_def = self._attached_entities[master]
-			master_def.entity:setpos(vector.add(self._pos, master_def.offset))
+			master_def.entity:set_pos(vector.add(self._pos, master_def.offset))
 		end
 	end,
 	getvelocity = function(self)
@@ -298,7 +298,7 @@ function luaentity.get_objects_inside_radius(pos, radius)
 	local objects = {}
 	local index = 1
 	for id, entity in pairs(luaentity.entities) do
-		if vector.distance(pos, entity:getpos()) <= radius then
+		if vector.distance(pos, entity:get_pos()) <= radius then
 			objects[index] = entity
 			index = index + 1
 		end
@@ -314,7 +314,7 @@ minetest.register_globalstep(function(dtime)
 		if master then
 			local master_def = entity._attached_entities[master]
 			local master_entity = master_def.entity
-			entity._pos = vector.subtract(master_entity:getpos(), master_def.offset)
+			entity._pos = vector.subtract(master_entity:get_pos(), master_def.offset)
 			entity._velocity = master_entity:getvelocity()
 			entity._acceleration = master_entity:getacceleration()
 		else
