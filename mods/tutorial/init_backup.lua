@@ -97,7 +97,7 @@ function heli:on_activate(staticdata, dtime_s)
 	self.prev_y=self.object:get_pos().y
 	if self.model == nil then
 		--if minetest.get_objects_inside_radius(self.object:get_pos(), 1)
-		self.model=minetest.env:add_entity(self.object:get_pos(), "tutorial:heliModel")
+		self.model=minetest.add_entity(self.object:get_pos(), "tutorial:heliModel")
 		self.model:set_attach(self.object, "Root", {x=0,y=0,z=0}, {x=0,y=0,z=0})
 	end
 
@@ -243,8 +243,8 @@ minetest.register_craftitem("tutorial:heli", {
 			return
 		end
 		pointed_thing.under.y = pointed_thing.under.y+1
-		minetest.env:add_entity(pointed_thing.under, "tutorial:heli")
-		--minetest.env:add_entity(pointed_thing.under, "helicopter:motor")
+		minetest.add_entity(pointed_thing.under, "tutorial:heli")
+		--minetest.add_entity(pointed_thing.under, "helicopter:motor")
 		--itemstack:take_item()
 		return itemstack
 	end,

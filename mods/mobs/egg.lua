@@ -5,7 +5,7 @@ minetest.register_craftitem("mobs:stone_monster_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs:stone_monster")
+			minetest.add_entity(pointed_thing.above,"mobs:stone_monster")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -20,17 +20,17 @@ minetest.register_craftitem("mobs:random_monster_egg", {
         if pointed_thing.type == "node" then
             local x = math.random(1,6)
             if x == 1 then
-			    minetest.env:add_entity(pointed_thing.above,"mobs:red_monster")
+			    minetest.add_entity(pointed_thing.above,"mobs:red_monster")
             elseif x == 2 then
-                minetest.env:add_entity(pointed_thing.above,"mobs:blue_monster")
+                minetest.add_entity(pointed_thing.above,"mobs:blue_monster")
             elseif x == 3 then
-                minetest.env:add_entity(pointed_thing.above,"mobs:green2_monster")
+                minetest.add_entity(pointed_thing.above,"mobs:green2_monster")
             elseif x == 4 then
-                minetest.env:add_entity(pointed_thing.above,"mobs:yellow_monster")
+                minetest.add_entity(pointed_thing.above,"mobs:yellow_monster")
             elseif x == 5 then
-                minetest.env:add_entity(pointed_thing.above,"mobs:purple_monster")
+                minetest.add_entity(pointed_thing.above,"mobs:purple_monster")
             elseif x == 6 then
-                minetest.env:add_entity(pointed_thing.above,"mobs:cyan_monster")
+                minetest.add_entity(pointed_thing.above,"mobs:cyan_monster")
             end
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
@@ -45,7 +45,7 @@ minetest.register_craftitem("mobs:dirt_monster_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs:dirt_monster")
+			minetest.add_entity(pointed_thing.above,"mobs:dirt_monster")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -59,7 +59,7 @@ minetest.register_craftitem("mobs:sand_monster_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs:sand_monster")
+			minetest.add_entity(pointed_thing.above,"mobs:sand_monster")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -73,7 +73,7 @@ minetest.register_craftitem("mobs:snow_monster_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs:snow_monster")
+			minetest.add_entity(pointed_thing.above,"mobs:snow_monster")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -87,7 +87,7 @@ minetest.register_craftitem("mobs:ice_monster_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs:ice_monster")
+			minetest.add_entity(pointed_thing.above,"mobs:ice_monster")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -101,7 +101,7 @@ minetest.register_craftitem("mobs:grass_monster_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs:green_monster")
+			minetest.add_entity(pointed_thing.above,"mobs:green_monster")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -115,7 +115,7 @@ minetest.register_craftitem("mobs:rainforest_litter_monster_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs:rainforest_litter_monster")
+			minetest.add_entity(pointed_thing.above,"mobs:rainforest_litter_monster")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -129,7 +129,7 @@ minetest.register_craftitem("mobs:dry_grass_monster_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs:dry_grass_monster")
+			minetest.add_entity(pointed_thing.above,"mobs:dry_grass_monster")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -143,7 +143,7 @@ minetest.register_craftitem("mobs:silver_sand_monster_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs:silver_sand_monster")
+			minetest.add_entity(pointed_thing.above,"mobs:silver_sand_monster")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -156,7 +156,7 @@ minetest.register_craftitem("mobs:desert_sand_monster_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs:desert_sand_monster")
+			minetest.add_entity(pointed_thing.above,"mobs:desert_sand_monster")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -170,7 +170,7 @@ minetest.register_craftitem("mobs:desert_stone_monster_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs:desert_stone_monster")
+			minetest.add_entity(pointed_thing.above,"mobs:desert_stone_monster")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -184,7 +184,7 @@ minetest.register_craftitem("mobs:dry_dirt_monster_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs:dry_dirt_monster")
+			minetest.add_entity(pointed_thing.above,"mobs:dry_dirt_monster")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -198,7 +198,7 @@ minetest.register_craftitem("mobs:clay_monster_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs:clay_monster")
+			minetest.add_entity(pointed_thing.above,"mobs:clay_monster")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -212,7 +212,7 @@ minetest.register_craftitem("mobs:gravel_monster_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs:gravel_monster")
+			minetest.add_entity(pointed_thing.above,"mobs:gravel_monster")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -226,7 +226,7 @@ minetest.register_craftitem("mobs:coniferous_litter_monster_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs:coniferous_litter_monster")
+			minetest.add_entity(pointed_thing.above,"mobs:coniferous_litter_monster")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -240,7 +240,7 @@ minetest.register_craftitem("mobs:moss_monster_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs:moss_monster")
+			minetest.add_entity(pointed_thing.above,"mobs:moss_monster")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -254,7 +254,7 @@ minetest.register_craftitem("mobs:permafrost_monster_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs:permafrost_monster")
+			minetest.add_entity(pointed_thing.above,"mobs:permafrost_monster")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -268,7 +268,7 @@ minetest.register_craftitem("mobs:dog_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			local obj = minetest.env:add_entity(pointed_thing.above,"mobs:dog")
+			local obj = minetest.add_entity(pointed_thing.above,"mobs:dog")
 			local name = placer:get_player_name()
 			local ent = obj:get_luaentity()
 			ent.owner = placer:get_player_name()
@@ -286,7 +286,7 @@ minetest.register_craftitem("mobs:cat_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			local obj = minetest.env:add_entity(pointed_thing.above,"mobs:cat")
+			local obj = minetest.add_entity(pointed_thing.above,"mobs:cat")
 			local name = placer:get_player_name()
 			local ent = obj:get_luaentity()
 			ent.owner = placer:get_player_name()
@@ -304,7 +304,7 @@ minetest.register_craftitem("mobs:sheep_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			local obj = minetest.env:add_entity(pointed_thing.above,"mobs:sheep")
+			local obj = minetest.add_entity(pointed_thing.above,"mobs:sheep")
 			local name = placer:get_player_name()
 			local ent = obj:get_luaentity()
 			ent.owner = placer:get_player_name()
@@ -322,7 +322,7 @@ minetest.register_craftitem("mobs:dragon_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			local obj = minetest.env:add_entity(pointed_thing.above,"mobs:dragon")
+			local obj = minetest.add_entity(pointed_thing.above,"mobs:dragon")
 			local name = placer:get_player_name()
 			local ent = obj:get_luaentity()
 			ent.owner = placer:get_player_name()
@@ -340,7 +340,7 @@ minetest.register_craftitem("mobs:fox_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			local obj = minetest.env:add_entity(pointed_thing.above,"mobs:fox")
+			local obj = minetest.add_entity(pointed_thing.above,"mobs:fox")
 			local name = placer:get_player_name()
 			local ent = obj:get_luaentity()
 			ent.owner = placer:get_player_name()
@@ -358,7 +358,7 @@ minetest.register_craftitem("mobs:tortoise_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			local obj = minetest.env:add_entity(pointed_thing.above,"mobs:tortoise")
+			local obj = minetest.add_entity(pointed_thing.above,"mobs:tortoise")
 			local name = placer:get_player_name()
 			local ent = obj:get_luaentity()
 			ent.owner = placer:get_player_name()
@@ -376,7 +376,7 @@ minetest.register_craftitem("mobs:knight_1248_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			local obj = minetest.env:add_entity(pointed_thing.above,"mobs:knight_1248")
+			local obj = minetest.add_entity(pointed_thing.above,"mobs:knight_1248")
 			local name = placer:get_player_name()
 			local ent = obj:get_luaentity()
 			ent.owner = placer:get_player_name()
@@ -396,7 +396,7 @@ minetest.register_craftitem("mobs:watermob_crocodile_lg_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs_crocs:crocodile_lg")
+			minetest.add_entity(pointed_thing.above,"mobs_crocs:crocodile_lg")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -410,7 +410,7 @@ minetest.register_craftitem("mobs:watermob_crocodile_md_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs_crocs:crocodile_md")
+			minetest.add_entity(pointed_thing.above,"mobs_crocs:crocodile_md")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -424,7 +424,7 @@ minetest.register_craftitem("mobs:watermob_crocodile_sm_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs_crocs:crocodile_sm")
+			minetest.add_entity(pointed_thing.above,"mobs_crocs:crocodile_sm")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -438,7 +438,7 @@ minetest.register_craftitem("mobs:watermob_clownfish_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs_fish:clownfish")
+			minetest.add_entity(pointed_thing.above,"mobs_fish:clownfish")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -452,7 +452,7 @@ minetest.register_craftitem("mobs:watermob_tropical_fish_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs_fish:tropical")
+			minetest.add_entity(pointed_thing.above,"mobs_fish:tropical")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -466,7 +466,7 @@ minetest.register_craftitem("mobs:watermob_jellyfish_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs_jellyfish:jellyfish")
+			minetest.add_entity(pointed_thing.above,"mobs_jellyfish:jellyfish")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -480,7 +480,7 @@ minetest.register_craftitem("mobs:watermob_shark_sm_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs_sharks:shark_sm")
+			minetest.add_entity(pointed_thing.above,"mobs_sharks:shark_sm")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -494,7 +494,7 @@ minetest.register_craftitem("mobs:watermob_shark_md_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs_sharks:shark_md")
+			minetest.add_entity(pointed_thing.above,"mobs_sharks:shark_md")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -508,7 +508,7 @@ minetest.register_craftitem("mobs:watermob_shark_lg_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs_sharks:shark_lg")
+			minetest.add_entity(pointed_thing.above,"mobs_sharks:shark_lg")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -522,7 +522,7 @@ minetest.register_craftitem("mobs:watermob_turtle_lg_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs_turtles:turtle_lg")
+			minetest.add_entity(pointed_thing.above,"mobs_turtles:turtle_lg")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -536,7 +536,7 @@ minetest.register_craftitem("mobs:watermob_turtle_sm_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs_turtles:turtle_sm")
+			minetest.add_entity(pointed_thing.above,"mobs_turtles:turtle_sm")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -550,7 +550,7 @@ minetest.register_craftitem("mobs:skymob_butterfly_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs_butterfly:butterfly")
+			minetest.add_entity(pointed_thing.above,"mobs_butterfly:butterfly")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -564,7 +564,7 @@ minetest.register_craftitem("mobs:skymob_gull_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs_birds:gull")
+			minetest.add_entity(pointed_thing.above,"mobs_birds:gull")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -578,7 +578,7 @@ minetest.register_craftitem("mobs:skymob_bird_sm_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs_birds:bird_sm")
+			minetest.add_entity(pointed_thing.above,"mobs_birds:bird_sm")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -592,7 +592,7 @@ minetest.register_craftitem("mobs:skymob_bird_lg_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs_birds:bird_lg")
+			minetest.add_entity(pointed_thing.above,"mobs_birds:bird_lg")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
@@ -606,7 +606,7 @@ minetest.register_craftitem("mobs:skymob_bat_egg", {
 	stack_max = 99,
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
-			minetest.env:add_entity(pointed_thing.above,"mobs_bat:bat")
+			minetest.add_entity(pointed_thing.above,"mobs_bat:bat")
 			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end

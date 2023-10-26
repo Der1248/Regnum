@@ -48,7 +48,7 @@ minetest.register_globalstep(function(dtime)
 						end
 					end
 					if set_animal and is_player then
-						local obj2 =  minetest.env:add_entity({x=tonumber(player:get_attribute(m[1].."x")), y=tonumber(player:get_attribute(m[1].."y")), z=tonumber(player:get_attribute(m[1].."z"))},"mobs:"..m[3])
+						local obj2 =  minetest.add_entity({x=tonumber(player:get_attribute(m[1].."x")), y=tonumber(player:get_attribute(m[1].."y")), z=tonumber(player:get_attribute(m[1].."z"))},"mobs:"..m[3])
 						local ent = obj2:get_luaentity()
 						ent.owner = player:get_player_name()
 						ent.npc_name = player:get_player_name().."'s "..m[2]

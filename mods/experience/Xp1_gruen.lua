@@ -3,7 +3,7 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 	local namer = oldnode.name
 	local see_if_mineral = minetest.get_item_group(namer, "xp")
 	if see_if_mineral > 0 then
-		minetest.env:add_entity(pos, "experience:orb")
+		minetest.add_entity(pos, "experience:orb")
 	end
 end)
 --give a new player some xp
@@ -17,7 +17,7 @@ minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do
 		local pos = player:get_pos()
 		pos.y = pos.y+0.5
-		for _,object in ipairs(minetest.env:get_objects_inside_radius(pos, 1)) do
+		for _,object in ipairs(minetest.get_objects_inside_radius(pos, 1)) do
 			if not object:is_player() and object:get_luaentity() and object:get_luaentity().name == "experience:orb" then
 				--RIGHT HERE ADD IN THE CODE TO UPGRADE PLAYERS 
 				object:setvelocity({x=0,y=0,z=0})
@@ -268,7 +268,7 @@ minetest.register_globalstep(function(dtime)
 				object:remove()
 			end
 		end
-		for _,object in ipairs(minetest.env:get_objects_inside_radius(pos, 3)) do
+		for _,object in ipairs(minetest.get_objects_inside_radius(pos, 3)) do
 			if not object:is_player() and object:get_luaentity() and object:get_luaentity().name == "experience:orb" then
 				if object:get_luaentity().collect then
 					local pos1 = pos
@@ -306,10 +306,10 @@ minetest.register_entity("experience:orb", {
 		if p == nil then
 			return
 		end
-		local nn = minetest.env:get_node(p).name
-		noder = minetest.env:get_node(p).name
+		local nn = minetest.get_node(p).name
+		noder = minetest.get_node(p).name
 		p.y = p.y - 0.3
-		local nn = minetest.env:get_node(p).name
+		local nn = minetest.get_node(p).name
 		if not minetest.registered_nodes[nn] or minetest.registered_nodes[nn].walkable then
 			if self.physical_state then
 				self.object:setvelocity({x=0, y=0, z=0})

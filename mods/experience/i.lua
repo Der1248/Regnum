@@ -4,7 +4,7 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 	namer = oldnode.name
 	see_if_mineral = minetest.get_item_group(namer, "xpr")
 	if see_if_mineral > 0 then
-		minetest.env:add_entity(pos, "experience:orb_rot")
+		minetest.add_entity(pos, "experience:orb_rot")
 	end
 end)
 
@@ -145,7 +145,7 @@ minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do
 		local pos = player:get_pos()
 		pos.y = pos.y+0.5
-		for _,object in ipairs(minetest.env:get_objects_inside_radius(pos, 1)) do
+		for _,object in ipairs(minetest.get_objects_inside_radius(pos, 1)) do
 			if not object:is_player() and object:get_luaentity() and object:get_luaentity().name == "experience:orb_rot" then
 				--RIGHT HERE ADD IN THE CODE TO UPGRADE PLAYERS
 				object:setvelocity({x=0,y=0,z=0})
@@ -162,253 +162,253 @@ minetest.register_globalstep(function(dtime)
 					xpr_write:write(new_xpr)
 					xpr_write:close()
 if new_xpr == rot_level1 then
-						minetest.env:add_item(pos, rot_level1_drop)
+						minetest.add_item(pos, rot_level1_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level1S then
-						minetest.env:add_item(pos, rot_level1S_drop)
+						minetest.add_item(pos, rot_level1S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level2 then
-						minetest.env:add_item(pos, rot_level2_drop)
+						minetest.add_item(pos, rot_level2_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level2S then
-						minetest.env:add_item(pos, rot_level2S_drop)
+						minetest.add_item(pos, rot_level2S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level3 then
-						minetest.env:add_item(pos, rot_level3_drop)
+						minetest.add_item(pos, rot_level3_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level3S then
-						minetest.env:add_item(pos, rot_level3S_drop)
+						minetest.add_item(pos, rot_level3S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level4 then
-						minetest.env:add_item(pos, rot_level4_drop)
+						minetest.add_item(pos, rot_level4_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level4S then
-						minetest.env:add_item(pos, rot_level4S_drop)
+						minetest.add_item(pos, rot_level4S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level5 then
-						minetest.env:add_item(pos, rot_level5_drop)
+						minetest.add_item(pos, rot_level5_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level5S then
-						minetest.env:add_item(pos, rot_level5S_drop)
+						minetest.add_item(pos, rot_level5S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level6 then
-						minetest.env:add_item(pos, rot_level6_drop)
+						minetest.add_item(pos, rot_level6_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level6S then
-						minetest.env:add_item(pos, rot_level6S_drop)
+						minetest.add_item(pos, rot_level6S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level7 then
-						minetest.env:add_item(pos, rot_level7_drop)
+						minetest.add_item(pos, rot_level7_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level7S then
-						minetest.env:add_item(pos, rot_level7S_drop)
+						minetest.add_item(pos, rot_level7S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level8 then
-						minetest.env:add_item(pos, rot_level8_drop)
+						minetest.add_item(pos, rot_level8_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level8S then
-						minetest.env:add_item(pos, rot_level8S_drop)
+						minetest.add_item(pos, rot_level8S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level9 then
-						minetest.env:add_item(pos, rot_level9_drop)
+						minetest.add_item(pos, rot_level9_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level9S then
-						minetest.env:add_item(pos, rot_level9S_drop)
+						minetest.add_item(pos, rot_level9S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level10 then
-						minetest.env:add_item(pos, rot_level10_drop)
+						minetest.add_item(pos, rot_level10_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level10S then
-						minetest.env:add_item(pos, rot_level10S_drop)
+						minetest.add_item(pos, rot_level10S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level11 then
-						minetest.env:add_item(pos, rot_level11_drop)
+						minetest.add_item(pos, rot_level11_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level11S then
-						minetest.env:add_item(pos, rot_level11S_drop)
+						minetest.add_item(pos, rot_level11S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level12 then
-						minetest.env:add_item(pos, rot_level12_drop)
+						minetest.add_item(pos, rot_level12_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level12S then
-						minetest.env:add_item(pos, rot_level12S_drop)
+						minetest.add_item(pos, rot_level12S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level13 then
-						minetest.env:add_item(pos, rot_level13_drop)
+						minetest.add_item(pos, rot_level13_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level13S then
-						minetest.env:add_item(pos, rot_level13S_drop)
+						minetest.add_item(pos, rot_level13S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level14 then
-						minetest.env:add_item(pos, rot_level14_drop)
+						minetest.add_item(pos, rot_level14_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level14S then
-						minetest.env:add_item(pos, rot_level14S_drop)
+						minetest.add_item(pos, rot_level14S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level15 then
-						minetest.env:add_item(pos, rot_level15_drop)
+						minetest.add_item(pos, rot_level15_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level15S then
-						minetest.env:add_item(pos, rot_level15S_drop)
+						minetest.add_item(pos, rot_level15S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level16 then
-						minetest.env:add_item(pos, rot_level16_drop)
+						minetest.add_item(pos, rot_level16_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level16S then
-						minetest.env:add_item(pos, rot_level16S_drop)
+						minetest.add_item(pos, rot_level16S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level17 then
-						minetest.env:add_item(pos, rot_level17_drop)
+						minetest.add_item(pos, rot_level17_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level17S then
-						minetest.env:add_item(pos, rot_level17S_drop)
+						minetest.add_item(pos, rot_level17S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level18 then
-						minetest.env:add_item(pos, rot_level18_drop)
+						minetest.add_item(pos, rot_level18_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level18S then
-						minetest.env:add_item(pos, rot_level18S_drop)
+						minetest.add_item(pos, rot_level18S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level19 then
-						minetest.env:add_item(pos, rot_level19_drop)
+						minetest.add_item(pos, rot_level19_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level9S then
-						minetest.env:add_item(pos, rot_level19S_drop)
+						minetest.add_item(pos, rot_level19S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level20 then
-						minetest.env:add_item(pos, rot_level20_drop)
+						minetest.add_item(pos, rot_level20_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_level20S then
-						minetest.env:add_item(pos, rot_level20S_drop)
+						minetest.add_item(pos, rot_level20S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_levelMAX then
-						minetest.env:add_item(pos, rot_levelMAX_drop)
+						minetest.add_item(pos, rot_levelMAX_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpr == rot_levelMAXS then
-						minetest.env:add_item(pos, rot_levelMAXS_drop)
+						minetest.add_item(pos, rot_levelMAXS_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
@@ -417,7 +417,7 @@ if new_xpr == rot_levelMAXS then
 			object:remove()
 		end
 	end
-for _,object in ipairs(minetest.env:get_objects_inside_radius(pos, 3)) do
+for _,object in ipairs(minetest.get_objects_inside_radius(pos, 3)) do
 			if not object:is_player() and object:get_luaentity() and object:get_luaentity().name == "experience:orb_rot" then
 				if object:get_luaentity().collect then
 					local pos1 = pos
@@ -452,10 +452,10 @@ minetest.register_entity("experience:orb_rot", {
 			self.object:remove()
 		end
 		local p = self.object:get_pos()
-		local nn = minetest.env:get_node(p).name
-		noder = minetest.env:get_node(p).name
+		local nn = minetest.get_node(p).name
+		noder = minetest.get_node(p).name
 		p.y = p.y - 0.3
-		local nn = minetest.env:get_node(p).name
+		local nn = minetest.get_node(p).name
 		if not minetest.registered_nodes[nn] or minetest.registered_nodes[nn].walkable then
 			if self.physical_state then
 				self.object:setvelocity({x=0, y=0, z=0})
@@ -496,7 +496,7 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 	namer = oldnode.name
 	see_if_mineral = minetest.get_item_group(namer, "xpb")
 	if see_if_mineral > 0 then
-		minetest.env:add_entity(pos, "experience:orb_blau")
+		minetest.add_entity(pos, "experience:orb_blau")
 	end
 end)
 
@@ -637,7 +637,7 @@ minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do
 		local pos = player:get_pos()
 		pos.y = pos.y+0.5
-		for _,object in ipairs(minetest.env:get_objects_inside_radius(pos, 1)) do
+		for _,object in ipairs(minetest.get_objects_inside_radius(pos, 1)) do
 			if not object:is_player() and object:get_luaentity() and object:get_luaentity().name == "experience:orb_blau" then
 				--RIGHT HERE ADD IN THE CODE TO UPGRADE PLAYERS
 				object:setvelocity({x=0,y=0,z=0})
@@ -654,253 +654,253 @@ minetest.register_globalstep(function(dtime)
 					xpb_write:write(new_xpb)
 					xpb_write:close()
 if new_xpb == blau_level1 then
-						minetest.env:add_item(pos, blau_level1_drop)
+						minetest.add_item(pos, blau_level1_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level1S then
-						minetest.env:add_item(pos, blau_level1S_drop)
+						minetest.add_item(pos, blau_level1S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level2 then
-						minetest.env:add_item(pos, blau_level2_drop)
+						minetest.add_item(pos, blau_level2_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level2S then
-						minetest.env:add_item(pos, blau_level2S_drop)
+						minetest.add_item(pos, blau_level2S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level3 then
-						minetest.env:add_item(pos, blau_level3_drop)
+						minetest.add_item(pos, blau_level3_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level3S then
-						minetest.env:add_item(pos, blau_level3S_drop)
+						minetest.add_item(pos, blau_level3S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level4 then
-						minetest.env:add_item(pos, blau_level4_drop)
+						minetest.add_item(pos, blau_level4_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level4S then
-						minetest.env:add_item(pos, blau_level4S_drop)
+						minetest.add_item(pos, blau_level4S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level5 then
-						minetest.env:add_item(pos, blau_level5_drop)
+						minetest.add_item(pos, blau_level5_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level5S then
-						minetest.env:add_item(pos, blau_level5S_drop)
+						minetest.add_item(pos, blau_level5S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level6 then
-						minetest.env:add_item(pos, blau_level6_drop)
+						minetest.add_item(pos, blau_level6_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level6S then
-						minetest.env:add_item(pos, blau_level6S_drop)
+						minetest.add_item(pos, blau_level6S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level7 then
-						minetest.env:add_item(pos, blau_level7_drop)
+						minetest.add_item(pos, blau_level7_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level7S then
-						minetest.env:add_item(pos, blau_level7S_drop)
+						minetest.add_item(pos, blau_level7S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level8 then
-						minetest.env:add_item(pos, blau_level8_drop)
+						minetest.add_item(pos, blau_level8_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level8S then
-						minetest.env:add_item(pos, blau_level8S_drop)
+						minetest.add_item(pos, blau_level8S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb ==blau_level9 then
-						minetest.env:add_item(pos, blau_level9_drop)
+						minetest.add_item(pos, blau_level9_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level9S then
-						minetest.env:add_item(pos, blau_level9S_drop)
+						minetest.add_item(pos, blau_level9S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level10 then
-						minetest.env:add_item(pos, blau_level10_drop)
+						minetest.add_item(pos, blau_level10_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level10S then
-						minetest.env:add_item(pos, blau_level10S_drop)
+						minetest.add_item(pos, blau_level10S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level11 then
-						minetest.env:add_item(pos, blau_level11_drop)
+						minetest.add_item(pos, blau_level11_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level11S then
-						minetest.env:add_item(pos, blau_level11S_drop)
+						minetest.add_item(pos, blau_level11S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level12 then
-						minetest.env:add_item(pos, blau_level12_drop)
+						minetest.add_item(pos, blau_level12_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level12S then
-						minetest.env:add_item(pos, blau_level12S_drop)
+						minetest.add_item(pos, blau_level12S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level13 then
-						minetest.env:add_item(pos, blau_level13_drop)
+						minetest.add_item(pos, blau_level13_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level13S then
-						minetest.env:add_item(pos, blau_level13S_drop)
+						minetest.add_item(pos, blau_level13S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level14 then
-						minetest.env:add_item(pos, blau_level14_drop)
+						minetest.add_item(pos, blau_level14_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level14S then
-						minetest.env:add_item(pos, blau_level14S_drop)
+						minetest.add_item(pos, blau_level14S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level15 then
-						minetest.env:add_item(pos, blau_level15_drop)
+						minetest.add_item(pos, blau_level15_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level15S then
-						minetest.env:add_item(pos, blau_level15S_drop)
+						minetest.add_item(pos, blau_level15S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level16 then
-						minetest.env:add_item(pos, blau_level16_drop)
+						minetest.add_item(pos, blau_level16_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level16S then
-						minetest.env:add_item(pos, blau_level16S_drop)
+						minetest.add_item(pos, blau_level16S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level17 then
-						minetest.env:add_item(pos, blau_level17_drop)
+						minetest.add_item(pos, blau_level17_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level17S then
-						minetest.env:add_item(pos, blau_level17S_drop)
+						minetest.add_item(pos, blau_level17S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level18 then
-						minetest.env:add_item(pos, blau_level18_drop)
+						minetest.add_item(pos, blau_level18_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level18S then
-						minetest.env:add_item(pos, blau_level18S_drop)
+						minetest.add_item(pos, blau_level18S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level19 then
-						minetest.env:add_item(pos, blau_level19_drop)
+						minetest.add_item(pos, blau_level19_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level9S then
-						minetest.env:add_item(pos, blau_level19S_drop)
+						minetest.add_item(pos, blau_level19S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level20 then
-						minetest.env:add_item(pos, blau_level20_drop)
+						minetest.add_item(pos, blau_level20_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_level20S then
-						minetest.env:add_item(pos, blau_level20S_drop)
+						minetest.add_item(pos, blau_level20S_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_levelMAX then
-						minetest.env:add_item(pos, blau_levelMAX_drop)
+						minetest.add_item(pos, blau_levelMAX_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
 					end
 if new_xpb == blau_levelMAXS then
-						minetest.env:add_item(pos, blau_levelMAXS_drop)
+						minetest.add_item(pos, blau_levelMAXS_drop)
 						minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
@@ -909,7 +909,7 @@ if new_xpb == blau_levelMAXS then
 			object:remove()
 		end
 	end
-for _,object in ipairs(minetest.env:get_objects_inside_radius(pos, 3)) do
+for _,object in ipairs(minetest.get_objects_inside_radius(pos, 3)) do
 			if not object:is_player() and object:get_luaentity() and object:get_luaentity().name == "experience:orb_blau" then
 				if object:get_luaentity().collect then
 					local pos1 = pos
@@ -944,10 +944,10 @@ minetest.register_entity("experience:orb_blau", {
 			self.object:remove()
 		end
 		local p = self.object:get_pos()
-		local nn = minetest.env:get_node(p).name
-		noder = minetest.env:get_node(p).name
+		local nn = minetest.get_node(p).name
+		noder = minetest.get_node(p).name
 		p.y = p.y - 0.3
-		local nn = minetest.env:get_node(p).name
+		local nn = minetest.get_node(p).name
 		if not minetest.registered_nodes[nn] or minetest.registered_nodes[nn].walkable then
 			if self.physical_state then
 				self.object:setvelocity({x=0, y=0, z=0})

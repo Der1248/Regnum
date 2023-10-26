@@ -41,7 +41,7 @@ minetest.register_craftitem("tutorial:monster_remover", {
 	stack_max = 1,
 	on_use = function(itemstack, user, pointed_thing)
 		local pos = user:get_pos()
-		for _,object in ipairs(minetest.env:get_objects_inside_radius(pos, 15)) do
+		for _,object in ipairs(minetest.get_objects_inside_radius(pos, 15)) do
 			if not object:is_player() then
 				if object:get_entity_name() then
 					if object:get_entity_name() == "mobs:dirt_monster" or object:get_entity_name() == "mobs:stone_monster" or object:get_entity_name() == "mobs:sand_monster" or object:get_entity_name() == "mobs:silver_sand_monster" or object:get_entity_name() == "mobs:desert_sand_monster" or object:get_entity_name() == "mobs:desert_stone_monster" or object:get_entity_name() == "mobs:snow_monster" or object:get_entity_name() == "mobs:ice_monster" or object:get_entity_name() == "mobs:green_monster" or object:get_entity_name() == "mobs:dry_grass_monster" or object:get_entity_name() == "mobs:rainforest_litter_monster" then

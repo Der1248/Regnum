@@ -2201,7 +2201,7 @@ for j = 1, 8, 1 do
 			interval = (j*3),
 			chance = 1,
 			action = function(pos)
-				minetest.env:remove_node(pos)
+				minetest.remove_node(pos)
 			end,
 		})
 	end
@@ -2218,13 +2218,13 @@ for k = 1, 8, 1 do
 				light_source = 12,
 				on_step = function(self, dtime)
 						local pos = self.object:get_pos()
-						if minetest.env:get_node(self.object:get_pos()).name ~= "air"then
+						if minetest.get_node(self.object:get_pos()).name ~= "air"then
 							self.hit_node(self, pos, node)
 							self.object:remove()
 							return
 						end
 						pos.y = pos.y-1
-						for _,player in pairs(minetest.env:get_objects_inside_radius(pos, 1)) do
+						for _,player in pairs(minetest.get_objects_inside_radius(pos, 1)) do
 							if player:is_player() then
 								self.hit_player(self, player)
 								self.object:remove()
@@ -2247,9 +2247,9 @@ for k = 1, 8, 1 do
 						for dy=0,1 do
 							for dz=0,1 do
 								local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-								local n = minetest.env:get_node(p).name
+								local n = minetest.get_node(p).name
 								if (n == "air") then
-									minetest.env:add_node(p, {name="tutorial:legend_thunder_"..i.."_"..j})
+									minetest.add_node(p, {name="tutorial:legend_thunder_"..i.."_"..j})
 								end
 							end
 						end
@@ -2260,9 +2260,9 @@ for k = 1, 8, 1 do
 						for dy=-2,1 do
 							for dz=-1,1 do
 								local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-								local n = minetest.env:get_node(p).name
+								local n = minetest.get_node(p).name
 								if (n == "air") then
-									minetest.env:add_node(p, {name="tutorial:legend_thunder_"..i.."_"..j})
+									minetest.add_node(p, {name="tutorial:legend_thunder_"..i.."_"..j})
 								end
 							end
 						end
@@ -2277,7 +2277,7 @@ for k = 1, 8, 1 do
 						local dir = placer:get_look_dir();
 						local inv = placer:get_inventory()
 						local playerpos = placer:get_pos();
-						local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_"..i.."_"..j.."_"..k)
+						local obj = minetest.add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_"..i.."_"..j.."_"..k)
 						local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 						if not minetest.is_creative_enabled(placer:get_player_name()) then
                             itemstack:take_item()
@@ -3364,7 +3364,7 @@ minetest.register_abm({
     interval = 1,
     chance = 1,
     action = function(pos, node)
-        minetest.env:remove_node(pos)
+        minetest.remove_node(pos)
     end,
 })
 for _,entity_name in ipairs(old_entities) do
