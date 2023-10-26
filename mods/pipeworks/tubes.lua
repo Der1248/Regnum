@@ -347,7 +347,7 @@ if pipeworks.enable_detector_tube then
 	local detector_plain_textures = {"pipeworks_detector_tube_plain.png", "pipeworks_detector_tube_plain.png", "pipeworks_detector_tube_plain.png",
 					 "pipeworks_detector_tube_plain.png", "pipeworks_detector_tube_plain.png", "pipeworks_detector_tube_plain.png"}
 	local detector_inv_texture = "pipeworks_detector_tube_inv.png"
-	local detector_tube_step = 2 * tonumber(minetest.setting_get("dedicated_server_step"))
+	local detector_tube_step = 2 * tonumber(minetest.settings:get("dedicated_server_step"))
 	pipeworks.register_tube("pipeworks:detector_tube_on", "Detecting Pneumatic Tube Segment on (you hacker you)", detector_plain_textures, noctr_textures,
 				end_textures, short_texture, detector_inv_texture,
 				{tube = {can_go = function(pos, node, velocity, stack)

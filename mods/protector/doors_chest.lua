@@ -71,7 +71,7 @@ function register_door(name, def)
 				minetest.get_meta(pt2):set_int("right", 1)
 			end
 
-			if not minetest.setting_getbool("creative_mode") then
+			if not minetest.is_creative_enabled(placer:get_player_name()) then
 				itemstack:take_item()
 			end
 			return itemstack
@@ -596,7 +596,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 					end
 				end
 			end
-	
+
 		elseif fields.todn then
 
 			-- copy contents of chest to players inventory

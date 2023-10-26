@@ -24,7 +24,7 @@ end
 -- Random variables
 
 pipeworks.expect_infinite_stacks = true
-if minetest.get_modpath("unified_inventory") or not minetest.setting_getbool("creative_mode") then
+if minetest.get_modpath("unified_inventory") or not minetest.is_creative_enabled("") then
 	pipeworks.expect_infinite_stacks = false
 end
 
@@ -128,4 +128,3 @@ if pipeworks.enable_autocrafter then dofile(pipeworks.modpath.."/autocrafter.lua
 minetest.register_alias("pipeworks:pipe", "pipeworks:pipe_110000_empty")
 
 print("Pipeworks loaded!")
-

@@ -126,7 +126,7 @@ minetest.register_craftitem("tutorial:spawn_egg", {
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type == "node" then
 			minetest.env:add_entity(pointed_thing.above,"mobs:mummy")
-			if not minetest.setting_getbool("creative_mode") then itemstack:take_item() end
+			if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
 			return itemstack
 		end
 	end,
@@ -530,7 +530,7 @@ minetest.register_tool("tutorial:legendball_admin", {
 			local playerpos = placer:getpos();
 			local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_admin")
 			local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
-			if not minetest.setting_getbool("creative_mode") then
+			if not minetest.is_creative_enabled(placer:get_player_name()) then
                 itemstack:take_item()
             end
 			obj:setvelocity(vec)
@@ -1136,7 +1136,7 @@ minetest.register_node("tutorial:bottle_crystal", {
 	},
     on_place = function(itemstack, placer, pointed_thing)
         minetest.env:add_entity(pointed_thing.above, "experience:orb_cyan")
-        if not minetest.setting_getbool("creative_mode") then itemstack:take_item() end
+        if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
         return itemstack
     end,
 	groups = {vessel=1,dig_immediate=3,attached_node=1},
@@ -5501,7 +5501,7 @@ for i = 0, 127 do
 	    end
 	    if self.lastpos.x ~= nil then
 		    if minetest.registered_nodes[node.name].walkable then
-			    if not minetest.setting_getbool("creative_mode") then
+			    if not minetest.is_creative_enabled("") then
 				    minetest.add_item(self.lastpos, "")
 			    end
                 if i > 126 then
@@ -5657,7 +5657,7 @@ for i = 0, 127 do
 	    end
 	    if self.lastpos.x ~= nil then
 		    if minetest.registered_nodes[node.name].walkable then
-			    if not minetest.setting_getbool("creative_mode") then
+			    if not minetest.is_creative_enabled("") then
 				    minetest.add_item(self.lastpos, "")
 			    end
                 if i > 126 then
