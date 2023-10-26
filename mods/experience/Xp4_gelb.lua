@@ -14,7 +14,7 @@ end)
 
 minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do
-		local pos = player:getpos()
+		local pos = player:get_pos()
 		pos.y = pos.y+0.5
 		for _,object in ipairs(minetest.env:get_objects_inside_radius(pos, 1)) do
 			if not object:is_player() and object:get_luaentity() and object:get_luaentity().name == "experience:orb_gelb" then
@@ -92,7 +92,7 @@ for _,object in ipairs(minetest.env:get_objects_inside_radius(pos, 3)) do
 				if object:get_luaentity().collect then
 					local pos1 = pos
 					pos1.y = pos1.y+0.2
-					local pos2 = object:getpos()
+					local pos2 = object:get_pos()
 					local vec = {x=pos1.x-pos2.x, y=pos1.y-pos2.y, z=pos1.z-pos2.z}
 					vec.x = vec.x*3
 					vec.y = vec.y*3
@@ -121,7 +121,7 @@ minetest.register_entity("experience:orb_gelb", {
 		if (self.timer > 300) then
 			self.object:remove()
 		end
-		local p = self.object:getpos()
+		local p = self.object:get_pos()
 		local nn = minetest.env:get_node(p).name
 		noder = minetest.env:get_node(p).name
 		p.y = p.y - 0.3

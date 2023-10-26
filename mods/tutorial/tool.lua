@@ -1459,7 +1459,7 @@ minetest.register_tool("tutorial:pistole", {
 	inventory_image = "tutorial_rocket_gun.png",
 	on_use = function(itemstack, placer, pointed_thing)
 		local dir = placer:get_look_dir();
-		local playerpos = placer:getpos();
+		local playerpos = placer:get_pos();
 		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:patrone")
 		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
 		obj:setvelocity(vec)

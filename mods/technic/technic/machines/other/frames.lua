@@ -126,7 +126,7 @@ local function move_nodes_vect(poslist,vect,must_not_move,owner)
 		end
 	end
 	for _, obj in ipairs(objects) do
-		obj:setpos(vector.add(obj:getpos(), vect))
+		obj:setpos(vector.add(obj:get_pos(), vect))
 	end
 	for _,n in ipairs(nodelist) do
 		local npos = n.pos
@@ -234,7 +234,7 @@ local nodeboxes= {
 			return l2
 		end,
 		on_punch=function(pos,node,puncher)
-			local ppos=puncher:getpos()
+			local ppos=puncher:get_pos()
 			local pvect=puncher:get_look_dir()
 			local pface=get_face(pos,ppos,pvect)
 			if pface==nil then return end
@@ -346,7 +346,7 @@ minetest.register_entity("technic:frame_entity", {
 
 	set_node = function(self, node)
 		self.node = node
-		local pos = self.object:getpos()
+		local pos = self.object:get_pos()
 		pos = {x = math.floor(pos.x+0.5), y = math.floor(pos.y+0.5), z = math.floor(pos.z+0.5)}
 		frames_pos[pos_to_string(pos)] = node.name
 		local stack = ItemStack(node.name)
@@ -378,15 +378,15 @@ minetest.register_entity("technic:frame_entity", {
 	end,
 
 	dig = function(self)
-		minetest.handle_node_drops(self.object:getpos(), {ItemStack("technic:frame_111111")}, self.last_puncher)
-		local pos = self.object:getpos()
+		minetest.handle_node_drops(self.object:get_pos(), {ItemStack("technic:frame_111111")}, self.last_puncher)
+		local pos = self.object:get_pos()
 		pos = {x = math.floor(pos.x+0.5), y = math.floor(pos.y+0.5), z = math.floor(pos.z+0.5)}
 		frames_pos[pos_to_string(pos)] = nil
 		self.object:remove()
 	end,
 
 	on_punch = function(self, puncher, time_from_last_punch, tool_capabilities, dir)
-		local pos = self.object:getpos()
+		local pos = self.object:get_pos()
 		if self.damage_object == nil then
 			self.damage_object = minetest.add_entity(pos, "technic:damage_entity")
 			self.damage_object:get_luaentity().remaining_time = 0.25
@@ -397,7 +397,7 @@ minetest.register_entity("technic:frame_entity", {
 			self.damage_object:get_luaentity().remaining_time = 0.25
 		end
 		self.last_puncher = puncher
-		local ppos = puncher:getpos()
+		local ppos = puncher:get_pos()
 		local pvect = puncher:get_look_dir()
 		local pface = get_face(pos,ppos,pvect)
 		if pface == nil then return end
@@ -413,8 +413,8 @@ minetest.register_entity("technic:frame_entity", {
 	end,
 
 	on_rightclick = function(self, clicker)
-		local pos = self.object:getpos()
-		local ppos = clicker:getpos()
+		local pos = self.object:get_pos()
+		local ppos = clicker:get_pos()
 		local pvect = clicker:get_look_dir()
 		local pface = get_face(pos, ppos, pvect)
 		if pface == nil then return end

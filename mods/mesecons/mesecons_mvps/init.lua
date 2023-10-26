@@ -98,7 +98,7 @@ function mesecon.mvps_push(pos, dir, maximum) -- pos: pos of mvps; dir: directio
 		minetest.add_node(np, n.node)
 		minetest.get_meta(np):from_table(n.meta)
 	end
-	
+
 	local moved_nodes = {}
 	local oldstack = mesecon.tablecopy(nodes)
 	for i in ipairs(nodes) do
@@ -109,7 +109,7 @@ function mesecon.mvps_push(pos, dir, maximum) -- pos: pos of mvps; dir: directio
 		moved_nodes[i].node = nodes[i].node
 		moved_nodes[i].meta = nodes[i].meta
 	end
-	
+
 	on_mvps_move(moved_nodes)
 
 	return true, nodes, oldstack
@@ -219,7 +219,7 @@ function mesecon.mvps_move_objects(pos, dir, nodestack)
 	for _, obj in ipairs(objects_to_move) do
 		local entity = obj:get_luaentity()
 		if not entity or not mesecon.is_mvps_unmov(entity.name) then
-			local np = mesecon.addPosRule(obj:getpos(), dir)
+			local np = mesecon.addPosRule(obj:get_pos(), dir)
 
 			--move only if destination is not solid
 			local nn = minetest.get_node(np)

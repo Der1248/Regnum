@@ -28,40 +28,40 @@ end
 local heli = {
 	physical = true,
 	collisionbox = {-1,-0.6,-1, 1,0.3,1},
-	
+
 	--Just copy from lua api for test
 	collide_with_objects = true,
 	weight = 5,
-	
+
 	visual = "mesh",
 	mesh = "root.x",
 	--Player
 	driver = nil,
-	
+
 	--Heli mesh
 	model = nil,
-	
+
 	--In progress
 	motor = nil,
 	left = true,
 	timer=0,
-	
+
 	--Rotation
 	yaw=0,
-	
+
 	--Detect hit an object or node
 	prev_y=0,
-	
+
 	--Speeds
 	v = {x=0,y=0,z=0}
-	
-	
+
+
 }
 local heliModel = {
 	visual = "mesh",
 	mesh = "heli.x",
 	textures = {"blades.png","blades.png","heli.png","Glass.png"},
-}	
+}
 local motor = {
 	physical = true,
 	collisionbox = {-2,0.5,-1, 1,1,1},
@@ -94,13 +94,13 @@ end
 
 function heli:on_activate(staticdata, dtime_s)
 	self.object:set_armor_groups({immortal=1})
-	self.prev_y=self.object:getpos().y
+	self.prev_y=self.object:get_pos().y
 	if self.model == nil then
-		--if minetest.get_objects_inside_radius(self.object:getpos(), 1)
-		self.model=minetest.env:add_entity(self.object:getpos(), "tutorial:heliModel")
+		--if minetest.get_objects_inside_radius(self.object:get_pos(), 1)
+		self.model=minetest.env:add_entity(self.object:get_pos(), "tutorial:heliModel")
 		self.model:set_attach(self.object, "Root", {x=0,y=0,z=0}, {x=0,y=0,z=0})
 	end
-	
+
 	if staticdata then
 		self.v = tonumber(staticdata)
 	end
@@ -124,13 +124,13 @@ function heliModel:on_punch(puncher, time_from_last_punch, tool_capabilities, di
 end
 function heli:on_step(dtime)
 	--Prevent shaking heli while sitting in it
-	
-	
+
+
 	--Prevent multi heli control bug
-	if self.driver and ( math.abs(self.driver:getpos().x-self.object:getpos().x)>10*dtime or math.abs(self.driver:getpos().y-self.object:getpos().y)>10*dtime or math.abs(self.driver:getpos().z-self.object:getpos().z)>10*dtime) then
+	if self.driver and ( math.abs(self.driver:get_pos().x-self.object:get_pos().x)>10*dtime or math.abs(self.driver:get_pos().y-self.object:get_pos().y)>10*dtime or math.abs(self.driver:get_pos().z-self.object:get_pos().z)>10*dtime) then
 		self.driver = nil
 	end
-	
+
 	if self.driver then
 		self.yaw = self.driver:get_look_yaw()
 		v = self.object:getvelocity()
@@ -172,9 +172,9 @@ function heli:on_step(dtime)
 		if math.abs(self.v.z) > 4.5 then
 			self.v.z = 4.5*get_sign(self.v.z)
 		end
-		
+
 	end
-	
+
 	--Decelerating
 	local sx=get_sign(self.v.x)
 	self.v.x = self.v.x - 0.02*sx
@@ -182,7 +182,7 @@ function heli:on_step(dtime)
 	self.v.z = self.v.z - 0.02*sz
 	local sy=get_sign(self.v.y)
 	self.v.y = self.v.y-0.01*sy
-	
+
 	--Stop
 	if sx ~= get_sign(self.v.x) then
 		self.v.x = 0
@@ -190,8 +190,8 @@ function heli:on_step(dtime)
 	if sz ~= get_sign(self.v.z) then
 		self.v.z = 0
 	end
-	
-	
+
+
 	--Speed limit
 	if math.abs(self.v.x) > 4.5 then
 		self.v.x = 4.5*get_sign(self.v.x)
@@ -202,22 +202,22 @@ function heli:on_step(dtime)
 	if math.abs(self.v.y) > 4.5 then
 		self.v.z = 4.5*get_sign(self.v.z)
 	end
-	
+
 	--Set speed to entity
 	self.object:setvelocity({x=self.v.x, y=self.v.y,z=self.v.z})
-	--Model rotation 
+	--Model rotation
 	--[[if self.driver then
-	self.model:set_attach(self.object,"Root", 
-	{x=-(self.driver:getpos().x-self.object:getpos().x)*dtime,
-	y=-(self.driver:getpos().z-self.object:getpos().z)*dtime,
-	z=-(self.driver:getpos().y-self.object:getpos().y)*dtime}, {
-			x=-90+self.v.z*5*math.cos(self.yaw)-self.v.x*5*math.sin(self.yaw), 
-			y=0-self.v.z*5*math.sin(self.yaw)-self.v.x*5*math.cos(self.yaw), 
+	self.model:set_attach(self.object,"Root",
+	{x=-(self.driver:get_pos().x-self.object:get_pos().x)*dtime,
+	y=-(self.driver:get_pos().z-self.object:get_pos().z)*dtime,
+	z=-(self.driver:get_pos().y-self.object:get_pos().y)*dtime}, {
+			x=-90+self.v.z*5*math.cos(self.yaw)-self.v.x*5*math.sin(self.yaw),
+			y=0-self.v.z*5*math.sin(self.yaw)-self.v.x*5*math.cos(self.yaw),
 			z=self.yaw*57})
 	else]]--
 	self.model:set_attach(self.object,"Root", {x=0,y=0,z=0}, {
-			x=-90+self.v.z*5*math.cos(self.yaw)-self.v.x*5*math.sin(self.yaw), 
-			y=0-self.v.z*5*math.sin(self.yaw)-self.v.x*5*math.cos(self.yaw), 
+			x=-90+self.v.z*5*math.cos(self.yaw)-self.v.x*5*math.sin(self.yaw),
+			y=0-self.v.z*5*math.sin(self.yaw)-self.v.x*5*math.cos(self.yaw),
 			z=self.yaw*57})
 	--end
 end
@@ -237,7 +237,7 @@ minetest.register_craftitem("tutorial:heli", {
 	wield_image = "heli_inv.png",
 	wield_scale = {x=1, y=1, z=1},
 	liquids_pointable = false,
-	
+
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type ~= "node" then
 			return

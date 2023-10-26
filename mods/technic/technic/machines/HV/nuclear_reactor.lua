@@ -207,7 +207,7 @@ local run = function(pos, node)
 
 	if burn_time >= burn_ticks or burn_time == 0 then
 		local inv = meta:get_inventory()
-		if not inv:is_empty("src") then 
+		if not inv:is_empty("src") then
 			local srclist = inv:get_list("src")
 			local correct_fuel_count = 0
 			for _, srcstack in pairs(srclist) do
@@ -222,7 +222,7 @@ local run = function(pos, node)
 			if correct_fuel_count == 6 and
 			   reactor_structure_badness(pos) == 0 then
 				meta:set_int("burn_time", 1)
-				technic.swap_node(pos, "technic:hv_nuclear_reactor_core_active") 
+				technic.swap_node(pos, "technic:hv_nuclear_reactor_core_active")
 				meta:set_int("HV_EU_supply", power_supply)
 				for idx, srcstack in pairs(srclist) do
 					srcstack:take_item()
@@ -272,7 +272,7 @@ minetest.register_node("technic:hv_nuclear_reactor_core", {
 		meta:set_string("formspec", generator_formspec)
 		local inv = meta:get_inventory()
 		inv:set_size("src", 6)
-	end,	
+	end,
 	can_dig = technic.machine_can_dig,
 	on_destruct = function(pos) siren_set_state(pos, "off") end,
 	allow_metadata_inventory_put = technic.machine_inventory_put,
@@ -309,10 +309,10 @@ minetest.register_node("technic:hv_nuclear_reactor_core_active", {
         end,
 	on_timer = function(pos, node)
 		local meta = minetest.get_meta(pos)
-		
+
 		-- Connected back?
-		if meta:get_int("HV_EU_timeout") > 0 then return end	
-		
+		if meta:get_int("HV_EU_timeout") > 0 then return end
+
 		local burn_time = meta:get_int("burn_time") or 0
 
 		if burn_time >= burn_ticks or burn_time == 0 then
@@ -323,7 +323,7 @@ minetest.register_node("technic:hv_nuclear_reactor_core_active", {
 			siren_clear(pos, meta)
 			return
 		end
-		
+
 		meta:set_int("burn_time", burn_time + 1)
 		local timer = minetest.get_node_timer(pos)
         	timer:start(1)
@@ -570,7 +570,7 @@ minetest.register_abm({
 		local strength = minetest.registered_nodes[node.name].groups.radioactive
 		for _, o in ipairs(minetest.get_objects_inside_radius(pos, strength*0.001 + assumed_abdomen_offset_length)) do
 			if o:is_player() then
-				local rel = vector.subtract(vector.add(o:getpos(), assumed_abdomen_offset), pos)
+				local rel = vector.subtract(vector.add(o:get_pos(), assumed_abdomen_offset), pos)
 				local dist_sq = vector.length_square(rel)
 				local dist = math.sqrt(dist_sq)
 				local dirstep = dist == 0 and vector.new(0,0,0) or vector.divide(rel, dist*4)
@@ -638,7 +638,7 @@ for _, state in ipairs({ "flowing", "source" }) do
 		post_effect_color = { a=192, r=80, g=160, b=80 },
 		groups = {
 			liquid = 2,
-			
+
 		},
 	})
 end

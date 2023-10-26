@@ -239,7 +239,7 @@ function minetest.is_protected(pos, digger)
 					player:set_wielded_item(holding)
 
 					-- drop stack
-					local obj = minetest.add_item(player:getpos(), sta)
+					local obj = minetest.add_item(player:get_pos(), sta)
 					obj:setvelocity({x = 0, y = 5, z = 0})
 				end)
 

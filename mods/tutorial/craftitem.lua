@@ -40,7 +40,7 @@ minetest.register_craftitem("tutorial:monster_remover", {
 	inventory_image = "tutorial_monster_entverner.png",
 	stack_max = 1,
 	on_use = function(itemstack, user, pointed_thing)
-		local pos = user:getpos()
+		local pos = user:get_pos()
 		for _,object in ipairs(minetest.env:get_objects_inside_radius(pos, 15)) do
 			if not object:is_player() then
 				if object:get_entity_name() then

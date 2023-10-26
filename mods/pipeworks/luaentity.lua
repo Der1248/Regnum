@@ -61,7 +61,7 @@ minetest.register_globalstep(function(dtime)
 		handle_active_blocks_timer = handle_active_blocks_timer - handle_active_blocks_step
 		local new_active_blocks = {}
 		for _, player in ipairs(minetest.get_connected_players()) do
-			local blockpos = get_blockpos(player:getpos())
+			local blockpos = get_blockpos(player:get_pos())
 			local minp = vector.subtract(blockpos, active_block_range)
 			local maxp = vector.add(blockpos, active_block_range)
 

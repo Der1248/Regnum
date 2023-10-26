@@ -177,7 +177,7 @@ minetest.register_node("mesecons_detector:node_detector_off", {
 	on_construct = node_detector_make_formspec,
 	on_receive_fields = node_detector_on_receive_fields,
 	after_place_node = function (pos, placer)
-		local placer_pos = placer:getpos()
+		local placer_pos = placer:get_pos()
 		
 		--correct for the player's height
 		if placer:is_player() then placer_pos.y = placer_pos.y + 1.5 end
@@ -212,7 +212,7 @@ minetest.register_node("mesecons_detector:node_detector_on", {
 	on_construct = node_detector_make_formspec,
 	on_receive_fields = node_detector_on_receive_fields,
 	after_place_node = function (pos, placer)
-		local placer_pos = placer:getpos()
+		local placer_pos = placer:get_pos()
 		
 		--correct for the player's height
 		if placer:is_player() then placer_pos.y = placer_pos.y + 1.5 end

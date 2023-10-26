@@ -118,7 +118,7 @@ end
 
 minetest.register_on_dieplayer(
 	function(player)
-		pos=player:getpos()
+		pos=player:get_pos()
 		if city_block:in_city(pos) and not(pos.x>-25 and pos.x<25 and pos.y>-5 and pos.y<25 and pos.z>-25 and pos.z<25) then
 			for _,suspect in pairs(minetest.get_objects_inside_radius(pos, 3.8)) do
 				if suspect:is_player() and suspect:get_player_name()~=player:get_player_name() then

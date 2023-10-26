@@ -14,11 +14,11 @@ local register_one_tube = function(name, tname, dropname, desc, plain, noctrs, e
 	local outboxes = {}
 	local outsel = {}
 	local outimgs = {}
-	
+
 	for i = 1, 6 do
 		outimgs[vti[i]] = plain[i]
 	end
-	
+
 	for _, v in ipairs(connects) do
 		table.extend(outboxes, pipeworks.tube_boxes[v])
 		table.insert(outsel, pipeworks.tube_selectboxes[v])
@@ -49,10 +49,10 @@ local register_one_tube = function(name, tname, dropname, desc, plain, noctrs, e
 		outsel = { -24/64, -10/64, -10/64, 24/64, 10/64, 10/64 }
 		wscale = {x = 1, y = 1, z = 0.01}
 	end
-	
+
 	local rname = name.."_"..tname
 	table.insert(pipeworks.tubenodes, rname)
-	
+
 	local nodedef = {
 		description = tubedesc,
 		drawtype = "nodebox",
@@ -98,7 +98,7 @@ local register_one_tube = function(name, tname, dropname, desc, plain, noctrs, e
 	if style == "6d" then
 		nodedef.paramtype2 = "facedir"
 	end
-	
+
 	if special == nil then special = {} end
 
 	for key, value in pairs(special) do
@@ -382,7 +382,7 @@ if pipeworks.enable_detector_tube then
 					 local name = minetest.get_node(pos).name
 					 local saved_pos = vector.new(pos)
 					 minetest.after(detector_tube_step, minetest.registered_nodes[name].item_exit, saved_pos)
-				
+
 				end
 	})
 	pipeworks.register_tube("pipeworks:detector_tube_off", "Detecting Pneumatic Tube Segment", detector_plain_textures, noctr_textures,
@@ -538,7 +538,7 @@ if pipeworks.enable_mese_sand_tube then
 		local objs = {}
 		for _,object in ipairs(minetest.get_objects_inside_radius(pos, math.sqrt(3)*rad)) do
 			if not object:is_player() and object:get_luaentity() and object:get_luaentity().name == "__builtin:item" then
-				local opos = object:getpos()
+				local opos = object:get_pos()
 				if pos.x - rad <= opos.x and opos.x <= pos.x + rad and pos.y - rad <= opos.y and opos.y <= pos.y + rad and pos.z - rad <= opos.z and opos.z <= pos.z + rad then
 					objs[#objs + 1] = object
 				end

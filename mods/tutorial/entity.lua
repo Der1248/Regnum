@@ -6,8 +6,8 @@ minetest.register_entity("tutorial:patrone", {
 	velocity = 5,
 	light_source = 12,
 	on_step = function(self, dtime)
-		local pos = self.object:getpos()
-		if minetest.env:get_node(self.object:getpos()).name ~= "air" then
+		local pos = self.object:get_pos()
+		if minetest.env:get_node(self.object:get_pos()).name ~= "air" then
 			self.hit_node(self, pos, node)
 			self.object:remove()
 			return
@@ -22,14 +22,14 @@ minetest.register_entity("tutorial:patrone", {
 		end
 	end,
 	hit_player = function(self, player)
-		local s = player:getpos()
+		local s = player:get_pos()
 		local p = player:get_look_dir()
 		local vec = {x=s.x-p.x, y=s.y-p.y, z=s.z-p.z}
 		player:punch(self.object, 1.0,  {
 			full_punch_interval=1.0,
 			damage_groups = {fleshy=1000000},
 		}, vec)
-		local pos = player:getpos()
+		local pos = player:get_pos()
 		for dx=-1,1 do
 			for dy=-1,1 do
 				for dz=-1,1 do
