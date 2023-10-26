@@ -375,7 +375,7 @@ function first_step(self,dtime)
 			end
 			if k == 0 then
 				if minetest.get_player_by_name(self.owner) then
-					self.object:setpos({x = minetest.get_player_by_name(self.owner):get_pos().x, y = minetest.get_player_by_name(self.owner):get_pos().y+1, z = minetest.get_player_by_name(self.owner):get_pos().z+1})
+					self.object:set_pos({x = minetest.get_player_by_name(self.owner):get_pos().x, y = minetest.get_player_by_name(self.owner):get_pos().y+1, z = minetest.get_player_by_name(self.owner):get_pos().z+1})
 				end
 			end
 		end
@@ -394,7 +394,7 @@ function first_step(self,dtime)
 			end
 			if k == 0 then
 				if minetest.get_player_by_name(self.owner) then
-					self.object:setpos({x = minetest.get_player_by_name(self.owner):get_pos().x, y = minetest.get_player_by_name(self.owner):get_pos().y+1, z = minetest.get_player_by_name(self.owner):get_pos().z+1})
+					self.object:set_pos({x = minetest.get_player_by_name(self.owner):get_pos().x, y = minetest.get_player_by_name(self.owner):get_pos().y+1, z = minetest.get_player_by_name(self.owner):get_pos().z+1})
 				end
 			end
 		end
@@ -415,7 +415,7 @@ function first_step(self,dtime)
 				if self.owner then
 					if minetest.get_player_by_name(self.owner) then
 						minetest.get_player_by_name(self.owner):get_inventory():set_size("dragon2",1)
-						self.object:setpos({x = minetest.get_player_by_name(self.owner):get_pos().x, y = minetest.get_player_by_name(self.owner):get_pos().y+1, z = minetest.get_player_by_name(self.owner):get_pos().z+1})
+						self.object:set_pos({x = minetest.get_player_by_name(self.owner):get_pos().x, y = minetest.get_player_by_name(self.owner):get_pos().y+1, z = minetest.get_player_by_name(self.owner):get_pos().z+1})
 						local numd = minetest.get_player_by_name(self.owner):get_inventory():get_stack("dragon2", 1):get_count()
 						if numd > 25 then
 							if minetest.get_player_by_name(self.owner):get_inventory():get_stack("dragon", 1):get_name() == "tutorial:dragon_crystal" then
@@ -449,7 +449,7 @@ function first_step(self,dtime)
 					if minetest.get_player_by_name(self.owner) then
 						minetest.get_player_by_name(self.owner):get_inventory():set_size("sheep2",1)
 						minetest.get_player_by_name(self.owner):get_inventory():set_size("sheep3",1)
-						self.object:setpos({x = minetest.get_player_by_name(self.owner):get_pos().x, y = minetest.get_player_by_name(self.owner):get_pos().y+1, z = minetest.get_player_by_name(self.owner):get_pos().z+1})
+						self.object:set_pos({x = minetest.get_player_by_name(self.owner):get_pos().x, y = minetest.get_player_by_name(self.owner):get_pos().y+1, z = minetest.get_player_by_name(self.owner):get_pos().z+1})
 						local numd = minetest.get_player_by_name(self.owner):get_inventory():get_stack("sheep2", 1):get_count()
 						if numd > 25 then
 							minetest.get_player_by_name(self.owner):get_inventory():add_item("main", minetest.get_player_by_name(self.owner):get_inventory():get_stack("sheep3", 1))
@@ -476,7 +476,7 @@ function first_step(self,dtime)
 			end
 			if k == 0 then
 				if minetest.get_player_by_name(self.owner) then
-					self.object:setpos({x = minetest.get_player_by_name(self.owner):get_pos().x, y = minetest.get_player_by_name(self.owner):get_pos().y+1, z = minetest.get_player_by_name(self.owner):get_pos().z+1})
+					self.object:set_pos({x = minetest.get_player_by_name(self.owner):get_pos().x, y = minetest.get_player_by_name(self.owner):get_pos().y+1, z = minetest.get_player_by_name(self.owner):get_pos().z+1})
 				end
 			end
 		end
@@ -499,7 +499,7 @@ function first_step(self,dtime)
 						minetest.get_player_by_name(self.owner):get_inventory():set_size("fox",1)
 						minetest.get_player_by_name(self.owner):get_inventory():set_size("foxfox",1)
 						minetest.get_player_by_name(self.owner):get_inventory():set_size("r1248",6)
-						self.object:setpos({x = minetest.get_player_by_name(self.owner):get_pos().x, y = minetest.get_player_by_name(self.owner):get_pos().y+1, z = minetest.get_player_by_name(self.owner):get_pos().z+1})
+						self.object:set_pos({x = minetest.get_player_by_name(self.owner):get_pos().x, y = minetest.get_player_by_name(self.owner):get_pos().y+1, z = minetest.get_player_by_name(self.owner):get_pos().z+1})
 						local numd = minetest.get_player_by_name(self.owner):get_inventory():get_stack("fox", 1):get_count()
 						if numd == 50 then
 							minetest.get_player_by_name(self.owner):get_inventory():add_item("main", "tutorial:fox_schluessel")
@@ -547,7 +547,7 @@ function first_step(self,dtime)
 			end
 			if k == 0 then
 				if minetest.get_player_by_name(self.owner) then
-					self.object:setpos({x = minetest.get_player_by_name(self.owner):get_pos().x, y = minetest.get_player_by_name(self.owner):get_pos().y+1, z = minetest.get_player_by_name(self.owner):get_pos().z+1})
+					self.object:set_pos({x = minetest.get_player_by_name(self.owner):get_pos().x, y = minetest.get_player_by_name(self.owner):get_pos().y+1, z = minetest.get_player_by_name(self.owner):get_pos().z+1})
 					minetest.get_player_by_name(self.owner):get_inventory():set_size("tortoise2",1)
 					local numd = minetest.get_player_by_name(self.owner):get_inventory():get_stack("tortoise2", 1):get_count()
 					if numd > 25 then

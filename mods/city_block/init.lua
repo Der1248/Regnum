@@ -125,7 +125,7 @@ minetest.register_on_dieplayer(
 					suspect_name=suspect:get_player_name()
 					if city_block.suspects[suspect_name] then
 						if city_block.suspects[suspect_name]>3 then
-							suspect:setpos( {x=0, y=-2, z=0} )
+							suspect:set_pos( {x=0, y=-2, z=0} )
 							minetest.chat_send_all("Player "..suspect_name.." sent to jail as suspect for killing in town")
 							minetest.log("action", "Player "..suspect_name.." warned for killing in town")
 							city_block.suspects[suspect_name]=1
