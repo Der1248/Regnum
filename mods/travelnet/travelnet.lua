@@ -23,13 +23,13 @@ minetest.register_node("travelnet:travelnet", {
 		fixed = {
 
 			{ 0.45, -0.5,-0.5,  0.5,  1.45, 0.5},
-			{-0.5 , -0.5, 0.45, 0.45, 1.45, 0.5}, 
+			{-0.5 , -0.5, 0.45, 0.45, 1.45, 0.5},
 			{-0.5,  -0.5,-0.5 ,-0.45, 1.45, 0.5},
 
 			--groundplate to stand on
-			{ -0.5,-0.5,-0.5,0.5,-0.45, 0.5}, 
+			{ -0.5,-0.5,-0.5,0.5,-0.45, 0.5},
 			--roof
-			{ -0.5, 1.45,-0.5,0.5, 1.5, 0.5}, 
+			{ -0.5, 1.45,-0.5,0.5, 1.5, 0.5},
 
 			-- control panel
 			--                { -0.2, 0.6,  0.3, 0.2, 1.1,  0.5},
@@ -44,6 +44,7 @@ minetest.register_node("travelnet:travelnet", {
 		"default_steel_block.png",  -- view from top
 		"default_clay.png",  -- view from bottom
 	},
+	use_texture_alpha = "clip",
     inventory_image = "travelnet_inv.png",
 
     groups = {cracky=1,choppy=1,snappy=1},
@@ -57,14 +58,14 @@ minetest.register_node("travelnet:travelnet", {
         meta:set_string("station_network","");
         meta:set_string("owner",          placer:get_player_name() );
         -- request initinal data
-        meta:set_string("formspec", 
+        meta:set_string("formspec",
                             "size[12,10]"..
                             "field[0.3,5.6;6,0.7;station_name;Name of this station:;]"..
                             "field[0.3,6.6;6,0.7;station_network;Assign to Network:;]"..
                             "field[0.3,7.6;6,0.7;owner_name;(optional) owned by:;]"..
                             "button_exit[6.3,6.2;1.7,0.7;station_set;Store]" );
     end,
-    
+
     on_receive_fields = travelnet.on_receive_fields,
     on_punch          = function(pos, node, puncher)
                           travelnet.update_formspec(pos, puncher:get_player_name())

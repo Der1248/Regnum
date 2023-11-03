@@ -15,13 +15,14 @@ end
 minetest.register_node("mesecons_button:button_off", {
 	drawtype = "nodebox",
 	tiles = {
-	"jeija_wall_button_sides.png",	
+	"jeija_wall_button_sides.png",
 	"jeija_wall_button_sides.png",
 	"jeija_wall_button_sides.png",
 	"jeija_wall_button_sides.png",
 	"jeija_wall_button_sides.png",
 	"jeija_wall_button_off.png"
 	},
+	use_texture_alpha = "opaque",
 	paramtype = "light",
 	paramtype2 = "facedir",
 	legacy_wallmounted = true,
@@ -32,7 +33,7 @@ minetest.register_node("mesecons_button:button_off", {
 		fixed = { -6/16, -6/16, 5/16, 6/16, 6/16, 8/16 }
 	},
 	node_box = {
-		type = "fixed",	
+		type = "fixed",
 		fixed = {
 		{ -6/16, -6/16, 6/16, 6/16, 6/16, 8/16 },	-- the thin plate behind the button
 		{ -4/16, -2/16, 4/16, 4/16, 2/16, 6/16 }	-- the button itself
@@ -63,6 +64,7 @@ minetest.register_node("mesecons_button:button_on", {
 		"jeija_wall_button_sides.png",
 		"jeija_wall_button_on.png"
 		},
+	use_texture_alpha = "opaque",
 	paramtype = "light",
 	paramtype2 = "facedir",
 	legacy_wallmounted = true,

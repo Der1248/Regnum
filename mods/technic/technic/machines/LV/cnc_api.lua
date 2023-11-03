@@ -234,7 +234,7 @@ technic.cnc.programs = {
 			type = "fixed",
 			fixed = {
 				{  4/16, -8/16,  4/16,  8/16, 8/16, 8/16 },
-				{     0, -8/16,     0,  4/16, 8/16, 8/16 },				
+				{     0, -8/16,     0,  4/16, 8/16, 8/16 },
 				{ -4/16, -8/16, -4/16,     0, 8/16, 8/16 },
 				{ -8/16, -8/16, -8/16, -4/16, 8/16, 8/16 }
 			}
@@ -254,7 +254,7 @@ technic.cnc.programs = {
 			}
 		}
 	},
-	
+
 }
 
 -- Allow disabling certain programs for some node. Default is allowing all types for all nodes
@@ -293,6 +293,7 @@ function technic.cnc.register_program(recipeitem, suffix, model, groups, images,
 		node_box      = nodeboxdef,
 		mesh          = meshdef,
 		tiles         = images,
+		use_texture_alpha = minetest.registered_nodes[recipeitem].use_texture_alpha,
 		paramtype     = "light",
 		paramtype2    = "facedir",
 		walkable      = true,
@@ -361,4 +362,3 @@ function technic.cnc.register_elements(recipeitem, groups, images, desc_element_
          technic.cnc.register_element_cross_double(recipeitem, groups, images, desc_element_cross_double)
          technic.cnc.register_element_end_double(recipeitem, groups, images, desc_element_end_double)
 end
-

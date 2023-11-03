@@ -67,6 +67,7 @@ minetest.register_node("travelnet:elevator_door_glass_open", {
 		drawtype = "nodebox",
                 -- top, bottom, side1, side2, inner, outer
 		tiles = {"travelnet_elevator_door_glass.png"},
+		use_texture_alpha = "clip",
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = true,
@@ -96,6 +97,7 @@ minetest.register_node("travelnet:elevator_door_glass_closed", {
 		drawtype = "nodebox",
                 -- top, bottom, side1, side2, inner, outer
 		tiles = {"travelnet_elevator_door_glass.png"},
+		use_texture_alpha = "clip",
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = true,
@@ -120,6 +122,3 @@ minetest.register_node("travelnet:elevator_door_glass_closed", {
 
 --      local old_node = minetest.get_node( pos );
 --      minetest.add_node(pos, {name = "travelnet:elevator_door_glass_closed", param2 = old_node.param2})
-
-
-

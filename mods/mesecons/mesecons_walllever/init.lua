@@ -4,6 +4,7 @@
 mesecon.register_node("mesecons_walllever:wall_lever", {
 	description="Lever",
 	drawtype = "nodebox",
+	use_texture_alpha = "opaque",
 	inventory_image = "jeija_wall_lever_off.png",
 	wield_image = "jeija_wall_lever_off.png",
 	paramtype = "light",

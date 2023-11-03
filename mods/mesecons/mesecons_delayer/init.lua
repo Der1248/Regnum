@@ -35,7 +35,7 @@ end
 
 for i = 1, 4 do
 local groups = {}
-if i == 1 then 
+if i == 1 then
 	groups = {bendy=2,snappy=1,dig_immediate=2}
 else
 	groups = {bendy=2,snappy=1,dig_immediate=2, not_in_creative_inventory=1}
@@ -70,6 +70,7 @@ minetest.register_node("mesecons_delayer:delayer_off_"..tostring(i), {
 		"mesecons_delayer_sides_off.png",
 		"mesecons_delayer_sides_off.png"
 		},
+	use_texture_alpha = "clip",
 	inventory_image = "mesecons_delayer_off_1.png",
 	wield_image = "mesecons_delayer_off_1.png",
 	walkable = true,
@@ -127,6 +128,7 @@ minetest.register_node("mesecons_delayer:delayer_on_"..tostring(i), {
 		"mesecons_delayer_sides_on.png",
 		"mesecons_delayer_sides_on.png"
 		},
+	use_texture_alpha = "clip",
 	walkable = true,
 	selection_box = {
 		type = "fixed",

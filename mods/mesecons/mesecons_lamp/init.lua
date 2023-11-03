@@ -12,6 +12,7 @@ mesecon_lamp_box = {
 minetest.register_node("mesecons_lamp:lamp_on", {
 	drawtype = "nodebox",
 	tiles = {"jeija_meselamp_on.png"},
+	use_texture_alpha = "opaque",
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	legacy_wallmounted = true,
@@ -33,6 +34,7 @@ minetest.register_node("mesecons_lamp:lamp_on", {
 minetest.register_node("mesecons_lamp:lamp_off", {
 	drawtype = "nodebox",
 	tiles = {"jeija_meselamp_off.png"},
+	use_texture_alpha = "opaque",
 	inventory_image = "jeija_meselamp.png",
 	wield_image = "jeija_meselamp.png",
 	paramtype = "light",
