@@ -427,7 +427,7 @@ for _, m in pairs(mining_drill_list) do
 end
 
 minetest.register_craft({
-	output = 'technic:drill_mkS1',
+	output = 'technic:drill_mkS1_1',
 	recipe = {
 		{'tutorial:coin2', 'tutorial:coin2', 'tutorial:coin2'},
 		{'', 'moreores:mithril_ingot', 'tutorial:admin'},

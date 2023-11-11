@@ -61,7 +61,7 @@ minetest.register_node("gems:pearl_ore", {
 minetest.register_node( "gems:ruby_block", {
 	description = "ruby block",
     light_source = 8,
-	tile_images = { "ruby_ruby_block.png" },
+	tiles = { "ruby_ruby_block.png" },
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
@@ -70,7 +70,7 @@ minetest.register_node( "gems:ruby_block", {
 minetest.register_node( "gems:emerald_block", {
 	description = "emerald block",
     light_source = 8,
-	tile_images = { "gems_emerald_block.png" },
+	tiles = { "gems_emerald_block.png" },
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
@@ -79,7 +79,7 @@ minetest.register_node( "gems:emerald_block", {
 minetest.register_node( "gems:sapphire_block", {
 	description = "sapphire block",
     light_source = 8,
-	tile_images = { "gems_sapphire_block.png" },
+	tiles = { "gems_sapphire_block.png" },
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
@@ -88,7 +88,7 @@ minetest.register_node( "gems:sapphire_block", {
 minetest.register_node( "gems:shadow_block", {
 	description = "shadow block",
     light_source = 8,
-	tile_images = { "shadow_block.png" },
+	tiles = { "shadow_block.png" },
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
@@ -97,7 +97,7 @@ minetest.register_node( "gems:shadow_block", {
 minetest.register_node( "gems:pearl_block", {
 	description = "pearl block",
     light_source = 8,
-	tile_images = { "gems_pearl_block.png" },
+	tiles = { "gems_pearl_block.png" },
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
@@ -106,7 +106,7 @@ minetest.register_node( "gems:pearl_block", {
 minetest.register_node( "gems:amethyst_block", {
 	description = "amethyst block",
     light_source = 8,
-	tile_images = { "gems_amethyst_block.png" },
+	tiles = { "gems_amethyst_block.png" },
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
@@ -114,42 +114,42 @@ minetest.register_node( "gems:amethyst_block", {
 	   
 minetest.register_craftitem( "gems:ruby_gem", {
 	description = "ruby gem",
-	tile_images = { "ruby:ruby_gem" },
+	tiles = { "ruby:ruby_gem" },
 	inventory_image = "ruby_ruby_gem.png",
 	on_place_on_ground = minetest.craftitem_place_item,
 })
 
 minetest.register_craftitem( "gems:emerald_gem", {
 	description = "emerald gem",
-	tile_images = { "gems:emerald_gem" },
+	tiles = { "gems:emerald_gem" },
 	inventory_image = "gems_emerald_gem.png",
 	on_place_on_ground = minetest.craftitem_place_item,
 })
 
 minetest.register_craftitem( "gems:shadow_gem", {
 	description = "shadow gem",
-	tile_images = { "gems:shadow_gem" },
+	tiles = { "gems:shadow_gem" },
 	inventory_image = "shadow_gem.png",
 	on_place_on_ground = minetest.craftitem_place_item,
 })
 
 minetest.register_craftitem( "gems:sapphire_gem", {
 	description = "sapphire gem",
-	tile_images = { "gems:sapphire_gem" },
+	tiles = { "gems:sapphire_gem" },
 	inventory_image = "gems_sapphire_gem.png",
 	on_place_on_ground = minetest.craftitem_place_item,
 })
 
 minetest.register_craftitem( "gems:amethyst_gem", {
 	description = "amethyst gem",
-	tile_images = { "gems:amethyst_gem" },
+	tiles = { "gems:amethyst_gem" },
 	inventory_image = "gems_amethyst_gem.png",
 	on_place_on_ground = minetest.craftitem_place_item,
 })
 
 minetest.register_craftitem( "gems:pearl_gem", {
 	description = "pearl gem",
-	tile_images = { "gems:pearl_gem" },
+	tiles = { "gems:pearl_gem" },
 	inventory_image = "gems_pearl_gem.png",
 	on_place_on_ground = minetest.craftitem_place_item,
 })

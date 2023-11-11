@@ -6,7 +6,7 @@ minetest.register_on_joinplayer(function(player)
 		offset = {x=0, y=10},
 		alignment = {x=1, y=0},
 		number = 0xFFFFFF ,
-		text = "For Minetest 	  :  5.5.x",
+		text = "For Minetest 	  :  5.6.x",
 	})
 	player:hud_add({
 		hud_elem_type = "text",
@@ -14,7 +14,7 @@ minetest.register_on_joinplayer(function(player)
 		offset = {x=0, y=30},
 		alignment = {x=1, y=0},
 		number = 0xFFFFFF ,
-		text = "Game Version	 :  3.6.4",
+		text = "Game Version	 :  3.6.5",
 	})
 end)
 
@@ -7042,7 +7042,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 						player_inv:set_stack("mine2", 6, "tutorial:coin2 "..(y6-1))
 						player_inv:set_stack("mine2", 7, "tutorial:coin2 "..(y7-1))
 						player_inv:set_stack("mine2", 8, "tutorial:coin2 "..(y8-1))
-						player_inv:set_stack("mine1", 1, "technic:drill_mkS"..(i+1))
+						player_inv:set_stack("mine1", 1, "technic:drill_mkS"..(i+1).."_1")
 					end
                 end
             end

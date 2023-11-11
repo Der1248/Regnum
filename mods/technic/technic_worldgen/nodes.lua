@@ -21,7 +21,7 @@ minetest.register_node( ":technic:mineral_chromium", {
 
 minetest.register_node( ":technic:mineral_zinc", {
 	description = S("Zinc Ore"),
-	tile_images = { "default_stone.png^technic_mineral_zinc.png" },
+	tiles = { "default_stone.png^technic_mineral_zinc.png" },
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
