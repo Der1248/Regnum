@@ -17,7 +17,7 @@ minetest.register_ore({
 	y_min		     = -300,
 	y_max		     = -80,
 	noise_params     = uranium_params,
-	noise_threshhold = uranium_threshhold,
+	noise_threshold = uranium_threshhold,
 })
 
 minetest.register_ore({
@@ -30,7 +30,7 @@ minetest.register_ore({
 	y_min		     = -200,
 	y_max		     = -100,
 	noise_params     = chromium_params,
-	noise_threshhold = chromium_threshhold,
+	noise_threshold = chromium_threshhold,
 })
 
 minetest.register_ore({
@@ -44,7 +44,7 @@ minetest.register_ore({
 	y_max		     = -200,
 	flags            = "absheight",
 	noise_params     = chromium_params,
-	noise_threshhold = chromium_threshhold,
+	noise_threshold = chromium_threshhold,
 })
 
 minetest.register_ore({
@@ -57,7 +57,7 @@ minetest.register_ore({
 	y_min		     = -32,
 	y_max		     = 2,
 	noise_params     = zinc_params,
-	noise_threshhold = zinc_threshhold,
+	noise_threshold = zinc_threshhold,
 })
 
 minetest.register_ore({
@@ -71,7 +71,7 @@ minetest.register_ore({
 	y_max		     = -32,
 	flags            = "absheight",
 	noise_params     = zinc_params,
-	noise_threshhold = zinc_threshhold,
+	noise_threshold = zinc_threshhold,
 })
 
 if technic.config:get_bool("enable_marble_generation") then
@@ -84,7 +84,7 @@ minetest.register_ore({
 	clust_size     = 3,
 	y_min		   = -31000,
 	y_max		   = -50,
-	noise_threshhold = 0.4,
+	noise_threshold = 0.4,
 	noise_params = {offset=0, scale=15, spread={x=150, y=150, z=150}, seed=23, octaves=3, persist=0.70}
 })
 end
@@ -99,7 +99,7 @@ minetest.register_ore({
 	clust_size     = 4,
 	y_min		   = -31000,
 	y_max		   = -150,
-	noise_threshhold = 0.4,
+	noise_threshold = 0.4,
 	noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 })
 end
