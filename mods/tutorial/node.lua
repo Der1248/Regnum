@@ -326,7 +326,7 @@ minetest.register_node("tutorial:stone_with_titan", {
 minetest.register_node("tutorial:arena_glass", {
 	description = "Arena glass",
 	drawtype = "glasslike_framed_optional",
-    alpha = 0,
+    -- alpha = 0,
     connects_to = "default:water_source",
 	tiles = {"tutorial_arena_glass.png"},
 	paramtype = "light",

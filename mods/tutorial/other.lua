@@ -3219,14 +3219,14 @@ minetest.override_item("default:water_source", {
 	drop = "default:water_source",
     drawtype = "liquid",
 	diggable = true,
-    alpha = 180,
+    -- alpha = 180,
 })
 minetest.override_item("default:water_flowing", {
 	groups = {water=3, liquid=3, puts_out_fire=1, cracky = 14},
 	drop = "default:water_source",
     drawtype = "flowingliquid",
 	diggable = true,
-    alpha = 180,
+    -- alpha = 180,
 })
 minetest.override_item("default:lava_source", {
 	groups = {lava=3, liquid=2, hot=3, igniter=1, cracky = 14},
