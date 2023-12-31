@@ -2,7 +2,7 @@
 -- namespace: technic
 -- (c) 2012-2013 by RealBadAngel <mk@realbadangel.pl>
 
-technic = technic or {}
+technic = rawget(_G, "technic") or {}
 
 technic.tube_inject_item = pipeworks.tube_inject_item or function (pos, start_pos, velocity, item)
 	local tubed = pipeworks.tube_item(vector.new(pos), item)
@@ -29,10 +29,10 @@ dofile(modpath.."/config.lua")
 -- Helper functions
 dofile(modpath.."/helpers.lua")
 
--- Items 
+-- Items
 dofile(modpath.."/items.lua")
 
--- Craft recipes for items 
+-- Craft recipes for items
 dofile(modpath.."/crafts.lua")
 
 -- Register functions
@@ -50,4 +50,3 @@ dofile(modpath.."/legacy.lua")
 if minetest.settings:get_bool("log_mods") then
 	print(S("[Technic] Loaded in %f seconds"):format(os.clock() - load_start))
 end
-

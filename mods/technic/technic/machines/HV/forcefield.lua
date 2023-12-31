@@ -237,7 +237,7 @@ minetest.register_node("technic:forcefield", {
 	drawtype = "glasslike",
 	groups = {cracky=15},
 	paramtype = "light",
-        light_source = 15,
+        light_source = minetest.LIGHT_MAX,
 	diggable = false,
 	drop = '',
 	tiles = {{
@@ -258,4 +258,3 @@ end
 
 technic.register_machine("HV", "technic:forcefield_emitter_on",  technic.receiver)
 technic.register_machine("HV", "technic:forcefield_emitter_off", technic.receiver)
-

@@ -290,7 +290,7 @@ minetest.register_node("technic:hv_nuclear_reactor_core_active", {
 	sounds = default.node_sound_wood_defaults(),
 	drop="technic:hv_nuclear_reactor_core",
 	drawtype="nodebox",
-	light_source = 15,
+	light_source = minetest.LIGHT_MAX,
 	paramtype = "light",
 	node_box = {
 		type = "fixed",
