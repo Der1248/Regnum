@@ -1654,7 +1654,7 @@ minetest.register_globalstep(function(dtime)
 		local player_inv = player:get_inventory()
 		local player_meta = player:get_meta()
 		if keys["RMB"] == true then
-			if keys.sneaking and player:get_attribute("rightclick") == "false" then
+			if keys.sneaking and player_meta:get("rightclick") == "false" then
 				local item = player:get_wielded_item():get_name()
 				local itemstack = player:get_wielded_item()
 				local kk = 0

@@ -29,7 +29,7 @@ minetest.register_globalstep(function(dtime)
 			local player_meta = player:get_meta()
 			for _, m in pairs(animals) do
 				if player_meta:contains(m[1].."x") then
-					local all_objects = minetest.get_objects_inside_radius({x=tonumber(player:get_attribute(m[1].."x")), y=tonumber(player:get_attribute(m[1].."y")), z=tonumber(player:get_attribute(m[1].."z"))}, 30)
+					local all_objects = minetest.get_objects_inside_radius({x=tonumber(player_meta:get(m[1].."x")), y=tonumber(player_meta:get(m[1].."y")), z=tonumber(player_meta:get(m[1].."z"))}, 30)
 					local is_player = false
 					for _,obj in ipairs(all_objects) do
 						if obj:is_player() then
@@ -49,14 +49,14 @@ minetest.register_globalstep(function(dtime)
 						end
 					end
 					if set_animal and is_player then
-						local obj2 =  minetest.add_entity({x=tonumber(player:get_attribute(m[1].."x")), y=tonumber(player:get_attribute(m[1].."y")), z=tonumber(player:get_attribute(m[1].."z"))},"mobs:"..m[3])
+						local obj2 =  minetest.add_entity({x=tonumber(player_meta:get(m[1].."x")), y=tonumber(player_meta:get(m[1].."y")), z=tonumber(player_meta:get(m[1].."z"))},"mobs:"..m[3])
 						local ent = obj2:get_luaentity()
 						ent.owner = player:get_player_name()
 						ent.npc_name = player:get_player_name().."'s "..m[2]
 						obj2:set_properties({infotext=player:get_player_name().."'s "..m[2]})
-						if player:get_attribute(m[1].."_meta1") then
-							ent.metadata = tonumber(player:get_attribute(m[1].."_meta1"))
-							ent.metadata2 = tonumber(player:get_attribute(m[1].."_meta2"))
+						if player_meta:contains(m[1].."_meta1") then
+							ent.metadata = tonumber(player_meta:get(m[1].."_meta1"))
+							ent.metadata2 = tonumber(player_meta:get(m[1].."_meta2"))
 							update_meta(player,m[1],obj2,ent)
 						end
 					end
@@ -67,47 +67,48 @@ minetest.register_globalstep(function(dtime)
 end)
 
 function update_meta(player,animal,obj,ent)
+	local player_meta = player:get_meta()
 	if animal == "dog" then
-		if tonumber(player:get_attribute("dog_meta1")) == 2 then
+		if tonumber(player_meta:get("dog_meta1")) == 2 then
 			obj:set_properties({textures={"mobs_dog2.png"}})
-		elseif tonumber(player:get_attribute("dog_meta1")) == 1 then
+		elseif tonumber(player_meta:get("dog_meta1")) == 1 then
 			obj:set_properties({textures={"mobs_dog.png"}})
 		end
 	elseif animal == "cat" then
-		if tonumber(player:get_attribute("cat_meta1")) == 2 then
+		if tonumber(player_meta:get("cat_meta1")) == 2 then
 			obj:set_properties({textures={"mobs_kitten.png"}})
-		elseif tonumber(player:get_attribute("cat_meta1")) == 3 then
+		elseif tonumber(player_meta:get("cat_meta1")) == 3 then
 			obj:set_properties({textures={"mobs_kitten2.png"}})
-		elseif tonumber(player:get_attribute("cat_meta1")) == 4 then
+		elseif tonumber(player_meta:get("cat_meta1")) == 4 then
 			obj:set_properties({textures={"mobs_kitten3.png"}})
-		elseif tonumber(player:get_attribute("cat_meta1")) == 1 then
+		elseif tonumber(player_meta:get("cat_meta1")) == 1 then
 			obj:set_properties({textures={"mobs_kitten4.png"}})
 		end
 	elseif animal == "dragon" then
-		if tonumber(player:get_attribute("dragon_meta1")) == 2 then
+		if tonumber(player_meta:get("dragon_meta1")) == 2 then
 			obj:set_properties({textures={"mobs_dragon_yellow.png"}})
-		elseif tonumber(player:get_attribute("dragon_meta1")) == 3 then
+		elseif tonumber(player_meta:get("dragon_meta1")) == 3 then
 			obj:set_properties({textures={"mobs_dragon_blue.png"}})
-		elseif tonumber(player:get_attribute("dragon_meta1")) == 4 then
+		elseif tonumber(player_meta:get("dragon_meta1")) == 4 then
 			obj:set_properties({textures={"mobs_dragon_green.png"}})
-		elseif tonumber(player:get_attribute("dragon_meta1")) == 5 then
+		elseif tonumber(player_meta:get("dragon_meta1")) == 5 then
 			obj:set_properties({textures={"mobs_dragon_black.png"}})
-		elseif tonumber(player:get_attribute("dragon_meta1")) == 6 then
+		elseif tonumber(player_meta:get("dragon_meta1")) == 6 then
 			obj:set_properties({textures={"mobs_dragon_great.png"}})
-		elseif tonumber(player:get_attribute("dragon_meta1")) == 1 then
+		elseif tonumber(player_meta:get("dragon_meta1")) == 1 then
 			obj:set_properties({textures={"mobs_dragon_red.png"}})
 		end
 	elseif animal == "fox" then
-		if tonumber(player:get_attribute("fox_meta1")) == 2 then
+		if tonumber(player_meta:get("fox_meta1")) == 2 then
 			obj:set_properties({textures={"mobs_fox1.png"}})
-		elseif tonumber(player:get_attribute("fox_meta1")) == 1 then
+		elseif tonumber(player_meta:get("fox_meta1")) == 1 then
 			obj:set_properties({textures={"mobs_fox.png"}})
 		end
 	end
-	if tonumber(player:get_attribute(animal.."_meta2")) == 2 then
+	if tonumber(player_meta:get(animal.."_meta2")) == 2 then
 		ent.walk_velocity = 0
 		ent.run_velocity = 0
-	elseif tonumber(player:get_attribute(animal.."_meta2")) == 1 then
+	elseif tonumber(player_meta:get(animal.."_meta2")) == 1 then
 		ent.walk_velocity = 1
 		ent.run_velocity = 3
 	end
@@ -296,68 +297,26 @@ function first_step(self,dtime)
             end
 	    end
 
-		if self.name == "mobs:dragon" then
-			if self.owner and minetest.get_player_by_name(self.owner) then
-				minetest.get_player_by_name(self.owner):set_attribute("dragonx", ""..math.floor(self.object:get_pos().x+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("dragony", ""..math.floor(self.object:get_pos().y+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("dragonz", ""..math.floor(self.object:get_pos().z+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("dragon_meta1", ""..self.metadata)
-				minetest.get_player_by_name(self.owner):set_attribute("dragon_meta2", ""..self.metadata2)
-			end
-		end
-		if self.name == "mobs:sheep" then
-			if self.owner and minetest.get_player_by_name(self.owner) then
-				minetest.get_player_by_name(self.owner):set_attribute("sheepx", ""..math.floor(self.object:get_pos().x+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("sheepy", ""..math.floor(self.object:get_pos().y+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("sheepz", ""..math.floor(self.object:get_pos().z+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("sheep_meta1", ""..self.metadata)
-				minetest.get_player_by_name(self.owner):set_attribute("sheep_meta2", ""..self.metadata2)
-
-			end
-		end
-		if self.name == "mobs:fox" then
-			if self.owner and minetest.get_player_by_name(self.owner) then
-				minetest.get_player_by_name(self.owner):set_attribute("foxx", ""..math.floor(self.object:get_pos().x+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("foxy", ""..math.floor(self.object:get_pos().y+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("foxz", ""..math.floor(self.object:get_pos().z+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("fox_meta1", ""..self.metadata)
-				minetest.get_player_by_name(self.owner):set_attribute("fox_meta2", ""..self.metadata2)
-			end
-		end
-		if self.name == "mobs:tortoise" then
-			if self.owner and minetest.get_player_by_name(self.owner) then
-				minetest.get_player_by_name(self.owner):set_attribute("tortoisex", ""..math.floor(self.object:get_pos().x+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("tortoisey", ""..math.floor(self.object:get_pos().y+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("tortoisez", ""..math.floor(self.object:get_pos().z+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("tortoise_meta1", ""..self.metadata)
-				minetest.get_player_by_name(self.owner):set_attribute("tortoise_meta2", ""..self.metadata2)
-			end
-		end
-		if self.name == "mobs:knight_1248" then
-			if self.owner and minetest.get_player_by_name(self.owner) then
-				minetest.get_player_by_name(self.owner):set_attribute("knightx", ""..math.floor(self.object:get_pos().x+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("knighty", ""..math.floor(self.object:get_pos().y+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("knightz", ""..math.floor(self.object:get_pos().z+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("knight_meta1", ""..self.metadata)
-				minetest.get_player_by_name(self.owner):set_attribute("knight_meta2", ""..self.metadata2)
-			end
-		end
-		if self.name == "mobs:dog" then
-			if self.owner and minetest.get_player_by_name(self.owner) then
-				minetest.get_player_by_name(self.owner):set_attribute("dogx", ""..math.floor(self.object:get_pos().x+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("dogy", ""..math.floor(self.object:get_pos().y+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("dogz", ""..math.floor(self.object:get_pos().z+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("dog_meta1", ""..self.metadata)
-				minetest.get_player_by_name(self.owner):set_attribute("dog_meta2", ""..self.metadata2)
-			end
-		end
-		if self.name == "mobs:cat" then
-			if self.owner and minetest.get_player_by_name(self.owner) then
-				minetest.get_player_by_name(self.owner):set_attribute("catx", ""..math.floor(self.object:get_pos().x+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("caty", ""..math.floor(self.object:get_pos().y+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("catz", ""..math.floor(self.object:get_pos().z+0.5))
-				minetest.get_player_by_name(self.owner):set_attribute("cat_meta1", ""..self.metadata)
-				minetest.get_player_by_name(self.owner):set_attribute("cat_meta2", ""..self.metadata2)
+		local owner = minetest.get_player_by_name(self.owner)
+		if self.owner and owner then
+			local owner_meta = owner:get_meta()
+			local animals = {
+				{"dog","dog"},
+				{"cat","cat"},
+				{"sheep","sheep"},
+				{"tortoise","tortoise"},
+				{"knight","knight_1248"},
+				{"fox","fox"},
+				{"dragon","dragon"},
+			}
+			for _, animal in ipairs(animals) do
+				if self.name == "mobs:" .. animal[2] then
+					owner_meta:set_string(animal[1] .. "x", "" .. math.floor(self.object:get_pos().x+0.5))
+					owner_meta:set_string(animal[1] .. "y", "" .. math.floor(self.object:get_pos().y+0.5))
+					owner_meta:set_string(animal[1] .. "z", "" .. math.floor(self.object:get_pos().z+0.5))
+					owner_meta:set_string(animal[1] .. "_meta1", "" .. self.metadata)
+					owner_meta:set_string(animal[1] .. "_meta2", "" .. self.metadata2)
+				end
 			end
 		end
 

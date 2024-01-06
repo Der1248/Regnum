@@ -111,7 +111,7 @@ local function validate_armor_inventory(player)
 		return
 	end
 	local armor_prev = {}
-	local armor_list_string = player:get_attribute("3d_armor_inventory")
+	local armor_list_string = player:get_meta():get("3d_armor_inventory")
 	if armor_list_string then
 		local armor_list = armor:deserialize_inventory_list(armor_list_string)
 		for i, stack in ipairs(armor_list) do
@@ -224,8 +224,8 @@ armor.init_player_armor = function(player)
     player_inv:set_size("arm2", 1)
 	local stack = player_inv:get_stack("arm2", 1)
 	armor_inv:set_stack("arm2", 1, stack)
-	
-	
+
+
 	local player_inv = player:get_inventory()
 	player_inv:set_size("armor", 6)
 	for i=1, 6 do
@@ -330,7 +330,7 @@ end)
 
 if armor.config.drop == true or armor.config.destroy == true then
 	minetest.register_on_dieplayer(function(player)
-		
+
 	end)
 end
 

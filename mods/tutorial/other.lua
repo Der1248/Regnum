@@ -1553,6 +1553,7 @@ mobpos.get_formspec = function(player, pos)
     local player_inv = player:get_inventory()
     player_inv:set_size("gem1", 8)
     player_inv:set_size("gem2", 8)
+	local player_meta = player:get_meta()
     local dog = ""
     local cat = ""
     local sheep = ""
@@ -1560,26 +1561,26 @@ mobpos.get_formspec = function(player, pos)
     local fox = ""
     local tortoise = ""
     local knight = ""
-    if player:get_attribute("dogx") ~= nil then
-        dog = player:get_attribute("dogx")..", "..player:get_attribute("dogy")..", "..player:get_attribute("dogz")
+    if player_meta:contains("dogx") then
+        dog = player_meta:get("dogx")..", "..player_meta:get("dogy")..", "..player_meta:get("dogz")
     end
-    if player:get_attribute("catx") ~= nil then
-        cat = player:get_attribute("catx")..", "..player:get_attribute("caty")..", "..player:get_attribute("catz")
+    if player_meta:contains("catx") then
+        cat = player_meta:get("catx")..", "..player_meta:get("caty")..", "..player_meta:get("catz")
     end
-    if player:get_attribute("sheepx") ~= nil then
-        sheep = player:get_attribute("sheepx")..", "..player:get_attribute("sheepy")..", "..player:get_attribute("sheepz")
+    if player_meta:contains("sheepx") then
+        sheep = player_meta:get("sheepx")..", "..player_meta:get("sheepy")..", "..player_meta:get("sheepz")
     end
-    if player:get_attribute("dragonx") ~= nil then
-        dragon = player:get_attribute("dragonx")..", "..player:get_attribute("dragony")..", "..player:get_attribute("dragonz")
+    if player_meta:contains("dragonx") then
+        dragon = player_meta:get("dragonx")..", "..player_meta:get("dragony")..", "..player_meta:get("dragonz")
     end
-    if player:get_attribute("foxx") ~= nil then
-        fox = player:get_attribute("foxx")..", "..player:get_attribute("foxy")..", "..player:get_attribute("foxz")
+    if player_meta:contains("foxx") then
+        fox = player_meta:get("foxx")..", "..player_meta:get("foxy")..", "..player_meta:get("foxz")
     end
-    if player:get_attribute("tortoisex") ~= nil then
-        tortoise = player:get_attribute("tortoisex")..", "..player:get_attribute("tortoisey")..", "..player:get_attribute("tortoisez")
+    if player_meta:contains("tortoisex") then
+        tortoise = player_meta:get("tortoisex")..", "..player_meta:get("tortoisey")..", "..player_meta:get("tortoisez")
     end
-    if player:get_attribute("knightx") ~= nil then
-        knight = player:get_attribute("knightx")..", "..player:get_attribute("knighty")..", "..player:get_attribute("knightz")
+    if player_meta:contains("knightx") then
+        knight = player_meta:get("knightx")..", "..player_meta:get("knighty")..", "..player_meta:get("knightz")
     end
 	formspec = "size[4,3]"
         .."background[4,3;1,1;gui_formbg.png;true]"
@@ -1587,13 +1588,13 @@ mobpos.get_formspec = function(player, pos)
         .."bgcolor[#080808BB;true]"
         .."button[0,0;2,0.5;dna;Back]"
 		.."button[2,0;2,0.5;main;Main]"
-        .."label[0,1;Dog pos:"..dog.."]"
-        .."label[0,1.3;Cat pos:"..cat.."]"
-        .."label[0,1.6;Sheep pos:"..sheep.."]"
-        .."label[0,1.9;Dragon pos:"..dragon.."]"
-        .."label[0,2.2;Fox pos:"..fox.."]"
-        .."label[0,2.5;Tortoise pos:"..tortoise.."]"
-        .."label[0,2.8;1248 Knight pos:"..knight.."]"
+        .."label[0,1;Dog pos: "..dog.."]"
+        .."label[0,1.3;Cat pos: "..cat.."]"
+        .."label[0,1.6;Sheep pos: "..sheep.."]"
+        .."label[0,1.9;Dragon pos: "..dragon.."]"
+        .."label[0,2.2;Fox pos: "..fox.."]"
+        .."label[0,2.5;Tortoise pos: "..tortoise.."]"
+        .."label[0,2.8;1248 Knight pos: "..knight.."]"
 	return formspec
 end
 minetest.register_on_player_receive_fields(function(player, formname, fields)
