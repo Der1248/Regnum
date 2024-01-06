@@ -397,7 +397,7 @@ awards.register_award("award_???_bronze",{
 	secret = true
 })
 awards.register_on_death(function(player,data)
-	local pos = player:getpos()
+	local pos = player:get_pos()
 	if pos and minetest.find_node_near(pos, 5, "default:mese") ~= nil then
 		return "award_???_bronze"
 	end	
@@ -412,7 +412,7 @@ awards.register_award("award_???_silber",{
 	secret = true
 })
 awards.register_on_death(function(player,data)
-	local pos = player:getpos()
+	local pos = player:get_pos()
 	if pos and minetest.find_node_near(pos, 5, "moreores:mineral_mithril") ~= nil then
 		return "award_???_silber"
 	end	
@@ -427,7 +427,7 @@ awards.register_award("award_???_gold",{
 	secret = true
 })
 awards.register_on_death(function(player,data)
-	local pos = player:getpos()
+	local pos = player:get_pos()
 	if pos and minetest.find_node_near(pos, 5, "tutorial:stone_with_titan") ~= nil then
 		return "award_???_gold"
 	end	
@@ -441,7 +441,7 @@ awards.register_award("award_???_platin",{
 	secret = true
 })
 awards.register_on_death(function(player,data)
-	local pos = player:getpos()
+	local pos = player:get_pos()
 	if pos and minetest.find_node_near(pos, 5, "tutorial:stone_with_admin") ~= nil then
 		return "award_???_platin"
 	end	
@@ -455,7 +455,7 @@ awards.register_award("award_???_regnum",{
 	secret = true
 })
 awards.register_on_death(function(player,data)
-	local pos = player:getpos()
+	local pos = player:get_pos()
 	if pos and minetest.find_node_near(pos, 5, "tutorial:stone_with_regnum") ~= nil then
 		return "award_???_regnum"
 	end	
@@ -469,7 +469,7 @@ awards.register_award("award_???_nyancat",{
 	secret = true
 })
 awards.register_on_death(function(player,data)
-	local pos = player:getpos()
+	local pos = player:get_pos()
 	if pos and minetest.find_node_near(pos, 5, "nyancat:nyancat") ~= nil then
 		return "award_???_nyancat"
 	end	

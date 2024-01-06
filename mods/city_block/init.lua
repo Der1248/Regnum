@@ -118,14 +118,14 @@ end
 
 minetest.register_on_dieplayer(
 	function(player)
-		pos=player:getpos()
+		pos=player:get_pos()
 		if city_block:in_city(pos) and not(pos.x>-25 and pos.x<25 and pos.y>-5 and pos.y<25 and pos.z>-25 and pos.z<25) then
 			for _,suspect in pairs(minetest.get_objects_inside_radius(pos, 3.8)) do
 				if suspect:is_player() and suspect:get_player_name()~=player:get_player_name() then
 					suspect_name=suspect:get_player_name()
 					if city_block.suspects[suspect_name] then
 						if city_block.suspects[suspect_name]>3 then
-							suspect:setpos( {x=0, y=-2, z=0} )
+							suspect:set_pos( {x=0, y=-2, z=0} )
 							minetest.chat_send_all("Player "..suspect_name.." sent to jail as suspect for killing in town")
 							minetest.log("action", "Player "..suspect_name.." warned for killing in town")
 							city_block.suspects[suspect_name]=1

@@ -449,7 +449,7 @@ end
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if fields.armoff then
-		
+
 		local player_inv = player:get_inventory()
 		player_inv:set_size("am", 1)
 		local type = player:get_inventory():get_stack("arm",1):get_name()
@@ -469,7 +469,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		end
 	end
 	if fields.armon then
-		
+
 		local player_inv = player:get_inventory()
 		player_inv:set_size("am", 1)
 		player_inv:set_stack("am", 1, nil)
@@ -501,7 +501,7 @@ armor.get_armor_formspec = function(self, name, listring)
 		formspec = formspec .."button[7.5,3.7;2,0.5;armon;armor on]"
 	else
 		formspec = formspec .."button[7.5,3.7;2,0.5;armoff;armor off]"
-		
+
 	end
 	if listring == true then
 		formspec = formspec.."listring[current_player;main]"..
@@ -550,7 +550,7 @@ end
 armor.load_armor_inventory = function(self, player)
 	local _, inv = self:get_valid_player(player, "[load_armor_inventory]")
 	if inv then
-		local armor_list_string = player:get_attribute("3d_armor_inventory")
+		local armor_list_string = player:get_meta():get("3d_armor_inventory")
 		if armor_list_string then
 			inv:set_list("armor",
 				self:deserialize_inventory_list(armor_list_string))
@@ -562,7 +562,7 @@ end
 armor.save_armor_inventory = function(self, player)
 	local _, inv = self:get_valid_player(player, "[save_armor_inventory]")
 	if inv then
-		player:set_attribute("3d_armor_inventory",
+		player:get_meta():set_string("3d_armor_inventory",
 			self:serialize_inventory_list(inv:get_list("armor")))
 	end
 end

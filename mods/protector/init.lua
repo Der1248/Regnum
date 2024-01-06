@@ -2,9 +2,9 @@ minetest.register_privilege("delprotect","Ignore player protection")
 
 protector = {}
 protector.mod = "redo"
-protector.radius = (tonumber(minetest.setting_get("protector_radius")) or 5)
-protector.drop = minetest.setting_getbool("protector_drop") or false
-protector.hurt = (tonumber(minetest.setting_get("protector_hurt")) or 0)
+protector.radius = (tonumber(minetest.settings:get("protector_radius")) or 5)
+protector.drop = minetest.settings:get_bool("protector_drop") or false
+protector.hurt = (tonumber(minetest.settings:get("protector_hurt")) or 0)
 
 protector.get_member_list = function(meta)
 
@@ -90,7 +90,7 @@ protector.generate_formspec = function(meta)
 
 		i = i + 1
 	end
-	
+
 	if i < npp then
 
 		-- user name entry field
@@ -144,7 +144,7 @@ protector.can_dig = function(r, pos, digger, onlyowner, infolevel)
 		owner = meta:get_string("owner")
 		members = meta:get_string("members")
 
-		if owner ~= digger then 
+		if owner ~= digger then
 
 			if onlyowner
 			or not protector.is_member(meta, digger) then
@@ -239,7 +239,7 @@ function minetest.is_protected(pos, digger)
 					player:set_wielded_item(holding)
 
 					-- drop stack
-					local obj = minetest.add_item(player:getpos(), sta)
+					local obj = minetest.add_item(player:get_pos(), sta)
 					obj:setvelocity({x = 0, y = 5, z = 0})
 				end)
 
@@ -324,7 +324,7 @@ minetest.register_node("protector:protect", {
 
 		if meta
 		and protector.can_dig(1, pos,clicker:get_player_name(), true, 1) then
-			minetest.show_formspec(clicker:get_player_name(), 
+			minetest.show_formspec(clicker:get_player_name(),
 			"protector:node_" .. minetest.pos_to_string(pos), protector.generate_formspec(meta))
 		end
 	end,
@@ -368,6 +368,7 @@ minetest.register_node("protector:protect2", {
 	tiles = {"protector_logo.png"},
 	wield_image = "protector_logo.png",
 	inventory_image = "protector_logo.png",
+	use_texture_alpha = "clip",
 	sounds = default.node_sound_stone_defaults(),
 	groups = {dig_immediate = 2, unbreakable = 1},
 	paramtype = 'light',
@@ -411,7 +412,7 @@ minetest.register_node("protector:protect2", {
 
 		if protector.can_dig(1, pos, clicker:get_player_name(), true, 1) then
 
-			minetest.show_formspec(clicker:get_player_name(), 
+			minetest.show_formspec(clicker:get_player_name(),
 			"protector:node_" .. minetest.pos_to_string(pos), protector.generate_formspec(meta))
 		end
 	end,
@@ -476,7 +477,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 				protector.del_member(meta, string.sub(field,string.len("protector_del_member_") + 1))
 			end
 		end
-		
+
 		if not fields.close_me then
 			minetest.show_formspec(player:get_player_name(), formname, protector.generate_formspec(meta))
 		end
@@ -522,7 +523,7 @@ minetest.register_entity("protector:display", {
 local x = protector.radius
 minetest.register_node("protector:display_node", {
 	tiles = {"protector_display.png"},
-	use_texture_alpha = true,
+	use_texture_alpha = "clip",
 	walkable = false,
 	drawtype = "nodebox",
 	node_box = {

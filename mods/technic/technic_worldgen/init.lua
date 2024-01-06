@@ -1,4 +1,4 @@
-technic = technic or {}
+technic = rawget(_G, "technic") or {}
 technic.worldgen = {}
 local modpath = minetest.get_modpath("technic_worldgen")
 local intllib = nil
@@ -26,4 +26,3 @@ end
 if minetest.get_modpath("mg") then
 	dofile(modpath.."/mg.lua")
 end
-

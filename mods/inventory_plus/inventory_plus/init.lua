@@ -82,7 +82,7 @@ inventory_plus.plusplus = true
 inventory_plus.buttons = {}
 
 -- default inventory page
-inventory_plus.default = minetest.setting_get("inventory_default") or "main"
+inventory_plus.default = minetest.settings:get("inventory_default") or "main"
 
 -- original inventory formspec, per player
 inventory_plus.inventory = {}
@@ -115,16 +115,9 @@ end
 
 -- set_inventory_formspec
 inventory_plus.set_inventory_formspec = function(player,formspec)
-	if minetest.setting_getbool("creative_mode") then
-		-- if creative mode is on then wait a bit
-		minetest.after(0.05,function()
-			player:set_inventory_formspec(formspec)
-		end)
-	else
-		minetest.after(0.05,function()
-			player:set_inventory_formspec(formspec)
-		end)
-	end
+	minetest.after(0.05,function()
+		player:set_inventory_formspec(formspec)
+	end)
 end
 
 -- get_formspec
@@ -149,7 +142,7 @@ inventory_plus.get_formspec = function(player,page)
 	-- craft page
 	if page=="main" or page==""then
 		local pri = minetest.get_player_privs(player:get_player_name())
-		if minetest.setting_getbool("creative_mode") or pri.creative then
+		if minetest.is_creative_enabled(player:get_player_name()) or pri.creative then
 			sfinv.set_player_inventory_formspec(player)
 			return player:get_inventory_formspec()
 				--.. get_buttons(6,0,2)
@@ -175,7 +168,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	-- main
 	if fields.main then
 		local pri = minetest.get_player_privs(player:get_player_name())
-		if minetest.setting_getbool("creative_mode") or pri.creative then
+		if minetest.is_creative_enabled(player:get_player_name()) or pri.creative then
 			minetest.after(0.01,function()
 				inventory_plus.set_inventory_formspec(player, inventory_plus.get_formspec(player,"main"))
 			end)

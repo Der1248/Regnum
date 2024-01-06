@@ -98,7 +98,7 @@ function mesecon.mvps_push(pos, dir, maximum) -- pos: pos of mvps; dir: directio
 		minetest.add_node(np, n.node)
 		minetest.get_meta(np):from_table(n.meta)
 	end
-	
+
 	local moved_nodes = {}
 	local oldstack = mesecon.tablecopy(nodes)
 	for i in ipairs(nodes) do
@@ -109,7 +109,7 @@ function mesecon.mvps_push(pos, dir, maximum) -- pos: pos of mvps; dir: directio
 		moved_nodes[i].node = nodes[i].node
 		moved_nodes[i].meta = nodes[i].meta
 	end
-	
+
 	on_mvps_move(moved_nodes)
 
 	return true, nodes, oldstack
@@ -205,7 +205,7 @@ function mesecon.mvps_move_objects(pos, dir, nodestack)
 	end
 
 	-- Move objects lying/standing on the stack (before it was pushed - oldstack)
-	if tonumber(minetest.setting_get("movement_gravity")) > 0 and dir.y == 0 then
+	if tonumber(minetest.settings:get("movement_gravity")) > 0 and dir.y == 0 then
 		-- If gravity positive and dir horizontal, push players standing on the stack
 		for _, n in ipairs(nodestack) do
 			local p_above = mesecon.addPosRule(n.pos, {x=0, y=1, z=0})
@@ -219,13 +219,13 @@ function mesecon.mvps_move_objects(pos, dir, nodestack)
 	for _, obj in ipairs(objects_to_move) do
 		local entity = obj:get_luaentity()
 		if not entity or not mesecon.is_mvps_unmov(entity.name) then
-			local np = mesecon.addPosRule(obj:getpos(), dir)
+			local np = mesecon.addPosRule(obj:get_pos(), dir)
 
 			--move only if destination is not solid
 			local nn = minetest.get_node(np)
 			if not ((not minetest.registered_nodes[nn.name])
 			or minetest.registered_nodes[nn.name].walkable) then
-				obj:setpos(np)
+				obj:set_pos(np)
 			end
 		end
 	end

@@ -157,7 +157,7 @@ minetest.register_node("tutorial:stone_with_regnum", {
 minetest.register_node("tutorial:xp_block",{
 	description = "Xp Block (grey)",
 	tiles  = {"tutorial_xp_block.png"},
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,xpg=1},  
+	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,xpg=1},
 })
 minetest.register_node("tutorial:stone_with_blau", {
 	description = "Blue ore",
@@ -232,7 +232,7 @@ minetest.register_node("tutorial:geschenk_wool1",{
 	description = "Colored wool gift lv.1",
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk_wool1.png"},
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},  
+	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
     drop = {
 		max_items = 1,
 		items = {
@@ -251,7 +251,7 @@ minetest.register_node("tutorial:geschenk_wool",{
 	is_ground_content = true,
 	drop   = 'wool:white 5',
 	tiles  = {"tutorial_geschenk_wool.png"},
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},   
+	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
 })
 minetest.register_node("tutorial:geschenk_gold",{
 	description = "Gift (gold)",
@@ -287,7 +287,7 @@ minetest.register_node("tutorial:geschenk_platin",{
 	description = "Gift (platinum)",
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk_platin.png"},
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},  
+	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
 	drop = {
 		max_items = 1,
 		items = {
@@ -303,7 +303,7 @@ minetest.register_node("tutorial:geschenk_silber",{
 	description = "Gift (silver)",
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk_silber.png"},
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},  
+	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
 	drop = {
 		max_items = 1,
 		items = {
@@ -326,12 +326,12 @@ minetest.register_node("tutorial:stone_with_titan", {
 minetest.register_node("tutorial:arena_glass", {
 	description = "Arena glass",
 	drawtype = "glasslike_framed_optional",
-    alpha = 0,
+    -- alpha = 0,
     connects_to = "default:water_source",
 	tiles = {"tutorial_arena_glass.png"},
 	paramtype = "light",
 	sunlight_propagates = true,
-	use_texture_alpha = true,
+	use_texture_alpha = "clip",
 	light_source = 14,
 	is_ground_content = true,
 	groups = {cracky=11},
@@ -394,7 +394,7 @@ minetest.register_node("tutorial:geschenk",{
 	description = "Gift",
 	is_ground_content = true,
 	tiles  = {"tutorial_geschenk.png"},
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},  
+	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
 	drop = {
 		max_items = 1,
 		items = {

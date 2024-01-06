@@ -71,7 +71,7 @@ function register_door(name, def)
 				minetest.get_meta(pt2):set_int("right", 1)
 			end
 
-			if not minetest.setting_getbool("creative_mode") then
+			if not minetest.is_creative_enabled(placer:get_player_name()) then
 				itemstack:take_item()
 			end
 			return itemstack
@@ -142,6 +142,7 @@ function register_door(name, def)
 
 	minetest.register_node(name.."_b_1", {
 		tiles = {tb[2], tb[2], tb[2], tb[2], tb[1], tb[1].."^[transformfx"},
+		use_texture_alpha = "clip",
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
@@ -179,6 +180,7 @@ function register_door(name, def)
 
 	minetest.register_node(name.."_t_1", {
 		tiles = {tt[2], tt[2], tt[2], tt[2], tt[1], tt[1].."^[transformfx"},
+		use_texture_alpha = "clip",
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
@@ -216,6 +218,7 @@ function register_door(name, def)
 
 	minetest.register_node(name.."_b_2", {
 		tiles = {tb[2], tb[2], tb[2], tb[2], tb[1].."^[transformfx", tb[1]},
+		use_texture_alpha = "clip",
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
@@ -253,6 +256,7 @@ function register_door(name, def)
 
 	minetest.register_node(name.."_t_2", {
 		tiles = {tt[2], tt[2], tt[2], tt[2], tt[1].."^[transformfx", tt[1]},
+		use_texture_alpha = "clip",
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
@@ -381,6 +385,7 @@ function register_trapdoor(name, def)
 	def.paramtype = "light"
 	def.paramtype2 = "facedir"
 	def.is_ground_content = false
+	def.use_texture_alpha = "clip"
 
 	local def_opened = table.copy(def)
 	local def_closed = table.copy(def)
@@ -596,7 +601,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 					end
 				end
 			end
-	
+
 		elseif fields.todn then
 
 			-- copy contents of chest to players inventory

@@ -111,7 +111,7 @@ minetest.register_node( "gems:amethyst_block", {
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
 })
-	   
+
 minetest.register_craftitem( "gems:ruby_gem", {
 	description = "ruby gem",
 	tiles = { "ruby:ruby_gem" },
@@ -218,7 +218,7 @@ minetest.register_craft({
             {'', '', ''},
 		    {'', 'gems:amethyst_block', ''},
 		    {'', '', ''},
-                
+
         }
 })
 
@@ -228,7 +228,7 @@ minetest.register_craft({
             {'', '', ''},
 		    {'', 'gems:ruby_block', ''},
 		    {'', '', ''},
-                
+
         }
 })
 
@@ -238,7 +238,7 @@ minetest.register_craft({
             {'', '', ''},
 		    {'', 'gems:emerald_block', ''},
 		    {'', '', ''},
-                
+
         }
 })
 
@@ -248,7 +248,7 @@ minetest.register_craft({
             {'', '', ''},
 		    {'', 'gems:sapphire_block', ''},
 		    {'', '', ''},
-                
+
         }
 })
 
@@ -258,7 +258,7 @@ minetest.register_craft({
             {'', '', ''},
 		    {'', 'gems:shadow_block', ''},
 		    {'', '', ''},
-                
+
         }
 })
 
@@ -268,7 +268,7 @@ minetest.register_craft({
             {'', '', ''},
 		    {'', 'gems:pearl_block', ''},
 		    {'', '', ''},
-                
+
         }
 })
 
@@ -279,8 +279,8 @@ minetest.register_ore({
 	clust_scarcity = 10*10*10,
 	clust_num_ores = 4,
 	clust_size     = 3,
-	height_min     = -31000,
-	height_max     = -300,
+	y_min 		   = -31000,
+	y_max 		   = -300,
 	flags          = "absheight",
 })
 
@@ -292,8 +292,8 @@ minetest.register_ore({
 	clust_scarcity = 10*10*10,
 	clust_num_ores = 4,
 	clust_size     = 3,
-	height_min     = -31000,
-	height_max     = -300,
+	y_min 		   = -31000,
+	y_max 		   = -300,
 	flags          = "absheight",
 })
 
@@ -304,8 +304,8 @@ minetest.register_ore({
 	clust_scarcity = 13*13*13,
 	clust_num_ores = 4,
 	clust_size     = 3,
-	height_min     = -31000,
-	height_max     = -600,
+	y_min 		   = -31000,
+	y_max 		   = -600,
 	flags          = "absheight",
 })
 
@@ -317,8 +317,8 @@ minetest.register_ore({
 	clust_scarcity = 15*15*15,
 	clust_num_ores = 4,
 	clust_size     = 3,
-	height_min     = -31000,
-	height_max     = -900,
+	y_min 		   = -31000,
+	y_max 		   = -900,
 	flags          = "absheight",
 })
 
@@ -329,8 +329,8 @@ minetest.register_ore({
 	clust_scarcity = 15*15*15,
 	clust_num_ores = 4,
 	clust_size     = 3,
-	height_min     = -31000,
-	height_max     = -900,
+	y_min 		   = -31000,
+	y_max 		   = -900,
 	flags          = "absheight",
 })
 
@@ -341,10 +341,7 @@ minetest.register_ore({
 	clust_scarcity = 17*17*17,
 	clust_num_ores = 4,
 	clust_size     = 3,
-	height_min     = -31000,
-	height_max     = -1200,
+	y_min 		   = -31000,
+	y_max 		   = -1200,
 	flags          = "absheight",
 })
-
-
-

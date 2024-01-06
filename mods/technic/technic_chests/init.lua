@@ -4,7 +4,7 @@
 
 modpath = minetest.get_modpath("technic_chests")
 
-technic = technic or {}
+technic = rawget(_G, "technic") or {}
 technic.chests = {}
 
 dofile(modpath.."/common.lua")
@@ -15,4 +15,3 @@ dofile(modpath.."/copper_chest.lua")
 dofile(modpath.."/silver_chest.lua")
 dofile(modpath.."/gold_chest.lua")
 dofile(modpath.."/mithril_chest.lua")
-

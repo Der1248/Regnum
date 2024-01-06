@@ -81,7 +81,7 @@ minetest.register_abm({
 	interval = 3.0,
 	chance = 2,
 	action = function(pos, node, active_object_count, active_object_count_wider)
-		minetest.env:remove_node(pos)
+		minetest.remove_node(pos)
 	end,
 })
 --v.0.6.1
@@ -98,6 +98,6 @@ minetest.register_abm({
 	interval = 2,
 	chance = 4,
 	action = function(pos)
-		minetest.env:add_node(pos, {name="tutorial:stampfi"})
+		minetest.add_node(pos, {name="tutorial:stampfi"})
 	end,
 })

@@ -1,8 +1,8 @@
 minetest.register_on_joinplayer(function(player)
-	minetest.setting_set("node_highlighting", "box")
-    minetest.setting_set("disable_anticheat", "true")
-    minetest.setting_set("bones_mode", "keep")
-    minetest.setting_set("time_speed", "0")
+	minetest.settings:set("node_highlighting", "box")
+    minetest.settings:set("disable_anticheat", "true")
+    minetest.settings:set("bones_mode", "keep")
+    minetest.settings:set("time_speed", "0")
     minetest.set_timeofday(0.5)
     local player_inv = player:get_inventory()
     local g1 = player_inv:get_stack("gem", 1):get_name()
@@ -68,9 +68,9 @@ minetest.register_on_joinplayer(function(player)
     end
 end)
 minetest.register_on_shutdown(function()
-    minetest.setting_set("disable_anticheat", "false")
-    minetest.setting_set("bones_mode", "bones")
-    minetest.setting_set("time_speed", "72")
+    minetest.settings:set("disable_anticheat", "false")
+    minetest.settings:set("bones_mode", "bones")
+    minetest.settings:set("time_speed", "72")
 end)
 local gem = {}
 gem.get_formspec = function(player, pos)
@@ -112,7 +112,7 @@ gem.get_formspec = function(player, pos)
                 .."image[2.5,2.25;1,1;tutorial_gem2.png]"
                 .."image[3.5,2.25;1,1;tutorial_gem3.png]"
                 .."image[4.5,2.25;1,1;tutorial_gem4.png]"
-                .."image[5.5,2.25;1,1;tutorial_gem5.png]"           
+                .."image[5.5,2.25;1,1;tutorial_gem5.png]"
         else
             if g1 == "tutorial:magic_gem1" and g2 == "tutorial:magic_gem2" and g3 == "tutorial:magic_gem3" and g4 == "tutorial:magic_gem4" and g5 == "tutorial:magic_gem5" then
                 formspec = formspec
@@ -127,7 +127,7 @@ gem.get_formspec = function(player, pos)
         formspec = formspec
         .."list[current_player;main;0,4.25;8,1;]"
 	    .."list[current_player;main;0,5.5;8,3;8]"
-	return formspec		
+	return formspec
 end
 local crafting5 = {}
 crafting5.get_formspec = function(player, pos)
@@ -150,7 +150,7 @@ crafting5.get_formspec = function(player, pos)
         .."button[4,3.3;2,0.5;craftgem;craft]"
         .."list[current_player;main;1,4.25;8,1;]"
 	    .."list[current_player;main;1,5.5;8,3;8]"
-	return formspec		
+	return formspec
 end
 minetest.register_on_player_receive_fields(function(player, formname, fields)
     local player_inv = player:get_inventory()
@@ -693,7 +693,7 @@ rg13.get_formspec = function(player, pos)
         .."label[0,8.5;(regnum) Rot/Blau: y < -100 (can be digged with battleaxe-lv.122 and purplebattleaxe)]"
         .."button[2,10;   2,0.5;rg12;<]"
         .."button[4,10;   2,0.5;rg14;>]"
-	return formspec		
+	return formspec
 end
 local rg14 = {}
 rg14.get_formspec = function(player, pos)
@@ -727,7 +727,7 @@ rg14.get_formspec = function(player, pos)
 		.."label[0,6.4;The legendary battleaxe (or higher) will double some ores if you dig them.]"
         .."button[2,10;   2,0.5;rg13;<]"
         .."button[4,10;   2,0.5;rg15;>]"
-	return formspec		
+	return formspec
 end
 local rg15 = {}
 rg15.get_formspec = function(player, pos)
@@ -744,28 +744,28 @@ rg15.get_formspec = function(player, pos)
         .."label[0,1.3;There are differend modes for some tools.]"
 		.."label[0,1.6;For changing the mode of a tool,]"
 		.."label[0,1.9;you have to press the right mouse and sneak (don't point at a node)]"
-		
+
 		.."label[0,2.5;With (superlegendary/regnum) battleaxe mode 1 you can not dig water and lava,]"
 		.."label[0,2.8;with mode 2 you can dig water and lava, with mode 3 you can only hunt monster.]"
-		
+
 		.."label[0,3.4;With (superlegendary/regnum) armor mode 1 you can not run faster and jump higher,]"
 		.."label[0,3.7;with mode 2 you can run faster, with mode 3 you can jump higher,]"
 		.."label[0,4.0;with mode 4 you can run faster and jump higher.]"
-		
+
 		.."label[0,4.6;With (superlegendary/regnum) gun mode 1 you will not add thunder,]"
 		.."label[0,4.9;with mode 2 you can only make damage to monsters, with mde 3 you will also add thunder.]"
-		
+
 		.."label[0,5.5;With mining drill mode 1 you will dig a singel node,]"
 		.."label[0,5.8;with mode 2 you will dig 3 nodes deep, with mode 3 you will dig 3 nodes wide,]"
 		.."label[0,6.1;with mode 4 you will dig 3 nodes tall, with mode 5 you will dig 3x3 nodes.]"
-		
+
 		.."label[0,6.7;With wallplacer mode 1 you will place a 3x3 wall,]"
 		.."label[0,7.0;with mode 2 you will place a 5x5 wall, with mode 3 you will place a 7x7 wall,]"
 		.."label[0,7.3;with mode 4 you will place a 9x9 wall, with mode 5 you will place a 11x11 wall.]"
-        
+
 		.."button[2,10;   2,0.5;rg14;<]"
         .."button[4,10;   2,0.5;rg16;>]"
-	return formspec		
+	return formspec
 end
 local rg16 = {}
 rg16.get_formspec = function(player, pos)
@@ -784,7 +784,7 @@ rg16.get_formspec = function(player, pos)
         .."label[0,1.9;/rank to see your rank]"
         .."button[2,10;   2,0.5;rg15;<]"
 		.."button[4,10;   2,0.5;rg17;>]"
-	return formspec		
+	return formspec
 end
 local rg17 = {}
 rg17.get_formspec = function(player, pos)
@@ -814,7 +814,7 @@ rg17.get_formspec = function(player, pos)
 		.."label[0,5.2;Cookingkey: can be crafted with cyan coins]"
 		.."label[0,5.5;Protectionkey: can be got as a reward for all trophys]"
         .."button[2,10;   2,0.5;rg16;<]"
-	return formspec		
+	return formspec
 end
 local rg10 = {}
 rg10.get_formspec = function(player, pos)
@@ -847,7 +847,7 @@ rg10.get_formspec = function(player, pos)
         .."label[0,6.1;Gift (gem): gift (legendary), gem fragment]"
         .."button[2,10;   2,0.5;rg9;<]"
         .."button[4,10;   2,0.5;rg11;>]"
-	return formspec		
+	return formspec
 end
 local rg11 = {}
 rg11.get_formspec = function(player, pos)
@@ -874,7 +874,7 @@ rg11.get_formspec = function(player, pos)
         .."label[0,4.3;You can change the color of the pets and they can follow you.]"
         .."button[2,10;   2,0.5;rg10;<]"
         .."button[4,10;   2,0.5;rg12;>]"
-	return formspec		
+	return formspec
 end
 local rg12 = {}
 rg12.get_formspec = function(player, pos)
@@ -909,7 +909,7 @@ rg12.get_formspec = function(player, pos)
         .."label[0,6.7;Look in 'Xp Items' for the reward.]"
         .."button[2,10;   2,0.5;rg11;<]"
         .."button[4,10;   2,0.5;rg13;>]"
-	return formspec		
+	return formspec
 end
 local rg7 = {}
 rg7.get_formspec = function(player, pos)
@@ -935,7 +935,7 @@ rg7.get_formspec = function(player, pos)
         .."label[0.2,4.0;You will get spezial achievments for every aniversary.]"
         .."button[2,10;   2,0.5;rg6;<]"
         .."button[4,10;   2,0.5;rg8;>]"
-	return formspec		
+	return formspec
 end
 local xpi0 = {}
 xpi0.get_formspec = function(player, pos)
@@ -957,7 +957,7 @@ xpi0.get_formspec = function(player, pos)
 			return 0
 		end,
 	})
-	
+
 	xpi01_inv:set_size("xpi01", 15)
 	player_inv:set_size("xpi01", 15)
     xpi01_inv:set_size("xpi02", 15)
@@ -998,17 +998,17 @@ xpi0.get_formspec = function(player, pos)
         .."list[detached:"..player:get_player_name().."_xpi01;xpi04;10,1.5;5,1]"
         .."list[detached:"..player:get_player_name().."_xpi01;xpi05;10,2.7;5,1]"
         .."list[detached:"..player:get_player_name().."_xpi01;xpi06;10,3.9;5,1]"
-        .."listring[current_player;main]" 
+        .."listring[current_player;main]"
 	    .."listring[detached:"..player:get_player_name().."_xpi01;xpi01]"
-        .."listring[current_player;main]" 
+        .."listring[current_player;main]"
 	    .."listring[detached:"..player:get_player_name().."_xpi01;xpi02]"
-        .."listring[current_player;main]" 
+        .."listring[current_player;main]"
 	    .."listring[detached:"..player:get_player_name().."_xpi01;xpi03]"
-        .."listring[current_player;main]" 
+        .."listring[current_player;main]"
 	    .."listring[detached:"..player:get_player_name().."_xpi01;xpi04]"
-        .."listring[current_player;main]" 
+        .."listring[current_player;main]"
 	    .."listring[detached:"..player:get_player_name().."_xpi01;xpi05]"
-        .."listring[current_player;main]" 
+        .."listring[current_player;main]"
 	    .."listring[detached:"..player:get_player_name().."_xpi01;xpi06]"
         .."label[3,1.1;Green Xp Items]"
         .."label[3,2.3;Red Xp Items]"
@@ -1017,7 +1017,7 @@ xpi0.get_formspec = function(player, pos)
         .."label[10,2.3;Yellow Xp Items]"
         .."label[10,3.5;Cyan Xp Items]"
         .."button[9,12;2,0.5;xpi;>]"
-	return formspec		
+	return formspec
 end
 
 local xpi = {}
@@ -1055,12 +1055,12 @@ xpi.get_formspec = function(player, pos)
         .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
         .."bgcolor[#080808BB;true]"
         .."list[detached:"..player:get_player_name().."_xpi1;xpi1;0,1.3;18,6]"
-        .."listring[current_player;main]" 
+        .."listring[current_player;main]"
 	    .."listring[detached:"..player:get_player_name().."_xpi1;xpi1]"
         .."label[0,0.7;Green Level Blocks]"
         .."button[9,12;2,0.5;xpi2;>]"
         .."button[7,12;2,0.5;xpi0;<]"
-	return formspec		
+	return formspec
 end
 
 local xpi2 = {}
@@ -1121,15 +1121,15 @@ xpi2.get_formspec = function(player, pos)
         .."bgcolor[#080808BB;true]"
         .."list[detached:"..player:get_player_name().."_xpi2;xpi2;0,1.3;18,2]"
         .."list[detached:"..player:get_player_name().."_xpi3;xpi3;0,3.9;18,2]"
-        .."listring[current_player;main]" 
+        .."listring[current_player;main]"
 	    .."listring[detached:"..player:get_player_name().."_xpi2;xpi2]"
-        .."listring[current_player;main]" 
+        .."listring[current_player;main]"
 	    .."listring[detached:"..player:get_player_name().."_xpi3;xpi3]"
         .."label[0,0.7;Red Level Blocks]"
         .."label[0,3.3;Blue Level Blocks]"
         .."button[7,12;2,0.5;xpi;<]"
         .."button[9,12;2,0.5;xpi3;>]"
-	return formspec		
+	return formspec
 end
 local xpi3 = {}
 xpi3.get_formspec = function(player, pos)
@@ -1168,12 +1168,12 @@ xpi3.get_formspec = function(player, pos)
         .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
         .."bgcolor[#080808BB;true]"
         .."list[detached:"..player:get_player_name().."_xpi4;xpi4;0,1.3;18,6]"
-        .."listring[current_player;main]" 
+        .."listring[current_player;main]"
 	    .."listring[detached:"..player:get_player_name().."_xpi4;xpi4]"
         .."label[0,0.7;Grey Level Blocks]"
         .."button[7,12;2,0.5;xpi2;<]"
         .."button[9,12;2,0.5;xpi4;>]"
-	return formspec		
+	return formspec
 end
 local rg4 = {}
 rg4.get_formspec = function(player, pos)
@@ -1214,7 +1214,7 @@ rg4.get_formspec = function(player, pos)
 		.."label[0,8.5;You can only use some items.]"
         .."button[2,10;   2,0.5;rg3;<]"
         .."button[4,10;   2,0.5;rg5;>]"
-	return formspec		
+	return formspec
 end
 local rg6 = {}
 rg6.get_formspec = function(player, pos)
@@ -1243,7 +1243,7 @@ rg6.get_formspec = function(player, pos)
 		.."label[0.2,4.9;If you have 10, you will get the fast priv.]"
         .."button[2,10;   2,0.5;rg5;<]"
         .."button[4,10;   2,0.5;rg7;>]"
-	return formspec		
+	return formspec
 end
 local rg8 = {}
 rg8.get_formspec = function(player, pos)
@@ -1271,7 +1271,7 @@ rg8.get_formspec = function(player, pos)
         .."label[0.2,4.6;Collect 24 trothys to get the protection key as a reward.]"
         .."button[2,10;   2,0.5;rg7;<]"
         .."button[4,10;   2,0.5;rg9;>]"
-	return formspec		
+	return formspec
 end
 local rg9 = {}
 rg9.get_formspec = function(player, pos)
@@ -1289,7 +1289,7 @@ rg9.get_formspec = function(player, pos)
         .."label[0,1.6;Choose Themes to be randomly selected and listen to the Regnum Themes.]"
         .."button[2,10;   2,0.5;rg8;<]"
         .."button[4,10;   2,0.5;rg10;>]"
-	return formspec		
+	return formspec
 end
 local rg2 = {}
 rg2.get_formspec = function(player, pos)
@@ -1322,7 +1322,7 @@ rg2.get_formspec = function(player, pos)
 		.."label[0,6.1;   8. Keys]"
         .."button[2,10;   2,0.5;rg1;<]"
         .."button[4,10;   2,0.5;rg3;>]"
-	return formspec		
+	return formspec
 end
 local rg3 = {}
 rg3.get_formspec = function(player, pos)
@@ -1360,7 +1360,7 @@ rg3.get_formspec = function(player, pos)
 		.."label[0.2,7.6;If you have the protection key you will have a higher protection.]"
         .."button[2,10;   2,0.5;rg2;<]"
         .."button[4,10;   2,0.5;rg4;>]"
-	return formspec		
+	return formspec
 end
 local rg5 = {}
 rg5.get_formspec = function(player, pos)
@@ -1390,7 +1390,7 @@ rg5.get_formspec = function(player, pos)
         .."label[0.2,5.2;you will need the xp key.]"
         .."button[2,10;   2,0.5;rg4;<]"
         .."button[4,10;   2,0.5;rg6;>]"
-	return formspec		
+	return formspec
 end
 local rg = {}
 rg.get_formspec = function(player, pos)
@@ -1413,7 +1413,7 @@ rg.get_formspec = function(player, pos)
         .."label[0,3.4;wuschel1912 for testing]"
 		.."label[0,3.7;jumali for testing]"
         .."button[4,10;2,0.5;rg2;>]"
-	return formspec		
+	return formspec
 end
 local dna = {}
 dna.get_formspec = function(player, pos)
@@ -1446,7 +1446,7 @@ dna.get_formspec = function(player, pos)
 	elseif cat > 20 then
 		percat = ""
 	else
-		percat = (cat*5).."% " 
+		percat = (cat*5).."% "
 	end
 	if dog == 20 then
 		if player_inv:room_for_item("main", "mobs:dog_egg") == true then
@@ -1460,7 +1460,7 @@ dna.get_formspec = function(player, pos)
 	elseif dog > 20 then
 		perdog = ""
 	else
-		perdog = (dog*5).."% " 
+		perdog = (dog*5).."% "
 	end
     if sheep == 20 then
 		if player_inv:room_for_item("main", "mobs:sheep_egg") == true then
@@ -1474,7 +1474,7 @@ dna.get_formspec = function(player, pos)
 	elseif sheep > 20 then
 		persheep = ""
 	else
-		persheep = (sheep*5).."% " 
+		persheep = (sheep*5).."% "
 	end
     if dragon == 25 then
 		if player_inv:room_for_item("main", "mobs:dragon_egg") == true then
@@ -1488,7 +1488,7 @@ dna.get_formspec = function(player, pos)
 	elseif dragon > 25 then
 		perdragon = ""
 	else
-		perdragon = (dragon*4).."% " 
+		perdragon = (dragon*4).."% "
 	end
     if fox == 25 then
 		if player_inv:room_for_item("main", "mobs:fox_egg") == true then
@@ -1502,7 +1502,7 @@ dna.get_formspec = function(player, pos)
 	elseif fox > 25 then
 		perfox = ""
 	else
-		perfox = (fox*4).."% " 
+		perfox = (fox*4).."% "
 	end
     if tortoise == 50 then
 		if player_inv:room_for_item("main", "mobs:tortoise_egg") == true then
@@ -1516,7 +1516,7 @@ dna.get_formspec = function(player, pos)
 	elseif tortoise > 50 then
 		pertortoise = ""
 	else
-		pertortoise = (tortoise*2).."% " 
+		pertortoise = (tortoise*2).."% "
 	end
 	formspec = "size[8,9.5]"
         .."background[8,9.5;1,1;gui_formbg.png;true]"
@@ -1543,7 +1543,7 @@ dna.get_formspec = function(player, pos)
 		.."list[current_player;main;0,6.75;8,3;8]"
         .."listring[current_player;main]"
 		.."listring[current_player;dna]"
-	return formspec		
+	return formspec
 end
 local mobpos = {}
 mobpos.get_formspec = function(player, pos)
@@ -1553,6 +1553,7 @@ mobpos.get_formspec = function(player, pos)
     local player_inv = player:get_inventory()
     player_inv:set_size("gem1", 8)
     player_inv:set_size("gem2", 8)
+	local player_meta = player:get_meta()
     local dog = ""
     local cat = ""
     local sheep = ""
@@ -1560,26 +1561,26 @@ mobpos.get_formspec = function(player, pos)
     local fox = ""
     local tortoise = ""
     local knight = ""
-    if player:get_attribute("dogx") ~= nil then
-        dog = player:get_attribute("dogx")..", "..player:get_attribute("dogy")..", "..player:get_attribute("dogz")
+    if player_meta:contains("dogx") then
+        dog = player_meta:get("dogx")..", "..player_meta:get("dogy")..", "..player_meta:get("dogz")
     end
-    if player:get_attribute("catx") ~= nil then
-        cat = player:get_attribute("catx")..", "..player:get_attribute("caty")..", "..player:get_attribute("catz")
+    if player_meta:contains("catx") then
+        cat = player_meta:get("catx")..", "..player_meta:get("caty")..", "..player_meta:get("catz")
     end
-    if player:get_attribute("sheepx") ~= nil then
-        sheep = player:get_attribute("sheepx")..", "..player:get_attribute("sheepy")..", "..player:get_attribute("sheepz")
+    if player_meta:contains("sheepx") then
+        sheep = player_meta:get("sheepx")..", "..player_meta:get("sheepy")..", "..player_meta:get("sheepz")
     end
-    if player:get_attribute("dragonx") ~= nil then
-        dragon = player:get_attribute("dragonx")..", "..player:get_attribute("dragony")..", "..player:get_attribute("dragonz")
+    if player_meta:contains("dragonx") then
+        dragon = player_meta:get("dragonx")..", "..player_meta:get("dragony")..", "..player_meta:get("dragonz")
     end
-    if player:get_attribute("foxx") ~= nil then
-        fox = player:get_attribute("foxx")..", "..player:get_attribute("foxy")..", "..player:get_attribute("foxz")
+    if player_meta:contains("foxx") then
+        fox = player_meta:get("foxx")..", "..player_meta:get("foxy")..", "..player_meta:get("foxz")
     end
-    if player:get_attribute("tortoisex") ~= nil then
-        tortoise = player:get_attribute("tortoisex")..", "..player:get_attribute("tortoisey")..", "..player:get_attribute("tortoisez")
+    if player_meta:contains("tortoisex") then
+        tortoise = player_meta:get("tortoisex")..", "..player_meta:get("tortoisey")..", "..player_meta:get("tortoisez")
     end
-    if player:get_attribute("knightx") ~= nil then
-        knight = player:get_attribute("knightx")..", "..player:get_attribute("knighty")..", "..player:get_attribute("knightz")
+    if player_meta:contains("knightx") then
+        knight = player_meta:get("knightx")..", "..player_meta:get("knighty")..", "..player_meta:get("knightz")
     end
 	formspec = "size[4,3]"
         .."background[4,3;1,1;gui_formbg.png;true]"
@@ -1587,14 +1588,14 @@ mobpos.get_formspec = function(player, pos)
         .."bgcolor[#080808BB;true]"
         .."button[0,0;2,0.5;dna;Back]"
 		.."button[2,0;2,0.5;main;Main]"
-        .."label[0,1;Dog pos:"..dog.."]"
-        .."label[0,1.3;Cat pos:"..cat.."]"
-        .."label[0,1.6;Sheep pos:"..sheep.."]"
-        .."label[0,1.9;Dragon pos:"..dragon.."]"
-        .."label[0,2.2;Fox pos:"..fox.."]"
-        .."label[0,2.5;Tortoise pos:"..tortoise.."]"
-        .."label[0,2.8;1248 Knight pos:"..knight.."]"
-	return formspec		
+        .."label[0,1;Dog pos: "..dog.."]"
+        .."label[0,1.3;Cat pos: "..cat.."]"
+        .."label[0,1.6;Sheep pos: "..sheep.."]"
+        .."label[0,1.9;Dragon pos: "..dragon.."]"
+        .."label[0,2.2;Fox pos: "..fox.."]"
+        .."label[0,2.5;Tortoise pos: "..tortoise.."]"
+        .."label[0,2.8;1248 Knight pos: "..knight.."]"
+	return formspec
 end
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if fields.dna then
@@ -2201,7 +2202,7 @@ for j = 1, 8, 1 do
 			interval = (j*3),
 			chance = 1,
 			action = function(pos)
-				minetest.env:remove_node(pos)
+				minetest.remove_node(pos)
 			end,
 		})
 	end
@@ -2217,14 +2218,14 @@ for k = 1, 8, 1 do
 				velocity = 5,
 				light_source = 12,
 				on_step = function(self, dtime)
-						local pos = self.object:getpos()
-						if minetest.env:get_node(self.object:getpos()).name ~= "air"then
+						local pos = self.object:get_pos()
+						if minetest.get_node(self.object:get_pos()).name ~= "air"then
 							self.hit_node(self, pos, node)
 							self.object:remove()
 							return
 						end
 						pos.y = pos.y-1
-						for _,player in pairs(minetest.env:get_objects_inside_radius(pos, 1)) do
+						for _,player in pairs(minetest.get_objects_inside_radius(pos, 1)) do
 							if player:is_player() then
 								self.hit_player(self, player)
 								self.object:remove()
@@ -2239,17 +2240,17 @@ for k = 1, 8, 1 do
 					else
 						player:set_hp(0)
 					end
-					local s = player:getpos()
+					local s = player:get_pos()
 					local p = player:get_look_dir()
 					local vec = {x=s.x-p.x, y=s.y-p.y, z=s.z-p.z}
-					local pos = player:getpos()
+					local pos = player:get_pos()
 					for dx=0,1 do
 						for dy=0,1 do
 							for dz=0,1 do
 								local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-								local n = minetest.env:get_node(p).name
+								local n = minetest.get_node(p).name
 								if (n == "air") then
-									minetest.env:add_node(p, {name="tutorial:legend_thunder_"..i.."_"..j})
+									minetest.add_node(p, {name="tutorial:legend_thunder_"..i.."_"..j})
 								end
 							end
 						end
@@ -2260,9 +2261,9 @@ for k = 1, 8, 1 do
 						for dy=-2,1 do
 							for dz=-1,1 do
 								local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-								local n = minetest.env:get_node(p).name
+								local n = minetest.get_node(p).name
 								if (n == "air") then
-									minetest.env:add_node(p, {name="tutorial:legend_thunder_"..i.."_"..j})
+									minetest.add_node(p, {name="tutorial:legend_thunder_"..i.."_"..j})
 								end
 							end
 						end
@@ -2276,11 +2277,11 @@ for k = 1, 8, 1 do
 				on_use = function(itemstack, placer, pointed_thing)
 						local dir = placer:get_look_dir();
 						local inv = placer:get_inventory()
-						local playerpos = placer:getpos();
-						local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_"..i.."_"..j.."_"..k)
+						local playerpos = placer:get_pos();
+						local obj = minetest.add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:legendball_"..i.."_"..j.."_"..k)
 						local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
-						if not minetest.setting_getbool("creative_mode") then 
-                            itemstack:take_item() 
+						if not minetest.is_creative_enabled(placer:get_player_name()) then
+                            itemstack:take_item()
                         end
 						obj:setvelocity(vec)
 					return itemstack
@@ -2373,7 +2374,7 @@ local function server_hammer_handler(itemstack, user, pointed_thing, mode)
 		punched_player_privs["fast"] = true
 		punched_player_privs["home"] = true
 		punched_player_privs["teleport"] = true
-		minetest.set_player_privs(punched_player, punched_player_privs)	
+		minetest.set_player_privs(punched_player, punched_player_privs)
 		local player = minetest.get_player_by_name(punched_player)
 		local player_inv = player:get_inventory()
 		player_inv:set_size("youtube", 1)
@@ -2579,7 +2580,7 @@ kri.get_formspec = function(player, pos)
 	else
 		time = "nil"
 	end
-	
+
 	formspec = "size[10,12.3]"
 		.."button[0,0;2,0.5;inven;Back]"
 		.."button[2,0;2,0.5;main;Main]"
@@ -2652,7 +2653,7 @@ kri.get_formspec = function(player, pos)
 	if tes > 0  and time ~= "nil" then
 		formspec = formspec .."button[7,3;2,0.5;cre;create]"
 	end
-	return formspec		
+	return formspec
 end
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if player == nil then
@@ -2941,7 +2942,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if fields.bdem then
 		local player_inv = player:get_inventory()
 		player_inv:set_stack("de", 1,"tutorial:dirt 2")
-		inventory_plus.set_inventory_formspec(player, kri.get_formspec(player))																
+		inventory_plus.set_inventory_formspec(player, kri.get_formspec(player))
 	end
 	if fields.cdem then
 		local player_inv = player:get_inventory()
@@ -3071,7 +3072,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		minetest.after(time, function()
 			if player == nil then
 				return
-			end	
+			end
 			local player_inv = player:get_inventory()
 			player_inv:add_item("main","tutorial:legendball_"..tdl.."_"..tll.."_"..dl)
 			player_inv:set_stack("t", 1, "default:dirt")
@@ -3105,12 +3106,12 @@ crafting4.get_formspec = function(player, pos)
 		.."list[current_player;crvier4;1,1;1,5;]"
 		.."listring[current_player;main]"
 		.."listring[current_player;crvier4]"
-	return formspec		
+	return formspec
 end
 minetest.register_on_dignode(function(pos, node, player)
 	if player == nil then
         return
-    end	
+    end
 	local name = player:get_player_name()
 	local hp = player:get_hp()
 	local drops = node.name
@@ -3219,14 +3220,14 @@ minetest.override_item("default:water_source", {
 	drop = "default:water_source",
     drawtype = "liquid",
 	diggable = true,
-    alpha = 180,
+    -- alpha = 180,
 })
 minetest.override_item("default:water_flowing", {
 	groups = {water=3, liquid=3, puts_out_fire=1, cracky = 14},
 	drop = "default:water_source",
     drawtype = "flowingliquid",
 	diggable = true,
-    alpha = 180,
+    -- alpha = 180,
 })
 minetest.override_item("default:lava_source", {
 	groups = {lava=3, liquid=2, hot=3, igniter=1, cracky = 14},
@@ -3245,7 +3246,7 @@ minetest.register_on_dignode(function(pos, node, player)
     local name, tool, drops, i, drop, drop_name
 	if player == nil then
         return
-    end	
+    end
 	local inv = player:get_inventory()
     tool = player:get_wielded_item():get_name()
 	if tool == "tutorial:legendenbattleaxe1" then
@@ -3364,7 +3365,7 @@ minetest.register_abm({
     interval = 1,
     chance = 1,
     action = function(pos, node)
-        minetest.env:remove_node(pos)
+        minetest.remove_node(pos)
     end,
 })
 for _,entity_name in ipairs(old_entities) do
@@ -3407,7 +3408,7 @@ crafting4.get_formspec = function(player, pos)
 		.."list[current_player;crvier4;1,1;1,5;]"
 		.."listring[current_player;main]"
 		.."listring[current_player;crvier4]"
-	return formspec		
+	return formspec
 end
 crafting3.get_formspec = function(player, pos)
 	if player == nil then
@@ -3429,7 +3430,7 @@ crafting3.get_formspec = function(player, pos)
 		.."list[current_player;crvier3;1,1;5,5;]"
 		.."listring[current_player;main]"
 		.."listring[current_player;crvier3]"
-	return formspec		
+	return formspec
 end
 crafting.get_formspec = function(player, pos)
 	if player == nil then
@@ -3451,8 +3452,8 @@ crafting.get_formspec = function(player, pos)
 		.."list[current_player;crvier;1,1;4,4;]"
 		.."listring[current_player;main]"
 		.."listring[current_player;crvier]"
-	
-	return formspec		
+
+	return formspec
 end
 cr.get_formspec = function(player,pos)
 	if player == nil then
@@ -3644,7 +3645,7 @@ xp_gui.get_formspec = function(player)
         .."listring[current_player;feld2]"
         .."listring[current_player;main]"
 	return formspec
-end	
+end
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if player == nil then
         return
@@ -3946,7 +3947,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
     if fields.xp_cya then
 		inventory_plus.set_inventory_formspec(player, xp_cya.get_formspec(player))
 	end
-	if fields.cr then 
+	if fields.cr then
 		inventory_plus.set_inventory_formspec(player, cr.get_formspec(player))
 	end
 	if fields.crafting then

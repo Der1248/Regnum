@@ -3,7 +3,7 @@ local S = technic.getter
 
 frames = {}
 
-local infinite_stacks = minetest.setting_getbool("creative_mode") and minetest.get_modpath("unified_inventory") == nil
+local infinite_stacks = minetest.is_creative_enabled("") and minetest.get_modpath("unified_inventory") == nil
 
 local frames_pos = {}
 
@@ -16,34 +16,34 @@ local function get_face(pos,ppos,pvect)
 		local t=(-0.5-ppos.x)/pvect.x
 		local y_int=ppos.y+t*pvect.y
 		local z_int=ppos.z+t*pvect.z
-		if y_int>-0.45 and y_int<0.45 and z_int>-0.45 and z_int<0.45 then return 1 end 
+		if y_int>-0.45 and y_int<0.45 and z_int>-0.45 and z_int<0.45 then return 1 end
 	elseif pvect.x<0 then
 		local t=(0.5-ppos.x)/pvect.x
 		local y_int=ppos.y+t*pvect.y
 		local z_int=ppos.z+t*pvect.z
-		if y_int>-0.45 and y_int<0.45 and z_int>-0.45 and z_int<0.45 then return 2 end 
+		if y_int>-0.45 and y_int<0.45 and z_int>-0.45 and z_int<0.45 then return 2 end
 	end
 	if pvect.y>0 then
 		local t=(-0.5-ppos.y)/pvect.y
 		local x_int=ppos.x+t*pvect.x
 		local z_int=ppos.z+t*pvect.z
-		if x_int>-0.45 and x_int<0.45 and z_int>-0.45 and z_int<0.45 then return 3 end 
+		if x_int>-0.45 and x_int<0.45 and z_int>-0.45 and z_int<0.45 then return 3 end
 	elseif pvect.y<0 then
 		local t=(0.5-ppos.y)/pvect.y
 		local x_int=ppos.x+t*pvect.x
 		local z_int=ppos.z+t*pvect.z
-		if x_int>-0.45 and x_int<0.45 and z_int>-0.45 and z_int<0.45 then return 4 end 
+		if x_int>-0.45 and x_int<0.45 and z_int>-0.45 and z_int<0.45 then return 4 end
 	end
 	if pvect.z>0 then
 		local t=(-0.5-ppos.z)/pvect.z
 		local x_int=ppos.x+t*pvect.x
 		local y_int=ppos.y+t*pvect.y
-		if x_int>-0.45 and x_int<0.45 and y_int>-0.45 and y_int<0.45 then return 5 end 
+		if x_int>-0.45 and x_int<0.45 and y_int>-0.45 and y_int<0.45 then return 5 end
 	elseif pvect.z<0 then
 		local t=(0.5-ppos.z)/pvect.z
 		local x_int=ppos.x+t*pvect.x
 		local y_int=ppos.y+t*pvect.y
-		if x_int>-0.45 and x_int<0.45 and y_int>-0.45 and y_int<0.45 then return 6 end 
+		if x_int>-0.45 and x_int<0.45 and y_int>-0.45 and y_int<0.45 then return 6 end
 	end
 end
 
@@ -126,7 +126,7 @@ local function move_nodes_vect(poslist,vect,must_not_move,owner)
 		end
 	end
 	for _, obj in ipairs(objects) do
-		obj:setpos(vector.add(obj:getpos(), vect))
+		obj:set_pos(vector.add(obj:get_pos(), vect))
 	end
 	for _,n in ipairs(nodelist) do
 		local npos = n.pos
@@ -171,7 +171,7 @@ local nodeboxes= {
 
 	{ -b,  b, -a,  b,  a, -b },
 	{ -b, -a, -a,  b, -b, -b },
-	
+
 	{ -b,  b,  b,  b,  a,  a },
 	{ -b, -a,  b,  b, -b,  a },
 
@@ -181,7 +181,7 @@ local nodeboxes= {
 	{ -a,  b, -b, -b,  a,  b },
 	{ -a, -a, -b, -b, -b,  b },
 	}
-	
+
 	if yp==0 then
 		table.insert(nodeboxes, {-b,b,-b, b,a,b})
 	end
@@ -200,11 +200,11 @@ local nodeboxes= {
 	if zm==0 then
 		table.insert(nodeboxes, {-b,-b,-a, b,b,-b})
 	end
-	
+
 	local nameext=tostring(xm)..tostring(xp)..tostring(ym)..tostring(yp)..tostring(zm)..tostring(zp)
 	local groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2}
 	if nameext~="111111" then groups.not_in_creative_inventory=1 end
-	
+
 
 	minetest.register_node("technic:frame_"..nameext,{
 		description = S("Frame"),
@@ -234,7 +234,7 @@ local nodeboxes= {
 			return l2
 		end,
 		on_punch=function(pos,node,puncher)
-			local ppos=puncher:getpos()
+			local ppos=puncher:get_pos()
 			local pvect=puncher:get_look_dir()
 			local pface=get_face(pos,ppos,pvect)
 			if pface==nil then return end
@@ -283,9 +283,9 @@ local nodeboxes= {
 					minetest.record_protection_violation(pos, placer:get_player_name())
 					return itemstack
 				end
-				
+
 				minetest.set_node(pos, {name = itemstack:get_name()})
-				
+
 				local take_item = true
 				local def = minetest.registered_items[itemstack:get_name()]
 				-- Run callback
@@ -312,10 +312,10 @@ local nodeboxes= {
 				if take_item then
 					itemstack:take_item()
 				end
-				
+
 				obj = minetest.add_entity(pos, "technic:frame_entity")
 				obj:get_luaentity():set_node({name=node.name})
-				
+
 				return itemstack
 			else
 				--local pointed_thing = {type = "node", under = pos}
@@ -346,7 +346,7 @@ minetest.register_entity("technic:frame_entity", {
 
 	set_node = function(self, node)
 		self.node = node
-		local pos = self.object:getpos()
+		local pos = self.object:get_pos()
 		pos = {x = math.floor(pos.x+0.5), y = math.floor(pos.y+0.5), z = math.floor(pos.z+0.5)}
 		frames_pos[pos_to_string(pos)] = node.name
 		local stack = ItemStack(node.name)
@@ -376,17 +376,17 @@ minetest.register_entity("technic:frame_entity", {
 		self.object:set_armor_groups({immortal=1})
 		self:set_node({name=staticdata})
 	end,
-	
+
 	dig = function(self)
-		minetest.handle_node_drops(self.object:getpos(), {ItemStack("technic:frame_111111")}, self.last_puncher)
-		local pos = self.object:getpos()
+		minetest.handle_node_drops(self.object:get_pos(), {ItemStack("technic:frame_111111")}, self.last_puncher)
+		local pos = self.object:get_pos()
 		pos = {x = math.floor(pos.x+0.5), y = math.floor(pos.y+0.5), z = math.floor(pos.z+0.5)}
 		frames_pos[pos_to_string(pos)] = nil
 		self.object:remove()
 	end,
-	
+
 	on_punch = function(self, puncher, time_from_last_punch, tool_capabilities, dir)
-		local pos = self.object:getpos()
+		local pos = self.object:get_pos()
 		if self.damage_object == nil then
 			self.damage_object = minetest.add_entity(pos, "technic:damage_entity")
 			self.damage_object:get_luaentity().remaining_time = 0.25
@@ -397,7 +397,7 @@ minetest.register_entity("technic:frame_entity", {
 			self.damage_object:get_luaentity().remaining_time = 0.25
 		end
 		self.last_puncher = puncher
-		local ppos = puncher:getpos()
+		local ppos = puncher:get_pos()
 		local pvect = puncher:get_look_dir()
 		local pface = get_face(pos,ppos,pvect)
 		if pface == nil then return end
@@ -411,10 +411,10 @@ minetest.register_entity("technic:frame_entity", {
 		self.node.name = nodename
 		self:set_node(self.node)
 	end,
-	
+
 	on_rightclick = function(self, clicker)
-		local pos = self.object:getpos()
-		local ppos = clicker:getpos()
+		local pos = self.object:get_pos()
+		local ppos = clicker:get_pos()
 		local pvect = clicker:get_look_dir()
 		local pface = get_face(pos, ppos, pvect)
 		if pface == nil then return end
@@ -482,7 +482,7 @@ mesecon.register_on_mvps_move(function(moved_nodes)
 			for _, obj in ipairs(objects) do
 				local entity = obj:get_luaentity()
 				if entity and (entity.name == "technic:frame_entity" or entity.name == "technic:damage_entity") then
-					obj:setpos(t.pos)
+					obj:set_pos(t.pos)
 				end
 			end
 		end
@@ -689,7 +689,7 @@ local function compress_templates(pos)
 		meta:set_string("connected", minetest.serialize(c))
 		meta:set_string("connectors_connected", minetest.serialize(cc))
 	end
-	
+
 	for _,p in ipairs(templates) do
 		if not pos_in_list(connectors, p) then
 			minetest.set_node(p, {name = "air"})
@@ -818,7 +818,7 @@ minetest.register_tool("technic:template_tool",{
 		else
 			compress_templates(pos)
 		end
-		
+
 	end
 })
 

@@ -749,6 +749,7 @@ minetest.register_node("default:leaves", {
 	drawtype = "allfaces_optional",
 	waving = 1,
 	tiles = {"default_leaves.png"},
+	use_texture_alpha = "clip",
 	special_tiles = {"default_leaves_simple.png"},
 	paramtype = "light",
 	is_ground_content = false,

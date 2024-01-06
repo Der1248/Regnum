@@ -87,7 +87,7 @@ minetest.register_entity("mesecons_movestones:movestone_entity", {
 	end,
 
 	on_step = function(self, dtime)
-		local pos = self.object:getpos()
+		local pos = self.object:get_pos()
 		pos.x, pos.y, pos.z = math.floor(pos.x+0.5), math.floor(pos.y+0.5), math.floor(pos.z+0.5)
 		local direction = mesecon.get_movestone_direction(pos)
 
@@ -178,7 +178,7 @@ minetest.register_entity("mesecons_movestones:sticky_movestone_entity", {
 	end,
 
 	on_step = function(self, dtime)
-		local pos = self.object:getpos()
+		local pos = self.object:get_pos()
 		pos.x, pos.y, pos.z = math.floor(pos.x+0.5), math.floor(pos.y+0.5), math.floor(pos.z+0.5)
 		local direction = mesecon.get_movestone_direction(pos)
 
