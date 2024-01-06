@@ -39,7 +39,8 @@ minetest.register_globalstep(function(dtime)
 					local set_animal = true
 					if is_player then
 						for _,obj in ipairs(all_objects) do
-							if obj:get_entity_name() == "mobs:"..m[3] and obj:get_luaentity().owner == player:get_player_name() then
+							local lua_ent = obj:get_luaentity()
+							if lua_ent and lua_ent.name == "mobs:"..m[3] and lua_ent.owner == player:get_player_name() then
 								if set_animal == false then
 									obj:remove()
 								end
