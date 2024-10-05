@@ -14,7 +14,7 @@ minetest.register_on_joinplayer(function(player)
 		offset = {x=0, y=30},
 		alignment = {x=1, y=0},
 		number = 0xFFFFFF ,
-		text = "Game Version	 :  3.6.6",
+		text = "Game Version	 :  3.6.7",
 	})
 end)
 
@@ -22,8 +22,8 @@ dofile(minetest.get_modpath("tutorial").."/craft.lua")
 dofile(minetest.get_modpath("tutorial").."/node.lua")
 dofile(minetest.get_modpath("tutorial").."/tool.lua")
 dofile(minetest.get_modpath("tutorial").."/craftitem.lua")
-dofile(minetest.get_modpath("tutorial").."/ore.lua")
 dofile(minetest.get_modpath("tutorial").."/abm.lua")
+dofile(minetest.get_modpath("tutorial").."/ore.lua")
 dofile(minetest.get_modpath("tutorial").."/entity.lua")
 dofile(minetest.get_modpath("tutorial").."/chatcommand.lua")
 dofile(minetest.get_modpath("tutorial").."/other.lua")
@@ -1728,8 +1728,8 @@ minetest.register_globalstep(function(dtime)
 			local player_inv = player:get_inventory()
 			player_inv:set_size("year", 8)
 			if player_inv:room_for_item("main", "tutorial:trophy_year8") and player_inv:get_stack("year", 8):get_count() == 0 then
-				player_inv:add_item("main", "tutorial:trophy_year8")
-				player_inv:set_stack("year", 8, "default:dirt")
+				--player_inv:add_item("main", "tutorial:trophy_year8")
+				--player_inv:set_stack("year", 8, "default:dirt")
 			end
 			player_inv:set_size("youtube", 1)
 			local c = player_inv:get_stack("youtube",1):get_count()
