@@ -46,7 +46,7 @@ end
 
 skins.formspec = {}
 skins.formspec.main = function(name)
-	page = skins.pages[name]
+	local page = skins.pages[name]
 	if page == nil then page = 0 end
 	print (name)
 	local player = minetest.get_player_by_name(name)
