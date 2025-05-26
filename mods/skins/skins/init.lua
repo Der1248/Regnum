@@ -49,81 +49,71 @@ skins.formspec.main = function(name)
 	local page = skins.pages[name]
 	if page == nil then page = 0 end
 	print (name)
+	local remove_list = true
 	local player = minetest.get_player_by_name(name)
 	local player_inv = player:get_inventory()
 	player_inv:set_size("skinskey", 1)
     player_inv:set_size("skinskey2", 1)
     player_inv:set_size("knightskin", 1)
-	local formspec = "size[8,11.75]"
-		.. "button[0,0;2,.5;inven;Back]"
-		.. "button[2,0;2,.5;main;Main]"
-        .."background[8,12;1,1;gui_formbg.png;true]"
-        .."listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
-        .."bgcolor[#080808BB;true]"
-		.."list[current_player;skinskey;2,6;1,1;]"
-        .."list[current_player;skinskey2;4.5,6;1,1;]"
-		.."label[1.7,7;Pixeled Regnum Key]"
-        .."label[4.5,7;Knight Key]"
-		.."list[current_player;main;0,7.75;8,1;]"
-		.."list[current_player;main;0,9;8,3;8]"
+	local skinskey_name = player_inv:get_stack("skinskey", 1):get_name()
+	local skinskey2_name = player_inv:get_stack("skinskey2", 1):get_name()
+	local formspec = "button[0,0;2,.5;back;Back]"
+		.."label[4.7,1.5;Dark Regnum Key]"
+        .."label[6.8,1.5;Knight Key]"
+	if skinskey_name == "tutorial:regnum_key_pixeled" and remove_list then
+		formspec = formspec.."image[5.2,0.6;1,1;tutorial_regnum_schluessel_dark.png]"
+	else
+		formspec = formspec.."image[5.2,0.6;1,1;tutorial_background_schluessel.png]"
+		.."list[current_player;skinskey;5.2,0.6;1,1;]"
+		.."listring[current_player;main]"
+		.."listring[current_player;skinskey]"
+	end
+	if skinskey2_name == "tutorial:knight_schluessel" and remove_list then
+		formspec = formspec.."image[6.9,0.6;1,1;tutorial_knight_schluessel.png]"
+	else
+		formspec = formspec.."image[6.9,0.6;1,1;tutorial_background_schluessel.png]"
+		.."list[current_player;skinskey2;6.9,0.6;1,1;]"
+		.."listring[current_player;main]"
+		.."listring[current_player;skinskey2]"
+	end
 	if skins.get_type(skins.skins[name]) == skins.type.MODEL then
 		formspec = formspec
-			.. "image[0,.75;1,2;"..skins.skins[name].."_preview.png]"
-			.. "image[1,.75;1,2;"..skins.skins[name].."_preview_back.png]"
-			.. "label[6,.5;Raw texture:]"
-			.. "image[6,1;2,1;"..skins.skins[name]..".png]"
+			.. "image[0,.65;1,2;"..skins.skins[name].."_preview.png]"
+			.. "image[1,.65;1,2;"..skins.skins[name].."_preview_back.png]"
 		
 	else
 		formspec = formspec
-			.. "image[0,.75;1,2;"..skins.skins[name]..".png]"
-			.. "image[1,.75;1,2;"..skins.skins[name].."_back.png]"
+			.. "image[0,.65;1,2;"..skins.skins[name]..".png]"
+			.. "image[1,.65;1,2;"..skins.skins[name].."_back.png]"
 	end
 	local meta = skins.meta[skins.skins[name]]
 	if meta then
 		if meta.name then
-			formspec = formspec .. "label[2,.5;Name: "..meta.name.."]"
+			formspec = formspec .. "label[2,.55;Name: "..meta.name.."]"
 		end
 		if meta.author then
-			formspec = formspec .. "label[2,1;Author: "..meta.author.."]"
+			formspec = formspec .. "label[2,1.05;Author: "..meta.author.."]"
 		end
 		if meta.comment then
-			formspec = formspec .. "label[2,1.5;"..meta.comment.."]"
+			formspec = formspec .. "label[2,1.55;"..meta.comment.."]"
 		end
         if meta.description then
-			formspec = formspec .. "label[2,2;"..meta.description.."]"
+			formspec = formspec .. "label[2,2.05;"..meta.description.."]"
 		end
 	end
 	local index = 0
+	local num = 0
 	local skip = 0 -- Skip skins, used for pages
 	for i, skin in ipairs(skins.list) do
-		if skin == "character_68" then
-			if player:get_inventory():get_stack("skinskey",1):get_name() == "tutorial:regnum_key_pixeled" then
-				formspec = formspec .."button[6,5.8;2,1;skins_set_"..i..";see-through skin]"
-			end
-        elseif skin == "character_171" then
-			formspec = formspec .."button[0,5.8;1.5,1;skins_set_"..i..";1248]"
-        elseif skin == "character_172" then
-			formspec = formspec .."button[0,6.5;1.5,1;skins_set_"..i..";Nightmare]"
-        elseif skin == "character_175" or skin == "character_176" or skin == "character_177" or skin == "character_178" or skin == "character_179" then
-			if player:get_inventory():get_stack("skinskey2",1):get_name() == "tutorial:knight_schluessel" then
-				if player:get_inventory():get_stack("knightskin",1):get_count() == 0 then
-                    formspec = formspec .."button[6,6.5;2,1;skins_set_125;Knight (red)]"
-                elseif player:get_inventory():get_stack("knightskin",1):get_count() == 1 then
-                    formspec = formspec .."button[6,6.5;2,1;skins_set_126;Knight (blue)]"
-                elseif player:get_inventory():get_stack("knightskin",1):get_count() == 2 then
-                    formspec = formspec .."button[6,6.5;2,1;skins_set_127;Knight (green)]"
-                elseif player:get_inventory():get_stack("knightskin",1):get_count() == 3 then
-                    formspec = formspec .."button[6,6.5;2,1;skins_set_128;Knight (pink)]"
-                elseif player:get_inventory():get_stack("knightskin",1):get_count() == 4 then
-                    formspec = formspec .."button[6,6.5;2,1;skins_set_129;Knight (purple)]"
-                end
-			end
-            
+		if skin == "character_180" and player:get_inventory():get_stack("skinskey",1):get_name() ~= "tutorial:regnum_key_pixeled" then
+        elseif (skin == "character_174" or skin == "character_175" or skin == "character_176" or skin == "character_177" or skin == "character_178" or skin == "character_179") and player:get_inventory():get_stack("skinskey2",1):get_name() ~= "tutorial:knight_schluessel" then
+		elseif skin == "character_173" and name ~= "1248" and name ~= "The1248" and name ~= "Der1248" then
 		else
+			num = num+1
 		    if skip < page*8 then skip = skip + 1 else
 			    if index < 8 then
 				    print(skin)
-				    formspec = formspec .. "image_button["..(index%8)..",2.7;1,2;"..skin
+				    formspec = formspec .. "image_button["..(index%8)..",2.5;1,2;"..skin
 				    if skins.get_type(skin) == skins.type.MODEL then
 					    formspec = formspec .. "_preview"
 				    end
@@ -134,15 +124,15 @@ skins.formspec.main = function(name)
 		end
 	end
 	if page > 0 then
-		formspec = formspec .. "button[0,4.7;1,.5;skins_page_"..(page-1)..";<<]"
-	else
-		formspec = formspec .. "button[0,4.7;1,.5;skins_page_"..page..";<<]"
+		formspec = formspec .. "image_button[2.4,4.45;0.8,0.8;craftguide_prev_icon.png;skins_page_"..(page-1)..";]"
+	--else
+	--	formspec = formspec .. "image_button[2.4,4.45;0.8,0.8;craftguide_prev_icon.png;skins_page_"..(page)..";]"
 	end
-	formspec = formspec .. "button[.75,4.7;6.5,.5;skins_page_"..page..";Page "..(page+1).."/"..math.floor(#skins.list/8).."]" -- a button is used so text is centered
+	formspec = formspec .. "label[3.4,4.55;Page "..(page+1).."/"..math.ceil(num/8).."]" --"button[.75,4.5;6.5,.5;skins_page_"..page..";Page "..(page+1).."/"..math.ceil(#skins.list/8).."]" -- a button is used so text is centered
 	if index > 8 then
-		formspec = formspec .. "button[7,4.7;1,.5;skins_page_"..(page+1)..";>>]"
+		formspec = formspec .. "image_button[4.8,4.45;0.8,0.8;craftguide_next_icon.png;skins_page_"..(page+1)..";]"
 	else
-		formspec = formspec .. "button[7,4.7;1,.5;skins_page_"..page..";>>]"
+		--formspec = formspec .. "image_button[4.8,4.45;0.8,0.8;craftguide_next_icon.png;skins_page_"..(page)..";]"
 	end
 	return formspec
 end
@@ -157,61 +147,3 @@ minetest.register_on_joinplayer(function(player)
 	skins.update_player_skin(player)
 	--inventory_plus.register_button(player,"skins","Skin")
 end)
-
-minetest.register_on_player_receive_fields(function(player,formname,fields)
-	if fields.skins then
-		inventory_plus.set_inventory_formspec(player,skins.formspec.main(player:get_player_name()))
-	end
-    if fields.skins_set_125 then
-		if player == nil then
-            return
-        end
-	    local player_inv = player:get_inventory()
-        player_inv:set_size("knightskin", 1)
-        local artrew = player_inv:set_stack("knightskin", 1, "default:dirt")
-	end
-    if fields.skins_set_126 then
-		if player == nil then
-            return
-        end
-	    local player_inv = player:get_inventory()
-        player_inv:set_size("knightskin", 1)
-        local artrew = player_inv:set_stack("knightskin", 1, "default:dirt 2")
-	end
-    if fields.skins_set_127 then
-		if player == nil then
-            return
-        end
-	    local player_inv = player:get_inventory()
-        player_inv:set_size("knightskin", 1)
-        local artrew = player_inv:set_stack("knightskin", 1, "default:dirt 3")
-	end
-    if fields.skins_set_128 then
-		if player == nil then
-            return
-        end
-	    local player_inv = player:get_inventory()
-        player_inv:set_size("knightskin", 1)
-        local artrew = player_inv:set_stack("knightskin", 1, "default:dirt 4")
-	end
-    if fields.skins_set_129 then
-		if player == nil then
-            return
-        end
-	    local player_inv = player:get_inventory()
-        player_inv:set_size("knightskin", 1)
-        local artrew = player_inv:set_stack("knightskin", 1, "")
-	end
-	for field, _ in pairs(fields) do
-		if string.sub(field,0,string.len("skins_set_")) == "skins_set_" then
-			skins.skins[player:get_player_name()] = skins.list[tonumber(string.sub(field,string.len("skins_set_")+1))]
-			skins.update_player_skin(player)
-			inventory_plus.set_inventory_formspec(player,skins.formspec.main(player:get_player_name()))
-		end
-		if string.sub(field,0,string.len("skins_page_")) == "skins_page_" then
-			skins.pages[player:get_player_name()] = tonumber(string.sub(field,string.len("skins_page_")+1))
-			inventory_plus.set_inventory_formspec(player,skins.formspec.main(player:get_player_name()))
-		end
-	end
-end)
-

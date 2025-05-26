@@ -1,266 +1,224 @@
 -- Configuration
 
-local chainsaw_max_charge      = 1 -- Maximum charge of the saw
--- Gives 2500 nodes on a single charge (about 50 complete normal trees)
-local chainsaw_charge_per_node = 0
+local chainsaw_max_charge      = 30000 -- Maximum charge of the saw
 -- Cut down tree leaves.  Leaf decay may cause slowness on large trees
 -- if this is disabled.
 local chainsaw_leaves = true
 
--- The default trees
-local timber_nodenames = {
-	["default:jungletree"] = true,
-	["default:papyrus"]    = true,
-	["default:cactus"]     = true,
-	["default:tree"]       = true,
-	["default:apple"]      = true,
-	["default:pine"]       = true,
-}
+local chainsaw_efficiency = 0.92 -- Drops less items
 
-if chainsaw_leaves then
-	timber_nodenames["default:leaves"] = true
-	timber_nodenames["default:jungleleaves"] = true
-	timber_nodenames["default:pine_needles"] = true
-end
-
--- technic_worldgen defines rubber trees if moretrees isn't installed
-if minetest.get_modpath("technic_worldgen") or
-		minetest.get_modpath("moretrees") then
-	timber_nodenames["moretrees:rubber_tree_trunk_empty"] = true
-	timber_nodenames["moretrees:rubber_tree_trunk"]       = true
-	if chainsaw_leaves then
-		timber_nodenames["moretrees:rubber_tree_leaves"] = true
-	end
-end
-
--- Support moretrees if it is there
-if minetest.get_modpath("moretrees") then
-	timber_nodenames["moretrees:acacia_trunk"]                = true
-	timber_nodenames["moretrees:acacia_trunk_sideways"]       = true
-	timber_nodenames["moretrees:apple_tree_trunk"]                 = true
-	timber_nodenames["moretrees:apple_tree_trunk_sideways"]        = true
-	timber_nodenames["moretrees:beech_trunk"]                      = true
-	timber_nodenames["moretrees:beech_trunk_sideways"]             = true
-	timber_nodenames["moretrees:birch_trunk"]                      = true
-	timber_nodenames["moretrees:birch_trunk_sideways"]             = true
-	timber_nodenames["moretrees:fir_trunk"]                        = true
-	timber_nodenames["moretrees:fir_trunk_sideways"]               = true
-	timber_nodenames["moretrees:oak_trunk"]                        = true
-	timber_nodenames["moretrees:oak_trunk_sideways"]               = true
-	timber_nodenames["moretrees:palm_trunk"]                       = true
-	timber_nodenames["moretrees:palm_trunk_sideways"]              = true
-	timber_nodenames["moretrees:pine_trunk"]                       = true
-	timber_nodenames["moretrees:pine_trunk_sideways"]              = true
-	timber_nodenames["moretrees:rubber_tree_trunk_sideways"]       = true
-	timber_nodenames["moretrees:rubber_tree_trunk_sideways_empty"] = true
-	timber_nodenames["moretrees:sequoia_trunk"]                    = true
-	timber_nodenames["moretrees:sequoia_trunk_sideways"]           = true
-	timber_nodenames["moretrees:spruce_trunk"]                     = true
-	timber_nodenames["moretrees:spruce_trunk_sideways"]            = true
-	timber_nodenames["moretrees:willow_trunk"]                     = true
-	timber_nodenames["moretrees:willow_trunk_sideways"]            = true
-	timber_nodenames["moretrees:jungletree_trunk"]                 = true
-	timber_nodenames["moretrees:jungletree_trunk_sideways"]        = true
-
-	if chainsaw_leaves then
-		timber_nodenames["moretrees:acacia_leaves"]            = true
-		timber_nodenames["moretrees:apple_tree_leaves"]        = true
-		timber_nodenames["moretrees:oak_leaves"]               = true
-		timber_nodenames["moretrees:fir_leaves"]               = true
-		timber_nodenames["moretrees:fir_leaves_bright"]        = true
-		timber_nodenames["moretrees:sequoia_leaves"]           = true
-		timber_nodenames["moretrees:birch_leaves"]             = true
-		timber_nodenames["moretrees:birch_leaves"]             = true
-		timber_nodenames["moretrees:palm_leaves"]              = true
-		timber_nodenames["moretrees:spruce_leaves"]            = true
-		timber_nodenames["moretrees:spruce_leaves"]            = true
-		timber_nodenames["moretrees:pine_leaves"]              = true
-		timber_nodenames["moretrees:willow_leaves"]            = true
-		timber_nodenames["moretrees:jungletree_leaves_green"]  = true
-		timber_nodenames["moretrees:jungletree_leaves_yellow"] = true
-		timber_nodenames["moretrees:jungletree_leaves_red"]    = true
-		timber_nodenames["moretrees:acorn"]                    = true
-		timber_nodenames["moretrees:coconut"]                  = true
-		timber_nodenames["moretrees:spruce_cone"]              = true
-		timber_nodenames["moretrees:pine_cone"]                = true
-		timber_nodenames["moretrees:fir_cone"]                 = true
-		timber_nodenames["moretrees:apple_blossoms"]           = true
-	end
-end
-
--- Support growing_trees
-if minetest.get_modpath("growing_trees") then
-	timber_nodenames["growing_trees:trunk"]         = true
-	timber_nodenames["growing_trees:medium_trunk"]  = true
-	timber_nodenames["growing_trees:big_trunk"]     = true
-	timber_nodenames["growing_trees:trunk_top"]     = true
-	timber_nodenames["growing_trees:trunk_sprout"]  = true
-	timber_nodenames["growing_trees:branch_sprout"] = true
-	timber_nodenames["growing_trees:branch"]        = true
-	timber_nodenames["growing_trees:branch_xmzm"]   = true
-	timber_nodenames["growing_trees:branch_xpzm"]   = true
-	timber_nodenames["growing_trees:branch_xmzp"]   = true
-	timber_nodenames["growing_trees:branch_xpzp"]   = true
-	timber_nodenames["growing_trees:branch_zz"]     = true
-	timber_nodenames["growing_trees:branch_xx"]     = true
-
-	if chainsaw_leaves then
-		timber_nodenames["growing_trees:leaves"] = true
-	end
-end
-
--- Support growing_cactus
-if minetest.get_modpath("growing_cactus") then
-	timber_nodenames["growing_cactus:sprout"]                       = true
-	timber_nodenames["growing_cactus:branch_sprout_vertical"]       = true
-	timber_nodenames["growing_cactus:branch_sprout_vertical_fixed"] = true
-	timber_nodenames["growing_cactus:branch_sprout_xp"]             = true
-	timber_nodenames["growing_cactus:branch_sprout_xm"]             = true
-	timber_nodenames["growing_cactus:branch_sprout_zp"]             = true
-	timber_nodenames["growing_cactus:branch_sprout_zm"]             = true
-	timber_nodenames["growing_cactus:trunk"]                        = true
-	timber_nodenames["growing_cactus:branch_trunk"]                 = true
-	timber_nodenames["growing_cactus:branch"]                       = true
-	timber_nodenames["growing_cactus:branch_xp"]                    = true
-	timber_nodenames["growing_cactus:branch_xm"]                    = true
-	timber_nodenames["growing_cactus:branch_zp"]                    = true
-	timber_nodenames["growing_cactus:branch_zm"]                    = true
-	timber_nodenames["growing_cactus:branch_zz"]                    = true
-	timber_nodenames["growing_cactus:branch_xx"]                    = true
-end
-
--- Support farming_plus
-if minetest.get_modpath("farming_plus") then
-	if chainsaw_leaves then
-		timber_nodenames["farming_plus:banana_leaves"] = true
-		timber_nodenames["farming_plus:banana"]        = true
-		timber_nodenames["farming_plus:cocoa_leaves"]  = true
-		timber_nodenames["farming_plus:cocoa"]         = true
-	end
-end
-
--- Support nature
-if minetest.get_modpath("nature") then
-	if chainsaw_leaves then
-		timber_nodenames["nature:blossom"] = true
-	end
-end
-
--- Support snow
-if minetest.get_modpath("snow") then
-	if chainsaw_leaves then
-		timber_nodenames["snow:needles"] = true
-		timber_nodenames["snow:needles_decorated"] = true
-		timber_nodenames["snow:star"] = true
-	end
-end
-
--- Support vines (also generated by moretrees if available)
-if minetest.get_modpath("vines") then
-	if chainsaw_leaves then
-		timber_nodenames["vines:vines"] = true
-	end
-end
+-- Maximal dimensions of the tree to cut (giant sequoia)
+local tree_max_radius = 10
+local tree_max_height = 70
 
 local S = technic.getter
 
+--[[
+Format: [node_name] = dig_cost
+
+This table is filled automatically afterwards to support mods such as:
+
+	cool_trees
+	ethereal
+	moretrees
+]]
+local tree_nodes = {
+	-- For the sake of maintenance, keep this sorted alphabetically!
+	["default:acacia_bush_stem"] = -1,
+	["default:bush_stem"] = -1,
+	["default:pine_bush_stem"] = -1,
+
+	["default:cactus"] = -1,
+	["default:papyrus"] = -1,
+
+	-- dfcaves "fruits"
+	["df_trees:blood_thorn_spike"] = -1,
+	["df_trees:blood_thorn_spike_dead"] = -1,
+	["df_trees:tunnel_tube_fruiting_body"] = -1,
+
+	["ethereal:bamboo"] = -1,
+}
+
+local tree_nodes_by_cid = {
+	-- content ID indexed table, data populated on mod load.
+	-- Format: [node_name] = cost_number
+}
+
+-- Function to decide whether or not to cut a certain node (and at which energy cost)
+local function populate_costs(name, def)
+	repeat
+		if tree_nodes[name] then
+			break -- Manually specified node to chop
+		end
+		if (def.groups.tree or 0) > 0 then
+			break -- Tree node
+		end
+		if (def.groups.leaves or 0) > 0 and chainsaw_leaves then
+			break -- Leaves
+		end
+		if (def.groups.leafdecay_drop or 0) > 0 then
+			break -- Food
+		end
+		return -- Abort function: do not dig this node
+
+	-- luacheck: push ignore 511
+	until 1
+	-- luacheck: pop
+
+	-- Add the node cost to the content ID indexed table
+	local content_id = minetest.get_content_id(name)
+
+	-- Make it so that the giant sequoia can be cut with a full charge
+	local cost = tree_nodes[name] or 0
+	if def.groups.choppy then
+		cost = math.max(cost, def.groups.choppy * 14) -- trunks (usually 3 * 14)
+	end
+	if def.groups.snappy then
+		cost = math.max(cost, def.groups.snappy * 2) -- leaves
+	end
+	tree_nodes_by_cid[content_id] = math.max(4, cost)
+end
+
+minetest.register_on_mods_loaded(function()
+	local ndefs = minetest.registered_nodes
+	-- Populate hardcoded nodes
+	for name in pairs(tree_nodes) do
+		local ndef = ndefs[name]
+		if ndef and ndef.groups then
+			populate_costs(name, ndef)
+		end
+	end
+
+	-- Find all trees and leaves
+	for name, def in pairs(ndefs) do
+		if def.groups then
+			populate_costs(name, def)
+		end
+	end
+end)
+
+
 technic.register_power_tool("technic:chainsaw", chainsaw_max_charge)
 
--- Table for saving what was sawed down
-local produced = {}
+local pos9dir = {
+	{ 1, 0,  0},
+	{-1, 0,  0},
+	{ 0, 0,  1},
+	{ 0, 0, -1},
+	{ 1, 0,  1},
+	{-1, 0, -1},
+	{ 1, 0, -1},
+	{-1, 0,  1},
+	{ 0, 1,  0}, -- up
+}
 
--- Save the items sawed down so that we can drop them in a nice single stack
-local function handle_drops(drops)
-	for _, item in ipairs(drops) do
-		local stack = ItemStack(item)
-		local name = stack:get_name()
-		local p = produced[name]
-		if not p then
-			produced[name] = stack
-		else
-			p:set_count(p:get_count() + stack:get_count())
+local cutter = {
+	-- See function cut_tree()
+}
+
+local safe_cut = minetest.settings:get_bool("technic_safe_chainsaw") ~= false
+local c_air = minetest.get_content_id("air")
+local function dig_recursive(x, y, z)
+	local i = cutter.area:index(x, y, z)
+	if cutter.seen[i] then
+		return
+	end
+	cutter.seen[i] = 1 -- Mark as visited
+
+	if safe_cut and cutter.param2[i] ~= 0 then
+		-- Do not dig manually placed nodes
+		-- Problem: moretrees' generated jungle trees use param2 = 2
+		return
+	end
+
+	local c_id = cutter.data[i]
+	local cost = tree_nodes_by_cid[c_id]
+	if not cost or cost > cutter.charge then
+		return -- Cannot dig this node
+	end
+
+	-- Count dug nodes
+	cutter.drops[c_id] = (cutter.drops[c_id] or 0) + 1
+	cutter.seen[i] = 2 -- Mark as dug (for callbacks)
+	cutter.data[i] = c_air
+	cutter.charge = cutter.charge - cost
+
+	-- Expand maximal bounds for area protection check
+	if x < cutter.minp.x then cutter.minp.x = x end
+	if y < cutter.minp.y then cutter.minp.y = y end
+	if z < cutter.minp.z then cutter.minp.z = z end
+	if x > cutter.maxp.x then cutter.maxp.x = x end
+	if y > cutter.maxp.y then cutter.maxp.y = y end
+	if z > cutter.maxp.z then cutter.maxp.z = z end
+
+	-- Traverse neighbors
+	local xn, yn, zn
+	for _, offset in ipairs(pos9dir) do
+		xn, yn, zn = x + offset[1], y + offset[2], z + offset[3]
+		if cutter.area:contains(xn, yn, zn) then
+			 dig_recursive(xn, yn, zn)
 		end
 	end
 end
 
---- Iterator over positions to try to saw around a sawed node.
--- This returns positions in a 3x1x3 area around the position, plus the
--- position above it.  This does not return the bottom position to prevent
--- the chainsaw from cutting down nodes below the cutting position.
--- @param pos Sawing position.
-local function iterSawTries(pos)
-	-- Copy position to prevent mangling it
-	local pos = vector.new(pos)
-	local i = 0
+local handle_drops
 
-	return function()
-		i = i + 1
-		-- Given a (top view) area like so (where 5 is the starting position):
-		-- X -->
-		-- Z 123
-		-- | 456
-		-- V 789
-		-- This will return positions 1, 4, 7, 2, 8 (skip 5), 3, 6, 9,
-		-- and the position above 5.
-		if i == 1 then
-			-- Move to starting position
-			pos.x = pos.x - 1
-			pos.z = pos.z - 1
-		elseif i == 4 or i == 7 then
-			-- Move to next X and back to start of Z when we reach
-			-- the end of a Z line.
-			pos.x = pos.x + 1
-			pos.z = pos.z - 2
-		elseif i == 5 then
-			-- Skip the middle position (we've already run on it)
-			-- and double-increment the counter.
-			pos.z = pos.z + 2
-			i = i + 1
-		elseif i <= 9 then
-			-- Go to next Z.
-			pos.z = pos.z + 1
-		elseif i == 10 then
-			-- Move back to center and up.
-			-- The Y+ position must be last so that we don't dig
-			-- straight upward and not come down (since the Y-
-			-- position isn't checked).
-			pos.x = pos.x - 1
-			pos.z = pos.z - 1
-			pos.y = pos.y + 1
-		else
-			return nil
-		end
-		return pos
-	end
-end
+local function chainsaw_dig(player, pos, remaining_charge)
+	local minp = {
+		x = pos.x - (tree_max_radius + 1),
+		y = pos.y,
+		z = pos.z - (tree_max_radius + 1)
+	}
+	local maxp = {
+		x = pos.x + (tree_max_radius + 1),
+		y = pos.y + tree_max_height,
+		z = pos.z + (tree_max_radius + 1)
+	}
 
--- This function does all the hard work. Recursively we dig the node at hand
--- if it is in the table and then search the surroundings for more stuff to dig.
-local function recursive_dig(pos, remaining_charge)
-	if remaining_charge < chainsaw_charge_per_node then
-		return remaining_charge
-	end
-	local node = minetest.get_node(pos)
+	local vm = minetest.get_voxel_manip()
+	local emin, emax = vm:read_from_map(minp, maxp)
 
-	if not timber_nodenames[node.name] then
-		return remaining_charge
+	cutter = {
+		area = VoxelArea:new{MinEdge=emin, MaxEdge=emax},
+		data = vm:get_data(),
+		param2 = vm:get_param2_data(),
+		seen = {},
+		drops = {}, -- [content_id] = count
+		minp = vector.copy(pos),
+		maxp = vector.copy(pos),
+		charge = remaining_charge
+	}
+
+	dig_recursive(pos.x, pos.y, pos.z)
+
+	-- Check protection
+	local player_name = player:get_player_name()
+	if minetest.is_area_protected(cutter.minp, cutter.maxp, player_name, 6) then
+		minetest.chat_send_player(player_name, "The chainsaw cannot cut this tree. The cuboid " ..
+			minetest.pos_to_string(cutter.minp) .. ", " .. minetest.pos_to_string(cutter.maxp) ..
+			" contains protected nodes.")
+		minetest.record_protection_violation(pos, player_name)
+		return
 	end
 
-	-- Wood found - cut it
-	handle_drops(minetest.get_node_drops(node.name, ""))
-	minetest.remove_node(pos)
-	remaining_charge = remaining_charge - chainsaw_charge_per_node
+	minetest.sound_play("chainsaw", {
+		pos = pos,
+		gain = 1.0,
+		max_hear_distance = 20
+	})
 
-	-- Check surroundings and run recursively if any charge left
-	for npos in iterSawTries(pos) do
-		if remaining_charge < chainsaw_charge_per_node then
-			break
-		end
-		if timber_nodenames[minetest.get_node(npos).name] then
-			remaining_charge = recursive_dig(npos, remaining_charge)
+	handle_drops(pos)
+
+	vm:set_data(cutter.data)
+	vm:write_to_map(true)
+	vm:update_map()
+
+	-- Update falling nodes
+	for i, status in pairs(cutter.seen) do
+		if status == 2 then -- actually dug
+			minetest.check_for_falling(cutter.area:position(i))
 		end
 	end
-	return remaining_charge
 end
 
 -- Function to randomize positions for new node drops
@@ -297,35 +255,55 @@ local function get_drop_pos(pos)
 	return pos
 end
 
--- Chainsaw entry point
-local function chainsaw_dig(pos, current_charge)
-	-- Start sawing things down
-	local remaining_charge = recursive_dig(pos, current_charge)
-	minetest.sound_play("chainsaw", {pos = pos, gain = 1.0,
-			max_hear_distance = 10})
+local drop_inv = minetest.create_detached_inventory("technic:chainsaw_drops", {}, ":technic")
+handle_drops = function(pos)
+	local n_slots = 100
+	drop_inv:set_size("main", n_slots)
+	drop_inv:set_list("main", {})
 
-	-- Now drop items for the player
-	for name, stack in pairs(produced) do
-		-- Drop stacks of stack max or less
-		local count, max = stack:get_count(), stack:get_stack_max()
-		stack:set_count(max)
-		while count > max do
-			minetest.add_item(get_drop_pos(pos), stack)
-			count = count - max
+	-- Put all dropped items into the detached inventory
+	for c_id, count in pairs(cutter.drops) do
+		local name = minetest.get_name_from_content_id(c_id)
+
+		-- Add drops in bulk -> keep some randomness
+		while count > 0 do
+			local drops = minetest.get_node_drops(name, "")
+			-- higher numbers are faster but return uneven sapling counts
+			local decrement = math.ceil(count * 0.3)
+			decrement = math.min(count, math.max(5, decrement))
+
+			for _, stack in ipairs(drops) do
+				stack = ItemStack(stack)
+				local total = math.ceil(stack:get_count() * decrement * chainsaw_efficiency)
+				local stack_max = stack:get_stack_max()
+
+				-- Split into full stacks
+				while total > 0 do
+					local size = math.min(total, stack_max)
+					stack:set_count(size)
+					drop_inv:add_item("main", stack)
+					total = total - size
+				end
+			end
+			count = count - decrement
 		end
-		stack:set_count(count)
+	end
+
+	-- Drop in random places
+	for i = 1, n_slots do
+		local stack = drop_inv:get_stack("main", i)
+		if stack:is_empty() then
+			break
+		end
 		minetest.add_item(get_drop_pos(pos), stack)
 	end
 
-	-- Clean up
-	produced = {}
-
-	return remaining_charge
+	drop_inv:set_size("main", 0) -- free RAM
 end
 
 
 minetest.register_tool("technic:chainsaw", {
-	description = S("Admin tool 5: Chainsaw"),
+	description = S("Chainsaw"),
 	inventory_image = "technic_chainsaw.png",
 	stack_max = 1,
 	wear_represents = "technic_RE_charge",
@@ -335,11 +313,8 @@ minetest.register_tool("technic:chainsaw", {
 			return itemstack
 		end
 
-		local meta = minetest.deserialize(itemstack:get_metadata())
-		if not meta or not meta.charge or
-				meta.charge < chainsaw_charge_per_node then
-			return
-		end
+		local meta = technic.get_stack_meta(itemstack)
+		local charge = meta:get_int("technic:charge")
 
 		local name = user:get_player_name()
 		if minetest.is_protected(pointed_thing.under, name) then
@@ -349,13 +324,30 @@ minetest.register_tool("technic:chainsaw", {
 
 		-- Send current charge to digging function so that the
 		-- chainsaw will stop after digging a number of nodes
-		meta.charge = chainsaw_dig(pointed_thing.under, meta.charge)
+		chainsaw_dig(user, pointed_thing.under, charge)
+		charge = cutter.charge
 
-		technic.set_RE_wear(itemstack, meta.charge, chainsaw_max_charge)
-		itemstack:set_metadata(minetest.serialize(meta))
+		cutter = {} -- Free RAM
+
+		if not technic.creative_mode then
+			meta:set_int("technic:charge", charge)
+			technic.set_RE_wear(itemstack, charge, chainsaw_max_charge)
+		end
 		return itemstack
 	end,
 })
 
+local mesecons_button = minetest.get_modpath("mesecons_button")
+local trigger = mesecons_button and "mesecons_button:button_off" or "default:mese_crystal_fragment"
 
+minetest.register_craft({
+	output = "technic:chainsaw",
+	recipe = {
+		{"technic:stainless_steel_ingot", trigger,                      "technic:battery"},
+		{"basic_materials:copper_wire",      "basic_materials:motor",              "technic:battery"},
+		{"",                              "",                           "technic:stainless_steel_ingot"},
+	},
+	replacements = { {"basic_materials:copper_wire", "basic_materials:empty_spool"}, },
+
+})
 

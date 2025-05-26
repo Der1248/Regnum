@@ -1,4 +1,4 @@
-name = "Knight green",
+name = "Knight pink",
 author = "???",
 description = "",
 comment = "to minetest by 1248",

@@ -1,3 +1,5 @@
+local S = minetest.get_translator(minetest.get_current_modname())
+
 --MESECON TORCHES
 
 local rotate_torch_rules = function (rules, param2)
@@ -27,9 +29,13 @@ local torch_get_output_rules = function(node)
 	return rotate_torch_rules(rules, node.param2)
 end
 
+local torch_input_rules_unrotated_horizontal = {vector.new(-2, 0, 0), vector.new(-1, 1, 0)}
+local torch_input_rules_unrotated_vertical   = {vector.new(-2, 0, 0)}
+
 local torch_get_input_rules = function(node)
-	local rules = 	{{x = -2, y = 0, z = 0},
-				 {x = -1, y = 1, z = 0}}
+	local rules = (node.param2 == 0 or node.param2 == 1)
+		and torch_input_rules_unrotated_vertical
+		or  torch_input_rules_unrotated_horizontal
 
 	return rotate_torch_rules(rules, node.param2)
 end
@@ -38,7 +44,7 @@ minetest.register_craft({
 	output = "mesecons_torch:mesecon_torch_on 4",
 	recipe = {
 	{"group:mesecon_conductor_craftable"},
-	{"default:stick"},}
+	{"group:stick"},}
 })
 
 local torch_selectionbox =
@@ -50,38 +56,44 @@ local torch_selectionbox =
 }
 
 minetest.register_node("mesecons_torch:mesecon_torch_off", {
-	drawtype = "torchlike",
-	tiles = {"jeija_torches_off.png", "jeija_torches_off_ceiling.png", "jeija_torches_off_side.png"},
+	drawtype = "plantlike",
+	tiles = {"jeija_torches_off.png"},
 	inventory_image = "jeija_torches_off.png",
 	paramtype = "light",
+	is_ground_content = false,
 	walkable = false,
 	paramtype2 = "wallmounted",
 	selection_box = torch_selectionbox,
 	groups = {dig_immediate = 3, not_in_creative_inventory = 1},
 	drop = "mesecons_torch:mesecon_torch_on",
+	sounds = mesecon.node_sound.default,
 	mesecons = {receptor = {
 		state = mesecon.state.off,
 		rules = torch_get_output_rules
-	}}
+	}},
+	on_blast = mesecon.on_blastnode,
 })
 
 minetest.register_node("mesecons_torch:mesecon_torch_on", {
-	drawtype = "torchlike",
-	tiles = {"jeija_torches_on.png", "jeija_torches_on_ceiling.png", "jeija_torches_on_side.png"},
+	drawtype = "plantlike",
+	tiles = {"jeija_torches_on.png"},
 	inventory_image = "jeija_torches_on.png",
 	wield_image = "jeija_torches_on.png",
 	paramtype = "light",
+	is_ground_content = false,
 	sunlight_propagates = true,
 	walkable = false,
 	paramtype2 = "wallmounted",
 	selection_box = torch_selectionbox,
 	groups = {dig_immediate=3},
-	light_source = LIGHT_MAX-5,
-	description="Mesecon Torch",
+	light_source = minetest.LIGHT_MAX-5,
+	description = S("Mesecon Torch"),
+	sounds = mesecon.node_sound.default,
 	mesecons = {receptor = {
 		state = mesecon.state.on,
 		rules = torch_get_output_rules
 	}},
+	on_blast = mesecon.on_blastnode,
 })
 
 minetest.register_abm({
@@ -91,7 +103,7 @@ minetest.register_abm({
 	action = function(pos, node)
 		local is_powered = false
 		for _, rule in ipairs(torch_get_input_rules(node)) do
-			local src = mesecon.addPosRule(pos, rule)
+			local src = vector.add(pos, rule)
 			if mesecon.is_power_on(src) then
 				is_powered = true
 			end

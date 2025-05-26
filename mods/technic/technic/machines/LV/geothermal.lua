@@ -7,14 +7,27 @@ minetest.register_alias("geothermal", "technic:geothermal")
 
 local S = technic.getter
 
+minetest.register_craft({
+	output = 'technic:geothermal',
+	recipe = {
+		{'technic:granite',          'default:diamond',        'technic:granite'},
+		{'basic_materials:copper_wire', 'technic:machine_casing', 'basic_materials:copper_wire'},
+		{'technic:granite',          'technic:lv_cable',       'technic:granite'},
+	},
+	replacements = {
+		{"basic_materials:copper_wire", "basic_materials:empty_spool"},
+		{"basic_materials:copper_wire", "basic_materials:empty_spool"}
+	},
+})
+
 minetest.register_craftitem("technic:geothermal", {
 	description = S("Geothermal %s Generator"):format("LV"),
-}) 
+})
 
 local check_node_around = function(pos)
 	local node = minetest.get_node(pos)
 	if node.name == "default:water_source" or node.name == "default:water_flowing" then return 1 end
-	if node.name == "default:lava_source"  or node.name == "default:lava_flowing"  then return 2 end	
+	if node.name == "default:lava_source"  or node.name == "default:lava_flowing"  then return 2 end
 	return 0
 end
 
@@ -73,8 +86,9 @@ minetest.register_node("technic:geothermal", {
 	description = S("Geothermal %s Generator"):format("LV"),
 	tiles = {"technic_geothermal_top.png", "technic_machine_bottom.png", "technic_geothermal_side.png",
 	         "technic_geothermal_side.png", "technic_geothermal_side.png", "technic_geothermal_side.png"},
+	groups = {snappy=2, choppy=2, oddly_breakable_by_hand=2,
+		technic_machine=1, technic_lv=1},
 	paramtype2 = "facedir",
-	groups = {snappy=2, choppy=2, oddly_breakable_by_hand=2, technic_machine=1},
 	legacy_facedir_simple = true,
 	sounds = default.node_sound_wood_defaults(),
 	on_construct = function(pos)
@@ -90,7 +104,8 @@ minetest.register_node("technic:geothermal_active", {
 	tiles = {"technic_geothermal_top_active.png", "technic_machine_bottom.png", "technic_geothermal_side.png",
 	         "technic_geothermal_side.png", "technic_geothermal_side.png", "technic_geothermal_side.png"},
 	paramtype2 = "facedir",
-	groups = {snappy=2, choppy=2, oddly_breakable_by_hand=2, not_in_creative_inventory=1},
+	groups = {snappy=2, choppy=2, oddly_breakable_by_hand=2,
+		technic_machine=1, technic_lv=1, not_in_creative_inventory=1},
 	legacy_facedir_simple = true,
 	sounds = default.node_sound_wood_defaults(),
 	drop = "technic:geothermal",

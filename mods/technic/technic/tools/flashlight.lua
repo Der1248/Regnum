@@ -8,7 +8,7 @@ local S = technic.getter
 technic.register_power_tool("technic:flashlight", flashlight_max_charge)
 
 minetest.register_alias("technic:light_off", "air")
-      
+
 minetest.register_tool("technic:flashlight", {
 	description = S("Flashlight"),
 	inventory_image = "technic_flashlight.png",
@@ -20,9 +20,9 @@ minetest.register_tool("technic:flashlight", {
 minetest.register_craft({
 	output = "technic:flashlight",
 	recipe = {
-		{"", "gems:ruby_gem", ""},
-		{"", "default:stone", ""},
-		{"", "default:stone", ""}
+		{"technic:rubber",                "default:glass",   "technic:rubber"},
+		{"technic:stainless_steel_ingot", "technic:battery", "technic:stainless_steel_ingot"},
+		{"",                              "technic:battery", ""}
 	}
 })
 
@@ -38,12 +38,15 @@ local function check_for_flashlight(player)
 	local hotbar = inv:get_list("main")
 	for i = 1, 8 do
 		if hotbar[i]:get_name() == "technic:flashlight" then
-			local meta = minetest.deserialize(hotbar[i]:get_metadata())
-			if meta and meta.charge and meta.charge >= 2 then
-				meta.charge = meta.charge - 2;
-				technic.set_RE_wear(hotbar[i], meta.charge, flashlight_max_charge)
-				hotbar[i]:set_metadata(minetest.serialize(meta))
-				inv:set_stack("main", i, hotbar[i])
+			local meta = technic.get_stack_meta(hotbar[i])
+			local charge = meta:get_int("technic:charge")
+			if charge >= 2 then
+				if not technic.creative_mode then
+					charge = charge - 2;
+					meta:set_int("technic:charge", charge)
+					technic.set_RE_wear(hotbar[i], charge, flashlight_max_charge)
+					inv:set_stack("main", i, hotbar[i])
+				end
 				return true
 			end
 		end
@@ -53,7 +56,7 @@ end
 
 minetest.register_on_joinplayer(function(player)
 	local player_name = player:get_player_name()
-	local pos = player:getpos()
+	local pos = player:get_pos()
 	local rounded_pos = vector.round(pos)
 	rounded_pos.y = rounded_pos.y + 1
 	player_positions[player_name] = rounded_pos
@@ -75,7 +78,7 @@ minetest.register_globalstep(function(dtime)
 	for i, player in pairs(minetest.get_connected_players()) do
 		local player_name = player:get_player_name()
 		local flashlight_weared = check_for_flashlight(player)
-		local pos = player:getpos()
+		local pos = player:get_pos()
 		local rounded_pos = vector.round(pos)
 		rounded_pos.y = rounded_pos.y + 1
 		local old_pos = player_positions[player_name]
@@ -97,7 +100,7 @@ minetest.register_globalstep(function(dtime)
 			if node and node.name == "air" then
 				minetest.set_node(rounded_pos, {name="technic:light"})
 			end
-			local node = minetest.get_node_or_nil(old_pos)
+			node = minetest.get_node_or_nil(old_pos)
 			if node and node.name == "technic:light" then
 				minetest.remove_node(old_pos)
 			end
@@ -111,11 +114,11 @@ minetest.register_node("technic:light", {
 	drawtype = "glasslike",
 	tiles = {"technic_light.png"},
 	paramtype = "light",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory = 1},
 	drop = "",
 	walkable = false,
 	buildable_to = true,
 	sunlight_propagates = true,
-	light_source = LIGHT_MAX,
+	light_source = minetest.LIGHT_MAX,
 	pointable = false,
 })

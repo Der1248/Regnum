@@ -1,9 +1,21 @@
 
 local S = technic.getter
 
+local tube_entry = "^pipeworks_tube_connection_metallic.png"
+local cable_entry = "^technic_cable_connection_overlay.png"
+
+minetest.register_craft({
+	recipe = {
+		{"technic:carbon_plate",       "pipeworks:filter",       "technic:composite_plate"},
+		{"basic_materials:motor",              "technic:machine_casing", "technic:diamond_drill_head"},
+		{"technic:carbon_steel_block", "technic:hv_cable",       "technic:carbon_steel_block"}},
+	output = "technic:quarry",
+})
+
 local quarry_dig_above_nodes = 3 -- How far above the quarry we will dig nodes
 local quarry_max_depth       = 100
 local quarry_demand = 10000
+local quarry_eject_dir = vector.new(0, 1, 0)
 
 local function set_quarry_formspec(meta)
 	local radius = meta:get_int("size")
@@ -35,19 +47,30 @@ local function set_quarry_demand(meta)
 	local radius = meta:get_int("size")
 	local diameter = radius*2 + 1
 	local machine_name = S("%s Quarry"):format("HV")
-	if meta:get_int("enabled") == 0 or meta:get_int("purge_on") == 1 then
-		meta:set_string("infotext", S(meta:get_int("purge_on") == 1 and "%s purging cache" or "%s Disabled"):format(machine_name))
+	local do_purge = meta:get_int("purge_on") == 1
+	if meta:get_int("enabled") == 0 or do_purge then
+		local infotext = do_purge and
+			S("%s purging cache") or S("%s Disabled")
+		meta:set_string("infotext", infotext:format(machine_name))
 		meta:set_int("HV_EU_demand", 0)
 	elseif meta:get_int("dug") == diameter*diameter * (quarry_dig_above_nodes+1+quarry_max_depth) then
 		meta:set_string("infotext", S("%s Finished"):format(machine_name))
 		meta:set_int("HV_EU_demand", 0)
 	else
-		meta:set_string("infotext", S(meta:get_int("HV_EU_input") >= quarry_demand and "%s Active" or "%s Unpowered"):format(machine_name))
+		local infotext = meta:get_int("HV_EU_input") >= quarry_demand
+			and S("%s Active") or S("%s Unpowered")
+		meta:set_string("infotext", infotext:format(machine_name))
 		meta:set_int("HV_EU_demand", quarry_demand)
 	end
 end
 
 local function quarry_receive_fields(pos, formname, fields, sender)
+	local player_name = sender:get_player_name()
+	if minetest.is_protected(pos, player_name) then
+		minetest.chat_send_player(player_name, "You are not allowed to edit this!")
+		minetest.record_protection_violation(pos, player_name)
+		return
+	end
 	local meta = minetest.get_meta(pos)
 	if fields.size and string.find(fields.size, "^[0-9]+$") then
 		local size = tonumber(fields.size)
@@ -75,7 +98,7 @@ local function quarry_handle_purge(pos)
 		if stack then
 			local item = stack:to_table()
 			if item then
-				technic.tube_inject_item(pos, pos, vector.new(0, 1, 0), item)
+				technic.tube_inject_item(pos, pos, quarry_eject_dir, item)
 				stack:clear()
 				inv:set_stack("cache", i, stack)
 				break
@@ -85,6 +108,40 @@ local function quarry_handle_purge(pos)
 	if inv:is_empty("cache") then
 		meta:set_int("purge_on", 0)
 	end
+end
+
+-- Determines whether the quarry can dig the node at "pos"
+-- "startpos" is located a few nodes above the quarry in South West direction (X-, Z-)
+-- Returns the node to dig (to avoid double minetest.get_node lookup)
+local function quarry_can_dig_node(startpos, pos, quarry_owner)
+	if minetest.is_protected(pos, quarry_owner) then
+		return nil
+	end
+
+	local node = technic.get_or_load_node(pos) or minetest.get_node(pos)
+	local def = minetest.registered_nodes[node.name] or {diggable=false}
+	-- doors mod among other thing does NOT like a nil digger...
+	local fakedigger = pipeworks.create_fake_player({
+		name = quarry_owner
+	})
+	if not def.diggable or (def.can_dig and not def.can_dig(pos, fakedigger)) then
+		return nil
+	end
+
+	-- Find airlike nodes on top of the current node. The entire Y column must be free.
+	for ay = pos.y+1, startpos.y do
+		local checkpos = {x=pos.x, y=ay, z=pos.z}
+		local checknode = technic.get_or_load_node(checkpos) or minetest.get_node(checkpos)
+
+		local cdef = minetest.registered_nodes[checknode.name] or {}
+		local is_kind_of_gas = cdef.buildable_to and cdef.sunlight_propagates and not cdef.walkable
+			and not cdef.diggable and (cdef.drawtype == "airlike" or cdef.drawtype == "glasslike")
+		if not is_kind_of_gas then
+			return nil
+		end
+	end
+
+	return node
 end
 
 local function quarry_run(pos, node)
@@ -100,6 +157,11 @@ local function quarry_run(pos, node)
 
 	if meta:get_int("enabled") and meta:get_int("HV_EU_input") >= quarry_demand and meta:get_int("purge_on") == 0 then
 		local pdir = minetest.facedir_to_dir(node.param2)
+		if pdir.y ~= 0 then
+			-- faces up or down, not valid, otherwise depth-check would run endless and hang up the server
+			return
+		end
+
 		local qdir = pdir.x == 1 and vector.new(0,0,-1) or
 			(pdir.z == -1 and vector.new(-1,0,0) or
 			(pdir.x == -1 and vector.new(0,0,1) or
@@ -110,18 +172,9 @@ local function quarry_run(pos, node)
 			vector.new(0, quarry_dig_above_nodes, 0)),
 			pdir),
 			vector.multiply(qdir, -radius))
-		local endpos = vector.add(vector.add(vector.add(startpos,
-			vector.new(0, -quarry_dig_above_nodes-quarry_max_depth, 0)),
-			vector.multiply(pdir, diameter-1)),
-			vector.multiply(qdir, diameter-1))
-		local vm = VoxelManip()
-		local minpos, maxpos = vm:read_from_map(startpos, endpos)
-		local area = VoxelArea:new({MinEdge=minpos, MaxEdge=maxpos})
-		local data = vm:get_data()
-		local c_air = minetest.get_content_id("air")
 		local owner = meta:get_string("owner")
 		local nd = meta:get_int("dug")
-		while nd ~= diameter*diameter * (quarry_dig_above_nodes+1+quarry_max_depth) do
+		while nd < diameter*diameter * (quarry_dig_above_nodes+1+quarry_max_depth) do
 			local ry = math.floor(nd / (diameter*diameter))
 			local ndl = nd % (diameter*diameter)
 			if ry % 2 == 1 then
@@ -134,31 +187,11 @@ local function quarry_run(pos, node)
 				vector.new(0, -ry, 0)),
 				vector.multiply(pdir, rp)),
 				vector.multiply(qdir, rq))
-			local can_dig = true
-			if can_dig and minetest.is_protected and minetest.is_protected(digpos, owner) then
-				can_dig = false
-			end
-			local dignode
-			if can_dig then
-				dignode = technic.get_or_load_node(digpos) or minetest.get_node(digpos)
-				local dignodedef = minetest.registered_nodes[dignode.name] or {diggable=false}
-				if not dignodedef.diggable or (dignodedef.can_dig and not dignodedef.can_dig(digpos, nil)) then
-					can_dig = false
-				end
-			end
 
-			if can_dig then
-				for ay = startpos.y, digpos.y+1, -1 do
-					local checkpos = {x=digpos.x, y=ay, z=digpos.z}
-					local checknode = technic.get_or_load_node(checkpos) or minetest.get_node(checkpos)
-					if checknode.name ~= "air" then
-						can_dig = false
-						break
-					end
-				end
-			end
 			nd = nd + 1
-			if can_dig then
+
+			local dignode = quarry_can_dig_node(startpos, digpos, owner)
+			if dignode then
 				minetest.remove_node(digpos)
 				local drops = minetest.get_node_drops(dignode.name, "")
 				for _, dropped_item in ipairs(drops) do
@@ -198,16 +231,29 @@ end
 
 minetest.register_node("technic:quarry", {
 	description = S("%s Quarry"):format("HV"),
-	tiles = {"technic_carbon_steel_block.png", "technic_carbon_steel_block.png",
-	         "technic_carbon_steel_block.png", "technic_carbon_steel_block.png",
-	         "technic_carbon_steel_block.png^default_tool_mesepick.png", "technic_carbon_steel_block.png"},
-	inventory_image = minetest.inventorycube("technic_carbon_steel_block.png",
-	         "technic_carbon_steel_block.png^default_tool_mesepick.png",
-	         "technic_carbon_steel_block.png"),
+	tiles = {
+		"technic_carbon_steel_block.png"..tube_entry,
+		"technic_carbon_steel_block.png"..cable_entry,
+		"technic_carbon_steel_block.png"..cable_entry,
+		"technic_carbon_steel_block.png"..cable_entry,
+		"technic_carbon_steel_block.png^default_tool_mesepick.png",
+		"technic_carbon_steel_block.png"..cable_entry
+	},
 	paramtype2 = "facedir",
-	groups = {cracky=2, tubedevice=1, technic_machine = 1},
+	groups = {cracky=2, tubedevice=1, technic_machine=1, technic_hv=1},
+	connect_sides = {"bottom", "front", "left", "right"},
 	tube = {
 		connect_sides = {top = 1},
+		-- lower priority than other tubes, so that quarries will prefer any
+		-- other tube to another quarry, which could lead to server freezes
+		-- in certain quarry placements (2x2 for example would never eject)
+		priority = 10,
+		can_go = function(pos, node, velocity, stack)
+			-- always eject the same, even if items came in another way
+			-- this further mitigates loops and generally avoids random sideway movement
+			-- that can be expected in certain quarry placements
+			return { quarry_eject_dir }
+		end
 	},
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)

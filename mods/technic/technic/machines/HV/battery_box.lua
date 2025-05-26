@@ -1,8 +1,11 @@
 -- HV battery box
+
 minetest.register_craft({
 	output = 'technic:hv_battery_box0',
 	recipe = {
-		{'technic:mv_battery_box0','technic:mv_battery_box0'},
+		{'technic:mv_battery_box0', 'technic:mv_battery_box0', 'technic:mv_battery_box0'},
+		{'technic:mv_battery_box0', 'technic:hv_transformer',  'technic:mv_battery_box0'},
+		{'',                        'technic:hv_cable',        ''},
 	}
 })
 

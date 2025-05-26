@@ -14,10 +14,6 @@ dofile(path.."/geothermal.lua")
 dofile(path.."/water_mill.lua")
 dofile(path.."/generator.lua")
 
--- Coal-powered machines (TODO -> move to somewhere else?)
-dofile(path.."/coal_alloy_furnace.lua")
-dofile(path.."/coal_furnace.lua")
-
 -- Machines
 dofile(path.."/alloy_furnace.lua")
 dofile(path.."/electric_furnace.lua")
@@ -26,8 +22,6 @@ dofile(path.."/extractor.lua")
 dofile(path.."/compressor.lua")
 
 dofile(path.."/music_player.lua")
-
-dofile(path.."/cnc.lua")
-dofile(path.."/cnc_api.lua")
-dofile(path.."/cnc_nodes.lua")
-
+-- NEW LV LAMPS
+dofile(path.."/led.lua")
+dofile(path.."/lamp.lua")

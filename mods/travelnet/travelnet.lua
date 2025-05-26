@@ -1,99 +1,24 @@
--- contains the node definition for a general travelnet that can be used by anyone
---   further travelnets can only be installed by the owner or by people with the travelnet_attach priv
---   digging of such a travelnet is limited to the owner and to people with the travelnet_remove priv (useful for admins to clean up)
--- (this can be overrided in config.lua)
--- Autor: Sokomine
-minetest.register_node("travelnet:travelnet", {
+local materials = xcompat.materials
 
-	description = "Travelnet box",
+local default_travelnets = {
+	-- "default" travelnet box in yellow
+	{ nodename="travelnet:travelnet", color="#e0bb2d", dye=materials.dye_yellow, recipe=travelnet.travelnet_recipe },
+	{ nodename="travelnet:travelnet_red", color="#ce1a1a", dye=materials.dye_red },
+	{ nodename="travelnet:travelnet_orange", color="#e2621b", dye=materials.dye_orange },
+	{ nodename="travelnet:travelnet_blue", color="#0051c5", dye=materials.dye_blue },
+	{ nodename="travelnet:travelnet_cyan", color="#00a6ae", dye=materials.dye_cyan },
+	{ nodename="travelnet:travelnet_green", color="#53c41c", dye=materials.dye_green },
+	{ nodename="travelnet:travelnet_dark_green", color="#2c7f00", dye=materials.dye_dark_green },
+	{ nodename="travelnet:travelnet_violet", color="#660bb3", dye=materials.dye_violet },
+	{ nodename="travelnet:travelnet_pink", color="#ff9494", dye=materials.dye_pink },
+	{ nodename="travelnet:travelnet_magenta", color="#d10377", dye=materials.dye_magenta },
+	{ nodename="travelnet:travelnet_brown", color="#572c00", dye=materials.dye_brown },
+	{ nodename="travelnet:travelnet_grey", color="#a2a2a2", dye=materials.dye_grey },
+	{ nodename="travelnet:travelnet_dark_grey", color="#3d3d3d", dye=materials.dye_dark_grey },
+	{ nodename="travelnet:travelnet_black", color="#0f0f0f", dye=materials.dye_black, light_source=0 },
+	{ nodename="travelnet:travelnet_white", color="#ffffff", dye=materials.dye_white, light_source=minetest.LIGHT_MAX },
+}
 
-	drawtype = "mesh",
-	mesh = "travelnet.obj",
-	sunlight_propagates = true,
-	paramtype = 'light',
-	paramtype2 = "facedir",
-	wield_scale = {x=0.6, y=0.6, z=0.6},
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.5, -0.5, -0.5, 0.5, 1.5, 0.5 }
-	},
-
-	collision_box = {
-		type = "fixed",
-		fixed = {
-
-			{ 0.45, -0.5,-0.5,  0.5,  1.45, 0.5},
-			{-0.5 , -0.5, 0.45, 0.45, 1.45, 0.5}, 
-			{-0.5,  -0.5,-0.5 ,-0.45, 1.45, 0.5},
-
-			--groundplate to stand on
-			{ -0.5,-0.5,-0.5,0.5,-0.45, 0.5}, 
-			--roof
-			{ -0.5, 1.45,-0.5,0.5, 1.5, 0.5}, 
-
-			-- control panel
-			--                { -0.2, 0.6,  0.3, 0.2, 1.1,  0.5},
-
-		},
-	},
-
-	tiles = {
-		"travelnet_travelnet_front.png",  -- backward view
-		"travelnet_travelnet_back.png", -- front view
-		"travelnet_travelnet_side.png", -- sides :)
-		"default_steel_block.png",  -- view from top
-		"default_clay.png",  -- view from bottom
-	},
-    inventory_image = "travelnet_inv.png",
-
-    groups = {cracky=1,choppy=1,snappy=1},
-
-    light_source = 10,
-
-    after_place_node  = function(pos, placer, itemstack)
-	local meta = minetest.get_meta(pos);
-        meta:set_string("infotext",       "Travelnet-box (unconfigured)");
-        meta:set_string("station_name",   "");
-        meta:set_string("station_network","");
-        meta:set_string("owner",          placer:get_player_name() );
-        -- request initinal data
-        meta:set_string("formspec", 
-                            "size[12,10]"..
-                            "field[0.3,5.6;6,0.7;station_name;Name of this station:;]"..
-                            "field[0.3,6.6;6,0.7;station_network;Assign to Network:;]"..
-                            "field[0.3,7.6;6,0.7;owner_name;(optional) owned by:;]"..
-                            "button_exit[6.3,6.2;1.7,0.7;station_set;Store]" );
-    end,
-    
-    on_receive_fields = travelnet.on_receive_fields,
-    on_punch          = function(pos, node, puncher)
-                          travelnet.update_formspec(pos, puncher:get_player_name())
-    end,
-
-    can_dig = function( pos, player )
-                          return travelnet.can_dig( pos, player, 'travelnet box' )
-    end,
-
-    after_dig_node = function(pos, oldnode, oldmetadata, digger)
-			  travelnet.remove_box( pos, oldnode, oldmetadata, digger )
-    end,
-
-    -- taken from VanessaEs homedecor fridge
-    on_place = function(itemstack, placer, pointed_thing)
-
-       local pos = pointed_thing.above;
-       if( minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name ~= "air" ) then
-
-          minetest.chat_send_player( placer:get_player_name(), 'Not enough vertical space to place the travelnet box!' )
-          return;
-       end
-       return minetest.item_place(itemstack, placer, pointed_thing);
-    end,
-
-})
-
---[
-minetest.register_craft({
-        output = "travelnet:travelnet",
-        recipe = travelnet.travelnet_recipe,
-})
+for _, cfg in ipairs(default_travelnets) do
+	travelnet.register_travelnet_box(cfg)
+end

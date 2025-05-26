@@ -1,0 +1,3 @@
+mobs_birds.enable_gulls (Enable Gulls) bool true
+mobs_birds.enable_large_birds (Enable Large Birds) bool true
+mobs_birds.enable_small_birds (Enable Small Birds) bool true

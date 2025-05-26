@@ -26,16 +26,17 @@ Graphite = Lastra in graffite
 Carbon Cloth = Fibra di carbonio
 Raw Latex = Latex grezzo
 Rubber Fiber = Fibra di gomma
-%.1f%%-Fissile Uranium Ingot =
-%.1f%%-Fissile Uranium Block =
+%.1f%%-Fissile Uranium Ingot = %.1f%%-Lingotto di uranio fissile
+%.1f%%-Fissile Uranium Block = %.1f%%-Blocco di uranio fissile
 
 ## Machine misc
 Machine cannot be removed because it is not empty = La macchina non può essere rimossa perchè non è vuota
 Inventory move disallowed due to protection = Impossibile muovere l'inventario a causa della protezione
 # $1: Machine name (Includes tier)
+@1 Active (@2 EU) = @1 Attivo (@2 EU)
 %s Active = %s Attivo
 %s Disabled = %s Disabilitato
-%s Enabled =
+%s Enabled = %s Abilitato
 %s Idle = %s Inattivo
 %s Improperly Placed = %s Piazzato impropiamente
 %s Unpowered = %s Non alimentato
@@ -45,25 +46,24 @@ Inventory move disallowed due to protection = Impossibile muovere l'inventario a
 %s Finished = %s Finito
 Enable/Disable = Abilita/Disabilita
 Range = Raggio
-Upgrade Slots =
+Upgrade Slots = Alloggi di aggiornamento
 In: = Ingresso:
 Out: = Uscita:
-Slot %d =
+Slot %d = Alloggio %d
 Itemwise = Singolo elemento
 Stackwise = pila completa
-Owner: =
-Unlocked =
-Locked =
-Radius: =
-Enabled =
-Disabled =
+Owner: = Proprietario:
+Unlocked = Non chiuso a chiave
+Locked = Chiuso a chiave
+Radius: = Raggio:
+Enabled = Abilitato
+Disabled = Disabilitato
 
 ## Machine names
 # $1: Tier
 %s Alloy Furnace = %s Fornace per leghe
 %s Battery Box =  %s Box batterie
 %s Cable = Cavo %s
-%s CNC Machine = Tornio CNC %s
 %s Compressor = Compressore %s
 %s Extractor = Estrattore %s
 %s Forcefield Emitter = Emettitore di campo di forza %s
@@ -83,10 +83,10 @@ Self-Contained Injector = Ignettore
 Constructor Mk%d = Costruttore Mk%d
 Frame = Cornice
 Frame Motor = Cornice del motore
-Template =
-Template (replacing) = Template (rimpiazzato)
-Template Motor =
-Template Tool =
+Template = Sagoma
+Template (replacing) = Sagoma (di rimpiazzo)
+Template Motor = Motore per sagome
+Template Tool = Strumento per sagome
 Battery Box = Box batterie
 Supply Converter = Trasformatore
 Switching Station = Stazione di controllo
@@ -95,7 +95,7 @@ Fuel-Fired Furnace = Fornace a carbone
 Wind Mill Frame = Pala eolica
 Forcefield = Campo di forza
 Nuclear Reactor Rod Compartment = Compartimento combustibile nucleare
-Administrative World Anchor =
+Administrative World Anchor = Ancora-mondo amministrativa
 
 ## Machine-specific
 # $1: Pruduced EU
@@ -103,54 +103,19 @@ Charge = Carica
 Discharge = Scarica
 Power level = Livello di potenza
 # $1: Tier $2: current_charge $3: max_charge
-%s Battery Box: %d/%d = %s Box Batterie: %d/%d
+@1 Battery Box: @2/@3 = @1 Box Batterie: @2/@3
 # $1: Machine name $2: Supply $3: Demand
-%s. Supply: %d Demand: %d = %s. Prodotto: %d Consumato: %d
+@1. Supply: @2 Demand: @3 = @1. Prodotto: @2 Consumato: @3
 Production at %d%% = Produzione a %d%%
 Choose Milling Program: = Scegliere un programma di Fresatura
 Slim Elements half / normal height: = Metà elementi sottili / altezza normale:
 Current track %s = Traccia corrente %s
-Stopped =
-Keeping %d/%d map blocks loaded =
-Digging not started =
-Digging finished =
-Digging %d m above machine =
-Digging %d m below machine =
-
-## CNC
-Cylinder = Cilindro
-Element Cross = Elemento a croce
-Element Cross Double = Elemento a croce doppio
-Element Edge = Elemento bordo
-Element Edge Double = Elemento bordo doppio
-Element End = Elemento finale
-Element End Double = Elemento finale doppio
-Element Straight = Elemento dritto
-Element Straight Double = Elemento dritto doppio
-Element T = Elemento a T
-Element T Double = Elemento a T doppio
-Horizontal Cylinder = Cilindro orizzontale
-One Curved Edge Block = Blocco con bordo curvo
-Pyramid = Piramide
-Slope = Inclinato
-Slope Edge = Bordo inclinato
-Slope Inner Edge = Bordo interno inclinato
-Slope Lying = Pendenza bugiarda
-Slope Upside Down = Pendenza capovolta
-Slope Upside Down Edge = Bordo inclinato capovolto
-Slope Upside Down Inner Edge = Bordo interno inclinato capovolto
-Sphere = Sfera
-Spike = Spuntone
-Stick = Bastone
-Two Curved Edge Block = Blocco con bordo a doppia curva
-Brick = Mattone
-Cobble = Ciottolato
-Dirt = Terra
-Leaves = Foglie
-Sandstone = Arenaria
-Stone = Pietra
-Tree = Albero
-Wooden = Legno
+Stopped = Fermato
+Keeping %d/%d map blocks loaded = Mantenimento di %d/%d blocchi mappa caricati
+Digging not started = Scavo non iniziato
+Digging finished = Scavo finito
+Digging %d m above machine = Scavo di %d m sopra la macchina
+Digging %d m below machine = Scavo di %d m sotto la macchina
 
 ## Grinder Recipes
 # $1: Name
@@ -173,10 +138,10 @@ Talinite = Talinite
 Tin = Stagno
 Wrought Iron = Ferro Battuto
 Zinc = Zinco
-%.1f%%-Fissile Uranium =
+%.1f%%-Fissile Uranium = %.1f%%-Uranio fissile
 
 ## Tools
-RE Battery =
+RE Battery = Batteria RE
 Water Can = Serbatoio d'acqua
 Lava Can = Serbatoio di lava
 Chainsaw = Motosega

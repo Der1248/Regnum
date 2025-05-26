@@ -42,12 +42,6 @@ minetest.register_craft({
     }
 })
 minetest.register_craft({
-    output = 'default:sign_wall',
-    recipe = {
-        {'default:sign_wall_wood','default:sign_wall_wood'},
-    }
-})
-minetest.register_craft({
     output = 'tutorial:regnum_key_pixeled',
     recipe = {
         {'tutorial:regnum_pixeled'},
@@ -110,42 +104,8 @@ minetest.register_craft({
         {'tutorial:regnum_part', 'tutorial:regnum_part', 'tutorial:regnum_part'},
     }
 })
-minetest.register_craft({
-    output = 'tutorial:regnumbattleaxe1',
-    recipe = {
-        {'', '', 'tutorial:regnum', '', ''},
-		{'', '', 'tutorial:bottleSS', '', ''},
-		{'tutorial:regnum', 'tutorial:bottleSS', 'tutorial:superlegendenbattleaxe1', 'tutorial:bottleSS', 'tutorial:regnum'},
-		{'', '', 'tutorial:bottleSS', '', ''},
-		{'', '', 'tutorial:regnum', '', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:regnumbattleaxe2',
-    recipe = {
-        {'', '', 'tutorial:regnum', '', ''},
-		{'', '', 'tutorial:bottleSS', '', ''},
-		{'tutorial:regnum', 'tutorial:bottleSS', 'tutorial:superlegendenbattleaxe2', 'tutorial:bottleSS', 'tutorial:regnum'},
-		{'', '', 'tutorial:bottleSS', '', ''},
-		{'', '', 'tutorial:regnum', '', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:regnumbattleaxe3',
-    recipe = {
-        {'', '', 'tutorial:regnum', '', ''},
-		{'', '', 'tutorial:bottleSS', '', ''},
-		{'tutorial:regnum', 'tutorial:bottleSS', 'tutorial:superlegendenbattleaxe3', 'tutorial:bottleSS', 'tutorial:regnum'},
-		{'', '', 'tutorial:bottleSS', '', ''},
-		{'', '', 'tutorial:regnum', '', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:superlegendenbattleaxe1',
-    recipe = {
-        {'tutorial:lilabattleaxe2', 'tutorial:legendenbattleaxe6'},
-    }
-})
+
+
 minetest.register_craft({
     output = 'tutorial:lilabattleaxe2',
     recipe = {
@@ -195,60 +155,7 @@ minetest.register_craft({
         {'tutorial:rot_erz', 'tutorial:blau_erz'},
     }
 })
-minetest.register_craft({
-    output = 'tutorial:legendenbattleaxe1',
-    recipe = {
-        {'tutorial:titanbattleaxe10', 'default:grass_1', 'default:grass_1', 'tutorial:bottle5'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'tutorial:bottle5', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:legendenbattleaxe2',
-    recipe = {
-        {'tutorial:legendenbattleaxe1', 'default:grass_1', 'default:grass_1', 'tutorial:bottle7'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'tutorial:bottle7', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:legendenbattleaxe3',
-    recipe = {
-        {'tutorial:legendenbattleaxe2', 'default:grass_1', 'default:grass_1', 'tutorial:bottle9'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'tutorial:bottle9', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:legendenbattleaxe4',
-    recipe = {
-        {'tutorial:legendenbattleaxe3', 'default:grass_1', 'default:grass_1', 'tutorial:bottle11'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'tutorial:bottle11', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:legendenbattleaxe5',
-    recipe = {
-        {'tutorial:legendenbattleaxe4', 'default:grass_1', 'default:grass_1', 'tutorial:bottleS1'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'tutorial:bottleS1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:legendenbattleaxe6',
-    recipe = {
-        {'tutorial:legendenbattleaxe5', 'default:grass_1', 'default:grass_1', 'tutorial:bottleS3'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'default:grass_1', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-		{'tutorial:bottleS3', 'default:grass_1', 'default:grass_1', 'default:grass_1'},
-    }
-})
+
 minetest.register_craft({
     output = 'tutorial:craft_schluessel1',
     recipe = {
@@ -349,86 +256,6 @@ minetest.register_craft({
     }
 })
 minetest.register_craft({
-    output = 'tutorial:titanbattleaxe10',
-    recipe = {
-        {'', 'tutorial:titan', ''},
-        {'tutorial:titan', 'tutorial:titanbattleaxe9', 'tutorial:titan'},
-        {'', 'tutorial:titan', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:titanbattleaxe9',
-    recipe = {
-        {'', 'tutorial:titan', ''},
-        {'tutorial:titan', 'tutorial:titanbattleaxe8', 'tutorial:titan'},
-        {'', 'tutorial:titan', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:titanbattleaxe8',
-    recipe = {
-        {'', 'tutorial:titan', ''},
-        {'tutorial:titan', 'tutorial:titanbattleaxe7', 'tutorial:titan'},
-        {'', 'tutorial:titan', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:titanbattleaxe7',
-    recipe = {
-        {'', 'tutorial:titan', ''},
-        {'tutorial:titan', 'tutorial:titanbattleaxe6', 'tutorial:titan'},
-        {'', 'tutorial:titan', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:titanbattleaxe6',
-    recipe = {
-        {'', 'tutorial:titan', ''},
-        {'tutorial:titan', 'tutorial:titanbattleaxe5', 'tutorial:titan'},
-        {'', 'tutorial:titan', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:titanbattleaxe5',
-    recipe = {
-        {'', 'tutorial:titan', ''},
-        {'tutorial:titan', 'tutorial:titanbattleaxe4', 'tutorial:titan'},
-        {'', 'tutorial:titan', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:titanbattleaxe4',
-    recipe = {
-        {'', 'tutorial:titan', ''},
-        {'tutorial:titan', 'tutorial:titanbattleaxe3', 'tutorial:titan'},
-        {'', 'tutorial:titan', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:titanbattleaxe3',
-    recipe = {
-        {'', 'tutorial:titan', ''},
-        {'tutorial:titan', 'tutorial:titanbattleaxe2', 'tutorial:titan'},
-        {'', 'tutorial:titan', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:titanbattleaxe2',
-    recipe = {
-        {'', 'tutorial:titan', ''},
-        {'tutorial:titan', 'tutorial:titanbattleaxe1', 'tutorial:titan'},
-        {'', 'tutorial:titan', ''},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:titanbattleaxe1',
-    recipe = {
-        {'', 'tutorial:titan', ''},
-        {'tutorial:titan', 'tutorial:arena_battleaxe4', 'tutorial:titan'},
-        {'', 'tutorial:titan', ''},
-    }
-})
-minetest.register_craft({
     output = 'tutorial:rainbow_torch 4',
     recipe = {
         {'nyancat:nyancat_rainbow'},
@@ -473,38 +300,7 @@ minetest.register_craft({
         {'tutorial:geschenk', 'tutorial:geschenk'},
     }
 })
-minetest.register_craft({
-    output = 'tutorial:arena_battleaxe4',
-    recipe = {
-        {'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
-        {'tutorial:arena_block', 'tutorial:arena_battleaxe3', 'tutorial:arena_block'},
-        {'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:arena_battleaxe3',
-    recipe = {
-        {'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
-        {'tutorial:arena_block', 'tutorial:arena_battleaxe2', 'tutorial:arena_block'},
-        {'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:arena_battleaxe2',
-    recipe = {
-        {'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
-        {'tutorial:arena_block', 'tutorial:arena_battleaxe1', 'tutorial:arena_block'},
-        {'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:arena_battleaxe1',
-    recipe = {
-        {'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
-        {'tutorial:arena_block', 'tutorial:ultrabattleaxe', 'tutorial:arena_block'},
-        {'tutorial:arena_block', 'tutorial:arena_block', 'tutorial:arena_block'},
-    }
-})
+
 minetest.register_craft({
     output = 'tutorial:coin_lila',
     recipe = {
@@ -677,338 +473,7 @@ minetest.register_craft({
         {'tutorial:geschenkpapier', 'tutorial:geschenkpapier'},
     }
 })
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe25',
-    cooktime = 10000,
-	output = 'tutorial:ultrabattleaxe',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe24',
-    cooktime = 5000,
-	output = 'tutorial:ultrabattleaxe25',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe23',
-    cooktime = 4800,
-	output = 'tutorial:ultrabattleaxe24',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe22',
-    cooktime = 4600,
-	output = 'tutorial:ultrabattleaxe23',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe21',
-    cooktime = 4400,
-	output = 'tutorial:ultrabattleaxe22',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe20',
-    cooktime = 4200,
-	output = 'tutorial:ultrabattleaxe21',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe19',
-    cooktime = 4000,
-	output = 'tutorial:ultrabattleaxe20',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe18',
-    cooktime = 3800,
-	output = 'tutorial:ultrabattleaxe19',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe17',
-    cooktime = 3600,
-	output = 'tutorial:ultrabattleaxe18',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe16',
-    cooktime = 3400,
-	output = 'tutorial:ultrabattleaxe17',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe15',
-    cooktime = 3200,
-	output = 'tutorial:ultrabattleaxe16',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe14',
-    cooktime = 3000,
-	output = 'tutorial:ultrabattleaxe15',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe13',
-    cooktime = 2800,
-	output = 'tutorial:ultrabattleaxe14',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe12',
-    cooktime = 2600,
-	output = 'tutorial:ultrabattleaxe13',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe11',
-    cooktime = 2400,
-	output = 'tutorial:ultrabattleaxe12',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe10',
-    cooktime = 2200,
-	output = 'tutorial:ultrabattleaxe11',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe9',
-    cooktime = 2000,
-	output = 'tutorial:ultrabattleaxe10',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe8',
-    cooktime = 1800,
-	output = 'tutorial:ultrabattleaxe9',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe7',
-    cooktime = 1600,
-	output = 'tutorial:ultrabattleaxe8',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe6',
-    cooktime = 1400,
-	output = 'tutorial:ultrabattleaxe7',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe5',
-    cooktime = 1200,
-	output = 'tutorial:ultrabattleaxe6',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe4',
-    cooktime = 1000,
-	output = 'tutorial:ultrabattleaxe5',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe3',
-    cooktime = 800,
-	output = 'tutorial:ultrabattleaxe4',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe2',
-    cooktime = 600,
-	output = 'tutorial:ultrabattleaxe3',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:ultrabattleaxe1',
-    cooktime = 400,
-	output = 'tutorial:ultrabattleaxe2',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:kristallbattleaxe5',
-    cooktime = 200,
-	output = 'tutorial:ultrabattleaxe1',
-})
-minetest.register_craft({
-    output = 'tutorial:kristallbattleaxe5',
-    recipe = {
-        {'tutorial:admin', 'tutorial:thunder', 'tutorial:admin'},
-        {'tutorial:admin', 'tutorial:kristallbattleaxe4', 'tutorial:admin'},
-        {'tutorial:admin', 'tutorial:thunder', 'tutorial:admin'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:kristallbattleaxe4',
-    recipe = {
-        {'gems:emerald_block', 'tutorial:thunder', 'gems:emerald_block'},
-        {'gems:emerald_block', 'tutorial:kristallbattleaxe3', 'gems:emerald_block'},
-        {'gems:emerald_block', 'tutorial:thunder', 'gems:emerald_block'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:kristallbattleaxe3',
-    recipe = {
-        {'gems:pearl_block', 'tutorial:thunder', 'gems:shadow_block'},
-        {'gems:pearl_block', 'tutorial:kristallbattleaxe2', 'gems:shadow_block'},
-        {'gems:pearl_block', 'tutorial:thunder', 'gems:shadow_block'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:kristallbattleaxe2',
-    recipe = {
-        {'gems:amethyst_block', 'tutorial:thunder', 'gems:amethyst_block'},
-        {'gems:amethyst_block', 'tutorial:kristallbattleaxe1', 'gems:amethyst_block'},
-        {'gems:amethyst_block', 'tutorial:thunder', 'gems:amethyst_block'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:kristallbattleaxe1',
-    recipe = {
-        {'gems:ruby_block', 'tutorial:thunder', 'gems:sapphire_block'},
-        {'gems:ruby_block', 'tutorial:superenergybattleaxe7', 'gems:sapphire_block'},
-        {'gems:ruby_block', 'tutorial:thunder', 'gems:sapphire_block'},
-    }
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energybattleaxe12',
-    cooktime = 1000,
-	output = 'tutorial:superenergybattleaxe1',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:superenergybattleaxe1',
-    cooktime = 1200,
-	output = 'tutorial:superenergybattleaxe2',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:superenergybattleaxe2',
-    cooktime = 1400,
-	output = 'tutorial:superenergybattleaxe3',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:superenergybattleaxe3',
-    cooktime = 1600,
-	output = 'tutorial:superenergybattleaxe4',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:superenergybattleaxe4',
-    cooktime = 1800,
-	output = 'tutorial:superenergybattleaxe5',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:superenergybattleaxe5',
-    cooktime = 2000,
-	output = 'tutorial:superenergybattleaxe6',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:superenergybattleaxe6',
-    cooktime = 2500,
-	output = 'tutorial:superenergybattleaxe7',
-})
-minetest.register_craft({
-    output = 'gems:amethyst_gem',
-    recipe = {
-        {'gems:sapphire_gem', 'gems:ruby_gem'},
-    }
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:uraniumbattleaxe2',
-    cooktime = 100,
-	output = 'tutorial:energybattleaxe1',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energybattleaxe1',
-    cooktime = 100,
-	output = 'tutorial:energybattleaxe2',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energybattleaxe2',
-    cooktime = 200,
-	output = 'tutorial:energybattleaxe3',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energybattleaxe3',
-    cooktime = 300,
-	output = 'tutorial:energybattleaxe4',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energybattleaxe4',
-    cooktime = 400,
-	output = 'tutorial:energybattleaxe5',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energybattleaxe5',
-    cooktime = 500,
-	output = 'tutorial:energybattleaxe6',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energybattleaxe6',
-    cooktime = 600,
-	output = 'tutorial:energybattleaxe7',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energybattleaxe7',
-    cooktime = 700,
-	output = 'tutorial:energybattleaxe8',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energybattleaxe8',
-    cooktime = 800,
-	output = 'tutorial:energybattleaxe9',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energybattleaxe9',
-    cooktime = 900,
-	output = 'tutorial:energybattleaxe10',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energybattleaxe10',
-    cooktime = 1000,
-	output = 'tutorial:energybattleaxe11',
-})
-minetest.register_craft({
-	type = 'cooking',
-	recipe = 'tutorial:energybattleaxe11',
-    cooktime = 1500,
-	output = 'tutorial:energybattleaxe12',
-})
-minetest.register_craft({
-    output = 'tutorial:uraniumbattleaxe2',
-    recipe = {
-        {'tutorial:uranium9', 'tutorial:uranium9', 'tutorial:uranium9'},
-        {'tutorial:uranium9', 'tutorial:uraniumbattleaxe1', 'tutorial:uranium9'},
-        {'tutorial:uranium9', 'tutorial:uranium9', 'tutorial:uranium9'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:battleaxe',
-    recipe = {
-        {'group:wood', 'group:wood', 'group:wood'},
-        {'group:wood', 'default:stick', 'group:wood'},
-        {'', 'default:stick', ''},
-    }
-})
+
 minetest.register_tool('tutorial:cloudentverner', {
 	description = 'Clouds remover',
 	inventory_image = 'tutorial_cloudentvernerg.png',
@@ -1048,8 +513,9 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'default:obsidian 1',
     recipe = {
+        {'', 'default:cobble', ''},
         {'default:cobble', 'default:cobble', 'default:cobble'},
-        {'default:cobble', 'default:cobble', 'default:cobble'},
+        {'', 'default:cobble', ''},
     }
 })
 minetest.register_craft({
@@ -1125,14 +591,6 @@ minetest.register_craft({
     }
 })
 minetest.register_craft({
-    output = 'tutorial:uraniumbattleaxe1',
-    recipe = {
-        {'tutorial:uranium8', 'tutorial:uranium8', 'tutorial:uranium8'},
-        {'tutorial:uranium8', 'tutorial:superbattleaxe4', 'tutorial:uranium8'},
-        {'tutorial:uranium8', 'tutorial:uranium8', 'tutorial:uranium8'},
-    }
-})
-minetest.register_craft({
     output = 'tutorial:uranium2',
     recipe = {
         {'tutorial:uranium1', 'tutorial:uranium1'},
@@ -1178,36 +636,6 @@ minetest.register_craft({
     output = 'tutorial:uranium9',
     recipe = {
         {'tutorial:uranium8', 'tutorial:uranium8'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:superbattleaxe4',
-    recipe = {
-        {'tutorial:whiteblock6', 'tutorial:thunder', 'tutorial:blackblock6'},
-        {'tutorial:whiteblock6', 'tutorial:superbattleaxe3', 'tutorial:blackblock6'},
-        {'tutorial:whiteblock6', 'tutorial:thunder', 'tutorial:blackblock6'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:superbattleaxe3',
-    recipe = {
-        {'tutorial:whiteblock6', 'tutorial:thunder', 'tutorial:blackblock6'},
-        {'tutorial:whiteblock6', 'tutorial:superbattleaxe2', 'tutorial:blackblock6'},
-        {'tutorial:whiteblock6', 'tutorial:thunder', 'tutorial:blackblock6'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:superbattleaxe2',
-    recipe = {
-        {'tutorial:whiteblock5', 'tutorial:thunder', 'tutorial:blackblock5'},
-        {'tutorial:whiteblock5', 'tutorial:superbattleaxe1', 'tutorial:blackblock5'},
-        {'tutorial:whiteblock5', 'tutorial:thunder', 'tutorial:blackblock5'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:superbattleaxe1',
-    recipe = {
-        {'tutorial:zauberstab9', 'tutorial:cloudbattleaxe_mega25', 'tutorial:swored_zauber9'},
     }
 })
 minetest.register_craft({
@@ -1409,210 +837,6 @@ minetest.register_craft({
     output = 'tutorial:superblock1 4',
     recipe = {
         {'default:sand', 'default:dirt', 'default:cobble'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega25',
-    recipe = {
-        {'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
-        {'tutorial:superblock9', 'tutorial:cloudbattleaxe_mega24', 'tutorial:superblock9'},
-        {'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega24',
-    recipe = {
-        {'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
-        {'tutorial:superblock9', 'tutorial:cloudbattleaxe_mega23', 'tutorial:superblock9'},
-        {'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega23',
-    recipe = {
-        {'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
-        {'tutorial:superblock9', 'tutorial:cloudbattleaxe_mega22', 'tutorial:superblock9'},
-        {'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega22',
-    recipe = {
-        {'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
-        {'tutorial:superblock9', 'tutorial:cloudbattleaxe_mega21', 'tutorial:superblock9'},
-        {'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega21',
-    recipe = {
-        {'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
-        {'tutorial:superblock9', 'tutorial:cloudbattleaxe_mega20', 'tutorial:superblock9'},
-        {'tutorial:superblock9', 'tutorial:superblock9', 'tutorial:superblock9'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega20',
-    recipe = {
-        {'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
-        {'tutorial:superblock8', 'tutorial:cloudbattleaxe_mega19', 'tutorial:superblock8'},
-        {'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega19',
-    recipe = {
-        {'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
-        {'tutorial:superblock8', 'tutorial:cloudbattleaxe_mega18', 'tutorial:superblock8'},
-        {'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega18',
-    recipe = {
-        {'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
-        {'tutorial:superblock8', 'tutorial:cloudbattleaxe_mega17', 'tutorial:superblock8'},
-        {'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega17',
-    recipe = {
-        {'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
-        {'tutorial:superblock8', 'tutorial:cloudbattleaxe_mega16', 'tutorial:superblock8'},
-        {'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega16',
-    recipe = {
-        {'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
-        {'tutorial:superblock8', 'tutorial:cloudbattleaxe_mega15', 'tutorial:superblock8'},
-        {'tutorial:superblock8', 'tutorial:superblock8', 'tutorial:superblock8'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega15',
-    recipe = {
-        {'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
-        {'tutorial:superblock7', 'tutorial:cloudbattleaxe_mega14', 'tutorial:superblock7'},
-        {'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega14',
-    recipe = {
-        {'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
-        {'tutorial:superblock7', 'tutorial:cloudbattleaxe_mega13', 'tutorial:superblock7'},
-        {'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega13',
-    recipe = {
-        {'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
-        {'tutorial:superblock7', 'tutorial:cloudbattleaxe_mega12', 'tutorial:superblock7'},
-        {'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega12',
-    recipe = {
-        {'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
-        {'tutorial:superblock7', 'tutorial:cloudbattleaxe_mega11', 'tutorial:superblock7'},
-        {'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega11',
-    recipe = {
-        {'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
-        {'tutorial:superblock7', 'tutorial:cloudbattleaxe_mega10', 'tutorial:superblock7'},
-        {'tutorial:superblock7', 'tutorial:superblock7', 'tutorial:superblock7'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega10',
-    recipe = {
-        {'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
-        {'tutorial:superblock6', 'tutorial:cloudbattleaxe_mega9', 'tutorial:superblock6'},
-        {'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega9',
-    recipe = {
-        {'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
-        {'tutorial:superblock6', 'tutorial:cloudbattleaxe_mega8', 'tutorial:superblock6'},
-        {'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega8',
-    recipe = {
-        {'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
-        {'tutorial:superblock6', 'tutorial:cloudbattleaxe_mega7', 'tutorial:superblock6'},
-        {'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega7',
-    recipe = {
-        {'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
-        {'tutorial:superblock6', 'tutorial:cloudbattleaxe_mega6', 'tutorial:superblock6'},
-        {'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega6',
-    recipe = {
-        {'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
-        {'tutorial:superblock6', 'tutorial:cloudbattleaxe_mega5', 'tutorial:superblock6'},
-        {'tutorial:superblock6', 'tutorial:superblock6', 'tutorial:superblock6'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega5',
-    recipe = {
-        {'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
-        {'tutorial:superblock5', 'tutorial:cloudbattleaxe_mega4', 'tutorial:superblock5'},
-        {'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega4',
-    recipe = {
-        {'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
-        {'tutorial:superblock5', 'tutorial:cloudbattleaxe_mega3', 'tutorial:superblock5'},
-        {'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega3',
-    recipe = {
-        {'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
-        {'tutorial:superblock5', 'tutorial:cloudbattleaxe_mega2', 'tutorial:superblock5'},
-        {'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega2',
-    recipe = {
-        {'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
-        {'tutorial:superblock5', 'tutorial:cloudbattleaxe_mega1', 'tutorial:superblock5'},
-        {'tutorial:superblock5', 'tutorial:superblock5', 'tutorial:superblock5'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega1',
-    recipe = {
-        {'tutorial:cloudentverner21', 'tutorial:battleaxe_mega20'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:cloudbattleaxe_mega1',
-    recipe = {
-        {'tutorial:battleaxe_mega20', 'tutorial:cloudentverner21'},
     }
 })
 minetest.register_craft({
@@ -1898,7 +1122,7 @@ minetest.register_craft({
 })
 minetest.register_craft({
     output = 'tutorial:cloudentverner21',
-    recipe = { 
+    recipe = {
 		{'tutorial:megablock4','tutorial:megablock4', 'tutorial:megablock4'},
 		{'tutorial:megablock4','tutorial:cloudentverner20', 'tutorial:megablock4'},
 		{'tutorial:megablock4','tutorial:megablock4', 'tutorial:megablock4'},
@@ -2035,106 +1259,10 @@ minetest.register_craft({
     }
 })
 minetest.register_craft({
-    output = 'tutorial:battleaxe_mega20',
-    recipe = {
-		{'tutorial:megablock2','tutorial:megablock2', 'tutorial:megablock2'},
-		{'tutorial:megablock2','tutorial:battleaxe_mega19','tutorial:megablock2'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:battleaxe_mega19',
-    recipe = {
-		{'tutorial:megablock1','tutorial:megablock1', 'tutorial:megablock1'},
-		{'tutorial:megablock1','tutorial:battleaxe_mega18','tutorial:megablock1'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:battleaxe_mega18',
-    recipe = {
-		{'tutorial:megablock1','tutorial:megablock1', 'tutorial:megablock1'},
-		{'tutorial:megablock1','tutorial:battleaxe_mega17','tutorial:megablock1'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:battleaxe_mega17',
-    recipe = {
-		{'tutorial:megablock1','tutorial:megablock1', 'tutorial:megablock1'},
-		{'tutorial:megablock1','tutorial:battleaxe_mega16','tutorial:megablock1'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:battleaxe_mega16',
-    recipe = {
-		{'tutorial:megablock1','tutorial:megablock1', 'tutorial:megablock1'},
-		{'tutorial:megablock1','tutorial:battleaxe_mega15','tutorial:megablock1'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
     output = 'tutorial:megablock1',
     recipe = {
         {'default:cactus', 'default:cactus', 'default:cactus'},
         {'default:cactus', 'default:cactus', 'default:cactus'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:battleaxe_mega13',
-    recipe = {
-		{'default:goldblock','default:goldblock', 'default:goldblock'},
-		{'default:goldblock','tutorial:battleaxe_mega12','default:goldblock'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:battleaxe_mega14',
-    recipe = {
-		{'nyancat:nyancat_rainbow','nyancat:nyancat_rainbow', 'nyancat:nyancat_rainbow'},
-		{'nyancat:nyancat_rainbow','tutorial:battleaxe_mega13','nyancat:nyancat_rainbow'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:battleaxe_mega15',
-    recipe = {
-		{'nyancat:nyancat_rainbow','nyancat:nyancat_rainbow', 'nyancat:nyancat_rainbow'},
-		{'nyancat:nyancat_rainbow','tutorial:battleaxe_mega14','nyancat:nyancat_rainbow'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:battleaxe_mega9',
-    recipe = {
-		{'tutorial:diamondblock2','tutorial:diamondblock2', 'tutorial:diamondblock2'},
-		{'tutorial:diamondblock2','tutorial:battleaxe_mega8','tutorial:diamondblock2'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:battleaxe_mega10',
-    recipe = {
-		{'tutorial:diamondblock2','tutorial:diamondblock2', 'tutorial:diamondblock2'},
-		{'tutorial:diamondblock2','tutorial:battleaxe_mega9','tutorial:diamondblock2'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:battleaxe_mega11',
-    recipe = {
-		{'tutorial:diamondblock2','tutorial:diamondblock2', 'tutorial:diamondblock2'},
-		{'tutorial:diamondblock2','tutorial:battleaxe_mega10','tutorial:diamondblock2'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:battleaxe_mega12',
-    recipe = {
-		{'tutorial:diamondblock2','tutorial:diamondblock2', 'tutorial:diamondblock2'},
-		{'tutorial:diamondblock2','tutorial:battleaxe_mega11','tutorial:diamondblock2'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
     }
 })
 minetest.register_craft({
@@ -2186,38 +1314,7 @@ minetest.register_craft({
         {'tutorial:dunklematerie5', 'tutorial:dunklematerie5'},
     }
 })
-minetest.register_craft({
-    output = 'tutorial:battleaxe_mega5',
-    recipe = {
-		{'tutorial:dunklematerie4','tutorial:dunklematerie4', 'tutorial:dunklematerie4'},
-		{'tutorial:dunklematerie4','tutorial:battleaxe_mega4','tutorial:dunklematerie4'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:battleaxe_mega6',
-    recipe = {
-		{'tutorial:dunklematerie4','tutorial:dunklematerie4', 'tutorial:dunklematerie4'},
-		{'tutorial:dunklematerie4','tutorial:battleaxe_mega5','tutorial:dunklematerie4'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:battleaxe_mega7',
-    recipe = {
-		{'tutorial:dunklematerie5','tutorial:dunklematerie5', 'tutorial:dunklematerie5'},
-		{'tutorial:dunklematerie5','tutorial:battleaxe_mega6','tutorial:dunklematerie5'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:battleaxe_mega8',
-    recipe = {
-		{'tutorial:dunklematerie6','tutorial:dunklematerie6', 'tutorial:dunklematerie6'},
-		{'tutorial:dunklematerie6','tutorial:battleaxe_mega7','tutorial:dunklematerie6'},
-		{'tutorial:thunder','tutorial:thunder', 'tutorial:thunder'},
-    }
-})
+
 minetest.register_craft({
     output = 'tutorial:obsidian2',
     recipe = {
@@ -2248,38 +1345,7 @@ minetest.register_craft({
         {'tutorial:obsidian5', 'tutorial:obsidian5'},
     }
 })
-minetest.register_craft({
-    output = 'tutorial:battleaxe_mega1',
-    recipe = {
-        {'tutorial:obsidian4', 'tutorial:obsidian4', 'tutorial:obsidian4'},
-        {'tutorial:obsidian4', 'tutorial:battleaxe', 'tutorial:obsidian4'},
-        {'tutorial:thunder', 'tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:battleaxe_mega2',
-    recipe = {
-        {'tutorial:obsidian4', 'tutorial:obsidian4', 'tutorial:obsidian4'},
-        {'tutorial:obsidian4','tutorial:battleaxe_mega1','tutorial:obsidian4'},
-        {'tutorial:thunder', 'tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = 'tutorial:battleaxe_mega3',
-    recipe = {
-        {'tutorial:obsidian5', 'tutorial:obsidian5', 'tutorial:obsidian5'},
-        {'tutorial:obsidian5','tutorial:battleaxe_mega2','tutorial:obsidian5'},
-        {'tutorial:thunder', 'tutorial:thunder', 'tutorial:thunder'},
-    }
-})
-minetest.register_craft({
-    output = '"tutorial:battleaxe_mega4"',
-    recipe = {
-        {'tutorial:obsidian6', 'tutorial:obsidian6', 'tutorial:obsidian6'},
-        {'tutorial:obsidian6','tutorial:battleaxe_mega3','tutorial:obsidian6'},
-        {'tutorial:thunder', 'tutorial:thunder', 'tutorial:thunder'},
-    }
-})
+
 minetest.register_craft({
 	output = 'tutorial:blades',
 	recipe = {
@@ -2293,14 +1359,14 @@ minetest.register_craft({
 	recipe = {
 		{'default:obsidian','default:obsidian','default:obsidian'},
 		{'default:obsidian','','default:ice'},
-	        {'default:obsidian','default:obsidian','default:obsidian'},		
+	        {'default:obsidian','default:obsidian','default:obsidian'},
 	}
-})		
+})
 minetest.register_craft({
 	output = 'tutorial:heli',
 	recipe = {
 		{'', 'tutorial:blades'},
-		{'tutorial:blades', 'tutorial:cabin'},	
+		{'tutorial:blades', 'tutorial:cabin'},
 	}
 })
 minetest.register_craft({

@@ -1,6 +1,6 @@
 -- Copyright (c) 2013-18 rubenwardy. MIT.
 
-local S = awards.gettext
+local S = awards.translator
 
 function awards.register_award(name, def)
 	def.name = name
@@ -195,11 +195,13 @@ function awards.get_award_states(name)
 			if def then
 				hash_is_unlocked[awardname] = true
 				local score = -100000
-
+				
 				local difficulty = def.difficulty or 1
+				--[[
 				if def.trigger and def.trigger.target then
 					difficulty = difficulty * def.trigger.target
 				end
+				--]]
 				score = score + difficulty
 
 				retval[#retval + 1] = {
@@ -220,6 +222,7 @@ function awards.get_award_states(name)
 			local progress = def.get_progress and def:get_progress(data)
 			local started = false
 			local score = def.difficulty or 1
+			--[[
 			if def.secret then
 				score = 1000000
 			elseif def.trigger and def.trigger.target and progress then
@@ -233,7 +236,7 @@ function awards.get_award_states(name)
 			else
 				score = 100
 			end
-
+			--]]
 			retval[#retval + 1] = {
 				name     = def.name,
 				def      = def,

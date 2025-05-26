@@ -11,37 +11,49 @@ end
 minetest.register_on_joinplayer(function(player)
 	if file_check(minetest.get_worldpath().."/"..player:get_player_name().."_experience") == true then
 	else
-		file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience", "w")
+		local file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience", "w")
 		file:write("0")
 		file:close()
 	end
 	if file_check(minetest.get_worldpath().."/"..player:get_player_name().."_experience_blau") == true then
 	else
-		file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_blau", "w")
+		local file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_blau", "w")
 		file:write("0")
 		file:close()
 	end
 	if file_check(minetest.get_worldpath().."/"..player:get_player_name().."_experience_rot") == true then
 	else
-		file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_rot", "w")
+		local file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_rot", "w")
 		file:write("0")
 		file:close()
 	end
 	if file_check(minetest.get_worldpath().."/"..player:get_player_name().."_experience_grau") == true then
 	else
-		file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_grau", "w")
+		local file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_grau", "w")
 		file:write("0")
 		file:close()
 	end
     if file_check(minetest.get_worldpath().."/"..player:get_player_name().."_experience_gelb") == true then
 	else
-		file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_gelb", "w")
+		local file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_gelb", "w")
 		file:write("0")
 		file:close()
 	end
     if file_check(minetest.get_worldpath().."/"..player:get_player_name().."_experience_cyan") == true then
 	else
-		file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_cyan", "w")
+		local file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_cyan", "w")
+		file:write("0")
+		file:close()
+	end
+	if file_check(minetest.get_worldpath().."/"..player:get_player_name().."_experience_bronze") == true then
+	else
+		local file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_bronze", "w")
+		file:write("0")
+		file:close()
+	end
+	if file_check(minetest.get_worldpath().."/"..player:get_player_name().."_experience_silver") == true then
+	else
+		local file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_silver", "w")
 		file:write("0")
 		file:close()
 	end
@@ -52,4 +64,6 @@ dofile(path.."/Xp2_blau.lua")
 dofile(path.."/Xp3_grau.lua")
 dofile(path.."/Xp4_gelb.lua")
 dofile(path.."/Xp5_cyan.lua")
+dofile(path.."/Xp6_precious_metal.lua")
+
 

@@ -1,7 +1,7 @@
 -- autorouting for pneumatic tubes
 
 local function is_tube(nodename)
-	return table.contains(pipeworks.tubenodes, nodename)
+	return pipeworks.table_contains(pipeworks.tubenodes, nodename)
 end
 
 --a function for determining which side of the node we are on
@@ -18,7 +18,7 @@ local function nodeside(node, tubedir)
 		return "front"
 	end
 
-	local topdir = minetest.facedir_to_top_dir(node.param2)
+	local topdir = pipeworks.facedir_to_top_dir(node.param2)
 	local top = vector.dot(topdir, tubedir)
 	if top == 1 then
 		return "top"
@@ -26,7 +26,7 @@ local function nodeside(node, tubedir)
 		return "bottom"
 	end
 
-	local rightdir = minetest.facedir_to_right_dir(node.param2)
+	local rightdir = pipeworks.facedir_to_right_dir(node.param2)
 	local right = vector.dot(rightdir, tubedir)
 	if right == 1 then
 		return "right"
@@ -53,26 +53,27 @@ local function tube_autoroute(pos)
 	}
 	-- xm = 1, xp = 2, ym = 3, yp = 4, zm = 5, zp = 6
 
-	local positions = {}
-	local nodes = {}
-	for i, adj in ipairs(adjustments) do
-		positions[i] = vector.add(pos, adj)
-		nodes[i] = minetest.get_node(positions[i])
-	end
+	local adjlist = {} -- this will be used in item_transport
 
-	for i, node in ipairs(nodes) do
+	for i, adj in ipairs(adjustments) do
+		local position = vector.add(pos, adj)
+		local node = minetest.get_node(position)
+
 		local idef = minetest.registered_nodes[node.name]
 		-- handle the tubes themselves
 		if is_tube(node.name) then
 			active[i] = 1
+			table.insert(adjlist, adj)
 		-- handle new style connectors
 		elseif idef and idef.tube and idef.tube.connect_sides then
-			local dir = adjustments[i]
-			if idef.tube.connect_sides[nodeside(node, vector.multiply(dir, -1))] then
+			if idef.tube.connect_sides[nodeside(node, vector.multiply(adj, -1))] then
 				active[i] = 1
+				table.insert(adjlist, adj)
 			end
 		end
 	end
+
+	minetest.get_meta(pos):set_string("adjlist", minetest.serialize(adjlist))
 
 	-- all sides checked, now figure which tube to use.
 
@@ -80,7 +81,7 @@ local function tube_autoroute(pos)
 	local basename = nodedef.basename
 	if nodedef.style == "old" then
 		local nsurround = ""
-		for i, n in ipairs(active) do
+		for _, n in ipairs(active) do
 			nsurround = nsurround..n
 		end
 		nctr.name = basename.."_"..nsurround
@@ -99,25 +100,33 @@ end
 
 function pipeworks.scan_for_tube_objects(pos)
 	for side = 0, 6 do
-		tube_autoroute(vector.add(pos, directions.side_to_dir(side)))
+		tube_autoroute(vector.add(pos, pipeworks.directions.side_to_dir(side)))
 	end
 end
 
-minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack)
-	if minetest.registered_items[newnode.name]
-	  and minetest.registered_items[newnode.name].tube
-	  and minetest.registered_items[newnode.name].tube.connect_sides then
-		pipeworks.scan_for_tube_objects(pos)
-	end
-end)
+function pipeworks.after_place(pos)
+	pipeworks.scan_for_tube_objects(pos)
+end
 
-minetest.register_on_dignode(function(pos, oldnode, digger)
-	if minetest.registered_items[oldnode.name]
-	  and minetest.registered_items[oldnode.name].tube
-	  and minetest.registered_items[oldnode.name].tube.connect_sides then
-		pipeworks.scan_for_tube_objects(pos)
-	end
-end)
+function pipeworks.after_dig(pos)
+	pipeworks.scan_for_tube_objects(pos)
+end
+
+-- Screwdriver calls this function before rotating a node.
+-- However, connections must be updated *after* the node is rotated
+-- So, this function does the rotation itself and returns `true`.
+-- (Note: screwdriver already checks for protected areas.)
+
+-- This should only be used for tubes that don't autoconnect.
+-- (For example, one-way tubes.)
+-- Autoconnecting tubes will just revert back to their original state
+-- when they are updated.
+function pipeworks.on_rotate(pos, node, user, mode, new_param2)
+	node.param2 = new_param2
+	minetest.swap_node(pos, node)
+	pipeworks.scan_for_tube_objects(pos)
+	return true
+end
 
 if minetest.get_modpath("mesecons_mvps") then
 	mesecon.register_on_mvps_move(function(moved_nodes)

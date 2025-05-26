@@ -10,7 +10,7 @@ minetest.register_node(":moretrees:rubber_tree_sapling", {
 	wield_image = "technic_rubber_sapling.png",
 	paramtype = "light",
 	walkable = false,
-	groups = {dig_immediate=3, flammable=2},
+	groups = {dig_immediate=3, flammable=2, sapling=1},
 	sounds = default.node_sound_defaults(),
 })
 
@@ -40,15 +40,20 @@ minetest.register_node(":moretrees:rubber_tree_trunk_empty", {
 
 minetest.register_node(":moretrees:rubber_tree_leaves", {
 	drawtype = "allfaces_optional",
+	description = S("Rubber Tree Leaves"),
 	tiles = {"technic_rubber_leaves.png"},
 	paramtype = "light",
-	groups = {snappy=3, leafdecay=3, flammable=2, not_in_creative_inventory=1},
+	groups = {snappy=3, leafdecay=3, flammable=2, leaves=1},
 	drop = {
 		max_items = 1,
 		items = {{
 			items = {"moretrees:rubber_tree_sapling"},
 			rarity = 20,
-		}}
+		},
+		{
+			items = {"moretrees:rubber_tree_leaves"},
+		}
+		}
 	},
 	sounds = default.node_sound_leaves_defaults(),
 })
@@ -68,6 +73,7 @@ technic.rubber_tree_model={
 
 minetest.register_abm({
 	nodenames = {"moretrees:rubber_tree_sapling"},
+	label = "Worldgen: grow rubber tree sapling",
 	interval = 60,
 	chance = 20,
 	action = function(pos, node)
@@ -88,8 +94,7 @@ if technic.config:get_bool("enable_rubber_tree_generation") then
 		local pos = minetest.find_node_near(tmp, maxp.x - minp.x,
 				{"default:dirt_with_grass"})
 		if pos ~= nil then
-			minetest.spawn_tree({x=pos.x, y=pos.y+1, z=pos.z}, technic.rubber_tree_model)
+			--minetest.spawn_tree({x=pos.x, y=pos.y+1, z=pos.z}, technic.rubber_tree_model)
 		end
 	end)
 end
-

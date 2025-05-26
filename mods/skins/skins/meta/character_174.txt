@@ -1,4 +1,4 @@
-name = "PopularMMOs ",
+name = "Knight red",
 author = "???",
-description = "1.Spezial Skin",
+description = "",
 comment = "to minetest by 1248",

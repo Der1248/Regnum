@@ -12,8 +12,7 @@ technic.networks = {}
 
 
 function technic.register_tier(tier, description)
-	technic.machines[tier]    = {}
-	technic.cables[tier]      = {}
+	technic.machines[tier] = {}
 end
 
 function technic.register_machine(tier, nodename, machine_type)
@@ -45,7 +44,10 @@ end
 
 -- Wear down a tool depending on the remaining charge.
 function technic.set_RE_wear(itemstack, item_load, max_load)
-	if (minetest.registered_items[itemstack:get_name()].wear_represents or "mechanical_wear") ~= "technic_RE_charge" then return itemstack end
+	local def = minetest.registered_items[itemstack:get_name()]
+	if (def.wear_represents or "mechanical_wear") ~= "technic_RE_charge" then
+		return itemstack
+	end
 	local temp
 	if item_load == 0 then
 		temp = 0

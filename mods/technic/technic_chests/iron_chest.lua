@@ -25,18 +25,19 @@ minetest.register_craft({
 
 minetest.register_craft({
 	output = 'technic:iron_locked_chest 1',
+	type = "shapeless",
 	recipe = {
-		{'default:steel_ingot'},
-		{'technic:iron_chest'},
+		'basic_materials:padlock',
+		'technic:iron_chest',
 	}
 })
 
 technic.chests:register("Iron", {
 	width = 9,
 	height = 5,
-	sort = false,
+	sort = true,
 	autosort = false,
-	infotext = true,
+	infotext = false,
 	color = false,
 	locked = false,
 })
@@ -44,9 +45,9 @@ technic.chests:register("Iron", {
 technic.chests:register("Iron", {
 	width = 9,
 	height = 5,
-	sort = false,
+	sort = true,
 	autosort = false,
-	infotext = true,
+	infotext = false,
 	color = false,
 	locked = true,
 })

@@ -1,8 +1,11 @@
+-- LV Battery box
 
 minetest.register_craft({
 	output = 'technic:lv_battery_box0',
 	recipe = {
-		{'gems:shadow_gem', 'gems:shadow_gem', 'gems:shadow_gem'},
+		{'group:wood',      'group:wood',             'group:wood'},
+		{'technic:battery', 'technic:machine_casing', 'technic:battery'},
+		{'technic:battery', 'technic:lv_cable',       'technic:battery'},
 	}
 })
 

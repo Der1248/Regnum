@@ -1,12 +1,12 @@
 
 minetest.register_craft({
-	output = 'technic:hv_cable0 1',
+	output = 'technic:hv_cable 3',
 	recipe = {
-		{'default:mese_crystal','default:mese_crystal','default:mese_crystal'},
-		{'default:mese_crystal','technic:mv_cable0','default:mese_crystal'},
-		{'default:mese_crystal','default:mese_crystal','default:mese_crystal'},
+		{'homedecor:plastic_sheeting', 'homedecor:plastic_sheeting', 'homedecor:plastic_sheeting'},
+		{'technic:mv_cable',           'technic:mv_cable',           'technic:mv_cable'},
+		{'homedecor:plastic_sheeting', 'homedecor:plastic_sheeting', 'homedecor:plastic_sheeting'},
 	}
-}) 
+})
 
 technic.register_cable("HV", 3/16)
 

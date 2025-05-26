@@ -1,5 +1,5 @@
 minetest.register_node("gems:ruby_ore", {
-	  description = "ruby ore",
+	  description = "Ruby Ore",
       light_source = 8,
 	  tiles = {"default_stone.png^ruby_ruby_ore.png"},
 	  is_ground_content = true,
@@ -9,7 +9,7 @@ minetest.register_node("gems:ruby_ore", {
 })
 
 minetest.register_node("gems:emerald_ore", {
-	  description = "emerald ore",
+	  description = "Emerald Ore",
       light_source = 8,
 	  tiles = {"default_stone.png^gems_emerald_ore.png"},
 	  is_ground_content = true,
@@ -19,7 +19,7 @@ minetest.register_node("gems:emerald_ore", {
 })
 
 minetest.register_node("gems:sapphire_ore", {
-	  description = "sapphire ore",
+	  description = "Sapphire Ore",
       light_source = 8,
 	  tiles = {"default_stone.png^gems_sapphire_ore.png"},
 	  is_ground_content = true,
@@ -29,7 +29,7 @@ minetest.register_node("gems:sapphire_ore", {
 })
 
 minetest.register_node("gems:amethyst_ore", {
-	  description = "amethyst ore",
+	  description = "Amethyst Ore",
       light_source = 8,
 	  tiles = {"default_stone.png^gems_amethyst_ore.png"},
 	  is_ground_content = true,
@@ -39,7 +39,7 @@ minetest.register_node("gems:amethyst_ore", {
 })
 
 minetest.register_node("gems:shadow_ore", {
-	  description = "shadow ore",
+	  description = "Shadow Ore",
       light_source = 8,
 	  tiles = {"default_stone.png^shadow_ore.png"},
 	  is_ground_content = true,
@@ -49,7 +49,7 @@ minetest.register_node("gems:shadow_ore", {
 })
 
 minetest.register_node("gems:pearl_ore", {
-	  description = "pearl ore",
+	  description = "Pearl Ore",
       light_source = 8,
 	  tiles = {"default_stone.png^gems_pearl_ore.png"},
 	  is_ground_content = true,
@@ -59,7 +59,7 @@ minetest.register_node("gems:pearl_ore", {
 })
 
 minetest.register_node( "gems:ruby_block", {
-	description = "ruby block",
+	description = "Ruby Block",
     light_source = 8,
 	tiles = { "ruby_ruby_block.png" },
 	is_ground_content = true,
@@ -68,7 +68,7 @@ minetest.register_node( "gems:ruby_block", {
 })
 
 minetest.register_node( "gems:emerald_block", {
-	description = "emerald block",
+	description = "Emerald Block",
     light_source = 8,
 	tiles = { "gems_emerald_block.png" },
 	is_ground_content = true,
@@ -77,7 +77,7 @@ minetest.register_node( "gems:emerald_block", {
 })
 
 minetest.register_node( "gems:sapphire_block", {
-	description = "sapphire block",
+	description = "Sapphire Block",
     light_source = 8,
 	tiles = { "gems_sapphire_block.png" },
 	is_ground_content = true,
@@ -86,7 +86,7 @@ minetest.register_node( "gems:sapphire_block", {
 })
 
 minetest.register_node( "gems:shadow_block", {
-	description = "shadow block",
+	description = "Shadow Block",
     light_source = 8,
 	tiles = { "shadow_block.png" },
 	is_ground_content = true,
@@ -95,7 +95,7 @@ minetest.register_node( "gems:shadow_block", {
 })
 
 minetest.register_node( "gems:pearl_block", {
-	description = "pearl block",
+	description = "Pearl Block",
     light_source = 8,
 	tiles = { "gems_pearl_block.png" },
 	is_ground_content = true,
@@ -104,51 +104,51 @@ minetest.register_node( "gems:pearl_block", {
 })
 
 minetest.register_node( "gems:amethyst_block", {
-	description = "amethyst block",
+	description = "Amethyst Block",
     light_source = 8,
 	tiles = { "gems_amethyst_block.png" },
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
 })
-	   
+
 minetest.register_craftitem( "gems:ruby_gem", {
-	description = "ruby gem",
+	description = "Ruby Gem",
 	tiles = { "ruby:ruby_gem" },
 	inventory_image = "ruby_ruby_gem.png",
 	on_place_on_ground = minetest.craftitem_place_item,
 })
 
 minetest.register_craftitem( "gems:emerald_gem", {
-	description = "emerald gem",
+	description = "Emerald Gem",
 	tiles = { "gems:emerald_gem" },
 	inventory_image = "gems_emerald_gem.png",
 	on_place_on_ground = minetest.craftitem_place_item,
 })
 
 minetest.register_craftitem( "gems:shadow_gem", {
-	description = "shadow gem",
+	description = "Shadow Gem",
 	tiles = { "gems:shadow_gem" },
 	inventory_image = "shadow_gem.png",
 	on_place_on_ground = minetest.craftitem_place_item,
 })
 
 minetest.register_craftitem( "gems:sapphire_gem", {
-	description = "sapphire gem",
+	description = "Sapphire Gem",
 	tiles = { "gems:sapphire_gem" },
 	inventory_image = "gems_sapphire_gem.png",
 	on_place_on_ground = minetest.craftitem_place_item,
 })
 
 minetest.register_craftitem( "gems:amethyst_gem", {
-	description = "amethyst gem",
+	description = "Amethyst Gem",
 	tiles = { "gems:amethyst_gem" },
 	inventory_image = "gems_amethyst_gem.png",
 	on_place_on_ground = minetest.craftitem_place_item,
 })
 
 minetest.register_craftitem( "gems:pearl_gem", {
-	description = "pearl gem",
+	description = "Pearl Gem",
 	tiles = { "gems:pearl_gem" },
 	inventory_image = "gems_pearl_gem.png",
 	on_place_on_ground = minetest.craftitem_place_item,
@@ -218,7 +218,7 @@ minetest.register_craft({
             {'', '', ''},
 		    {'', 'gems:amethyst_block', ''},
 		    {'', '', ''},
-                
+
         }
 })
 
@@ -228,7 +228,7 @@ minetest.register_craft({
             {'', '', ''},
 		    {'', 'gems:ruby_block', ''},
 		    {'', '', ''},
-                
+
         }
 })
 
@@ -238,7 +238,7 @@ minetest.register_craft({
             {'', '', ''},
 		    {'', 'gems:emerald_block', ''},
 		    {'', '', ''},
-                
+
         }
 })
 
@@ -248,7 +248,7 @@ minetest.register_craft({
             {'', '', ''},
 		    {'', 'gems:sapphire_block', ''},
 		    {'', '', ''},
-                
+
         }
 })
 
@@ -258,7 +258,7 @@ minetest.register_craft({
             {'', '', ''},
 		    {'', 'gems:shadow_block', ''},
 		    {'', '', ''},
-                
+
         }
 })
 
@@ -268,7 +268,7 @@ minetest.register_craft({
             {'', '', ''},
 		    {'', 'gems:pearl_block', ''},
 		    {'', '', ''},
-                
+
         }
 })
 
@@ -279,8 +279,8 @@ minetest.register_ore({
 	clust_scarcity = 10*10*10,
 	clust_num_ores = 4,
 	clust_size     = 3,
-	height_min     = -31000,
-	height_max     = -300,
+	y_min 		   = -31000,
+	y_max 		   = -300,
 	flags          = "absheight",
 })
 
@@ -292,8 +292,8 @@ minetest.register_ore({
 	clust_scarcity = 10*10*10,
 	clust_num_ores = 4,
 	clust_size     = 3,
-	height_min     = -31000,
-	height_max     = -300,
+	y_min 		   = -31000,
+	y_max 		   = -300,
 	flags          = "absheight",
 })
 
@@ -304,8 +304,8 @@ minetest.register_ore({
 	clust_scarcity = 13*13*13,
 	clust_num_ores = 4,
 	clust_size     = 3,
-	height_min     = -31000,
-	height_max     = -600,
+	y_min 		   = -31000,
+	y_max 		   = -600,
 	flags          = "absheight",
 })
 
@@ -317,8 +317,8 @@ minetest.register_ore({
 	clust_scarcity = 15*15*15,
 	clust_num_ores = 4,
 	clust_size     = 3,
-	height_min     = -31000,
-	height_max     = -900,
+	y_min 		   = -31000,
+	y_max 		   = -900,
 	flags          = "absheight",
 })
 
@@ -329,8 +329,8 @@ minetest.register_ore({
 	clust_scarcity = 15*15*15,
 	clust_num_ores = 4,
 	clust_size     = 3,
-	height_min     = -31000,
-	height_max     = -900,
+	y_min 		   = -31000,
+	y_max 		   = -900,
 	flags          = "absheight",
 })
 
@@ -341,10 +341,7 @@ minetest.register_ore({
 	clust_scarcity = 17*17*17,
 	clust_num_ores = 4,
 	clust_size     = 3,
-	height_min     = -31000,
-	height_max     = -1200,
+	y_min 		   = -31000,
+	y_max 		   = -1200,
 	flags          = "absheight",
 })
-
-
-

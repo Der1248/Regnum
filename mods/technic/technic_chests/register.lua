@@ -1,12 +1,37 @@
+local S = rawget(_G, "intllib") and intllib.Getter() or function(s) return s end
 
-local intllib = nil
-local S
-if intllib then
-	S = intllib.Getter()
+local pipeworks = rawget(_G, "pipeworks")
+local fs_helpers
+local tubelib_exists = minetest.global_exists("tubelib")
+
+local registered_chest_data = {} -- data passed to :register()
+
+local allow_label = ""
+local tube_entry = ""
+
+if not minetest.get_modpath("pipeworks") then
+	-- Pipeworks is not installed. Simulate using a dummy table...
+	pipeworks = {}
+	fs_helpers = {}
+	local pipeworks_meta = {}
+	setmetatable(pipeworks, pipeworks_meta)
+	local dummy = function()
+		end
+	pipeworks_meta.__index = function(table, key)
+			print("[technic_chests] WARNING: variable or method '"..key.."' not present in dummy pipeworks table - assuming it is a method...")
+			pipeworks[key] = dummy
+			return dummy
+		end
+	pipeworks.after_place = dummy
+	pipeworks.after_dig = dummy
+	fs_helpers.cycling_button = function() return "" end
 else
-	S = function(s) return s end
+	fs_helpers = pipeworks.fs_helpers
+	allow_label = "Allow splitting incoming stacks from tubes"
+	tube_entry = "^pipeworks_tube_connection_metallic.png"
 end
 
+-- Change the appearance of the chest
 local chest_mark_colors = {
 	{"black", S("Black")},
 	{"blue", S("Blue")},
@@ -60,23 +85,43 @@ end
 
 local function set_formspec(pos, data, page)
 	local meta = minetest.get_meta(pos)
-	local node = minetest.get_node(pos)
-	local formspec = data.base_formspec
+
+	-- Static formspec elements are in base_formspec
+	local fs = { data.base_formspec }
+
+	-- Pipeworks splitting setting
+	fs[#fs + 1] = fs_helpers.cycling_button(
+		meta,
+		"image_button[0,0.5;1,0.6",
+		"splitstacks",
+		{
+			pipeworks.button_off,
+			pipeworks.button_on
+		}
+	)
+
 	if data.autosort then
 		local status = meta:get_int("autosort")
-		formspec = formspec.."button["..(data.hileft+2)..","..(data.height+1.1)..";3,0.8;autosort_to_"..(1-status)..";"..S("Auto-sort is %s"):format(status == 1 and S("On") or S("Off")).."]"
+		fs[#fs + 1] = ("checkbox[%g,%g;autosort_to_%s;%s;%s]"):format(
+			data.hileft + 2.2, data.lotop - 1.15,
+			tostring(1 - status), S("Auto-sort upon exit"), tostring(status == 1))
 	end
+
 	if data.infotext then
 		local formspec_infotext = minetest.formspec_escape(meta:get_string("infotext"))
+
+		local button_fmt = "image_button[%g,0;0.8,0.8;%s;%s;]"
 		if page == "main" then
-			formspec = formspec.."image_button["..(data.hileft+2.1)..",0.1;0.8,0.8;"
-					.."technic_pencil_icon.png;edit_infotext;]"
-					.."label["..(data.hileft+3)..",0;"..formspec_infotext.."]"
+			fs[#fs + 1] = button_fmt:format(data.hileft + 6.1,
+				"technic_pencil_icon.png", "edit_infotext")
+
+			fs[#fs + 1] = "label["..(data.hileft+7.1)..",0.1;"..formspec_infotext.."]"
 		elseif page == "edit_infotext" then
-			formspec = formspec.."image_button["..(data.hileft+2.1)..",0.1;0.8,0.8;"
-					.."technic_checkmark_icon.png;save_infotext;]"
-					.."field["..(data.hileft+3.3)..",0.2;4.8,1;"
-					.."infotext_box;"..S("Edit chest description:")..";"
+			fs[#fs + 1] = button_fmt:format(data.hileft + 6.1,
+				"technic_checkmark_icon.png", "save_infotext")
+
+			fs[#fs + 1] = "field["..(data.hileft+7.3)..",0.2;4,1;"
+					.."infotext_box;;"
 					..formspec_infotext.."]"
 		end
 	end
@@ -88,9 +133,9 @@ local function set_formspec(pos, data, page)
 		else
 			colorName = S("None")
 		end
-		formspec = formspec.."label["..(data.coleft+0.2)..","..(data.lotop+3)..";"..S("Color Filter: %s"):format(colorName).."]"
+		fs[#fs + 1] = "label["..(data.coleft+0.2)..","..(data.lotop+3)..";"..S("Color Filter: %s"):format(colorName).."]"
 	end
-	meta:set_string("formspec", formspec)
+	meta:set_string("formspec", table.concat(fs))
 end
 
 local function sort_inventory(inv)
@@ -104,38 +149,20 @@ local function sort_inventory(inv)
 			local m = st:get_metadata()
 			local k = string.format("%s %05d %s", n, w, m)
 			if not typecnt[k] then
-				typecnt[k] = {
-					name = n,
-					wear = w,
-					metadata = m,
-					stack_max = st:get_stack_max(),
-					count = 0,
-				}
+				typecnt[k] = {st}
 				table.insert(typekeys, k)
+			else
+				table.insert(typecnt[k], st)
 			end
-			typecnt[k].count = typecnt[k].count + st:get_count()
 		end
 	end
 	table.sort(typekeys)
-	local outlist = {}
+	inv:set_list("main", {})
 	for _, k in ipairs(typekeys) do
-		local tc = typecnt[k]
-		while tc.count > 0 do
-			local c = math.min(tc.count, tc.stack_max)
-			table.insert(outlist, ItemStack({
-				name = tc.name,
-				wear = tc.wear,
-				metadata = tc.metadata,
-				count = c,
-			}))
-			tc.count = tc.count - c
+		for _, item in ipairs(typecnt[k]) do
+			inv:add_item("main", item)
 		end
 	end
-	if #outlist > #inlist then return end
-	while #outlist < #inlist do
-		table.insert(outlist, ItemStack(nil))
-	end
-	inv:set_list("main", outlist)
 end
 
 local function get_receive_fields(name, data)
@@ -143,8 +170,19 @@ local function get_receive_fields(name, data)
 	return function(pos, formname, fields, sender)
 		local meta = minetest.get_meta(pos)
 		local page = "main"
+
+		local owner = meta:get_string("owner")
+		if owner ~= "" then
+			-- prevent modification of locked chests
+			if owner ~= sender:get_player_name() then return end
+		elseif not fields.quit then
+			-- prevent modification of protected chests
+			if minetest.is_protected(pos, sender:get_player_name()) then return end
+		end
+
 		if fields.sort or (data.autosort and fields.quit and meta:get_int("autosort") == 1) then
 			sort_inventory(meta:get_inventory())
+			return -- No formspec update
 		end
 		if fields.edit_infotext then
 			page = "edit_infotext"
@@ -159,19 +197,21 @@ local function get_receive_fields(name, data)
 			local nn = "technic:"..lname..(data.locked and "_locked" or "").."_chest"
 			check_color_buttons(pos, meta, nn, fields)
 		end
-		meta:get_inventory():set_size("main", data.width * data.height)
+		if fields["fs_helpers_cycling:0:splitstacks"]
+		  or fields["fs_helpers_cycling:1:splitstacks"] then
+			if not pipeworks.may_configure(pos, sender) then return end
+			fs_helpers.on_receive_fields(pos, fields)
+		end
+
 		set_formspec(pos, data, page)
 	end
 end
 
-
 function technic.chests:definition(name, data)
 	local lname = name:lower()
 	name = S(name)
-	local d = {}
-	for k, v in pairs(data) do d[k] = v end
-	data = d
 
+	-- Calculate formspec positions
 	data.lowidth = 8
 	data.ovwidth = math.max(data.lowidth, data.width)
 	data.hileft = (data.ovwidth - data.width) / 2
@@ -191,24 +231,30 @@ function technic.chests:definition(name, data)
 	data.lotop = data.height + 2
 	data.ovheight = data.lotop + 4
 
-	local locked_after_place = nil
-	local front = {"technic_"..lname.."_chest_front.png"}
-	data.base_formspec = "invsize["..data.ovwidth..","..data.ovheight..";]"..
-			"label[0,0;"..S("%s Chest"):format(name).."]"..
-			"list[current_name;main;"..data.hileft..",1;"..data.width..","..data.height..";]"..
-			"list[current_player;main;"..data.loleft..","..data.lotop..";8,4;]"..
-			"background[-0.19,-0.25;"..(data.ovwidth+0.4)..","..(data.ovheight+0.75)..";ui_form_bg.png]"..
-			"background["..data.hileft..",1;"..data.width..","..data.height..";technic_"..lname.."_chest_inventory.png]"..
-			"background["..data.loleft..","..data.lotop..";8,4;ui_main_inventory.png]"..
-			"listring[current_name;main]" ..
-			"listring[current_player;main]" 
-	if data.sort then
-		data.base_formspec = data.base_formspec.."button["..data.hileft..","..(data.height+1.1)..";1,0.8;sort;"..S("Sort").."]"
-	end
-	if data.color then
-		data.base_formspec = data.base_formspec..get_color_buttons(data.coleft, data.lotop)
+	-- Set up constant formspec fields
+	local fs = {
+		"size["..data.ovwidth..","..data.ovheight.."]",
+		"label[0,0;"..S("%s Chest"):format(name).."]",
+		"list[context;main;"..data.hileft..",1;"..data.width..","..data.height..";]",
+		"list[current_player;main;"..data.loleft..","..data.lotop..";8,4;]",
+		"listring[]"
+	}
+	if #allow_label > 0 then
+		fs[#fs + 1] = ("label[0.9,0.5;%s]"):format(allow_label)
 	end
 
+	if data.color then
+		fs[#fs + 1] = get_color_buttons(data.coleft, data.lotop)
+	end
+
+	if data.sort then
+		fs[#fs + 1] = ("button[%g,%g;2,0.7;sort;%s]"):format(
+			data.hileft, data.lotop - 1, S("Sort now"))
+	end
+	data.base_formspec = table.concat(fs)
+
+	local front = {"technic_"..lname.."_chest_front.png"}
+	local locked_after_place
 	if data.locked then
 		locked_after_place = function(pos, placer)
 			local meta = minetest.get_meta(pos)
@@ -216,8 +262,11 @@ function technic.chests:definition(name, data)
 			meta:set_string("infotext",
 					S("%s Locked Chest (owned by %s)")
 					:format(name, meta:get_string("owner")))
+			pipeworks.after_place(pos)
 		end
 		table.insert(front, "technic_"..lname.."_chest_lock_overlay.png")
+	else
+		locked_after_place = pipeworks.after_place
 	end
 
 	local desc
@@ -227,17 +276,32 @@ function technic.chests:definition(name, data)
 		desc = S("%s Chest"):format(name)
 	end
 
+	local tentry = tube_entry
+	if tube_entry ~= "" then
+		if lname == "wooden" then
+			tentry = "^pipeworks_tube_connection_wooden.png"
+		elseif lname == "mithril" then
+			tentry = "^pipeworks_tube_connection_stony.png"
+		end
+	end
 	local def = {
 		description = desc,
-		tiles = {"technic_"..lname.."_chest_top.png", "technic_"..lname.."_chest_top.png",
-			"technic_"..lname.."_chest_side.png", "technic_"..lname.."_chest_side.png",
-			"technic_"..lname.."_chest_side.png", table.concat(front, "^")},
+		tiles = {
+			"technic_"..lname.."_chest_top.png"..tentry,
+			"technic_"..lname.."_chest_top.png"..tentry,
+			"technic_"..lname.."_chest_side.png"..tentry,
+			"technic_"..lname.."_chest_side.png"..tentry,
+			"technic_"..lname.."_chest_side.png"..tentry,
+			table.concat(front, "^")
+		},
 		paramtype2 = "facedir",
 		groups = self.groups,
 		tube = self.tube,
 		legacy_facedir_simple = true,
 		sounds = default.node_sound_wood_defaults(),
 		after_place_node = locked_after_place,
+		after_dig_node = pipeworks.after_dig,
+
 		on_construct = function(pos)
 			local meta = minetest.get_meta(pos)
 			meta:set_string("infotext", S("%s Chest"):format(name))
@@ -250,20 +314,89 @@ function technic.chests:definition(name, data)
 		on_metadata_inventory_move = self.on_inv_move,
 		on_metadata_inventory_put = self.on_inv_put,
 		on_metadata_inventory_take = self.on_inv_take,
+		on_blast = function(pos)
+			local drops = {}
+			default.get_inventory_drops(pos, "main", drops)
+			drops[#drops+1] = "technic:"..name:lower()..(data.locked and "_locked" or "").."_chest"
+			minetest.remove_node(pos)
+			return drops
+		end,
 	}
 	if data.locked then
 		def.allow_metadata_inventory_move = self.inv_move
 		def.allow_metadata_inventory_put = self.inv_put
 		def.allow_metadata_inventory_take = self.inv_take
+		def.on_blast = function() end
+		def.can_dig = function(pos,player)
+			local meta = minetest.get_meta(pos);
+			local inv = meta:get_inventory()
+			return inv:is_empty("main") and default.can_interact_with_node(player, pos)
+		end
+		def.on_skeleton_key_use = function(pos, player, newsecret)
+			local meta = minetest.get_meta(pos)
+			local owner = meta:get_string("owner")
+			local name = player:get_player_name()
+
+			-- verify placer is owner of lockable chest
+			if owner ~= name then
+				minetest.record_protection_violation(pos, name)
+				minetest.chat_send_player(name, "You do not own this chest.")
+				return nil
+			end
+
+			local secret = meta:get_string("key_lock_secret")
+			if secret == "" then
+				secret = newsecret
+				meta:set_string("key_lock_secret", secret)
+			end
+
+			return secret, "a locked chest", owner
+		end
 	end
 	return def
 end
 
+local _TUBELIB_CALLBACKS = {
+	on_pull_item = function(pos, side, player_name)
+		if not minetest.is_protected(pos, player_name) then
+			local inv = minetest.get_meta(pos):get_inventory()
+			for _, stack in pairs(inv:get_list("main")) do
+				if not stack:is_empty() then
+					return inv:remove_item("main", stack:get_name())
+				end
+			end
+		end
+		return nil
+	end,
+	on_push_item = function(pos, side, item, player_name)
+		local inv = minetest.get_meta(pos):get_inventory()
+		if inv:room_for_item("main", item) then
+			inv:add_item("main", item)
+			return true
+		end
+		return false
+	end,
+	on_unpull_item = function(pos, side, item, player_name)
+		local inv = minetest.get_meta(pos):get_inventory()
+		if inv:room_for_item("main", item) then
+			inv:add_item("main", item)
+			return true
+		end
+		return false
+	end,
+}
+
 function technic.chests:register(name, data)
+	data = table.copy(data) -- drop reference
 	local def = technic.chests:definition(name, data)
 
 	local nn = "technic:"..name:lower()..(data.locked and "_locked" or "").."_chest"
 	minetest.register_node(":"..nn, def)
+	registered_chest_data[nn] = data
+
+	if tubelib_exists then
+		tubelib.register_node(nn, {}, _TUBELIB_CALLBACKS)
+	end
 
 	if data.color then
 		local mk_front
@@ -281,9 +414,27 @@ function technic.chests:register(name, data)
 			colordef.drop = nn
 			colordef.groups = self.groups_noinv
 			colordef.tiles = { def.tiles[1], def.tiles[2], def.tiles[3], def.tiles[4], def.tiles[5], mk_front("technic_chest_overlay"..postfix..".png") }
-			minetest.register_node(":"..nn..postfix, colordef)
+
+			local new_name = nn .. postfix
+			minetest.register_node(":" .. new_name, colordef)
+			registered_chest_data[new_name] = data -- for all colors
+
+			if tubelib_exists then
+				tubelib.register_node(nn..postfix, {}, _TUBELIB_CALLBACKS)
+			end
 		end
 	end
-
 end
 
+
+-- Migration of chest formspecs
+-- Group is specified in common.lua
+minetest.register_lbm({
+	label = "technic_chests formspec upgrade",
+	name = "technic_chests:upgrade_formspec",
+	nodenames = {"group:technic_chest"},
+	run_at_every_load = false,
+	action = function(pos, node)
+		set_formspec(pos, registered_chest_data[node.name], "main")
+	end
+})

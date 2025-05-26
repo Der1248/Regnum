@@ -2,124 +2,145 @@
 -- All doors (not only these here) in front of a travelnet or elevator are opened automaticly when a player arrives
 -- and are closed when a player departs from the travelnet or elevator.
 -- Autor: Sokomine
+local S = minetest.get_translator("travelnet")
 
-minetest.register_node("travelnet:elevator_door_steel_open", {
-		description = "elevator door (open)",
+function travelnet.register_door(node_base_name, def_tiles, material)
+	local closed_door = node_base_name .. "_closed"
+	local open_door = node_base_name .. "_open"
+
+	minetest.register_node(open_door, {
+		description = S("Elevator door (open)"),
 		drawtype = "nodebox",
-                -- top, bottom, side1, side2, inner, outer
-		tiles = {"default_stone.png"},
+		tiles = def_tiles,
+		use_texture_alpha = "clip",
 		paramtype = "light",
 		paramtype2 = "facedir",
-		is_ground_content = true,
-		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2,not_in_creative_inventory=1},
-                -- larger than one node but slightly smaller than a half node so that wallmounted torches pose no problem
+		is_ground_content = false,
+		-- only the closed variant is in creative inventory
+		groups = {
+			snappy = 2,
+			choppy = 2,
+			oddly_breakable_by_hand = 2,
+			pickaxey = 1,
+			handy = 1,
+			not_in_creative_inventory = 1,
+			door = 1
+		},
+		-- larger than one node but slightly smaller than a half node so
+		-- that wallmounted torches pose no problem
 		node_box = {
 			type = "fixed",
 			fixed = {
-				{-0.90, -0.5,  0.4, -0.49, 1.5,  0.5},
-				{ 0.49, -0.5,  0.4,  0.9, 1.5,  0.5},
+				{ -0.90, -0.5, 0.4, -0.49, 1.5, 0.5 },
+				{  0.49, -0.5, 0.4,   0.9, 1.5, 0.5 },
 			},
 		},
 		selection_box = {
 			type = "fixed",
 			fixed = {
-				{-0.9, -0.5,  0.4,  0.9, 1.5,  0.5},
+				{ -0.9, -0.5, 0.4, 0.9, 1.5, 0.5 },
 			},
 		},
-		drop = "travelnet:elevator_door_steel_closed",
-                on_rightclick = function(pos, node, puncher)
-                    minetest.add_node(pos, {name = "travelnet:elevator_door_steel_closed", param2 = node.param2})
-                end,
-})
+		drop = closed_door,
+		on_rightclick = function(pos, node)
+			minetest.add_node(pos, {
+				name = closed_door,
+				param2 = node.param2
+			})
+		end,
+	})
 
-minetest.register_node("travelnet:elevator_door_steel_closed", {
-		description = "elevator door (closed)",
+	minetest.register_node(closed_door, {
+		description = S("Elevator door (closed)"),
 		drawtype = "nodebox",
-                -- top, bottom, side1, side2, inner, outer
-		tiles = {"default_stone.png"},
+		tiles = def_tiles,
+		use_texture_alpha = "clip",
 		paramtype = "light",
 		paramtype2 = "facedir",
-		is_ground_content = true,
-		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
+		is_ground_content = false,
+		groups = {
+			snappy = 2,
+			choppy = 2,
+			oddly_breakable_by_hand = 2,
+			pickaxey = 1,
+			handy = 1,
+			door = 1
+		},
+		_mcl_blast_resistance = 1,
+		_mcl_hardness = 0.7,
 		node_box = {
 			type = "fixed",
 			fixed = {
-				{-0.5,  -0.5,  0.4, -0.01, 1.5,  0.5},
-				{ 0.01, -0.5,  0.4,  0.5,  1.5,  0.5},
+				{ -0.5, -0.5, 0.4, -0.01, 1.5, 0.5 },
+				{ 0.01, -0.5, 0.4,   0.5, 1.5, 0.5 },
 			},
 		},
 		selection_box = {
 			type = "fixed",
 			fixed = {
-				{-0.5, -0.5,  0.4,  0.5, 1.5,  0.5},
+				{ -0.5, -0.5, 0.4, 0.5, 1.5, 0.5 },
 			},
 		},
-                on_rightclick = function(pos, node, puncher)
-                    minetest.add_node(pos, {name = "travelnet:elevator_door_steel_open", param2 = node.param2})
-                end,
-})
+		on_rightclick = function(pos, node)
+			minetest.add_node(pos, {
+				name = open_door,
+				param2 = node.param2
+			})
+		end,
+	})
+
+	-- add a craft receipe for the door
+	minetest.register_craft({
+		output = closed_door,
+		recipe = {
+			{ material, "", material },
+			{ material, "", material },
+			{ material, "", material }
+		}
+	})
 
 
+	-- Make doors reacts to mesecons
+	if minetest.get_modpath("mesecons") then
+		local mesecons = {
+			effector = {
+				action_on = function(pos, node)
+					minetest.add_node(pos, {
+						name = open_door,
+						param2 = node.param2
+					})
+				end,
+				action_off = function(pos, node)
+					minetest.add_node(pos, {
+						name = closed_door,
+						param2 = node.param2
+					})
+				end,
+				rules = mesecon.rules.pplate
+			}
+		}
 
+		minetest.override_item(closed_door, { mesecons=mesecons })
+		minetest.override_item(open_door,   { mesecons=mesecons })
+	end
+end
 
-minetest.register_node("travelnet:elevator_door_glass_open", {
-		description = "elevator door (open)",
-		drawtype = "nodebox",
-                -- top, bottom, side1, side2, inner, outer
-		tiles = {"travelnet_elevator_door_glass.png"},
-		paramtype = "light",
-		paramtype2 = "facedir",
-		is_ground_content = true,
-		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2,not_in_creative_inventory=1},
-                -- larger than one node but slightly smaller than a half node so that wallmounted torches pose no problem
-		node_box = {
-			type = "fixed",
-			fixed = {
-				{-0.99, -0.5,  0.4, -0.49, 1.5,  0.5},
-				{ 0.49, -0.5,  0.4,  0.99, 1.5,  0.5},
-			},
-		},
-		selection_box = {
-			type = "fixed",
-			fixed = {
-				{-0.9, -0.5,  0.4,  0.9, 1.5,  0.5},
-			},
-		},
-		drop = "travelnet:elevator_door_glass_closed",
-                on_rightclick = function(pos, node, puncher)
-                    minetest.add_node(pos, {name = "travelnet:elevator_door_glass_closed", param2 = node.param2})
-                end,
-})
-
-minetest.register_node("travelnet:elevator_door_glass_closed", {
-		description = "elevator door (closed)",
-		drawtype = "nodebox",
-                -- top, bottom, side1, side2, inner, outer
-		tiles = {"travelnet_elevator_door_glass.png"},
-		paramtype = "light",
-		paramtype2 = "facedir",
-		is_ground_content = true,
-		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
-		node_box = {
-			type = "fixed",
-			fixed = {
-				{-0.5,  -0.5,  0.4, -0.01, 1.5,  0.5},
-				{ 0.01, -0.5,  0.4,  0.5,  1.5,  0.5},
-			},
-		},
-		selection_box = {
-			type = "fixed",
-			fixed = {
-				{-0.5, -0.5,  0.4,  0.5, 1.5,  0.5},
-			},
-		},
-                on_rightclick = function(pos, node, puncher)
-                    minetest.add_node(pos, {name = "travelnet:elevator_door_glass_open", param2 = node.param2})
-                end,
-})
-
---      local old_node = minetest.get_node( pos );
---      minetest.add_node(pos, {name = "travelnet:elevator_door_glass_closed", param2 = old_node.param2})
-
-
-
+-- actually register the doors
+-- (but only if the materials for them exist)
+if minetest.get_modpath("default") or minetest.get_modpath("mcl_core") then
+	travelnet.register_door(
+		"travelnet:elevator_door_steel",
+		{ "default_stone.png" },
+		xcompat.materials.steel_ingot
+	)
+	travelnet.register_door(
+		"travelnet:elevator_door_glass",
+		{ "travelnet_elevator_door_glass.png" },
+		xcompat.materials.glass
+	)
+	travelnet.register_door(
+		"travelnet:elevator_door_tin",
+		{ "default_clay.png" },
+		xcompat.materials.tin_ingot
+	)
+end

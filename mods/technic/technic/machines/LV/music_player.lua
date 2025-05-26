@@ -4,6 +4,14 @@
 local S = technic.getter
 
 minetest.register_alias("music_player", "technic:music_player")
+minetest.register_craft({
+	output = 'technic:music_player',
+	recipe = {
+		{'technic:chromium_ingot', 'default:diamond',        'technic:chromium_ingot'},
+		{'default:diamond',        'technic:machine_casing', 'default:diamond'},
+		{'default:mossycobble',    'technic:lv_cable',       'default:mossycobble'},
+	}
+})
 
 local music_handles = {}
 
@@ -16,7 +24,6 @@ local run = function(pos, node)
 	local meta         = minetest.get_meta(pos)
 	local eu_input     = meta:get_int("LV_EU_input")
 	local machine_name = S("%s Music Player"):format("LV")
-	local machine_node = "technic:music_player"
 	local demand       = 150
 
 	local current_track = meta:get_int("current_track")
@@ -86,7 +93,9 @@ minetest.register_node("technic:music_player", {
 	description = S("%s Music Player"):format("LV"),
 	tiles = {"technic_music_player_top.png", "technic_machine_bottom.png", "technic_music_player_side.png",
 	         "technic_music_player_side.png", "technic_music_player_side.png", "technic_music_player_side.png"},
-	groups = {snappy=2, choppy=2, oddly_breakable_by_hand=2, technic_machine=1},
+	groups = {snappy=2, choppy=2, oddly_breakable_by_hand=2,
+		technic_machine=1, technic_lv=1},
+	connect_sides = {"bottom"},
 	sounds = default.node_sound_wood_defaults(),
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)

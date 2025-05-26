@@ -1,33 +1,57 @@
 
-travelnet.MAX_STATIONS_PER_NETWORK = 24;
+-- set this to 0 if you want no limit
+travelnet.MAX_STATIONS_PER_NETWORK = tonumber(minetest.settings:get("travelnet.MAX_STATIONS_PER_NETWORK")) or 24
 
 -- set this to true if you want a simulated beam effect
-travelnet.travelnet_effect_enabled = false;
+travelnet.travelnet_effect_enabled = minetest.settings:get_bool("travelnet.travelnet_effect_enabled", false)
 -- set this to true if you want a sound to be played when the travelnet is used
-travelnet.travelnet_sound_enabled  = false;
+travelnet.travelnet_sound_enabled  = minetest.settings:get_bool("travelnet.travelnet_sound_enabled", true)
 
 -- if you set this to false, travelnets cannot be created
 -- (this may be useful if you want nothing but the elevators on your server)
-travelnet.travelnet_enabled        = true;
+travelnet.travelnet_enabled        = minetest.settings:get_bool("travelnet.travelnet_enabled", true)
+
+travelnet.travelnet_cleanup_lbm = minetest.settings:get_bool("travelnet.travelnet_cleanup_lbm", false)
+
 -- if you set travelnet.elevator_enabled to false, you will not be able to
 -- craft, place or use elevators
-travelnet.elevator_enabled         = true;
+travelnet.elevator_enabled         = minetest.settings:get_bool("travelnet.elevator_enabled", true)
 -- if you set this to false, doors will be disabled
-travelnet.doors_enabled            = true;
+travelnet.doors_enabled            = minetest.settings:get_bool("travelnet.doors_enabled", true)
 
 -- starts an abm which re-adds travelnet stations to networks in case the savefile got lost
-travelnet.abm_enabled              = false;
+travelnet.abm_enabled              = minetest.settings:get_bool("travelnet.abm_enabled", false)
 
 -- change these if you want other receipes for travelnet or elevator
 travelnet.travelnet_recipe = {
-                {"default:glass", "default:steel_ingot", "default:glass", },
-                {"default:glass", "default:mese",        "default:glass", },
-                {"default:glass", "default:steel_ingot", "default:glass", }
+	{ xcompat.materials.glass, xcompat.materials.steel_ingot, xcompat.materials.glass },
+	{ xcompat.materials.glass, xcompat.materials.mese,        xcompat.materials.glass },
+	{ xcompat.materials.glass, xcompat.materials.steel_ingot, xcompat.materials.glass }
 }
 travelnet.elevator_recipe = {
-	        {"default:steel_ingot", "default:glass", "default:steel_ingot", },
-		{"default:steel_ingot", "",              "default:steel_ingot", },
-		{"default:steel_ingot", "default:glass", "default:steel_ingot", }
+	{ xcompat.materials.steel_ingot, xcompat.materials.glass, xcompat.materials.steel_ingot },
+	{ xcompat.materials.steel_ingot, "",                      xcompat.materials.steel_ingot },
+	{ xcompat.materials.steel_ingot, xcompat.materials.glass, xcompat.materials.steel_ingot }
+}
+travelnet.tiles_elevator = {
+	"travelnet_elevator_front.png",
+	"travelnet_elevator_inside_controls.png",
+	"travelnet_elevator_sides_outside.png",
+	"travelnet_elevator_inside_ceiling.png",
+	"travelnet_elevator_inside_floor.png",
+	"travelnet_top.png"
+}
+travelnet.elevator_inventory_image  = "travelnet_elevator_inv.png"
+
+travelnet.node_box = {
+	type = "fixed",
+	fixed = {
+		{-0.5, -0.5, 0.4375, 0.5, 1.5, 0.5},  -- Back
+		{-0.5, -0.5, -0.5, -0.4375, 1.5, 0.5},  -- Right
+		{0.4375, -0.5, -0.5, 0.5, 1.5, 0.5},  -- Left
+		{-0.5, -0.5, -0.5, 0.5, -0.4375, 0.5},  -- Floor
+		{-0.5, 1.4375, -0.5, 0.5, 1.5, 0.5},  -- Roof
+	}
 }
 
 -- if this function returns true, the player with the name player_name is
@@ -36,18 +60,19 @@ travelnet.elevator_recipe = {
 -- if you want to allow *everybody* to attach stations to all nets, let the
 -- function always return true;
 -- if the function returns false, players with the travelnet_attach priv
--- can still add stations to that network 
-
-travelnet.allow_attach = function( player_name, owner_name, network_name )
-   return false;
+-- can still add stations to that network
+-- params: player_name, owner_name, network_name
+travelnet.allow_attach = function()
+	return minetest.settings:get_bool("travelnet.allow_attach", false)
 end
 
 
 -- if this returns true, a player named player_name can remove a travelnet station
 -- from network_name (owned by owner_name) even though he is neither the owner nor
 -- has the travelnet_remove priv
-travelnet.allow_dig    = function( player_name, owner_name, network_name )
-   return false;
+-- params: player_name, owner_name, network_name, pos
+travelnet.allow_dig = function()
+	return minetest.settings:get_bool("travelnet.allow_dig", false)
 end
 
 
@@ -57,11 +82,14 @@ end
 -- if this function returns true, the player will be transfered to the target station;
 -- you can use this code to i.e. charge the player money for the transfer or to limit
 -- usage of stations to players in the same fraction on PvP servers
-travelnet.allow_travel = function( player_name, owner_name, network_name, station_name_start, station_name_target )
-
-   --minetest.chat_send_player( player_name, "Player "..tostring( player_name ).." tries to use station "..tostring( station_name_start )..
-   --    " on network "..tostring( network_name ).." owned by "..tostring( owner_name ).." in order to travel to "..
-   --    tostring( station_name_target )..".");
-
-   return true;
+-- params: player_name, owner_name, network_name, station_name_start, station_name_target
+travelnet.allow_travel = function(player_name, owner_name)
+	local setting = minetest.settings:get_bool("travelnet.allow_travel", true)
+	return setting or player_name == owner_name
 end
+
+-- allows an custom attach priv
+travelnet.attach_priv = minetest.settings:get("travelnet.attach_priv") or "travelnet_attach"
+
+-- allows an custom remove priv
+travelnet.remove_priv = minetest.settings:get("travelnet.remove_priv") or "travelnet_remove"

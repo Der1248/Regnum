@@ -48,9 +48,10 @@
 --v.1.0.1
 --v.1.0.0
 minetest.register_tool("tutorial:regnumbattleaxe1", {
-	description = "Regnumbattleaxe Mode 1 (dig no water and lava)\nBattleaxe-lv.MAX",
+	description = "Regnum Battleaxe Mode 1 (dig no water and lava)\nBattleaxe-Lv.MAX",
 	inventory_image = "tutorial_regnumbattleaxe.png^technic_tool_mode1.png",
     wield_image = "tutorial_regnumbattleaxe.png",
+	groups = {battleaxe_level=15},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -59,17 +60,17 @@ minetest.register_tool("tutorial:regnumbattleaxe1", {
 			choppy	=	{times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
 			crumbly =	{times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
 			fleshy	=	{times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
-			cracky	=	{times={[0]=0, [1]=0, [2]=0, [3]=0, [4]=0, [5]=0, [6]=0, [7]=0, [8]=0, [9]=0, [10]=0, [11]=0, [12]=0, [13]=0, [14]=0, [15]=5.0}, uses=0, maxlevel=3},
+			cracky	=	{times={[0]=0, [1]=0, [2]=0, [3]=0, [4]=0, [5]=0, [6]=0, [7]=0, [8]=0, [9]=0, [10]=0, [11]=0, [12]=0, [13]=0, [14]=0, [15]=5.0, [16]=0, [17]=0}, uses=0, maxlevel=3},
 		},
 		damage_groups = {fleshy=150}
 	},
 	liquids_pointable = false,
 })
 minetest.register_tool("tutorial:regnumbattleaxe2", {
-	description = "Regnumbattleaxe Mode 2 (dig water and lava)\nBattleaxe-lv.MAX",
+	description = "Regnum Battleaxe Mode 2 (dig water and lava)\nBattleaxe-Lv.MAX",
 	inventory_image = "tutorial_regnumbattleaxe.png^technic_tool_mode2.png",
     wield_image = "tutorial_regnumbattleaxe.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=15},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -78,17 +79,17 @@ minetest.register_tool("tutorial:regnumbattleaxe2", {
 			choppy	=	{times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
 			crumbly =	{times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
 			fleshy	=	{times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
-			cracky	=	{times={[0]=0, [1]=0, [2]=0, [3]=0, [4]=0, [5]=0, [6]=0, [7]=0, [8]=0, [9]=0, [10]=0, [11]=0, [12]=0, [13]=0, [14]=0, [15]=5.0}, uses=0, maxlevel=3},
+			cracky	=	{times={[0]=0, [1]=0, [2]=0, [3]=0, [4]=0, [5]=0, [6]=0, [7]=0, [8]=0, [9]=0, [10]=0, [11]=0, [12]=0, [13]=0, [14]=0, [15]=5.0, [16]=0, [17]=0}, uses=0, maxlevel=3},
 		},
 		damage_groups = {fleshy=150}
 	},
 	liquids_pointable = true,
 })
 minetest.register_tool("tutorial:superlegendenbattleaxe1", {
-	description = "Superlegendbattleaxe Mode 1 (dig water and lava)\nBattleaxe-lv.122",
+	description = "Super Legendary Battleaxe Mode 1 (dig water and lava)\nBattleaxe-Lv.122",
 	inventory_image = "tutorial_superlegendenbattleaxe.png^technic_tool_mode1.png",
     wield_image = "tutorial_superlegendenbattleaxe.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=15},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -97,17 +98,17 @@ minetest.register_tool("tutorial:superlegendenbattleaxe1", {
 			choppy	=	{times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
 			crumbly =	{times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
 			fleshy	=	{times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
-			cracky	=	{times={[0]=0, [1]=0, [2]=0, [3]=0, [4]=0, [5]=0, [6]=0, [7]=0, [8]=0, [9]=0, [10]=0, [11]=0, [12]=0, [13]=0, [14]=0, [15]=20.0}, uses=0, maxlevel=3},
+			cracky	=	{times={[0]=0, [1]=0, [2]=0, [3]=0, [4]=0, [5]=0, [6]=0, [7]=0, [8]=0, [9]=0, [10]=0, [11]=0, [12]=0, [13]=0, [14]=0, [15]=20.0, [16]=0, [17]=0}, uses=0, maxlevel=3},
 		},
 		damage_groups = {fleshy=122}
 	},
 	liquids_pointable = true,
 })
 minetest.register_tool("tutorial:superlegendenbattleaxe2", {
-	description = "Superlegendbattleaxe Mode 2 (dig no water and lava)\nBattleaxe-lv.122",
+	description = "Super Legendary Battleaxe Mode 2 (dig no water and lava)\nBattleaxe-Lv.122",
 	inventory_image = "tutorial_superlegendenbattleaxe.png^technic_tool_mode2.png",
     wield_image = "tutorial_superlegendenbattleaxe.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=15},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -116,29 +117,29 @@ minetest.register_tool("tutorial:superlegendenbattleaxe2", {
 			choppy	=	{times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
 			crumbly =	{times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
 			fleshy	=	{times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
-			cracky	=	{times={[0]=0, [1]=0, [2]=0, [3]=0, [4]=0, [5]=0, [6]=0, [7]=0, [8]=0, [9]=0, [10]=0, [11]=0, [12]=0, [13]=0, [14]=0, [15]=20.0}, uses=0, maxlevel=3},
+			cracky	=	{times={[0]=0, [1]=0, [2]=0, [3]=0, [4]=0, [5]=0, [6]=0, [7]=0, [8]=0, [9]=0, [10]=0, [11]=0, [12]=0, [13]=0, [14]=0, [15]=20.0, [16]=0, [17]=0}, uses=0, maxlevel=3},
 		},
 		damage_groups = {fleshy=122}
 	},
 	liquids_pointable = false,
 })
 minetest.register_tool("tutorial:lilabattleaxe2", {
-	description = "Purplebattleaxe Lv.MAX",
+	description = "Purple Battleaxe Lv.MAX",
 	inventory_image = "tutorial_lilabattleaxe2.png",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
 		groupcaps={	
-			cracky  = {times={[13]=0,[14]=0}, uses=0, maxlevel=3},
+			cracky  = {times={[13]=0, [14]=0, [17]=0}, uses=0, maxlevel=3},
 		},
 		damage_groups = {fleshy=10}
 	},
 	liquids_pointable = true,
 })
 minetest.register_tool("tutorial:legendenbattleaxe1", {
-	description = "Legendbattleaxe Lv.1\nBattleaxe-lv.116",
+	description = "Legendary Battleaxe Lv.1\nBattleaxe-Lv.116",
 	inventory_image = "tutorial_legendenbattleaxe1.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=12},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -153,9 +154,9 @@ minetest.register_tool("tutorial:legendenbattleaxe1", {
 	},
 })
 minetest.register_tool("tutorial:legendenbattleaxe2", {
-	description = "Legendbattleaxe Lv.2\nBattleaxe-lv.117",
+	description = "Legendary Battleaxe Lv.2\nBattleaxe-Lv.117",
 	inventory_image = "tutorial_legendenbattleaxe2.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=12},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -170,9 +171,9 @@ minetest.register_tool("tutorial:legendenbattleaxe2", {
 	},
 })
 minetest.register_tool("tutorial:legendenbattleaxe3", {
-	description = "Legendbattleaxe Lv.3\nBattleaxe-lv.118",
+	description = "Legendary Battleaxe Lv.3\nBattleaxe-Lv.118",
 	inventory_image = "tutorial_legendenbattleaxe3.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=12},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -187,9 +188,9 @@ minetest.register_tool("tutorial:legendenbattleaxe3", {
 	},
 })
 minetest.register_tool("tutorial:legendenbattleaxe4", {
-	description = "Legendbattleaxe Lv.4\nBattleaxe-lv.119",
+	description = "Legendary Battleaxe Lv.4\nBattleaxe-Lv.119",
 	inventory_image = "tutorial_legendenbattleaxe4.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=12},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -204,9 +205,9 @@ minetest.register_tool("tutorial:legendenbattleaxe4", {
 	},
 })
 minetest.register_tool("tutorial:legendenbattleaxe5", {
-	description = "Legendbattleaxe Lv.5\nBattleaxe-lv.120",
+	description = "Legendary Battleaxe Lv.5\nBattleaxe-Lv.120",
 	inventory_image = "tutorial_legendenbattleaxe5.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=12},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -221,9 +222,9 @@ minetest.register_tool("tutorial:legendenbattleaxe5", {
 	},
 })
 minetest.register_tool("tutorial:legendenbattleaxe6", {
-	description = "Legendbattleaxe Lv.6\nBattleaxe-lv.121",
+	description = "Legendary Battleaxe Lv.6\nBattleaxe-Lv.121",
 	inventory_image = "tutorial_legendenbattleaxe6.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=12},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -244,7 +245,7 @@ minetest.register_tool("tutorial:legendenbattleaxe6", {
 --v.0.22.1
 --v.0.22.0
 minetest.register_tool("tutorial:titanentverner", {
-	description = "Titanium remover",
+	description = "Titanium Remover",
 	inventory_image = "tutorial_titanentverner.png",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
@@ -254,9 +255,9 @@ minetest.register_tool("tutorial:titanentverner", {
 	},
 })
 minetest.register_tool("tutorial:titanbattleaxe10", {
-	description = "Titaniumbattleaxe lv.10\nBattleaxe-lv.115",
+	description = "Titanium Battleaxe Lv.10\nBattleaxe-Lv.115",
 	inventory_image = "tutorial_titanbattleaxe10.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=12},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -271,9 +272,9 @@ minetest.register_tool("tutorial:titanbattleaxe10", {
 	},
 })
 minetest.register_tool("tutorial:titanbattleaxe9", {
-	description = "Titaniumbattleaxe lv.9\nBattleaxe-lv.114",
+	description = "Titanium Battleaxe Lv.9\nBattleaxe-Lv.114",
 	inventory_image = "tutorial_titanbattleaxe9.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=12},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -288,9 +289,9 @@ minetest.register_tool("tutorial:titanbattleaxe9", {
 	},
 })
 minetest.register_tool("tutorial:titanbattleaxe8", {
-	description = "Titaniumbattleaxe lv.8\nBattleaxe-lv.113",
+	description = "Titanium Battleaxe Lv.8\nBattleaxe-Lv.113",
 	inventory_image = "tutorial_titanbattleaxe8.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=12},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -305,9 +306,9 @@ minetest.register_tool("tutorial:titanbattleaxe8", {
 	},
 })
 minetest.register_tool("tutorial:titanbattleaxe7", {
-	description = "Titaniumbattleaxe lv.7\nBattleaxe-lv.112",
+	description = "Titanium Battleaxe Lv.7\nBattleaxe-Lv.112",
 	inventory_image = "tutorial_titanbattleaxe7.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=12},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -322,9 +323,9 @@ minetest.register_tool("tutorial:titanbattleaxe7", {
 	},
 })
 minetest.register_tool("tutorial:titanbattleaxe6", {
-	description = "Titaniumbattleaxe lv.6\nBattleaxe-lv.111",
+	description = "Titanium Battleaxe Lv.6\nBattleaxe-Lv.111",
 	inventory_image = "tutorial_titanbattleaxe6.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=12},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -339,9 +340,9 @@ minetest.register_tool("tutorial:titanbattleaxe6", {
 	},
 })
 minetest.register_tool("tutorial:titanbattleaxe5", {
-	description = "Titaniumbattleaxe lv.5\nBattleaxe-lv.110",
+	description = "Titanium Battleaxe Lv.5\nBattleaxe-Lv.110",
 	inventory_image = "tutorial_titanbattleaxe5.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=12},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -356,9 +357,9 @@ minetest.register_tool("tutorial:titanbattleaxe5", {
 	},
 })
 minetest.register_tool("tutorial:titanbattleaxe4", {
-	description = "Titaniumbattleaxe lv.4\nBattleaxe-lv.109",
+	description = "Titanium Battleaxe Lv.4\nBattleaxe-Lv.109",
 	inventory_image = "tutorial_titanbattleaxe4.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=11},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -373,9 +374,9 @@ minetest.register_tool("tutorial:titanbattleaxe4", {
 	},
 })
 minetest.register_tool("tutorial:titanbattleaxe3", {
-	description = "Titaniumbattleaxe lv.3\nBattleaxe-lv.108",
+	description = "Titanium Battleaxe Lv.3\nBattleaxe-Lv.108",
 	inventory_image = "tutorial_titanbattleaxe3.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=11},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -390,9 +391,9 @@ minetest.register_tool("tutorial:titanbattleaxe3", {
 	},
 })
 minetest.register_tool("tutorial:titanbattleaxe2", {
-	description = "Titaniumbattleaxe lv.2\nBattleaxe-lv.107",
+	description = "Titanium Battleaxe Lv.2\nBattleaxe-Lv.107",
 	inventory_image = "tutorial_titanbattleaxe2.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=11},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -407,9 +408,9 @@ minetest.register_tool("tutorial:titanbattleaxe2", {
 	},
 })
 minetest.register_tool("tutorial:titanbattleaxe1", {
-	description = "Titaniumbattleaxe lv.1\nBattleaxe-lv.106",
+	description = "Titanium Battleaxe Lv.1\nBattleaxe-Lv.106",
 	inventory_image = "tutorial_titanbattleaxe1.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=11},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -426,7 +427,7 @@ minetest.register_tool("tutorial:titanbattleaxe1", {
 --v.0.21.0
 --v.0.20.0
 minetest.register_tool("tutorial:lilabattleaxe", {
-	description = "Purplebattleaxe Lv.1 (only for red and blue ores)",
+	description = "Purple Battleaxe Lv.1 (only for red and blue ores)",
 	inventory_image = "tutorial_lilabattleaxe.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -440,9 +441,9 @@ minetest.register_tool("tutorial:lilabattleaxe", {
 })
 --v.0.19.1
 minetest.register_tool("tutorial:arena_battleaxe4", {
-	description = "Arenabattleaxe lv.4\nBattleaxe-lv.105",
+	description = "Arena Battleaxe Lv.4\nBattleaxe-Lv.105",
 	inventory_image = "tutorial_arenabattleaxe4.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=11},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -457,9 +458,9 @@ minetest.register_tool("tutorial:arena_battleaxe4", {
 	},
 })
 minetest.register_tool("tutorial:arena_battleaxe3", {
-	description = "Arenabattleaxe lv.3\nBattleaxe-lv.104",
+	description = "Arena Battleaxe Lv.3\nBattleaxe-Lv.104",
 	inventory_image = "tutorial_arenabattleaxe3.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=11},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -474,9 +475,9 @@ minetest.register_tool("tutorial:arena_battleaxe3", {
 	},
 })
 minetest.register_tool("tutorial:arena_battleaxe2", {
-	description = "Arenabattleaxe lv.2\nBattleaxe-lv.103",
+	description = "Arena Battleaxe Lv.2\nBattleaxe-Lv.103",
 	inventory_image = "tutorial_arenabattleaxe2.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=11},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -491,9 +492,9 @@ minetest.register_tool("tutorial:arena_battleaxe2", {
 	},
 })
 minetest.register_tool("tutorial:arena_battleaxe1", {
-	description = "Arenabattleaxe lv.1\nBattleaxe-lv.102",
+	description = "Arena Battleaxe Lv.1\nBattleaxe-Lv.102",
 	inventory_image = "tutorial_arenabattleaxe1.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=11},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -509,9 +510,10 @@ minetest.register_tool("tutorial:arena_battleaxe1", {
 })
 --v.0.18.0
 minetest.register_tool("tutorial:adminbattleaxe", {
-	description = "Admin tool 3: Admin battleaxe Mode 1 (dig water and lava)",
+	description = "Admin Battleaxe Mode 1 (dig water and lava)",
 	inventory_image = "tutorial_adminbattleaxe.png^technic_tool_mode1.png",
     wield_image = "tutorial_adminbattleaxe.png",
+	groups = {battleaxe_level=15},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -520,17 +522,17 @@ minetest.register_tool("tutorial:adminbattleaxe", {
 			choppy  =	{times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},			
 			crumbly =	{times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
 			fleshy	=	{times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},		
-			cracky  =	{times={[0]=0, [1]=0, [2]=0, [3]=0, [4]=0, [5]=0, [6]=0, [7]=0, [8]=0, [9]=0, [10]=0, [11]=0, [12]=0, [13]=0, [14]=0, [15]=0, [0]=0,}, uses=0, maxlevel=3},
+			cracky  =	{times={[0]=0, [1]=0, [2]=0, [3]=0, [4]=0, [5]=0, [6]=0, [7]=0, [8]=0, [9]=0, [10]=0, [11]=0, [12]=0, [13]=0, [14]=0, [15]=0, [16]=0, [17]=0}, uses=0, maxlevel=3},
 		},
 		damage_groups = {fleshy=2000}
 	},
 	liquids_pointable = false,
 })
 minetest.register_tool("tutorial:adminbattleaxe2", {
-	description = "Admin tool 3: Admin battleaxe Mode 2 (dig no water and lava)",
+	description = "Admin Battleaxe Mode 2 (dig no water and lava)",
 	inventory_image = "tutorial_adminbattleaxe.png^technic_tool_mode2.png",
     wield_image = "tutorial_adminbattleaxe.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=15},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -540,7 +542,7 @@ minetest.register_tool("tutorial:adminbattleaxe2", {
 			choppy  =	{times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},			
 			crumbly =	{times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
 			fleshy	=	{times={[1]=0, [2]=0, [3]=0}, uses=0, maxlevel=3},
-			cracky  =	{times={[0]=0, [1]=0, [2]=0, [3]=0, [4]=0, [5]=0, [6]=0, [7]=0, [8]=0, [9]=0, [10]=0, [11]=0, [12]=0, [13]=0, [14]=0, [15]=0, [0]=0,}, uses=0, maxlevel=3},
+			cracky  =	{times={[0]=0, [1]=0, [2]=0, [3]=0, [4]=0, [5]=0, [6]=0, [7]=0, [8]=0, [9]=0, [10]=0, [11]=0, [12]=0, [13]=0, [14]=0, [15]=0, [16]=0, [17]=0}, uses=0, maxlevel=3},
 		},
 		damage_groups = {fleshy=2000}
 	},
@@ -549,9 +551,9 @@ minetest.register_tool("tutorial:adminbattleaxe2", {
 --v.0.17.0
 --v.0.16.0
 minetest.register_tool("tutorial:ultrabattleaxe", {
-	description = "Superultrabattleaxe\nBattleaxe-lv.101",
+	description = "Super Ultra Battleaxe\nBattleaxe-Lv.101",
 	inventory_image = "tutorial_super_ultrabattleaxe.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -566,9 +568,9 @@ minetest.register_tool("tutorial:ultrabattleaxe", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe25", {
-	description = "Ultrabattleaxe lv.25\nBattleaxe-lv.100",
+	description = "Ultra Battleaxe Lv.25\nBattleaxe-Lv.100",
 	inventory_image = "tutorial_ultrabattleaxe25.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -583,9 +585,9 @@ minetest.register_tool("tutorial:ultrabattleaxe25", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe24", {
-	description = "Ultrabattleaxe lv.24\nBattleaxe-lv.99",
+	description = "Ultra Battleaxe Lv.24\nBattleaxe-Lv.99",
 	inventory_image = "tutorial_ultrabattleaxe24.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -600,9 +602,9 @@ minetest.register_tool("tutorial:ultrabattleaxe24", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe23", {
-	description = "Ultrabattleaxe lv.23\nBattleaxe-lv.98",
+	description = "Ultra Battleaxe Lv.23\nBattleaxe-Lv.98",
 	inventory_image = "tutorial_ultrabattleaxe23.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -617,9 +619,9 @@ minetest.register_tool("tutorial:ultrabattleaxe23", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe22", {
-	description = "Ultrabattleaxe lv.22\nBattleaxe-lv.97",
+	description = "Ultra Battleaxe Lv.22\nBattleaxe-Lv.97",
 	inventory_image = "tutorial_ultrabattleaxe22.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -634,9 +636,9 @@ minetest.register_tool("tutorial:ultrabattleaxe22", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe21", {
-	description = "Ultrabattleaxe lv.21\nBattleaxe-lv.96",
+	description = "Ultra Battleaxe Lv.21\nBattleaxe-Lv.96",
 	inventory_image = "tutorial_ultrabattleaxe21.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -651,9 +653,9 @@ minetest.register_tool("tutorial:ultrabattleaxe21", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe20", {
-	description = "Ultrabattleaxe lv.20\nBattleaxe-lv.95",
+	description = "Ultra Battleaxe Lv.20\nBattleaxe-Lv.95",
 	inventory_image = "tutorial_ultrabattleaxe20.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -668,9 +670,9 @@ minetest.register_tool("tutorial:ultrabattleaxe20", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe19", {
-	description = "Ultrabattleaxe lv.19\nBattleaxe-lv.94",
+	description = "Ultra Battleaxe Lv.19\nBattleaxe-Lv.94",
 	inventory_image = "tutorial_ultrabattleaxe19.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -685,9 +687,9 @@ minetest.register_tool("tutorial:ultrabattleaxe19", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe18", {
-	description = "Ultrabattleaxe lv.18\nBattleaxe-lv.93",
+	description = "Ultra Battleaxe Lv.18\nBattleaxe-Lv.93",
 	inventory_image = "tutorial_ultrabattleaxe18.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -702,9 +704,9 @@ minetest.register_tool("tutorial:ultrabattleaxe18", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe17", {
-	description = "Ultrabattleaxe lv.17\nBattleaxe-lv.92",
+	description = "Ultra Battleaxe Lv.17\nBattleaxe-Lv.92",
 	inventory_image = "tutorial_ultrabattleaxe17.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -719,9 +721,9 @@ minetest.register_tool("tutorial:ultrabattleaxe17", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe16", {
-	description = "Ultrabattleaxe lv.16\nBattleaxe-lv.91",
+	description = "Ultra Battleaxe Lv.16\nBattleaxe-Lv.91",
 	inventory_image = "tutorial_ultrabattleaxe16.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -736,9 +738,9 @@ minetest.register_tool("tutorial:ultrabattleaxe16", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe15", {
-	description = "Ultrabattleaxe lv.15\nBattleaxe-lv.90",
+	description = "Ultra Battleaxe Lv.15\nBattleaxe-Lv.90",
 	inventory_image = "tutorial_ultrabattleaxe15.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -753,9 +755,9 @@ minetest.register_tool("tutorial:ultrabattleaxe15", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe14", {
-	description = "Ultrabattleaxe lv.14\nBattleaxe-lv.89",
+	description = "Ultra Battleaxe Lv.14\nBattleaxe-Lv.89",
 	inventory_image = "tutorial_ultrabattleaxe14.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -770,9 +772,9 @@ minetest.register_tool("tutorial:ultrabattleaxe14", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe13", {
-	description = "Ultrabattleaxe lv.13\nBattleaxe-lv.88",
+	description = "Ultra Battleaxe Lv.13\nBattleaxe-Lv.88",
 	inventory_image = "tutorial_ultrabattleaxe13.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -787,9 +789,9 @@ minetest.register_tool("tutorial:ultrabattleaxe13", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe12", {
-	description = "Ultrabattleaxe lv.12\nBattleaxe-lv.87",
+	description = "Ultra Battleaxe Lv.12\nBattleaxe-Lv.87",
 	inventory_image = "tutorial_ultrabattleaxe12.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -804,9 +806,9 @@ minetest.register_tool("tutorial:ultrabattleaxe12", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe11", {
-	description = "Ultrabattleaxe lv.11\nBattleaxe-lv.86",
+	description = "Ultra Battleaxe Lv.11\nBattleaxe-Lv.86",
 	inventory_image = "tutorial_ultrabattleaxe11.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -821,9 +823,9 @@ minetest.register_tool("tutorial:ultrabattleaxe11", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe10", {
-	description = "Ultrabattleaxe lv.10\nBattleaxe-lv.85",
+	description = "Ultra Battleaxe Lv.10\nBattleaxe-Lv.85",
 	inventory_image = "tutorial_ultrabattleaxe10.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -838,9 +840,9 @@ minetest.register_tool("tutorial:ultrabattleaxe10", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe9", {
-	description = "Ultrabattleaxe lv.9\nBattleaxe-lv.84",
+	description = "Ultra Battleaxe Lv.9\nBattleaxe-Lv.84",
 	inventory_image = "tutorial_ultrabattleaxe9.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -855,9 +857,9 @@ minetest.register_tool("tutorial:ultrabattleaxe9", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe8", {
-	description = "Ultrabattleaxe lv.8\nBattleaxe-lv.83",
+	description = "Ultra Battleaxe Lv.8\nBattleaxe-Lv.83",
 	inventory_image = "tutorial_ultrabattleaxe8.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -872,9 +874,9 @@ minetest.register_tool("tutorial:ultrabattleaxe8", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe7", {
-	description = "Ultrabattleaxe lv.7\nBattleaxe-lv.82",
+	description = "Ultra Battleaxe Lv.7\nBattleaxe-Lv.82",
 	inventory_image = "tutorial_ultrabattleaxe7.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -889,9 +891,9 @@ minetest.register_tool("tutorial:ultrabattleaxe7", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe6", {
-	description = "Ultrabattleaxe lv.6\nBattleaxe-lv.81",
+	description = "Ultra Battleaxe Lv.6\nBattleaxe-Lv.81",
 	inventory_image = "tutorial_ultrabattleaxe6.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -906,9 +908,9 @@ minetest.register_tool("tutorial:ultrabattleaxe6", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe5", {
-	description = "Ultrabattleaxe lv.5\nBattleaxe-lv.80",
+	description = "Ultra Battleaxe Lv.5\nBattleaxe-Lv.80",
 	inventory_image = "tutorial_ultrabattleaxe5.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -923,9 +925,9 @@ minetest.register_tool("tutorial:ultrabattleaxe5", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe4", {
-	description = "Ultrabattleaxe lv.4\nBattleaxe-lv.79",
+	description = "Ultra Battleaxe Lv.4\nBattleaxe-Lv.79",
 	inventory_image = "tutorial_ultrabattleaxe4.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -940,9 +942,9 @@ minetest.register_tool("tutorial:ultrabattleaxe4", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe3", {
-	description = "Ultrabattleaxe lv.3\nBattleaxe-lv.78",
+	description = "Ultra Battleaxe Lv.3\nBattleaxe-Lv.78",
 	inventory_image = "tutorial_ultrabattleaxe3.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -957,9 +959,9 @@ minetest.register_tool("tutorial:ultrabattleaxe3", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe2", {
-	description = "Ultrabattleaxe lv.2\nBattleaxe-lv.77",
+	description = "Ultra Battleaxe Lv.2\nBattleaxe-Lv.77",
 	inventory_image = "tutorial_ultrabattleaxe2.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -974,9 +976,9 @@ minetest.register_tool("tutorial:ultrabattleaxe2", {
 	},
 })
 minetest.register_tool("tutorial:ultrabattleaxe1", {
-	description = "Ultrabattleaxe lv.1\nBattleaxe-lv.76",
+	description = "Ultra Battleaxe Lv.1\nBattleaxe-Lv.76",
 	inventory_image = "tutorial_ultrabattleaxe1.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -992,9 +994,9 @@ minetest.register_tool("tutorial:ultrabattleaxe1", {
 })
 --v.0.15.0
 minetest.register_tool("tutorial:kristallbattleaxe5", {
-	description = "Crystalbattleaxe lv.5\nBattleaxe-lv.75",
+	description = "Crystal Battleaxe Lv.5\nBattleaxe-Lv.75",
 	inventory_image = "tutorial_kristallbattleaxe5.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1009,9 +1011,9 @@ minetest.register_tool("tutorial:kristallbattleaxe5", {
 	},
 })
 minetest.register_tool("tutorial:kristallbattleaxe4", {
-	description = "Crystalbattleaxe lv.4\nBattleaxe-lv.74",
+	description = "Crystal Battleaxe Lv.4\nBattleaxe-Lv.74",
 	inventory_image = "tutorial_kristallbattleaxe4.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=10},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1026,9 +1028,9 @@ minetest.register_tool("tutorial:kristallbattleaxe4", {
 	},
 })
 minetest.register_tool("tutorial:kristallbattleaxe3", {
-	description = "Crystalbattleaxe lv.3\nBattleaxe-lv.73",
+	description = "Crystal Battleaxe Lv.3\nBattleaxe-Lv.73",
 	inventory_image = "tutorial_kristallbattleaxe3.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=9},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1043,9 +1045,9 @@ minetest.register_tool("tutorial:kristallbattleaxe3", {
 	},
 })
 minetest.register_tool("tutorial:kristallbattleaxe2", {
-	description = "Crystalbattleaxe lv.2\nBattleaxe-lv.72",
+	description = "Crystal Battleaxe Lv.2\nBattleaxe-Lv.72",
 	inventory_image = "tutorial_kristallbattleaxe2.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=9},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1060,9 +1062,9 @@ minetest.register_tool("tutorial:kristallbattleaxe2", {
 	},
 })
 minetest.register_tool("tutorial:kristallbattleaxe1", {
-	description = "Crystalbattleaxe lv.1\nBattleaxe-lv.71",
+	description = "Crystal Battleaxe Lv.1\nBattleaxe-Lv.71",
 	inventory_image = "tutorial_kristallbattleaxe1.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=9},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1078,9 +1080,9 @@ minetest.register_tool("tutorial:kristallbattleaxe1", {
 })
 --v.0.14.0
 minetest.register_tool("tutorial:superenergybattleaxe7", {
-	description = "Superenergybattleaxe lv.7\nBattleaxe-lv.70",
+	description = "Super Energy Battleaxe Lv.7\nBattleaxe-Lv.70",
 	inventory_image = "tutorial_superenergybattleaxe7.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=8},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1095,9 +1097,9 @@ minetest.register_tool("tutorial:superenergybattleaxe7", {
 	},
 })
 minetest.register_tool("tutorial:superenergybattleaxe6", {
-	description = "Superenergybattleaxe lv.6\nBattleaxe-lv.69",
+	description = "Super Energy Battleaxe Lv.6\nBattleaxe-Lv.69",
 	inventory_image = "tutorial_superenergybattleaxe6.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=8},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1112,9 +1114,9 @@ minetest.register_tool("tutorial:superenergybattleaxe6", {
 	},
 })
 minetest.register_tool("tutorial:superenergybattleaxe5", {
-	description = "Superenergybattleaxe lv.5\nBattleaxe-lv.68",
+	description = "Super Energy Battleaxe Lv.5\nBattleaxe-Lv.68",
 	inventory_image = "tutorial_superenergybattleaxe5.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=8},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1129,9 +1131,9 @@ minetest.register_tool("tutorial:superenergybattleaxe5", {
 	},
 })
 minetest.register_tool("tutorial:superenergybattleaxe4", {
-	description = "Superenergybattleaxe lv.4\nBattleaxe-lv.67",
+	description = "Super Energy Battleaxe Lv.4\nBattleaxe-Lv.67",
 	inventory_image = "tutorial_superenergybattleaxe4.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=8},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1146,9 +1148,9 @@ minetest.register_tool("tutorial:superenergybattleaxe4", {
 	},
 })
 minetest.register_tool("tutorial:superenergybattleaxe3", {
-	description = "Superenergybattleaxe lv.3\nBattleaxe-lv.66",
+	description = "Super Energy Battleaxe Lv.3\nBattleaxe-Lv.66",
 	inventory_image = "tutorial_superenergybattleaxe3.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=8},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1163,9 +1165,9 @@ minetest.register_tool("tutorial:superenergybattleaxe3", {
 	},
 })
 minetest.register_tool("tutorial:superenergybattleaxe2", {
-	description = "Superenergybattleaxe lv.2\nBattleaxe-lv.65",
+	description = "Super Energy Battleaxe Lv.2\nBattleaxe-Lv.65",
 	inventory_image = "tutorial_superenergybattleaxe2.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=8},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1180,9 +1182,9 @@ minetest.register_tool("tutorial:superenergybattleaxe2", {
 	},
 })
 minetest.register_tool("tutorial:superenergybattleaxe1", {
-	description = "Superenergybattleaxe lv.1\nBattleaxe-lv.64",
+	description = "Super Energy Battleaxe Lv.1\nBattleaxe-Lv.64",
 	inventory_image = "tutorial_superenergybattleaxe1.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=8},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1198,9 +1200,9 @@ minetest.register_tool("tutorial:superenergybattleaxe1", {
 })
 --v.0.13.0
 minetest.register_tool("tutorial:energybattleaxe12", {
-	description = "Energybattleaxe lv.12\nBattleaxe-lv.63",
+	description = "Energy Battleaxe Lv.12\nBattleaxe-Lv.63",
 	inventory_image = "tutorial_energybattleaxe12.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=7},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1215,9 +1217,9 @@ minetest.register_tool("tutorial:energybattleaxe12", {
 	},
 })
 minetest.register_tool("tutorial:energybattleaxe11", {
-	description = "Energybattleaxe lv.11\nBattleaxe-lv.62",
+	description = "Energy Battleaxe Lv.11\nBattleaxe-Lv.62",
 	inventory_image = "tutorial_energybattleaxe11.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=7},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1232,9 +1234,9 @@ minetest.register_tool("tutorial:energybattleaxe11", {
 	},
 })
 minetest.register_tool("tutorial:energybattleaxe10", {
-	description = "Energybattleaxe lv.10\nBattleaxe-lv.61",
+	description = "Energy Battleaxe Lv.10\nBattleaxe-Lv.61",
 	inventory_image = "tutorial_energybattleaxe10.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=6},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1249,9 +1251,9 @@ minetest.register_tool("tutorial:energybattleaxe10", {
 	},
 })
 minetest.register_tool("tutorial:energybattleaxe9", {
-	description = "Energybattleaxe lv.9\nBattleaxe-lv.60",
+	description = "Energy Battleaxe Lv.9\nBattleaxe-Lv.60",
 	inventory_image = "tutorial_energybattleaxe9.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=6},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1266,9 +1268,9 @@ minetest.register_tool("tutorial:energybattleaxe9", {
 	},
 })
 minetest.register_tool("tutorial:energybattleaxe8", {
-	description = "Energybattleaxe lv.8\nBattleaxe-lv.59",
+	description = "Energy Battleaxe Lv.8\nBattleaxe-Lv.59",
 	inventory_image = "tutorial_energybattleaxe8.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=6},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1283,9 +1285,9 @@ minetest.register_tool("tutorial:energybattleaxe8", {
 	},
 })
 minetest.register_tool("tutorial:energybattleaxe7", {
-	description = "Energybattleaxe lv.7\nBattleaxe-lv.58",
+	description = "Energy Battleaxe Lv.7\nBattleaxe-Lv.58",
 	inventory_image = "tutorial_energybattleaxe7.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=6},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1300,9 +1302,9 @@ minetest.register_tool("tutorial:energybattleaxe7", {
 	},
 })
 minetest.register_tool("tutorial:energybattleaxe6", {
-	description = "Energybattleaxe lv.6\nBattleaxe-lv.57",
+	description = "Energy Battleaxe Lv.6\nBattleaxe-Lv.57",
 	inventory_image = "tutorial_energybattleaxe6.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=6},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1317,9 +1319,9 @@ minetest.register_tool("tutorial:energybattleaxe6", {
 	},
 })
 minetest.register_tool("tutorial:energybattleaxe5", {
-	description = "Energybattleaxe lv.5\nBattleaxe-lv.56",
+	description = "Energy Battleaxe Lv.5\nBattleaxe-Lv.56",
 	inventory_image = "tutorial_energybattleaxe5.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=6},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1334,9 +1336,9 @@ minetest.register_tool("tutorial:energybattleaxe5", {
 	},
 })
 minetest.register_tool("tutorial:energybattleaxe4", {
-	description = "Energybattleaxe lv.4\nBattleaxe-lv.55",
+	description = "Energy Battleaxe Lv.4\nBattleaxe-Lv.55",
 	inventory_image = "tutorial_energybattleaxe4.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=6},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1351,9 +1353,9 @@ minetest.register_tool("tutorial:energybattleaxe4", {
 	},
 })
 minetest.register_tool("tutorial:energybattleaxe3", {
-	description = "Energybattleaxe lv.3\nBattleaxe-lv.54",
+	description = "Energy Battleaxe Lv.3\nBattleaxe-Lv.54",
 	inventory_image = "tutorial_energybattleaxe3.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=6},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1368,9 +1370,9 @@ minetest.register_tool("tutorial:energybattleaxe3", {
 	},
 })
 minetest.register_tool("tutorial:energybattleaxe2", {
-	description = "Energybattleaxe lv.2\nBattleaxe-lv.53",
+	description = "Energy Battleaxe Lv.2\nBattleaxe-Lv.53",
 	inventory_image = "tutorial_energybattleaxe2.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=6},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1385,9 +1387,9 @@ minetest.register_tool("tutorial:energybattleaxe2", {
 	},
 })
 minetest.register_tool("tutorial:energybattleaxe1", {
-	description = "Energybattleaxe lv.1\nBattleaxe-lv.52",
+	description = "Energy Battleaxe Lv.1\nBattleaxe-Lv.52",
 	inventory_image = "tutorial_energybattleaxe1.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=6},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1403,9 +1405,9 @@ minetest.register_tool("tutorial:energybattleaxe1", {
 })
 --v.0.12.0
 minetest.register_tool("tutorial:uraniumbattleaxe2", {
-	description = "Uraniumbattleaxe lv.2\nBattleaxe-lv.51",
+	description = "Uranium Battleaxe Lv.2\nBattleaxe-Lv.51",
 	inventory_image = "tutorial_uraniumbattleaxe2.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=5},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1420,9 +1422,9 @@ minetest.register_tool("tutorial:uraniumbattleaxe2", {
 	},
 })
 minetest.register_tool("tutorial:battleaxe", {
-	description = "Battleaxe\nBattleaxe-lv.0",
+	description = "Battleaxe\nBattleaxe-Lv.0",
 	inventory_image = "tutorial_battleaxe.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1438,9 +1440,9 @@ minetest.register_tool("tutorial:battleaxe", {
 })
 --v.0.11.0
 minetest.register_tool("tutorial:uraniumbattleaxe1", {
-	description = "Uraniumbattleaxe lv.1\nBattleaxe-lv.50",
+	description = "Uranium Battleaxe Lv.1\nBattleaxe-Lv.50",
 	inventory_image = "tutorial_uraniumbattleaxe1.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=5},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1454,23 +1456,10 @@ minetest.register_tool("tutorial:uraniumbattleaxe1", {
 		damage_groups = {fleshy=50}
 	},
 })
-minetest.register_tool("tutorial:pistole", {
-	description = "Admin tool 2: Rocket Gun",
-	inventory_image = "tutorial_rocket_gun.png",
-	on_use = function(itemstack, placer, pointed_thing)
-		local dir = placer:get_look_dir();
-		local playerpos = placer:getpos();
-		local obj = minetest.env:add_entity({x=playerpos.x+0+dir.x,y=playerpos.y+2+dir.y,z=playerpos.z+0+dir.z}, "tutorial:patrone")
-		local vec = {x=dir.x*3,y=dir.y*3,z=dir.z*3}
-		obj:setvelocity(vec)
-		return itemstack
-	end,
-	light_source = 2,
-})
 minetest.register_tool("tutorial:superbattleaxe4", {
-	description = "Superbattleaxe lv.4\nBattleaxe-lv.49",
+	description = "Super Battleaxe Lv.4\nBattleaxe-Lv.49",
 	inventory_image = "tutorial_superbattleaxe4.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=5},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1485,9 +1474,9 @@ minetest.register_tool("tutorial:superbattleaxe4", {
 	},
 })
 minetest.register_tool("tutorial:superbattleaxe3", {
-	description = "Superbattleaxe lv.3\nBattleaxe-lv.48",
+	description = "Super Battleaxe Lv.3\nBattleaxe-Lv.48",
 	inventory_image = "tutorial_superbattleaxe3.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=5},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1502,9 +1491,9 @@ minetest.register_tool("tutorial:superbattleaxe3", {
 	},
 })
 minetest.register_tool("tutorial:superbattleaxe2", {
-	description = "Superbattleaxe lv.2\nBattleaxe-lv.47",
+	description = "Super Battleaxe Lv.2\nBattleaxe-Lv.47",
 	inventory_image = "tutorial_superbattleaxe2.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=5},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1519,9 +1508,9 @@ minetest.register_tool("tutorial:superbattleaxe2", {
 	},
 })
 minetest.register_tool("tutorial:superbattleaxe1", {
-	description = "Superbattleaxe lv.1\nBattleaxe-lv.46",
+	description = "Super Battleaxe Lv.1\nBattleaxe-Lv.46",
 	inventory_image = "tutorial_superbattleaxe1.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=5},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1537,57 +1526,45 @@ minetest.register_tool("tutorial:superbattleaxe1", {
 })
 --v.0.10.1
 minetest.register_tool("tutorial:zauberstab", {
-	description = "Magic stick",
+	description = "Magic Stick",
 	inventory_image = "tutorial_zauberstab.png",
-	on_use = function(itemstack, placer, pointed_thing)
-	end,
 	light_source = 12,
 })
 minetest.register_tool("tutorial:zauberstab9", {
-	description = "Magic stick lv.MAX",
+	description = "Magic Stick Lv.MAX",
 	inventory_image = "tutorial_zauberstab9.png",
-	on_use = function(itemstack, placer, pointed_thing)
-	end,
 	light_source = 12,
 })
 minetest.register_tool("tutorial:zauberstab8", {
-	description = "Magic stick lv.8",
+	description = "Magic Stick Lv.8",
 	inventory_image = "tutorial_zauberstab8.png",
 	groups = {not_in_creative_inventory=1},
-	on_use = function(itemstack, placer, pointed_thing)
-	end,
 	light_source = 12,
 })
 minetest.register_tool("tutorial:zauberstab7", {
-	description = "Magic stick lv.7",
+	description = "Magic Stick Lv.7",
 	inventory_image = "tutorial_zauberstab7.png",
 	groups = {not_in_creative_inventory=1},
-	on_use = function(itemstack, placer, pointed_thing)
-	end,
 	light_source = 12,
 })
 minetest.register_tool("tutorial:zauberstab6", {
-	description = "Magic stick lv.6",
+	description = "Magic Stick Lv.6",
 	inventory_image = "tutorial_zauberstab6.png",
 	groups = {not_in_creative_inventory=1},
-	on_use = function(itemstack, placer, pointed_thing)
-	end,
 	light_source = 12,
 })
 minetest.register_tool("tutorial:zauberstab5", {
-	description = "Magic stick lv.5",
+	description = "Magic Stick Lv.5",
 	inventory_image = "tutorial_zauberstab5.png",
 	groups = {not_in_creative_inventory=1},
-	on_use = function(itemstack, placer, pointed_thing)
-	end,
 	light_source = 12,
 })
 --v.0.10.0
 --v.0.9.0
 minetest.register_tool("tutorial:cloudbattleaxe_mega1", {
-	description = "Cloudbattleaxe lv.1\nBattleaxe-lv.21",
+	description = "Cloud Battleaxe Lv.1\nBattleaxe-Lv.21",
 	inventory_image = "tutorial_cloudbattleaxe_mega1.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1602,9 +1579,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega1", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega2", {
-	description = "Cloudbattleaxe lv.2\nBattleaxe-lv.22",
+	description = "Cloud Battleaxe Lv.2\nBattleaxe-Lv.22",
 	inventory_image = "tutorial_cloudbattleaxe_mega2.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1619,9 +1596,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega2", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega3", {
-	description = "Cloudbattleaxe lv.3\nBattleaxe-lv.23",
+	description = "Cloud Battleaxe Lv.3\nBattleaxe-Lv.23",
 	inventory_image = "tutorial_cloudbattleaxe_mega3.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1636,9 +1613,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega3", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega4", {
-	description = "Cloudbattleaxe lv.4\nBattleaxe-lv.24",
+	description = "Cloud Battleaxe Lv.4\nBattleaxe-Lv.24",
 	inventory_image = "tutorial_cloudbattleaxe_mega4.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1653,9 +1630,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega4", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega5", {
-	description = "Cloudbattleaxe lv.5\nBattleaxe-lv.25",
+	description = "Cloud Battleaxe Lv.5\nBattleaxe-Lv.25",
 	inventory_image = "tutorial_cloudbattleaxe_mega5.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1670,9 +1647,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega5", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega6", {
-	description = "Cloudbattleaxe lv.6\nBattleaxe-lv.26",
+	description = "Cloud Battleaxe Lv.6\nBattleaxe-Lv.26",
 	inventory_image = "tutorial_cloudbattleaxe_mega6.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1687,9 +1664,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega6", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega7", {
-	description = "Cloudbattleaxe lv.7\nBattleaxe-lv.27",
+	description = "Cloud Battleaxe Lv.7\nBattleaxe-Lv.27",
 	inventory_image = "tutorial_cloudbattleaxe_mega7.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1704,9 +1681,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega7", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega8", {
-	description = "Cloudbattleaxe lv.8\nBattleaxe-lv.28",
+	description = "Cloud Battleaxe Lv.8\nBattleaxe-Lv.28",
 	inventory_image = "tutorial_cloudbattleaxe_mega8.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1721,9 +1698,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega8", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega9", {
-	description = "Cloudbattleaxe lv.9\nBattleaxe-lv.29",
+	description = "Cloud Battleaxe Lv.9\nBattleaxe-Lv.29",
 	inventory_image = "tutorial_cloudbattleaxe_mega9.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1738,9 +1715,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega9", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega10", {
-	description = "Cloudbattleaxe lv.10\nBattleaxe-lv.30",
+	description = "Cloud Battleaxe Lv.10\nBattleaxe-Lv.30",
 	inventory_image = "tutorial_cloudbattleaxe_mega10.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1755,9 +1732,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega10", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega11", {
-	description = "Cloudbattleaxe lv.11\nBattleaxe-lv.31",
+	description = "Cloud Battleaxe Lv.11\nBattleaxe-Lv.31",
 	inventory_image = "tutorial_cloudbattleaxe_mega11.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1772,9 +1749,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega11", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega12", {
-	description = "Cloudbattleaxe lv.12\nBattleaxe-lv.32",
+	description = "Cloud Battleaxe Lv.12\nBattleaxe-Lv.32",
 	inventory_image = "tutorial_cloudbattleaxe_mega12.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1789,9 +1766,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega12", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega13", {
-	description = "Cloudbattleaxe lv.13\nBattleaxe-lv.33",
+	description = "Cloud Battleaxe Lv.13\nBattleaxe-Lv.33",
 	inventory_image = "tutorial_cloudbattleaxe_mega13.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1806,9 +1783,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega13", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega14", {
-	description = "Cloudbattleaxe lv.14\nBattleaxe-lv.34",
+	description = "Cloud Battleaxe Lv.14\nBattleaxe-Lv.34",
 	inventory_image = "tutorial_cloudbattleaxe_mega14.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1823,9 +1800,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega14", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega15", {
-	description = "Cloudbattleaxe lv.15\nBattleaxe-lv.35",
+	description = "Cloud Battleaxe Lv.15\nBattleaxe-Lv.35",
 	inventory_image = "tutorial_cloudbattleaxe_mega15.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1840,9 +1817,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega15", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega16", {
-	description = "Cloudbattleaxe lv.16\nBattleaxe-lv.36",
+	description = "Cloud Battleaxe Lv.16\nBattleaxe-Lv.36",
 	inventory_image = "tutorial_cloudbattleaxe_mega16.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1857,9 +1834,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega16", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega17", {
-	description = "Cloudbattleaxe lv.17\nBattleaxe-lv.37",
+	description = "Cloud Battleaxe Lv.17\nBattleaxe-Lv.37",
 	inventory_image = "tutorial_cloudbattleaxe_mega17.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1874,9 +1851,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega17", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega18", {
-	description = "Cloudbattleaxe lv.18\nBattleaxe-lv.38",
+	description = "Cloud Battleaxe Lv.18\nBattleaxe-Lv.38",
 	inventory_image = "tutorial_cloudbattleaxe_mega18.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1891,9 +1868,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega18", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega19", {
-	description = "Cloudbattleaxe lv.19\nBattleaxe-lv.39",
+	description = "Cloud Battleaxe Lv.19\nBattleaxe-Lv.39",
 	inventory_image = "tutorial_cloudbattleaxe_mega19.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1908,9 +1885,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega19", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega20", {
-	description = "Cloudbattleaxe lv.20\nBattleaxe-lv.40",
+	description = "Cloud Battleaxe Lv.20\nBattleaxe-Lv.40",
 	inventory_image = "tutorial_cloudbattleaxe_mega20.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1925,9 +1902,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega20", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega21", {
-	description = "Cloudbattleaxe lv.21\nBattleaxe-lv.41",
+	description = "Cloud Battleaxe Lv.21\nBattleaxe-Lv.41",
 	inventory_image = "tutorial_cloudbattleaxe_mega21.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1942,9 +1919,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega21", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega22", {
-	description = "Cloudbattleaxe lv.22\nBattleaxe-lv.42",
+	description = "Cloud Battleaxe Lv.22\nBattleaxe-Lv.42",
 	inventory_image = "tutorial_cloudbattleaxe_mega22.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1959,9 +1936,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega22", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega23", {
-	description = "Cloudbattleaxe lv.23\nBattleaxe-lv.43",
+	description = "Cloud Battleaxe Lv.23\nBattleaxe-Lv.43",
 	inventory_image = "tutorial_cloudbattleaxe_mega23.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1976,9 +1953,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega23", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega24", {
-	description = "Cloudbattleaxe lv.24\nBattleaxe-lv.44",
+	description = "Cloud Battleaxe Lv.24\nBattleaxe-Lv.44",
 	inventory_image = "tutorial_cloudbattleaxe_mega24.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -1993,9 +1970,9 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega24", {
 	},
 })
 minetest.register_tool("tutorial:cloudbattleaxe_mega25", { 
-	description = "Cloudbattleaxe lv.25\nBattleaxe-lv.45",
+	description = "Cloud Battleaxe Lv.25\nBattleaxe-Lv.45",
 	inventory_image = "tutorial_cloudbattleaxe_mega25.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=4},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2012,7 +1989,7 @@ minetest.register_tool("tutorial:cloudbattleaxe_mega25", {
 --v.0.8.0
 --v.0.7.2
 minetest.register_tool("tutorial:cloudentverner1", {
-	description = "Clouds remover lv.1",
+	description = "Clouds Remover Lv.1",
 	inventory_image = "tutorial_cloudentverner.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -2023,7 +2000,7 @@ minetest.register_tool("tutorial:cloudentverner1", {
 	},
 })
 minetest.register_tool("tutorial:cloudentverner2", {
-	description = "Clouds remover lv.2",
+	description = "Clouds Remover Lv.2",
 	inventory_image = "tutorial_cloudentverner2.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -2034,7 +2011,7 @@ minetest.register_tool("tutorial:cloudentverner2", {
 	},
 })
 minetest.register_tool("tutorial:cloudentverner3", {
-	description = "Clouds remover lv.3",
+	description = "Clouds Remover Lv.3",
 	inventory_image = "tutorial_cloudentverner3.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -2045,7 +2022,7 @@ minetest.register_tool("tutorial:cloudentverner3", {
 	},
 })
 minetest.register_tool("tutorial:cloudentverner4", {
-	description = "Clouds remover lv.4",
+	description = "Clouds Remover Lv.4",
 	inventory_image = "tutorial_cloudentverner4.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -2056,7 +2033,7 @@ minetest.register_tool("tutorial:cloudentverner4", {
 	},
 })
 minetest.register_tool("tutorial:cloudentverner5", {
-	description = "Clouds remover lv.5",
+	description = "Clouds Remover Lv.5",
 	inventory_image = "tutorial_cloudentverner5.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -2067,7 +2044,7 @@ minetest.register_tool("tutorial:cloudentverner5", {
 	},
 })
 minetest.register_tool("tutorial:cloudentverner6", {
-	description = "Clouds remover lv.6",
+	description = "Clouds Remover Lv.6",
 	inventory_image = "tutorial_cloudentverner6.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -2078,7 +2055,7 @@ minetest.register_tool("tutorial:cloudentverner6", {
 	},
 })
 minetest.register_tool("tutorial:cloudentverner7", {
-	description = "Clouds remover lv.7",
+	description = "Clouds Remover Lv.7",
 	inventory_image = "tutorial_cloudentverner7.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -2089,7 +2066,7 @@ minetest.register_tool("tutorial:cloudentverner7", {
 	},
 })
 minetest.register_tool("tutorial:cloudentverner8", {
-	description = "Clouds remover lv.8",
+	description = "Clouds Remover Lv.8",
 	inventory_image = "tutorial_cloudentverner8.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -2100,7 +2077,7 @@ minetest.register_tool("tutorial:cloudentverner8", {
 	},
 })
 minetest.register_tool("tutorial:cloudentverner9", {
-	description = "Clouds remover lv.9",
+	description = "Clouds Remover Lv.9",
 	inventory_image = "tutorial_cloudentverner9.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -2111,7 +2088,7 @@ minetest.register_tool("tutorial:cloudentverner9", {
 	},
 })
 minetest.register_tool("tutorial:cloudentverner10", {
-	description = "Clouds remover lv.10",
+	description = "Clouds Remover Lv.10",
 	inventory_image = "tutorial_cloudentverner10.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -2122,7 +2099,7 @@ minetest.register_tool("tutorial:cloudentverner10", {
 	},
 })
 minetest.register_tool("tutorial:cloudentverner11", {
-	description = "Clouds remover lv.11",
+	description = "Clouds Remover Lv.11",
 	inventory_image = "tutorial_cloudentverner11.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -2133,7 +2110,7 @@ minetest.register_tool("tutorial:cloudentverner11", {
 	},
 })
 minetest.register_tool("tutorial:cloudentverner12", {
-	description = "Clouds remover lv.12",
+	description = "Clouds Remover Lv.12",
 	inventory_image = "tutorial_cloudentverner12.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -2144,7 +2121,7 @@ minetest.register_tool("tutorial:cloudentverner12", {
 	},
 })
 minetest.register_tool("tutorial:cloudentverner13", {
-	description = "Clouds remover lv.13",
+	description = "Clouds Remover Lv.13",
 	inventory_image = "tutorial_cloudentverner13.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -2155,7 +2132,7 @@ minetest.register_tool("tutorial:cloudentverner13", {
 	},
 })
 minetest.register_tool("tutorial:cloudentverner14", {
-	description = "Clouds remover lv.14",
+	description = "Clouds Remover Lv.14",
 	inventory_image = "tutorial_cloudentverner14.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -2166,7 +2143,7 @@ minetest.register_tool("tutorial:cloudentverner14", {
 	},
 })
 minetest.register_tool("tutorial:cloudentverner15", {
-	description = "Clouds remover lv.15",
+	description = "Clouds Remover Lv.15",
 	inventory_image = "tutorial_cloudentverner15.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -2177,7 +2154,7 @@ minetest.register_tool("tutorial:cloudentverner15", {
 	},
 })
 minetest.register_tool("tutorial:cloudentverner16", {
-	description = "Clouds remover lv.16",
+	description = "Clouds Remover Lv.16",
 	inventory_image = "tutorial_cloudentverner16.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -2188,7 +2165,7 @@ minetest.register_tool("tutorial:cloudentverner16", {
 	},
 })
 minetest.register_tool("tutorial:cloudentverner17", {
-	description = "Clouds remover lv.17",
+	description = "Clouds Remover Lv.17",
 	inventory_image = "tutorial_cloudentverner17.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -2199,7 +2176,7 @@ minetest.register_tool("tutorial:cloudentverner17", {
 	},
 })
 minetest.register_tool("tutorial:cloudentverner18", {
-	description = "Clouds remover lv.18",
+	description = "Clouds Remover Lv.18",
 	inventory_image = "tutorial_cloudentverner18.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -2210,7 +2187,7 @@ minetest.register_tool("tutorial:cloudentverner18", {
 	},
 })
 minetest.register_tool("tutorial:cloudentverner19", {
-	description = "Clouds remover lv.19",
+	description = "Clouds Remover Lv.19",
 	inventory_image = "tutorial_cloudentverner19.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -2221,7 +2198,7 @@ minetest.register_tool("tutorial:cloudentverner19", {
 	},
 })
 minetest.register_tool("tutorial:cloudentverner20", {
-	description = "Clouds remover lv.20",
+	description = "Clouds Remover Lv.20",
 	inventory_image = "tutorial_cloudentverner20.png",
 	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
@@ -2232,7 +2209,7 @@ minetest.register_tool("tutorial:cloudentverner20", {
 	},
 })
 minetest.register_tool("tutorial:cloudentverner21", {
-	description = "Clouds remover lv.MAX",
+	description = "Clouds Remover Lv.MAX",
 	inventory_image = "tutorial_cloudentverner21.png",
 	tool_capabilities = {
 		max_drop_level=3,
@@ -2243,114 +2220,88 @@ minetest.register_tool("tutorial:cloudentverner21", {
 })
 --v.0.7.1
 minetest.register_tool("tutorial:zauberstab4", {
-	description = "Magic stick lv.4",
+	description = "Magic Stick Lv.4",
 	inventory_image = "tutorial_zauberstab4.png",
 	groups = {not_in_creative_inventory=1},
-	on_use = function(itemstack, placer, pointed_thing)
-	end,
 	light_source = 12,
 })
 minetest.register_tool("tutorial:zauberstab3", {
-	description = "Magic stick lv.3",
+	description = "Magic Stick Lv.3",
 	inventory_image = "tutorial_zauberstab3.png",
 	groups = {not_in_creative_inventory=1},
-	on_use = function(itemstack, placer, pointed_thing)	
-	end,
 	light_source = 12,
 })
 minetest.register_tool("tutorial:zauberstab2", {
-	description = "Magic stick lv.2",
+	description = "Magic Stick Lv.2",
 	inventory_image = "tutorial_zauberstab2.png",
 	groups = {not_in_creative_inventory=1},
-	on_use = function(itemstack, placer, pointed_thing)	
-	end,
 	light_source = 12,
 })
 minetest.register_tool("tutorial:zauberstab1", {
-	description = "Magic stick lv.1",
+	description = "Magic Stick Lv.1",
 	inventory_image = "tutorial_zauberstab1.png",
 	groups = {not_in_creative_inventory=1},
-	on_use = function(itemstack, placer, pointed_thing)
-	end,
 	light_source = 12,
 })
 --v.0.7.0
 minetest.register_tool("tutorial:swored_zauber1", {
-	description = "Magic sword lv.1",
+	description = "Magic Sword Lv.1",
 	inventory_image = "tutorial_zauberschwert1.png",
 	groups = {not_in_creative_inventory=1},
-	on_use = function(itemstack, placer, pointed_thing)
-	end,
 	light_source = 2,
 })
 minetest.register_tool("tutorial:swored_zauber2", {
-	description = "Magic sword lv.2",
+	description = "Magic Sword Lv.2",
 	inventory_image = "tutorial_zauberschwert2.png",
 	groups = {not_in_creative_inventory=1},
-	on_use = function(itemstack, placer, pointed_thing)
-	end,
 	light_source = 2,
 })
 minetest.register_tool("tutorial:swored_zauber3", {
-	description = "Magic sword lv.3",
+	description = "Magic Sword Lv.3",
 	inventory_image = "tutorial_zauberschwert3.png",
 	groups = {not_in_creative_inventory=1},
-	on_use = function(itemstack, placer, pointed_thing)
-	end,
 	light_source = 2,
 })
 minetest.register_tool("tutorial:swored_zauber4", {
-	description = "Magic sword lv.4",
+	description = "Magic Sword Lv.4",
 	inventory_image = "tutorial_zauberschwert4.png",
 	groups = {not_in_creative_inventory=1},
-	on_use = function(itemstack, placer, pointed_thing)
-	end,
 	light_source = 2,
 })
 minetest.register_tool("tutorial:swored_zauber5", {
-	description = "Magic sword lv.5",
+	description = "Magic Sword Lv.5",
 	inventory_image = "tutorial_zauberschwert5.png",
 	groups = {not_in_creative_inventory=1},
-	on_use = function(itemstack, placer, pointed_thing)
-	end,
 	light_source = 2,
 })
 minetest.register_tool("tutorial:swored_zauber6", {
-	description = "Magic sword lv.6",
+	description = "Magic Sword Lv.6",
 	inventory_image = "tutorial_zauberschwert6.png",
 	groups = {not_in_creative_inventory=1},
-	on_use = function(itemstack, placer, pointed_thing)
-	end,
 	light_source = 2,
 })
 minetest.register_tool("tutorial:swored_zauber7", {
-	description = "Magic sword lv.7",
+	description = "Magic Sword Lv.7",
 	inventory_image = "tutorial_zauberschwert7.png",
 	groups = {not_in_creative_inventory=1},
-	on_use = function(itemstack, placer, pointed_thing)
-	end,
 	light_source = 2,
 })
 minetest.register_tool("tutorial:swored_zauber8", {
-	description = "Magic sword lv.8",
+	description = "Magic Sword Lv.8",
 	inventory_image = "tutorial_zauberschwert8.png",
 	groups = {not_in_creative_inventory=1},
-	on_use = function(itemstack, placer, pointed_thing)
-	end,
 	light_source = 2,
 })
 minetest.register_tool("tutorial:swored_zauber9", {
-	description = "Magic sword lv.MAX",
+	description = "Magic Sword Lv.MAX",
 	inventory_image = "tutorial_zauberschwert9.png",
-	on_use = function(itemstack, placer, pointed_thing)
-	end,
 	light_source = 2,
 })
 --v.0.6.6
 minetest.register_tool("tutorial:battleaxe_mega16", {
-	description = "Mega Battleaxe lv.16\nBattleaxe-lv.16",
+	description = "Mega Battleaxe Lv.16\nBattleaxe-Lv.16",
 	inventory_image = "tutorial_battleaxe_mega16.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2365,9 +2316,9 @@ minetest.register_tool("tutorial:battleaxe_mega16", {
 	},
 })
 minetest.register_tool("tutorial:battleaxe_mega17", {
-	description = "Mega Battleaxe lv.17\nBattleaxe-lv.17",
+	description = "Mega Battleaxe Lv.17\nBattleaxe-Lv.17",
 	inventory_image = "tutorial_battleaxe_mega17.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2382,9 +2333,9 @@ minetest.register_tool("tutorial:battleaxe_mega17", {
 	},
 })
 minetest.register_tool("tutorial:battleaxe_mega18", {
-	description = "Mega Battleaxe lv.18\nBattleaxe-lv.18",
+	description = "Mega Battleaxe Lv.18\nBattleaxe-Lv.18",
 	inventory_image = "tutorial_battleaxe_mega18.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2399,9 +2350,9 @@ minetest.register_tool("tutorial:battleaxe_mega18", {
 	},
 })
 minetest.register_tool("tutorial:battleaxe_mega19", {
-	description = "Mega Battleaxe lv.19\nBattleaxe-lv.19",
+	description = "Mega Battleaxe Lv.19\nBattleaxe-Lv.19",
 	inventory_image = "tutorial_battleaxe_mega19.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2416,9 +2367,9 @@ minetest.register_tool("tutorial:battleaxe_mega19", {
 	},
 })
 minetest.register_tool("tutorial:battleaxe_mega20", {
-	description = "Mega Battleaxe lv.20\nBattleaxe-lv.20",
+	description = "Mega Battleaxe Lv.20\nBattleaxe-Lv.20",
 	inventory_image = "tutorial_battleaxe_mega20.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2434,9 +2385,9 @@ minetest.register_tool("tutorial:battleaxe_mega20", {
 })
 --v.0.6.5
 minetest.register_tool("tutorial:battleaxe_mega13", {
-	description = "Mega Battleaxe lv.13\nBattleaxe-lv.13",
+	description = "Mega Battleaxe Lv.13\nBattleaxe-Lv.13",
 	inventory_image = "tutorial_battleaxe_mega13.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2451,9 +2402,9 @@ minetest.register_tool("tutorial:battleaxe_mega13", {
 	},
 })
 minetest.register_tool("tutorial:battleaxe_mega14", {
-	description = "Mega Battleaxe lv.14\nBattleaxe-lv.14",
+	description = "Mega Battleaxe Lv.14\nBattleaxe-Lv.14",
 	inventory_image = "tutorial_battleaxe_mega14.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2468,9 +2419,9 @@ minetest.register_tool("tutorial:battleaxe_mega14", {
 	},
 })
 minetest.register_tool("tutorial:battleaxe_mega15", {
-	description = "Mega Battleaxe lv.15\nBattleaxe-lv.15",
+	description = "Mega Battleaxe Lv.15\nBattleaxe-Lv.15",
 	inventory_image = "tutorial_battleaxe_mega15.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2486,9 +2437,9 @@ minetest.register_tool("tutorial:battleaxe_mega15", {
 })
 --v.0.6.4
 minetest.register_tool("tutorial:battleaxe_mega9", {
-	description = "Mega Battleaxe lv.9\nBattleaxe-lv.9",
+	description = "Mega Battleaxe Lv.9\nBattleaxe-Lv.9",
 	inventory_image = "tutorial_battleaxe_mega9.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2503,9 +2454,9 @@ minetest.register_tool("tutorial:battleaxe_mega9", {
 	},
 })
 minetest.register_tool("tutorial:battleaxe_mega10", {
-	description = "Mega Battleaxe lv.10\nBattleaxe-lv.10",
+	description = "Mega Battleaxe Lv.10\nBattleaxe-Lv.10",
 	inventory_image = "tutorial_battleaxe_mega10.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2520,9 +2471,9 @@ minetest.register_tool("tutorial:battleaxe_mega10", {
 	},
 })
 minetest.register_tool("tutorial:battleaxe_mega11", {
-	description = "Mega Battleaxe lv.11\nBattleaxe-lv.11",
+	description = "Mega Battleaxe Lv.11\nBattleaxe-Lv.11",
 	inventory_image = "tutorial_battleaxe_mega11.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2537,9 +2488,9 @@ minetest.register_tool("tutorial:battleaxe_mega11", {
 	},
 })
 minetest.register_tool("tutorial:battleaxe_mega12", {
-	description = "Mega Battleaxe lv.12\nBattleaxe-lv.12",
+	description = "Mega Battleaxe Lv.12\nBattleaxe-Lv.12",
 	inventory_image = "tutorial_battleaxe_mega12.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2555,9 +2506,9 @@ minetest.register_tool("tutorial:battleaxe_mega12", {
 })
 --v.0.6.3
 minetest.register_tool("tutorial:battleaxe_mega5", {
-	description = "Mega Battleaxe lv.5\nBattleaxe-lv.5",
+	description = "Mega Battleaxe Lv.5\nBattleaxe-Lv.5",
 	inventory_image = "tutorial_battleaxe_mega5.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2572,9 +2523,9 @@ minetest.register_tool("tutorial:battleaxe_mega5", {
 	},
 })
 minetest.register_tool("tutorial:battleaxe_mega6", {
-	description = "Mega Battleaxe lv.6\nBattleaxe-lv.6",
+	description = "Mega Battleaxe Lv.6\nBattleaxe-Lv.6",
 	inventory_image = "tutorial_battleaxe_mega6.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2589,9 +2540,9 @@ minetest.register_tool("tutorial:battleaxe_mega6", {
 	},
 })
 minetest.register_tool("tutorial:battleaxe_mega7", {
-	description = "Mega Battleaxe lv.7\nBattleaxe-lv.7",
+	description = "Mega Battleaxe Lv.7\nBattleaxe-Lv.7",
 	inventory_image = "tutorial_battleaxe_mega7.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2606,9 +2557,9 @@ minetest.register_tool("tutorial:battleaxe_mega7", {
 	},
 })
 minetest.register_tool("tutorial:battleaxe_mega8", {
-	description = "Mega Battleaxe lv.8\nBattleaxe-lv.8",
+	description = "Mega Battleaxe Lv.8\nBattleaxe-Lv.8",
 	inventory_image = "tutorial_battleaxe_mega8.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2625,9 +2576,9 @@ minetest.register_tool("tutorial:battleaxe_mega8", {
 --v.0.6.2
 --v.0.6.1
 minetest.register_tool("tutorial:battleaxe_mega4", {
-	description = "Mega Battleaxe lv.4\nBattleaxe-lv.4",
+	description = "Mega Battleaxe Lv.4\nBattleaxe-Lv.4",
 	inventory_image = "tutorial_battleaxe_mega4.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2642,9 +2593,9 @@ minetest.register_tool("tutorial:battleaxe_mega4", {
 	},
 })
 minetest.register_tool("tutorial:battleaxe_mega3", {
-	description = "Mega Battleaxe lv.3\nBattleaxe-lv.3",
+	description = "Mega Battleaxe Lv.3\nBattleaxe-Lv.3",
 	inventory_image = "tutorial_battleaxe_mega3.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2659,9 +2610,9 @@ minetest.register_tool("tutorial:battleaxe_mega3", {
 	},
 })
 minetest.register_tool("tutorial:battleaxe_mega2", {
-	description = "Mega Battleaxe lv.2\nBattleaxe-lv.2",
+	description = "Mega Battleaxe Lv.2\nBattleaxe-Lv.2",
 	inventory_image = "tutorial_battleaxe_mega2.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2676,9 +2627,9 @@ minetest.register_tool("tutorial:battleaxe_mega2", {
 	},
 })
 minetest.register_tool("tutorial:battleaxe_mega1", {
-	description = "Mega Battleaxe lv.1\nBattleaxe-lv.1",
+	description = "Mega Battleaxe Lv.1\nBattleaxe-Lv.1",
 	inventory_image = "tutorial_battleaxe_mega1.png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, battleaxe_level=3},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -2695,6 +2646,7 @@ minetest.register_tool("tutorial:battleaxe_mega1", {
 minetest.register_tool('tutorial:paxel_super', {
 	description = 'Super Paxel',
 	inventory_image = 'tutorial_tool_superpaxel.png',
+	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
 		full_punch_interval = 0.4,
 		max_drop_level=3,
@@ -2710,6 +2662,7 @@ minetest.register_tool('tutorial:paxel_super', {
 minetest.register_tool("tutorial:axe_super", {
 	description = "Super Axe",
 	inventory_image = "tutorial_tool_cediaxt.png",
+	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
 		max_drop_level=3,
 		groupcaps={
@@ -2722,6 +2675,7 @@ minetest.register_tool("tutorial:axe_super", {
 minetest.register_tool("tutorial:shovel_super", {
 	description = "Super Shovel",
 	inventory_image = "tutorial_tool_cedishovel.png",
+	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
 		max_drop_level=3,
 		groupcaps={
@@ -2734,6 +2688,7 @@ minetest.register_tool("tutorial:shovel_super", {
 minetest.register_tool("tutorial:pick_super", {
 	description = "Super Pick",
 	inventory_image = "tutorial_tool_cedipick.png",
+	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
 		max_drop_level=3,
 		groupcaps={
@@ -2748,6 +2703,7 @@ minetest.register_tool("tutorial:pick_super", {
 minetest.register_tool("tutorial:pick_ice", {
 	description = "Ice Pick",
 	inventory_image = "tutorial_tool_icepick.png",
+	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
 		max_drop_level=3,
 		groupcaps={
@@ -2758,6 +2714,7 @@ minetest.register_tool("tutorial:pick_ice", {
 minetest.register_tool("tutorial:shovel_ice", {
 	description = "Ice Shovel",
 	inventory_image = "tutorial_tool_iceshovel.png",
+	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
 		max_drop_level=3,
 		groupcaps={
@@ -2768,6 +2725,7 @@ minetest.register_tool("tutorial:shovel_ice", {
 minetest.register_tool("tutorial:axe_ice", {
 	description = "Ice Axe",
 	inventory_image = "tutorial_tool_iceaxt.png",
+	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
 		max_drop_level=3,
 		groupcaps={
@@ -2779,6 +2737,7 @@ minetest.register_tool("tutorial:axe_ice", {
 minetest.register_tool("tutorial:sword_ice", {
 	description = "Ice Sword",
 	inventory_image = "tutorial_tool_icesword.png",
+	groups = {not_in_creative_inventory=1},
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=3,

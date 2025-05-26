@@ -1,4 +1,4 @@
-name = "Knight purple",
+name = "PopularMMOs ",
 author = "???",
-description = "",
+description = "voted for in 2016",
 comment = "to minetest by 1248",

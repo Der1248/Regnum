@@ -1,6 +1,6 @@
 Licenses
 
-Model/Textures: unknown
-Author: AspireMint
+Code: MIT
+Model/Textures: CC-BY-SA 3.0, Author AspireMint
 
 texture modification by: blert2112

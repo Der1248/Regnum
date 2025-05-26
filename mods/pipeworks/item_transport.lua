@@ -1,18 +1,46 @@
-local function delay(x)
-	return (function() return x end)
+local luaentity = pipeworks.luaentity
+local enable_max_limit = minetest.settings:get_bool("pipeworks_enable_items_per_tube_limit")
+local max_tube_limit = tonumber(minetest.settings:get("pipeworks_max_items_per_tube")) or 30
+if enable_max_limit == nil then enable_max_limit = true end
+
+if pipeworks.enable_item_tags then
+	local max_tag_length = tonumber(minetest.settings:get("pipeworks_max_item_tag_length")) or 32
+	local max_tags = tonumber(minetest.settings:get("pipeworks_max_item_tags")) or 16
+
+	function pipeworks.sanitize_tags(tags)
+		if type(tags) == "string" then
+			tags = tags:split(",")
+		end
+		local sanitized = {}
+		for i, tag in ipairs(tags) do
+			if type(tag) == "string" then
+				tag = tag:gsub("[%s,]", "")  -- Remove whitespace and commas
+				tag = tag:gsub("%$%b%{%}", "")  -- Remove special ${key} values
+				if tag ~= "" then
+					table.insert(sanitized, tag:sub(1, max_tag_length))
+				end
+			end
+			if #sanitized >= max_tags then
+				break
+			end
+		end
+		return sanitized
+	end
 end
 
 function pipeworks.tube_item(pos, item)
 	error("obsolete pipeworks.tube_item() called; change caller to use pipeworks.tube_inject_item() instead")
 end
 
-function pipeworks.tube_inject_item(pos, start_pos, velocity, item)
+function pipeworks.tube_inject_item(pos, start_pos, velocity, item, owner, tags)
 	-- Take item in any format
 	local stack = ItemStack(item)
 	local obj = luaentity.add_entity(pos, "pipeworks:tubed_item")
 	obj:set_item(stack:to_string())
 	obj.start_pos = vector.new(start_pos)
-	obj:setvelocity(velocity)
+	obj:set_velocity(velocity)
+	obj.owner = owner
+	obj.tags = tags
 	--obj:set_color("red") -- todo: this is test-only code
 	return obj
 end
@@ -23,205 +51,7 @@ end
 -- both optional w/ sensible defaults and fallback to normal allow_* function
 -- XXX: possibly change insert_object to insert_item
 
-local function set_filter_infotext(data, meta)
-	local infotext = data.wise_desc.." Filter-Injector"
-	if meta:get_int("slotseq_mode") == 2 then
-		infotext = infotext .. " (slot #"..meta:get_int("slotseq_index").." next)"
-	end
-	meta:set_string("infotext", infotext)
-end
-
-local function set_filter_formspec(data, meta)
-	local itemname = data.wise_desc.." Filter-Injector"
-	local formspec = "size[8,8.5]"..
-			"item_image[0,0;1,1;pipeworks:"..data.name.."]"..
-			"label[1,0;"..minetest.formspec_escape(itemname).."]"..
-			"label[0,1;Prefer item types:]"..
-			"list[current_name;main;0,1.5;8,2;]"..
-			fs_helpers.cycling_button(meta, "button[0,3.5;4,1", "slotseq_mode",
-				{"Sequence slots by Priority",
-				 "Sequence slots Randomly",
-				 "Sequence slots by Rotation"})..
-			"list[current_player;main;0,4.5;8,4;]"
-	meta:set_string("formspec", formspec)
-end
-
--- todo SOON: this function has *way too many* parameters
-local function grabAndFire(data,slotseq_mode,filtmeta,frominv,frominvname,frompos,fromnode,filtername,fromtube,fromdef,dir,fakePlayer,all)
-	local sposes = {}
-	for spos,stack in ipairs(frominv:get_list(frominvname)) do
-		local matches
-		if filtername == "" then
-			matches = stack:get_name() ~= ""
-		else
-			matches = stack:get_name() == filtername
-		end
-		if matches then table.insert(sposes, spos) end
-	end
-	if #sposes == 0 then return false end
-	if slotseq_mode == 1 then
-		for i = #sposes, 2, -1 do
-			local j = math.random(i)
-			local t = sposes[j]
-			sposes[j] = sposes[i]
-			sposes[i] = t
-		end
-	elseif slotseq_mode == 2 then
-		local headpos = filtmeta:get_int("slotseq_index")
-		table.sort(sposes, function (a, b)
-			if a >= headpos then
-				if b < headpos then return true end
-			else
-				if b >= headpos then return false end
-			end
-			return a < b
-		end)
-	end
-	for _, spos in ipairs(sposes) do
-			local stack = frominv:get_stack(frominvname, spos)
-			local doRemove = stack:get_count()
-			if fromtube.can_remove then
-				doRemove = fromtube.can_remove(frompos, fromnode, stack, dir)
-			elseif fromdef.allow_metadata_inventory_take then
-				doRemove = fromdef.allow_metadata_inventory_take(frompos, frominvname,spos, stack, fakePlayer)
-			end
-			-- stupid lack of continue statements grumble
-			if doRemove > 0 then
-				if slotseq_mode == 2 then
-					local nextpos = spos + 1
-					if nextpos > frominv:get_size(frominvname) then
-						nextpos = 1
-					end
-					filtmeta:set_int("slotseq_index", nextpos)
-					set_filter_infotext(data, filtmeta)
-				end
-				local item
-				local count
-				if all then
-					count = math.min(stack:get_count(), doRemove)
-				else
-					count = 1
-				end
-				if fromtube.remove_items then
-					-- it could be the entire stack...
-					item = fromtube.remove_items(frompos, fromnode, stack, dir, count)
-				else
-					item = stack:take_item(count)
-					frominv:set_stack(frominvname, spos, stack)
-					if fromdef.on_metadata_inventory_take then
-						fromdef.on_metadata_inventory_take(frompos, frominvname, spos, item, fakePlayer)
-					end
-				end
-				local pos = vector.add(frompos, vector.multiply(dir, 1.4))
-				local start_pos = vector.add(frompos, dir)
-				local item1 = pipeworks.tube_inject_item(pos, start_pos, dir, item)
-				return true-- only fire one item, please
-			end
-	end
-	return false
-end
-
-local function punch_filter(data, filtpos, filtnode)
-	local filtmeta = minetest.get_meta(filtpos)
-	local filtinv = filtmeta:get_inventory()
-	local owner = filtmeta:get_string("owner")
-	local fakePlayer = {
-		get_player_name = delay(owner),
-	} -- TODO: use a mechanism as the wielder one
-	local dir = minetest.facedir_to_right_dir(filtnode.param2)
-	local frompos = vector.subtract(filtpos, dir)
-	local fromnode = minetest.get_node(frompos)
-	if not fromnode then return end
-	local fromdef = minetest.registered_nodes[fromnode.name]
-	if not fromdef then return end
-	local fromtube = fromdef.tube
-	if not (fromtube and fromtube.input_inventory) then return end
-	local filters = {}
-	for _, filterstack in ipairs(filtinv:get_list("main")) do
-		local filtername = filterstack:get_name()
-		if filtername ~= "" then table.insert(filters, filtername) end
-	end
-	if #filters == 0 then table.insert(filters, "") end
-	local slotseq_mode = filtmeta:get_int("slotseq_mode")
-	local frommeta = minetest.get_meta(frompos)
-	local frominv = frommeta:get_inventory()
-	if fromtube.before_filter then fromtube.before_filter(frompos) end
-	for _, frominvname in ipairs(type(fromtube.input_inventory) == "table" and fromtube.input_inventory or {fromtube.input_inventory}) do
-		local done = false
-		for _, filtername in ipairs(filters) do
-			if grabAndFire(data, slotseq_mode, filtmeta, frominv, frominvname, frompos, fromnode, filtername, fromtube, fromdef, dir, fakePlayer, data.stackwise) then
-				done = true
-				break
-			end
-		end
-		if done then break end
-	end
-	if fromtube.after_filter then fromtube.after_filter(frompos) end
-end
-
-for _, data in ipairs({
-	{
-		name = "filter",
-		wise_desc = "Itemwise",
-		stackwise = false,
-	},
-	{
-		name = "mese_filter",
-		wise_desc = "Stackwise",
-		stackwise = true,
-	},
-}) do
-	minetest.register_node("pipeworks:"..data.name, {
-		description = data.wise_desc.." Filter-Injector",
-		tiles = {
-			"pipeworks_"..data.name.."_top.png",
-			"pipeworks_"..data.name.."_top.png",
-			"pipeworks_"..data.name.."_output.png",
-			"pipeworks_"..data.name.."_input.png",
-			"pipeworks_"..data.name.."_side.png",
-			"pipeworks_"..data.name.."_top.png",
-		},
-		paramtype2 = "facedir",
-		groups = {snappy = 2, choppy = 2, oddly_breakable_by_hand = 2, mesecon = 2},
-		legacy_facedir_simple = true,
-		sounds = default.node_sound_wood_defaults(),
-		on_construct = function(pos)
-			local meta = minetest.get_meta(pos)
-			set_filter_formspec(data, meta)
-			set_filter_infotext(data, meta)
-			local inv = meta:get_inventory()
-			inv:set_size("main", 8*2)
-		end,
-		after_place_node = function (pos, placer)
-			minetest.get_meta(pos):set_string("owner", placer:get_player_name())
-		end,
-		on_receive_fields = function(pos, formname, fields, sender)
-			fs_helpers.on_receive_fields(pos, fields)
-			local meta = minetest.get_meta(pos)
-			meta:set_int("slotseq_index", 1)
-			set_filter_formspec(data, meta)
-			set_filter_infotext(data, meta)
-		end,
-		can_dig = function(pos, player)
-			local meta = minetest.get_meta(pos)
-			local inv = meta:get_inventory()
-			return inv:is_empty("main")
-		end,
-		mesecons = {
-			effector = {
-				action_on = function(pos, node)
-					punch_filter(data, pos, node)
-				end,
-			},
-		},
-		tube = {connect_sides = {right = 1}},
-		on_punch = function (pos, node, puncher)
-			punch_filter(data, pos, node)
-		end,
-	})
-end
-
-local adjlist={{x=0,y=0,z=1},{x=0,y=0,z=-1},{x=0,y=1,z=0},{x=0,y=-1,z=0},{x=1,y=0,z=0},{x=-1,y=0,z=0}}
+local default_adjlist={{x=0,y=0,z=1},{x=0,y=0,z=-1},{x=0,y=1,z=0},{x=0,y=-1,z=0},{x=1,y=0,z=0},{x=-1,y=0,z=0}}
 
 function pipeworks.notvel(tbl, vel)
 	local tbl2={}
@@ -231,12 +61,119 @@ function pipeworks.notvel(tbl, vel)
 	return tbl2
 end
 
-local function go_next(pos, velocity, stack)
+local tube_item_count = {}
+
+minetest.register_globalstep(function(dtime)
+	if not luaentity.entities then
+		return
+	end
+	tube_item_count = {}
+	for _, entity in pairs(luaentity.entities) do
+		if entity.name == "pipeworks:tubed_item" then
+			local h = minetest.hash_node_position(vector.round(entity._pos))
+			tube_item_count[h] = (tube_item_count[h] or 0) + 1
+		end
+	end
+end)
+
+
+
+-- tube overload mechanism:
+-- when the tube's item count (tracked in the above tube_item_count table)
+-- exceeds the limit configured per tube, replace it with a broken one.
+
+function pipeworks.break_tube(pos)
+	local node = minetest.get_node(pos)
+	local meta = minetest.get_meta(pos)
+	meta:set_string("the_tube_was", minetest.serialize(node))
+	minetest.swap_node(pos, {name = "pipeworks:broken_tube_1"})
+	pipeworks.scan_for_tube_objects(pos)
+end
+
+local crunch_tube = function(pos, cnode, cmeta)
+	if enable_max_limit then
+		local h = minetest.hash_node_position(pos)
+		local itemcount = tube_item_count[h] or 0
+		if itemcount > max_tube_limit then
+			pipeworks.logger("Warning - a tube at "..minetest.pos_to_string(pos).." broke due to too many items ("..itemcount..")")
+			pipeworks.break_tube(pos)
+		end
+	end
+end
+
+
+
+-- compatibility behaviour for the existing can_go() callbacks,
+-- which can only specify a list of possible positions.
+local function go_next_compat(pos, cnode, cmeta, cycledir, vel, stack, owner, tags)
 	local next_positions = {}
 	local max_priority = 0
+	local can_go
+
+	local def = minetest.registered_nodes[cnode.name]
+	if def and def.tube and def.tube.can_go then
+		can_go = def.tube.can_go(pos, cnode, vel, stack, tags)
+	else
+		local adjlist_string = minetest.get_meta(pos):get_string("adjlist")
+		local adjlist = minetest.deserialize(adjlist_string) or default_adjlist -- backward compat: if not found, use old behavior: all directions
+
+		can_go = pipeworks.notvel(adjlist, vel)
+	end
+	-- can_go() is expected to return an array-like table of candidate offsets.
+	-- for each one, look at the node at that offset and determine if it can accept the item.
+	-- also note the prioritisation:
+	-- if any tube is found with a greater priority than previously discovered,
+	-- then the valid positions are reset and and subsequent positions under this are skipped.
+	-- this has the effect of allowing only equal priorities to co-exist.
+	for _, vect in ipairs(can_go) do
+		local npos = vector.add(pos, vect)
+		pipeworks.load_position(npos)
+		local node = minetest.get_node(npos)
+		local reg_node = minetest.registered_nodes[node.name]
+		if reg_node then
+			local tube_def = reg_node.tube
+			local tubedevice = minetest.get_item_group(node.name, "tubedevice")
+			local tube_priority = (tube_def and tube_def.priority) or 100
+			if tubedevice > 0 and tube_priority >= max_priority then
+				if not tube_def or not tube_def.can_insert or
+						tube_def.can_insert(npos, node, stack, vect, owner) then
+					if tube_priority > max_priority then
+						max_priority = tube_priority
+						next_positions = {}
+					end
+					next_positions[#next_positions + 1] = {pos = npos, vect = vect}
+				end
+			end
+		end
+	end
+
+	-- indicate not found if no valid rules were picked up,
+	-- and don't change the counter.
+	if not next_positions[1] then
+		return cycledir, false, nil, nil
+	end
+
+	-- otherwise rotate to the next output direction and return that
+	local n = (cycledir % (#next_positions)) + 1
+	local new_velocity = vector.multiply(next_positions[n].vect, vel.speed)
+	return n, true, new_velocity, nil
+end
+
+
+
+
+-- function called by the on_step callback of the pipeworks tube luaentity.
+-- the routine is passed the current node position, velocity, itemstack,
+-- and owner name.
+-- returns three values:
+-- * a boolean "found destination" status;
+-- * a new velocity vector that the tubed item should use, or nil if not found;
+-- * a "multi-mode" data table (or nil if N/A) where a stack was split apart.
+--	if this is not nil, the luaentity spawns new tubed items for each new fragment stack,
+--	then deletes itself (i.e. the original item stack).
+local function go_next(pos, velocity, stack, owner, tags)
 	local cnode = minetest.get_node(pos)
 	local cmeta = minetest.get_meta(pos)
-	local can_go
 	local speed = math.abs(velocity.x + velocity.y + velocity.z)
 	if speed == 0 then
 		speed = 1
@@ -250,43 +187,29 @@ local function go_next(pos, velocity, stack)
 		speed = 1
 	end
 	vel.speed = speed
-	if minetest.registered_nodes[cnode.name] and minetest.registered_nodes[cnode.name].tube and minetest.registered_nodes[cnode.name].tube.can_go then
-		can_go = minetest.registered_nodes[cnode.name].tube.can_go(pos, cnode, vel, stack)
-	else
-		can_go = pipeworks.notvel(adjlist, vel)
-	end
-	for _, vect in ipairs(can_go) do
-		local npos = vector.add(pos, vect)
-		local node = minetest.get_node(npos)
-		local reg_node = minetest.registered_nodes[node.name]
-		if reg_node then
-			local tube_def = reg_node.tube
-			local tubedevice = minetest.get_item_group(node.name, "tubedevice")
-			local tube_priority = (tube_def and tube_def.priority) or 100
-			if tubedevice > 0 and tube_priority >= max_priority then
-				if not tube_def or not tube_def.can_insert or
-						tube_def.can_insert(npos, node, stack, vect) then
-					if tube_priority > max_priority then
-						max_priority = tube_priority
-						next_positions = {}
-					end
-					next_positions[#next_positions + 1] = {pos = npos, vect = vect}
-				end
-			end
-		end
-	end
 
-	if not next_positions[1] then
-		return false, nil
-	end
-	
-	local n = (cmeta:get_int("tubedir") % (#next_positions)) + 1
+	crunch_tube(pos, cnode, cmeta)
+	-- cycling of outputs:
+	-- an integer counter is kept in each pipe's metadata,
+	-- which allows tracking which output was previously chosen.
+	-- note reliance on get_int returning 0 for uninitialised.
+	local cycledir = cmeta:get_int("tubedir")
+
+	-- pulled out and factored out into go_next_compat() above.
+	-- n is the new value of the cycle counter.
+	-- XXX: this probably needs cleaning up after being split out,
+	-- seven args is a bit too many
+	local n, found, new_velocity, multimode = go_next_compat(pos, cnode, cmeta, cycledir, vel, stack, owner, tags)
+
+	-- if not using output cycling,
+	-- don't update the field so it stays the same for the next item.
 	if pipeworks.enable_cyclic_mode then
 		cmeta:set_int("tubedir", n)
 	end
-	local new_velocity = vector.multiply(next_positions[n].vect, vel.speed)
-	return true, new_velocity
+	return found, new_velocity, multimode
 end
+
+
 
 minetest.register_entity("pipeworks:tubed_item", {
 	initial_properties = {
@@ -305,6 +228,7 @@ minetest.register_entity("pipeworks:tubed_item", {
 
 	from_data = function(self, itemstring)
 		local stack = ItemStack(itemstring)
+		--[[
 		local itemtable = stack:to_table()
 		local itemname = nil
 		if itemtable then
@@ -316,12 +240,13 @@ minetest.register_entity("pipeworks:tubed_item", {
 			item_texture = minetest.registered_items[itemname].inventory_image
 			item_type = minetest.registered_items[itemname].type
 		end
+		--]]
 		self.object:set_properties({
 			is_visible = true,
 			textures = {stack:get_name()}
 		})
 		local def = stack:get_definition()
-		self.object:setyaw((def and def.type == "node") and 0 or math.pi * 0.25)
+		self.object:set_yaw((def and def.type == "node") and 0 or math.pi * 0.25)
 	end,
 
 	get_staticdata = luaentity.get_staticdata,
@@ -334,7 +259,7 @@ minetest.register_entity("pipeworks:tubed_item", {
 			return
 		end
 		local item = minetest.deserialize(staticdata)
-		pipeworks.tube_inject_item(self.object:getpos(), item.start_pos, item.velocity, item.itemstring)
+		pipeworks.tube_inject_item(self.object:get_pos(), item.start_pos, item.velocity, item.itemstring)
 		self.object:remove()
 	end,
 })
@@ -366,12 +291,19 @@ minetest.register_entity("pipeworks:color_entity", {
 	on_activate = luaentity.on_activate,
 })
 
+-- see below for usage:
+-- determine if go_next returned a multi-mode set.
+local is_multimode = function(v)
+	return (type(v) == "table") and (v.__multimode)
+end
+
 luaentity.register_entity("pipeworks:tubed_item", {
 	itemstring = '',
 	item_entity = nil,
 	color_entity = nil,
 	color = nil,
 	start_pos = nil,
+	tags = nil,
 
 	set_item = function(self, item)
 		local itemstring = ItemStack(item):to_string() -- Accept any input format
@@ -384,7 +316,7 @@ luaentity.register_entity("pipeworks:tubed_item", {
 		self.itemstring = itemstring
 		self.item_entity = self:add_attached_entity("pipeworks:tubed_item", itemstring)
 	end,
-	
+
 	set_color = function(self, color)
 		if self.color == color then
 			return
@@ -401,18 +333,14 @@ luaentity.register_entity("pipeworks:tubed_item", {
 	end,
 
 	on_step = function(self, dtime)
+		local pos = self:get_pos()
 		if self.start_pos == nil then
-			local pos = self:getpos()
 			self.start_pos = vector.round(pos)
-			self:setpos(pos)
+			self:set_pos(pos)
 		end
-		
-		local pos = self:getpos()
-		local stack = ItemStack(self.itemstring)
-		local drop_pos
-		
-		local velocity = self:getvelocity()
-		
+
+		local velocity = self:get_velocity()
+
 		local moved = false
 		local speed = math.abs(velocity.x + velocity.y + velocity.z)
 		if speed == 0 then
@@ -420,18 +348,26 @@ luaentity.register_entity("pipeworks:tubed_item", {
 			moved = true
 		end
 		local vel = {x = velocity.x / speed, y = velocity.y / speed, z = velocity.z / speed, speed = speed}
-		
-		if vector.distance(pos, self.start_pos) >= 1 then
+		local moved_by = vector.distance(pos, self.start_pos)
+
+		if moved_by >= 1 then
 			self.start_pos = vector.add(self.start_pos, vel)
 			moved = true
 		end
-		
-		minetest.load_position(self.start_pos)
+
+		if not moved then
+			return
+		end
+
+		local stack = ItemStack(self.itemstring)
+
+		pipeworks.load_position(self.start_pos)
 		local node = minetest.get_node(self.start_pos)
-		if moved and minetest.get_item_group(node.name, "tubedevice_receiver") == 1 then
+		if minetest.get_item_group(node.name, "tubedevice_receiver") == 1 then
 			local leftover
-			if minetest.registered_nodes[node.name].tube and minetest.registered_nodes[node.name].tube.insert_object then
-				leftover = minetest.registered_nodes[node.name].tube.insert_object(self.start_pos, node, stack, vel)
+			local def = minetest.registered_nodes[node.name]
+			if def.tube and def.tube.insert_object then
+				leftover = def.tube.insert_object(self.start_pos, node, stack, vel, self.owner)
 			else
 				leftover = stack
 			end
@@ -440,26 +376,56 @@ luaentity.register_entity("pipeworks:tubed_item", {
 				return
 			end
 			velocity = vector.multiply(velocity, -1)
-			self:setvelocity(velocity)
+			self:set_pos(vector.subtract(self.start_pos, vector.multiply(vel, moved_by - 1)))
+			self:set_velocity(velocity)
 			self:set_item(leftover:to_string())
 			return
 		end
-		
-		if moved then
-			local found_next, new_velocity = go_next(self.start_pos, velocity, stack) -- todo: color
-			if not found_next then
-				drop_pos = minetest.find_node_near(vector.add(self.start_pos, velocity), 1, "air")
-				if drop_pos then 
-					minetest.add_item(drop_pos,stack)
+
+		local tags
+		if pipeworks.enable_item_tags then
+			tags = self.tags or {}
+		end
+		local found_next, new_velocity, multimode = go_next(self.start_pos, velocity, stack, self.owner, tags) -- todo: color
+		if pipeworks.enable_item_tags then
+			self.tags = #tags > 0 and tags or nil
+		end
+		local rev_vel = vector.multiply(velocity, -1)
+		local rev_dir = vector.direction(self.start_pos,vector.add(self.start_pos,rev_vel))
+		local rev_node = minetest.get_node(vector.round(vector.add(self.start_pos,rev_dir)))
+		local tube_present = minetest.get_item_group(rev_node.name,"tubedevice") == 1
+		if not found_next then
+			if pipeworks.drop_on_routing_fail or not tube_present or
+					minetest.get_item_group(rev_node.name,"tube") ~= 1 then
+				-- Using add_item instead of item_drop since this makes pipeworks backward
+				-- compatible with Minetest 0.4.13.
+				-- Using item_drop here makes Minetest 0.4.13 crash.
+				local dropped_item = minetest.add_item(self.start_pos, stack)
+				if dropped_item then
+					dropped_item:set_velocity(vector.multiply(velocity, 5))
 					self:remove()
-					return
 				end
+				return
+			else
+				velocity = vector.multiply(velocity, -1)
+				self:set_pos(vector.subtract(self.start_pos, vector.multiply(vel, moved_by - 1)))
+				self:set_velocity(velocity)
 			end
-			
-			if new_velocity and not vector.equals(velocity, new_velocity) then
-				self:setpos(self.start_pos)
-				self:setvelocity(new_velocity)
+		elseif is_multimode(multimode) then
+			-- create new stacks according to returned data.
+			local s = self.start_pos
+			for _, split in ipairs(multimode) do
+				pipeworks.tube_inject_item(s, s, split.velocity, split.itemstack, self.owner)
 			end
+			-- remove ourself now the splits are sent
+			self:remove()
+			return
+		end
+
+		if new_velocity and not vector.equals(velocity, new_velocity) then
+			local nvelr = math.abs(new_velocity.x + new_velocity.y + new_velocity.z)
+			self:set_pos(vector.add(self.start_pos, vector.multiply(new_velocity, (moved_by - 1) / nvelr)))
+			self:set_velocity(new_velocity)
 		end
 	end
 })
@@ -472,13 +438,13 @@ if minetest.get_modpath("mesecons_mvps") then
 		for _, n in ipairs(moved_nodes) do
 			moved[minetest.hash_node_position(n.oldpos)] = vector.subtract(n.pos, n.oldpos)
 		end
-		for id, entity in pairs(luaentity.entities) do
+		for _, entity in pairs(luaentity.entities) do
 			if entity.name == "pipeworks:tubed_item" then
-				local pos = entity:getpos()
+				local pos = entity:get_pos()
 				local rpos = vector.round(pos)
 				local dir = moved[minetest.hash_node_position(rpos)]
 				if dir then
-					entity:setpos(vector.add(pos, dir))
+					entity:set_pos(vector.add(pos, dir))
 					entity.start_pos = vector.add(entity.start_pos, dir)
 				end
 			end

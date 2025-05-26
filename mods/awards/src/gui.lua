@@ -1,6 +1,6 @@
 -- Copyright (c) 2013-18 rubenwardy. MIT.
 
-local S = awards.gettext
+local S = awards.translator
 
 function awards.get_formspec(name, to, sid)
 	local formspec = ""
@@ -17,11 +17,11 @@ function awards.get_formspec(name, to, sid)
 	local sitem = awards_list[sid]
 	local sdef = sitem.def
 	if sdef and sdef.secret and not sitem.unlocked then
-		formspec = formspec .. "label[1,3.85;"..
+		formspec = formspec .. "label[1,2.75;"..
 				minetest.formspec_escape(S("(Secret Award)")).."]"..
-				"image[0.45,0.75;3.5,3.5;awards_unknown.png]"
+				"image[1,0;3,3;awards_unknown.png]"
 		if sdef and sdef.description then
-			formspec = formspec	.. "textarea[0.25,4.35;4.8,1.7;;"..
+			formspec = formspec	.. "textarea[0.25,3.25;4.8,1.7;;"..
 					minetest.formspec_escape(
 							S("Unlock this award to find out what it is."))..";]"
 		end
@@ -30,17 +30,22 @@ function awards.get_formspec(name, to, sid)
 		if sdef and sdef.title then
 			title = sdef.title
 		end
-		local status = "%s"
+		local status = "@1"
 		if sitem.unlocked then
-			status = S("%s (unlocked)")
+			-- Don't actually use translator here. We define empty S() to fool the update_translations script
+			-- into extracting that string for the templates.
+			local function S(str)
+				return str
+			end
+			status = S("@1 (unlocked)")
 		end
 
-		formspec = formspec .. "textarea[0.5,3.85;4.8,1.45;;" ..
-			string.format(status, minetest.formspec_escape(title)) ..
+		formspec = formspec .. "textarea[0.5,3.1;4.8,1.45;;" ..
+			S(status, minetest.formspec_escape(title)) ..
 			";]"
 
 		if sdef and sdef.icon then
-			formspec = formspec .. "image[0.45,0.75;3.5,3.5;" .. sdef.icon .. "]"  -- adjusted values from 0.6,0;3,3
+			formspec = formspec .. "image[0.45,0;3.5,3.5;" .. sdef.icon .. "]"  -- adjusted values from 0.6,0;3,3
 		end
 
 		if sitem.progress then
@@ -50,22 +55,22 @@ function awards.get_formspec(name, to, sid)
 			if perc > 1 then
 				perc = 1
 			end
-			formspec = formspec .. "background[0,8.99;" .. barwidth ..",0.4;awards_progress_gray.png;false]"
-			formspec = formspec .. "background[0,8.99;" .. (barwidth * perc) ..",0.4;awards_progress_green.png;false]"
+			formspec = formspec .. "background[0,8.24;" .. barwidth ..",0.4;awards_progress_gray.png;false]"
+			formspec = formspec .. "background[0,8.24;" .. (barwidth * perc) ..",0.4;awards_progress_green.png;false]"
 			if label then
-				formspec = formspec .. "label[1.6,8.90;" .. minetest.formspec_escape(label) .. "]"
+				formspec = formspec .. "label[1.6,8.15;" .. minetest.formspec_escape(label) .. "]"
 			end
 		end
 
 		if sdef and sdef.description then
-			formspec = formspec .. "box[-0.05,4.5;3.9,4.2;#000]"
-			formspec = formspec	.. "textarea[0.25,4.5;3.9,4.2;;" ..
+			formspec = formspec .. "box[-0.05,3.75;3.9,4.2;#000]"
+			formspec = formspec	.. "textarea[0.25,3.75;3.9,4.2;;" ..
 					minetest.formspec_escape(sdef.description) .. ";]"
 		end
 	end
-	local total_awards = 0
+
 	-- Create list box
-	formspec = formspec .. "textlist[4,0.75;3.8,8.6;awards;"
+	formspec = formspec .. "textlist[4,0;3.8,8.6;awards;"
 	local first = true
 	for _, award in pairs(awards_list) do
 		local def = award.def
@@ -84,7 +89,6 @@ function awards.get_formspec(name, to, sid)
 				end
 				-- title = title .. " [" .. award.score .. "]"
 				if award.unlocked then
-					total_awards = total_awards + 1
 					formspec = formspec .. minetest.formspec_escape(title)
 				elseif award.started then
 					formspec = formspec .. "#c0c0c0".. minetest.formspec_escape(title)
@@ -94,20 +98,7 @@ function awards.get_formspec(name, to, sid)
 			end
 		end
 	end
-	if total_awards == 42 then
-		local player_inv = minetest.get_player_by_name(name):get_inventory()
-		player_inv:set_size("a20", 1)
-		player_inv:set_stack("a20", 1, "default:dirt")
-	else
-		local player_inv = minetest.get_player_by_name(name):get_inventory()
-		player_inv:set_size("a20", 1)
-		player_inv:set_stack("a20", 1, "")
-	end
-	formspec = formspec .. ";"..sid.."]"
-	formspec = formspec .. "label[5.6,0;"..total_awards.."/42]"
-		.."button[0,0;2,0.5;inven;Back]"
-		.."button[2,0;2,0.5;main;Main]"
-	return formspec
+	return formspec .. ";"..sid.."]"
 end
 
 
@@ -136,7 +127,7 @@ function awards.show_to(name, to, sid, text)
 			if def then
 				if def.title then
 					if def.description then
-						minetest.chat_send_player(to, string.format(S("%s: %s"), def.title, def.description))
+						minetest.chat_send_player(to, string.format("%s: %s", def.title, def.description))
 					else
 						minetest.chat_send_player(to, def.title)
 					end
@@ -151,24 +142,30 @@ function awards.show_to(name, to, sid, text)
 			deco = default.gui_bg .. default.gui_bg_img
 		end
 		-- Show formspec to user
-		minetest.get_player_by_name(to):set_inventory_formspec("size[8,9.35]" .. deco .. awards.get_formspec(name, to, sid))
+		minetest.show_formspec(to,"awards:awards",
+			"size[8,8.6]" .. deco ..
+			awards.get_formspec(name, to, sid))
 	end
 end
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
-	local name = player:get_player_name()
-	if fields.aw then
-		awards.show_to(name, name, nil, false)
+	if formname ~= "awards:awards" then
+		return false
 	end
-
-	
+	if fields.quit then
+		return true
+	end
+	local name = player:get_player_name()
 	if fields.awards then
 		local event = minetest.explode_textlist_event(fields.awards)
 		if event.type == "CHG" then
 			awards.show_to(name, name, event.index, false)
 		end
 	end
+
+	return true
 end)
+
 --[[
 if minetest.get_modpath("sfinv") then
 	sfinv.register_page("awards:awards", {
@@ -214,6 +211,7 @@ if minetest.get_modpath("sfinv") then
 	awards.register_on_unlock(check_and_reshow)
 end
 --]]
+
 if minetest.get_modpath("unified_inventory") ~= nil then
 	unified_inventory.register_button("awards", {
 		type = "image",

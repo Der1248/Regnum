@@ -1,5 +1,6 @@
 Licenses
 
+Code: MIT
 Model/Textures:	WTFPL
 Author: blert2112
 
@@ -18,4 +19,3 @@ Author: blert2112
    TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
   0. You just DO WHAT THE FUCK YOU WANT TO.
- 

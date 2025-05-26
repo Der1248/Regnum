@@ -1,4 +1,3 @@
-name = "Knight 1248",
-author = "???",
-description = "",
-comment = "to minetest by 1248",
+name = "Smurf", 
+author = "1248",
+
