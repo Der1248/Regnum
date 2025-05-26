@@ -5,16 +5,17 @@ NightmareLP for building a mod
 et77 for great ideas
 wuschel1912 for testing
 jumali for testing
+Verlo for language improvements
+Skamiz Kazzarch for warning fixes
 
 Info:
-50 achievements to earn, 11 differend monsters to hunt,
-6 animals to tame, 20 differend mods, more than 20 new ores,
-129 skins, 11 differend craft types, 6 xp types,
-up to 8 very big bagpacks, a huge inventory,
-many tools with cool functions and
-more then 3700 different blocks, items and tools.
-Craft keys, colect xp, craft battleaxes, armor, guns and lots more.
-And this in only one Game.
+54 achievements to earn, 18 differend monsters to hunt,
+6 animals to tame, 58 differend mods, 15 new ores,
+more than 100 skins, 10 new craft types, 8 xp types, up 
+to 8 very big bagpacks, a huge inventory, and many 
+tools with cool functions. Craft keys, colect xp, craft 
+battleaxes, armor, guns and lots more. And this in only 
+one Game.
 
 License:
 See README.txt in each mod for more information
