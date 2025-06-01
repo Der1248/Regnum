@@ -134,7 +134,8 @@ minetest.register_globalstep(function(dtime)
             if dig_pos[player_name] and dig_pos[player_name] ~= node_pos then
                 local objects = minetest.get_objects_inside_radius(dig_pos[player_name], 0.5)
                 for _, object in ipairs(objects) do
-                    if object:get_luaentity().name == "tutorial:crack_overlay" then
+                    local e = object:get_luaentity()
+                    if e and e.name == "tutorial:crack_overlay" then
                         object:remove()
                     end
                 end
@@ -154,7 +155,8 @@ minetest.register_globalstep(function(dtime)
                     local objects = minetest.get_objects_inside_radius(dig_pos[player_name], 0.5)
                     local is_ent = false
                     for _, object in ipairs(objects) do
-                        if object:get_luaentity().name == "tutorial:crack_overlay" then
+                        local e = object:get_luaentity()
+                        if e and e.name == "tutorial:crack_overlay" then
                             is_ent = true
                             local time = 120
                             if node_group == 4 then
@@ -247,7 +249,8 @@ minetest.register_globalstep(function(dtime)
             if dig_pos[player_name] then
                 local objects = minetest.get_objects_inside_radius(dig_pos[player_name], 0.5)
                 for _, object in ipairs(objects) do
-                    if object:get_luaentity().name == "tutorial:crack_overlay" then
+                    local e = object:get_luaentity()
+                    if e and e.name == "tutorial:crack_overlay" then
                         object:remove()
                     end
                 end
