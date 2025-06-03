@@ -5,17 +5,35 @@ local remove_list = true
 
 minetest.register_on_mods_loaded(function()
     local old_pages = sfinv.pages_unordered
-    sfinv.pages_unordered = {}
-	table.insert(sfinv.pages_unordered, old_pages[1])
-	table.insert(sfinv.pages_unordered, old_pages[2])
-	table.insert(sfinv.pages_unordered, old_pages[5])
-	table.insert(sfinv.pages_unordered, old_pages[8])
-	table.insert(sfinv.pages_unordered, old_pages[4])
-	table.insert(sfinv.pages_unordered, old_pages[6])
-	table.insert(sfinv.pages_unordered, old_pages[7])
-	table.insert(sfinv.pages_unordered, old_pages[3])
+	new_order = { 
+		"sfinv:crafting", 
+		"mtg_craftguide:craftguide",
+		"tutorial:regnum_guide", 
+		"bags:bags",
+		"3d_armor:armor",
+		"tutorial:achievements",
+		"tutorial:other",
+		"creative:all",
+	}
+	local name_to_page = {}
+	local added = {}
+	sfinv.pages_unordered = {}
+	for _, page in ipairs(old_pages) do
+		name_to_page[page.name] = page
+	end
+	for _, name in ipairs(new_order) do
+		local page = name_to_page[name]
+		if page then
+			table.insert(sfinv.pages_unordered, page)
+			added[name] = true
+		end
+	end
+	for _, page in ipairs(old_pages) do
+		if not added[page.name] then
+			table.insert(sfinv.pages_unordered, page)
+		end
+	end
 end)
-
 
 minetest.register_on_joinplayer(function(player)
 	local name = player:get_player_name()
