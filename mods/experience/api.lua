@@ -5,6 +5,12 @@ experience.set(player, "experience", 0)
 experience.add_orb(pos, "experience")
 experience.is_xp_orb(object, "experience")
 
+experience.register_xp_type("experience", {
+	description = "",
+	texture = "orb.png",
+	on_xp_gain = function(player, new_xp)
+	end,
+})
 
 experience types:
 "experience"
@@ -42,6 +48,24 @@ experience.set = function(player, xp_type, value)
 	xp_file:close()
 end
 
+-- add experience points to selected type and call xp gain callbacks
+experience.add = function(player, xp_type, value)
+	local current_xp = experience.get(player, xp_type)
+	local new_xp = current_xp + value
+	experience.set(player, xp_type, new_xp)
+
+	local xp_def = experience.registered_xp_types[xp_type]
+	if xp_def then
+		xp_def.on_xp_gain(player, new_xp)
+	end
+end
+
+
+experience.registered_xp_types = {}
+experience.register_xp_type = function(name, def)
+	def.name = name
+	experience.registered_xp_types[name] = def
+end
 
 -- return center pos of players collision box
 experience.get_player_center = function(player)
@@ -79,17 +103,7 @@ experience.add_orb = function(pos, xp_type)
 	local obj = core.add_entity(pos, "experience:xp_orb", xp_type)
 end
 
-local type_textures = {
-	["experience"] = "orb.png",
-	["experience_rot"] = "orb_rot.png",
-	["experience_blau"] = "orb_blau.png",
-	["experience_grau"] = "orb_grau.png",
-	["experience_gelb"] = "orb_gelb.png",
-	["experience_cyan"] = "orb_cyan.png",
-	["experience_bronze"] = "orb_bronze.png",
-	["experience_silver"] = "orb_silver.png",
-}
-
+-- unified xp orb object
 minetest.register_entity("experience:xp_orb", {
 	initial_properties = {
 		physical = true,
@@ -112,10 +126,12 @@ minetest.register_entity("experience:xp_orb", {
 		if staticdata then
 			self.xp_type = staticdata
 
-			local texture = type_textures[self.xp_type]
-			self.object:set_properties({
-				textures = {texture},
-			})
+			local xp_def = experience.registered_xp_types[self.xp_type]
+			if xp_def then
+				self.object:set_properties({
+					textures = {xp_def.texture},
+				})
+			end
 		end
 	end,
 
@@ -161,7 +177,7 @@ minetest.register_entity("experience:xp_orb", {
 core.register_globalstep(function(dtime)
 	for _, player in ipairs(core.get_connected_players()) do
 		local player_pos = player:get_pos()
-		local player_height = player:get_properties().collisionbox[5]
+		-- local player_height = player:get_properties().collisionbox[5]
 
 		-- player_pos = player_pos + experience.get_player_center(player)
 		player_pos.y = player_pos.y + 0.5
@@ -175,6 +191,32 @@ core.register_globalstep(function(dtime)
 				vec = vec * 3
 
 				object:set_velocity(vec)
+			end
+		end
+	end
+end)
+
+-- pick up xp orbs
+core.register_globalstep(function(dtime)
+	for _, player in ipairs(core.get_connected_players()) do
+		local player_pos = player:get_pos()
+		-- local player_height = player:get_properties().collisionbox[5]
+
+		-- player_pos = player_pos + experience.get_player_center(player)
+		player_pos.y = player_pos.y + 0.5
+
+		for object in core.objects_inside_radius(player_pos, 1) do
+			if experience.is_xp_orb(object) then
+				local xp_type = object:get_luaentity().xp_type
+				local xp_def = xp_type and experience.registered_xp_types[xp_type]
+
+				if xp_def then
+					object:remove()
+					experience.add(player, xp_type, 1)
+					minetest.sound_play("orb", {
+						to_player = player:get_player_name(),
+					})
+				end
 			end
 		end
 	end

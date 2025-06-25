@@ -47,7 +47,7 @@ minetest.register_tool("tutorial:waterbattleaxe", {
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
-		groupcaps={               		
+		groupcaps={
 			cracky	=	{times={[14]=0}, uses=0, maxlevel=3},
 		},
 		damage_groups = {fleshy=1}
@@ -62,7 +62,7 @@ minetest.register_tool("tutorial:lavabattleaxe", {
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
-		groupcaps={               		
+		groupcaps={
 			cracky	=	{times={[17]=0}, uses=0, maxlevel=3},
 		},
 		damage_groups = {fleshy=1}
@@ -451,7 +451,7 @@ minetest.register_allow_player_inventory_action(function(player, action, invento
     elseif list_name == "dragon" and (stack:get_name() ~= "tutorial:dragon_crystal" or prev_stack:get_count() ~= 0) then
         return 0
     elseif list_name == "dragon" then
-        return 1  
+        return 1
     elseif list_name == "sheep" and (minetest.get_item_group(stack:get_name(), "dye") == 0 or (prev_stack:get_count() ~= 0 and prev_stack:get_name() == stack:get_name())) then
         return 0
     elseif list_name == "sheep" then
@@ -459,7 +459,7 @@ minetest.register_allow_player_inventory_action(function(player, action, invento
     elseif list_name == "tortoise" and (stack:get_name() ~= "tutorial:dragon_crystal" or prev_stack:get_count() ~= 0) then
         return 0
     elseif list_name == "tortoise" then
-        return 1  
+        return 1
     elseif list_name == "trophcr" and minetest.get_item_group(stack:get_name(), "regnum_tear") == 0 then
         return 0
     elseif list_name == "trophcr" then
@@ -513,8 +513,8 @@ minetest.register_on_player_inventory_action(function(player, action, inventory,
     elseif inventory_info.stack then
         list_name = inventory_info.listname
     end
-    if list_name == "feld3" or list_name == "feld" or list_name == "feld4" or list_name == "feld5" or list_name == "feld6" or list_name == "feld7" or list_name == "feld8" 
-    or list_name == "cookkey" or list_name == "pixkey" or list_name == "skinskey" or list_name == "skinskey2" or list_name == "bronze_key" or list_name == "feld2" 
+    if list_name == "feld3" or list_name == "feld" or list_name == "feld4" or list_name == "feld5" or list_name == "feld6" or list_name == "feld7" or list_name == "feld8"
+    or list_name == "cookkey" or list_name == "pixkey" or list_name == "skinskey" or list_name == "skinskey2" or list_name == "bronze_key" or list_name == "feld2"
     or list_name == "arm" or list_name == "krit" or list_name == "b" or list_name == "bag" or list_name == "gem" or list_name == "2gem" then
         sfinv.set_player_inventory_formspec(player)
     end
@@ -837,7 +837,7 @@ minetest.register_craft({
         {'tutorial:coin_bronze', 'tutorial:coin_bronze', 'tutorial:coin_bronze', 'tutorial:coin_bronze', 'tutorial:coin_bronze'},
     }
 })
-	
+
 minetest.register_craftitem("tutorial:xraystick1", {
     description = "Xray Stick Lv.1",
     inventory_image = "tutorial_xraystick1.png",
@@ -2262,7 +2262,7 @@ minetest.register_node("tutorial:bottle_crystal", {
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
 	},
     on_place = function(itemstack, placer, pointed_thing)
-        minetest.add_entity(pointed_thing.above, "experience:orb_cyan")
+		experience.add_orb(pointed_thing.above, "experience_cyan")
         if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
         return itemstack
     end,
@@ -2423,7 +2423,7 @@ minetest.register_globalstep(function(dtime)
                     num_ach = num_ach+1
                 end
             end
-        
+
             local player_rank = "[Outsider]"
             for _, rank in ipairs(rank_order) do
                 local privs = ranks[rank]
@@ -2446,7 +2446,7 @@ minetest.register_globalstep(function(dtime)
             elseif num_ach > 24 then
                 suffix = "[★]"
             end
-            
+
             if player_rank == "[Admin]" then
                 player:set_nametag_attributes({bgcolor = bcolor, color = {a = 255, r = 255, g = 0, b = 255}, text = "[Admin]"..player:get_player_name()..suffix})
             elseif player_rank == "[Moderator]" then
@@ -5666,7 +5666,7 @@ local mode_tools = {
 	{"tutorial:gun_admin2","tutorial:gun_admin1",""},
 	{"tutorial:gun_admin3","tutorial:gun_admin2",""},
 
-    
+
 }
 for i = 1, 150 do
     table.insert(mode_tools, {"technic:drill_mkS"..i.."_1","technic:drill_mkS"..i.."_2"})
@@ -5742,14 +5742,14 @@ end
 for _, pair in ipairs(mode_tools) do
     local original_item = pair[1]
     local new_item = pair[2]
-    
+
     local old_def = minetest.registered_items[original_item]
     if old_def then
-        
+
         local old_on_place = minetest.registered_items[original_item].on_place
         minetest.override_item(original_item, {
             on_place = function(itemstack, placer, pointed_thing)
-                
+
                 if pointed_thing.type == "node" then
                     local node = minetest.get_node(pointed_thing.under)
                     local nodedef = minetest.registered_nodes[node.name]
@@ -5774,7 +5774,7 @@ for _, pair in ipairs(mode_tools) do
 
             end,
             on_secondary_use = function(itemstack, user)
-                
+
                 local transformed = get_transformed_item(itemstack:get_name())
                 local ctrl = user:get_player_control()
                 if transformed and ctrl.sneak then
