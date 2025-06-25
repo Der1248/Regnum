@@ -6,10 +6,8 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 		minetest.add_entity(pos, "experience:orb")
 	end
 end)
---give a new player some xp
-minetest.register_on_newplayer(function(player)
-	experience.set(player, "experience", 0)
-end)
+
+
 --Allow people to collect orbs
 minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do

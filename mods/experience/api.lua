@@ -3,7 +3,7 @@ experience.get(player, "experience")
 experience.set(player, "experience", 0)
 ]]
 
--- get player experience value, returns 0 if experience typ not found
+-- get player experience value, returns 0 if experience type not found
 experience.get = function(player, exp_type)
 	local player_name = player:get_player_name()
 	local file_path = experience.worldpath .. "/" .. player_name .. "_" .. exp_type

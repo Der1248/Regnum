@@ -6,9 +6,6 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 	end
 end)
 
-minetest.register_on_newplayer(function(player)
-	experience.set(player, "experience_gelb", 0)
-end)
 
 minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do
