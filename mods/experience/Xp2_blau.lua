@@ -7,9 +7,7 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 end)
 
 minetest.register_on_newplayer(function(player)
-	local file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_blau", "w")
-	file:write("0")
-	file:close()
+	experience.set(player, "experience_blau", 0)
 end)
 
 
@@ -20,20 +18,18 @@ minetest.register_globalstep(function(dtime)
 		pos.y = pos.y+0.5
 		for _,object in ipairs(minetest.get_objects_inside_radius(pos, 1)) do
 			if not object:is_player() and object:get_luaentity() and object:get_luaentity().name == "experience:orb_blau" then
-				--RIGHT HERE ADD IN THE CODE TO UPGRADE PLAYERS 
+				--RIGHT HERE ADD IN THE CODE TO UPGRADE PLAYERS
 				object:set_velocity({x=0,y=0,z=0})
 				object:get_luaentity().name = "STOP"
 				minetest.sound_play("orb", {
 					to_player = player:get_player_name(),
 				})
-				local xpb = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_blau", "r")
-				local experience_blau = xpb:read("*l")
-				xpb:close()
-				if experience_blau ~= nil then
-					local new_xpb = experience_blau + 1
-					local xpb_write = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_blau", "w")
-					xpb_write:write(new_xpb)
-					xpb_write:close()
+
+				local old_xpb = experience.get(player, "experience_blau")
+				if old_xpb ~= nil then
+					local new_xpb = old_xpb + 1
+					experience.set(player, "experience_blau", new_xpb)
+
 					sfinv.set_player_inventory_formspec(player)
                     local h = 0
                     local player_inv = player:get_inventory()
@@ -132,17 +128,3 @@ minetest.register_entity("experience:orb_blau", {
 		end
 	end,
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-

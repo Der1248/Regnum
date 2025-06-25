@@ -8,9 +8,7 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 end)
 --give a new player some xp
 minetest.register_on_newplayer(function(player)
-	local file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience", "w")
-	file:write("0")
-	file:close()
+	experience.set(player, "experience", 0)
 end)
 --Allow people to collect orbs
 minetest.register_globalstep(function(dtime)
@@ -19,20 +17,18 @@ minetest.register_globalstep(function(dtime)
 		pos.y = pos.y+0.5
 		for _,object in ipairs(minetest.get_objects_inside_radius(pos, 1)) do
 			if not object:is_player() and object:get_luaentity() and object:get_luaentity().name == "experience:orb" then
-				--RIGHT HERE ADD IN THE CODE TO UPGRADE PLAYERS 
+				--RIGHT HERE ADD IN THE CODE TO UPGRADE PLAYERS
 				object:set_velocity({x=0,y=0,z=0})
 				object:get_luaentity().name = "STOP"
 				minetest.sound_play("orb", {
 					to_player = player:get_player_name(),
 				})
-				local xp = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience", "r")
-				local experience = xp:read("*l")
-				xp:close()
-				if experience ~= nil then
-					local new_xp = experience + 1
-					local xp_write = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience", "w")
-					xp_write:write(new_xp)
-					xp_write:close()
+
+				local old_xp = experience.get(player, "experience")
+				if old_xp ~= nil then
+					local new_xp = old_xp + 1
+					experience.set(player, "experience", new_xp)
+
                     sfinv.set_player_inventory_formspec(player)
                     local player_inv = player:get_inventory()
                     local vv = 0

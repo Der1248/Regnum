@@ -7,9 +7,7 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 end)
 
 minetest.register_on_newplayer(function(player)
-	local file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_grau", "w")
-	file:write("0")
-	file:close()
+	experience.set(player, "experience_grau", 0)
 end)
 
 minetest.register_globalstep(function(dtime)
@@ -18,20 +16,18 @@ minetest.register_globalstep(function(dtime)
 		pos.y = pos.y+0.5
 		for _,object in ipairs(minetest.get_objects_inside_radius(pos, 1)) do
 			if not object:is_player() and object:get_luaentity() and object:get_luaentity().name == "experience:orb_grau" then
-				--RIGHT HERE ADD IN THE CODE TO UPGRADE PLAYERS 
+				--RIGHT HERE ADD IN THE CODE TO UPGRADE PLAYERS
 				object:set_velocity({x=0,y=0,z=0})
 				object:get_luaentity().name = "STOP"
 				minetest.sound_play("orb", {
 					to_player = player:get_player_name(),
 				})
-				local xpg = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_grau", "r")
-				local experience_grau = xpg:read("*l")
-				xpg:close()
-				if experience_grau ~= nil then
-					local new_xpg = experience_grau + 1
-					local xpg_write = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_grau", "w")
-					xpg_write:write(new_xpg)
-					xpg_write:close()
+
+				local new_xpg = experience.get(player, "experience_grau")
+				if new_xpg ~= nil then
+					local new_xpg = new_xpg + 1
+					experience.set(player, "experience_grau", new_xpg)
+
 					sfinv.set_player_inventory_formspec(player)
                     local player_inv = player:get_inventory()
                     local h = 0
@@ -88,14 +84,14 @@ minetest.register_globalstep(function(dtime)
                         end
                         if new_xpg == g then
                             if h == 1 then
-                                player_inv:add_item("xpi01", "tutorial:xp_block") 
+                                player_inv:add_item("xpi01", "tutorial:xp_block")
                             end
                             player_inv:add_item("xpi01", "tutorial:coin_grau "..c)
                             player_inv:set_stack("xpi4", i, "tutorial:level"..i.."_grau 1")
                             minetest.sound_play("level_up", {
 							    to_player = player:get_player_name(),
 						    })
-                        end 
+                        end
                     end
                     if new_xpg == 3200 then
 						player_inv:add_item("xpi01", "tutorial:coin_grau 90")
@@ -172,6 +168,3 @@ minetest.register_entity("experience:orb_grau", {
 		end
 	end,
 })
-
-
-

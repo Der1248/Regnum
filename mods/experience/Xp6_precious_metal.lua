@@ -22,14 +22,12 @@ minetest.register_globalstep(function(dtime)
 				minetest.sound_play("orb", {
 					to_player = player:get_player_name(),
 				})
-				local xp = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_bronze", "r")
-				local experience_bronze = xp:read("*l")
-				xp:close()
-				if experience_bronze ~= nil then
-					local new_xp = experience_bronze + 1
-					local xp_write = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_bronze", "w")
-					xp_write:write(new_xp)
-					xp_write:close()
+
+				local old_xp = experience.get(player, "experience_bronze")
+				if old_xp ~= nil then
+					local new_xp = old_xp + 1
+					experience.set(player, "experience_bronze", new_xp)
+
 					sfinv.set_player_inventory_formspec(player)
                     local player_inv = player:get_inventory()
                     local h = 0
@@ -76,7 +74,7 @@ minetest.register_globalstep(function(dtime)
                         minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
-                    end 
+                    end
 				end
 				object:remove()
 			end
@@ -86,14 +84,12 @@ minetest.register_globalstep(function(dtime)
 				minetest.sound_play("orb", {
 					to_player = player:get_player_name(),
 				})
-				local xp = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_silver", "r")
-				local experience_silver = xp:read("*l")
-				xp:close()
-				if experience_silver ~= nil and tonumber(experience_silver) < 400 then
-					local new_xp = experience_silver + 1
-					local xp_write = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_silver", "w")
-					xp_write:write(new_xp)
-					xp_write:close()
+
+				local old_xp = experience.get(player, "experience_silver")
+				if old_xp ~= nil and tonumber(old_xp) < 400 then
+					local new_xp = old_xp + 1
+					experience.set(player, "experience_silver", new_xp)
+
 					sfinv.set_player_inventory_formspec(player)
                     local player_inv = player:get_inventory()
                     local h = 0
@@ -143,7 +139,7 @@ minetest.register_globalstep(function(dtime)
                         minetest.sound_play("level_up", {
 							to_player = player:get_player_name(),
 						})
-                    end 
+                    end
 					--]]
 				end
 				object:remove()
