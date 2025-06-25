@@ -2,7 +2,7 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 	local namer = oldnode.name
 	local see_if_mineral = minetest.get_item_group(namer, "xpg")
 	if see_if_mineral > 0 then
-		minetest.add_entity(pos, "experience:orb_grau")
+		experience.add_orb(pos, "experience_grau")
 	end
 end)
 
@@ -12,7 +12,7 @@ minetest.register_globalstep(function(dtime)
 		local pos = player:get_pos()
 		pos.y = pos.y+0.5
 		for _,object in ipairs(minetest.get_objects_inside_radius(pos, 1)) do
-			if not object:is_player() and object:get_luaentity() and object:get_luaentity().name == "experience:orb_grau" then
+			if experience.is_xp_orb(object, "experience_grau") then
 				--RIGHT HERE ADD IN THE CODE TO UPGRADE PLAYERS
 				object:set_velocity({x=0,y=0,z=0})
 				object:get_luaentity().name = "STOP"
@@ -107,61 +107,5 @@ minetest.register_globalstep(function(dtime)
 				object:remove()
 		end
 	end
-for _,object in ipairs(minetest.get_objects_inside_radius(pos, 3)) do
-			if not object:is_player() and object:get_luaentity() and object:get_luaentity().name == "experience:orb_grau" then
-				if object:get_luaentity().collect then
-					local pos1 = pos
-					pos1.y = pos1.y+0.2
-					local pos2 = object:get_pos()
-					local vec = {x=pos1.x-pos2.x, y=pos1.y-pos2.y, z=pos1.z-pos2.z}
-					vec.x = vec.x*3
-					vec.y = vec.y*3
-					vec.z = vec.z*3
-					object:set_velocity(vec)
-				end
-			end
-		end
 	end
 end)
-
-minetest.register_entity("experience:orb_grau", {
-	physical = true,
-	timer = 0,
-	textures = {"orb_grau.png"},
-	visual_size = {x=0.3, y=0.3},
-	collisionbox = {-0.17,-0.17,-0.17,0.17,0.17,0.17},
-	on_activate = function(self, staticdata)
-		self.object:set_armor_groups({immortal=1})
-		self.object:set_velocity({x=0, y=1, z=0})
-		self.object:set_acceleration({x=0, y=-10, z=0})
-	end,
-	collect = true,
-	on_step = function(self, dtime)
-		self.timer = self.timer + dtime
-		if (self.timer > 300) then
-			self.object:remove()
-		end
-		local p = self.object:get_pos()
-		p.y = p.y - 0.3
-		local nn = minetest.get_node(p).name
-		if not minetest.registered_nodes[nn] or minetest.registered_nodes[nn].walkable then
-			if self.physical_state then
-				self.object:set_velocity({x=0, y=0, z=0})
-				self.object:set_acceleration({x=0, y=0, z=0})
-				self.physical_state = false
-				self.object:set_properties({
-					physical = false
-				})
-			end
-		else
-			if not self.physical_state then
-				self.object:set_velocity({x=0,y=0,z=0})
-				self.object:set_acceleration({x=0, y=-10, z=0})
-				self.physical_state = true
-				self.object:set_properties({
-					physical = true
-				})
-			end
-		end
-	end,
-})
