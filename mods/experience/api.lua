@@ -50,16 +50,6 @@ experience.register_xp_type = function(name, def)
 	experience.registered_xp_types[name] = def
 end
 
--- return center pos of players collision box
-experience.get_player_center = function(player)
-	local col = player:get_properties().collisionbox
-	local minp = vector.new(col[1], col[2], col[3])
-	local maxp = vector.new(col[4], col[5], col[6])
-
-	local center = (minp + maxp) * 0.5
-
-	return center
-end
 
 
 -- EXPERIENCE ORBS
@@ -156,58 +146,38 @@ minetest.register_entity("experience:xp_orb", {
 	end,
 })
 
--- accelerate xp orbs towards close players
+-- accelerate xp orbs towards close players and pick them up
 core.register_globalstep(function(dtime)
 	for _, player in ipairs(core.get_connected_players()) do
 		local player_pos = player:get_pos()
-		-- local player_height = player:get_properties().collisionbox[5]
-
-		-- player_pos = player_pos + experience.get_player_center(player)
-		player_pos.y = player_pos.y + 0.5
+		local coll = player:get_properties().collisionbox
+		local middle_height = (coll[2] + coll[5]) / 2
+		player_pos.y = player_pos.y + middle_height
 
 		for object in core.objects_inside_radius(player_pos, 3) do
-			if not object:is_player() and object:get_luaentity() and object:get_luaentity().name == "experience:xp_orb" then
-				player_pos.y = player_pos.y + 0.2
-				local orb_pos = object:get_pos()
-
-				local vec = player_pos - orb_pos
-				vec = vec * 3
-
-				object:set_velocity(vec)
-			end
-		end
-	end
-end)
-
--- pick up xp orbs
-core.register_globalstep(function(dtime)
-	for _, player in ipairs(core.get_connected_players()) do
-		local player_pos = player:get_pos()
-		-- local player_height = player:get_properties().collisionbox[5]
-
-		-- player_pos = player_pos + experience.get_player_center(player)
-		player_pos.y = player_pos.y + 0.5
-
-		for object in core.objects_inside_radius(player_pos, 1) do
 			if experience.is_xp_orb(object) then
-				local xp_type = object:get_luaentity().xp_type
-				local xp_def = xp_type and experience.registered_xp_types[xp_type]
+				local orb_pos = object:get_pos()
+				local vec = player_pos - orb_pos
 
-				if xp_def then
-					object:remove()
-					experience.add(player, xp_type, 1)
-					minetest.sound_play("orb", {
-						to_player = player:get_player_name(),
-					})
+				if vec:length() <= 1.1 then -- pick orb up
+					local xp_type = object:get_luaentity().xp_type
+					local xp_def = xp_type and experience.registered_xp_types[xp_type]
+
+					if xp_def then
+						object:remove()
+						experience.add(player, xp_type, 1)
+						minetest.sound_play("orb", {
+							to_player = player:get_player_name(),
+						})
+					end
+				else -- accelerate orbs towards player
+					vec = vec * 3
+					object:set_velocity(vec)
 				end
 			end
 		end
 	end
 end)
-
-
-
-
 
 
 -- debug chat command for testing the new API
