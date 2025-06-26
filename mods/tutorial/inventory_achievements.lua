@@ -196,14 +196,14 @@ function update_arch(player)
 	local type8 = 0
 	local type9 = 0
 
-	local type10 = experience.get(player, "experience")
-	local type11 = experience.get(player, "experience_rot")
-	local type12 = experience.get(player, "experience_blau")
-	local type13 = experience.get(player, "experience_grau")
-	local type16 = experience.get(player, "experience_gelb")
+	local type10 = experience.get(player, "experience_green")
+	local type11 = experience.get(player, "experience_red")
+	local type12 = experience.get(player, "experience_blue")
+	local type13 = experience.get(player, "experience_grey")
+	local type16 = experience.get(player, "experience_yellow")
 	local type23 = experience.get(player, "experience_cyan")
 	local type27 = experience.get(player, "experience_bronze")
-	
+
 	local type14 = player:get_inventory():get_stack("feld5",1):get_name()
 	local type15 = player:get_inventory():get_stack("feld6",1):get_name()
 	local type17 = player:get_inventory():get_stack("feld7",1):get_name()

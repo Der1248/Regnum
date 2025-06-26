@@ -159,7 +159,7 @@ minetest.register_node("tutorial:xp_block",{
 	tiles  = {"tutorial_xp_block.png"},
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,xp_source=1},
 	after_dig_node = function(pos, oldnode, oldmetadata, digger)
-		experience.add_orb(pos, "experience_gelb")
+		experience.add_orb(pos, "experience_grey")
 	end,
 })
 minetest.register_node("tutorial:stone_with_blau", {
@@ -170,7 +170,7 @@ minetest.register_node("tutorial:stone_with_blau", {
 	drop = 'tutorial:blau_erz',
 	sounds = default.node_sound_stone_defaults(),
 	after_dig_node = function(pos, oldnode, oldmetadata, digger)
-		experience.add_orb(pos, "experience_blau")
+		experience.add_orb(pos, "experience_blue")
 	end,
 })
 minetest.register_node("tutorial:stone_with_rot", {
@@ -181,7 +181,7 @@ minetest.register_node("tutorial:stone_with_rot", {
 	drop = 'tutorial:rot_erz',
 	sounds = default.node_sound_stone_defaults(),
 	after_dig_node = function(pos, oldnode, oldmetadata, digger)
-		experience.add_orb(pos, "experience_rot")
+		experience.add_orb(pos, "experience_red")
 	end,
 })
 minetest.register_node("tutorial:rainbow_torch", {
@@ -431,7 +431,7 @@ minetest.register_node("tutorial:stone_with_uranium", {
 	drop = 'tutorial:uranium1 4',
 	sounds = default.node_sound_stone_defaults(),
 	after_dig_node = function(pos, oldnode, oldmetadata, digger)
-		experience.add_orb(pos, "experience")
+		experience.add_orb(pos, "experience_green")
 	end,
 })
 minetest.register_node("tutorial:uran_chest", {

@@ -176,15 +176,15 @@ minetest.register_chatcommand("regnum", {
         armor_inv:set_stack("armor", 5, "shields:regnumshield")
         armor_inv:set_stack("armor", 6, "tutorial:uraniumheart2")
 
-		experience.set(player, "experience", 11950)
-		experience.set(player, "experience_blau", 250)
-		experience.set(player, "experience_rot", 250)
-		experience.set(player, "experience_grau", 3200)
-		experience.set(player, "experience_gelb", 600)
+		experience.set(player, "experience_green", 11950)
+		experience.set(player, "experience_blue", 250)
+		experience.set(player, "experience_red", 250)
+		experience.set(player, "experience_grey", 3200)
+		experience.set(player, "experience_yellow", 600)
 		experience.set(player, "experience_cyan", 900)
 		experience.set(player, "experience_bronze", 1500)
 		experience.set(player, "experience_silver", 400)
-		
+
 		player_inv:add_item("catdna","default:dirt 21")
 		player_inv:add_item("main","mobs:cat_egg")
 		player_inv:add_item("dogdna","default:dirt 21")

@@ -1,4 +1,4 @@
-experience.register_xp_type("experience_gelb", {
+experience.register_xp_type("experience_yellow", {
 	description = "",
 	texture = "orb_gelb.png",
 	on_xp_gain = function(player, new_xpy)

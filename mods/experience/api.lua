@@ -1,6 +1,5 @@
 --[[
 TODO: refactor on_exp_gain code
-TODO: move to metadata storage
 TODO: code cleanup and documentation
 TODO: mesh orbs
 
@@ -17,40 +16,19 @@ experience.register_xp_type("experience", {
 	end,
 })
 
-experience types:
-"experience"
-"experience_rot"
-"experience_blau"
-"experience_grau"
-"experience_gelb"
-"experience_cyan"
-"experience_bronze"
-"experience_silver"
 ]]
 
 -- get player experience value, returns 0 if experience type not found
 experience.get = function(player, xp_type)
-	local player_name = player:get_player_name()
-	local file_path = experience.worldpath .. "/" .. player_name .. "_" .. xp_type
-
-	local xp_file = io.open(file_path, "r")
-	if xp_file then
-		local experience = xp_file:read("*n")
-		xp_file:close()
-		return experience
-	end
-
-	return 0
+	local meta = player:get_meta()
+	local experience = meta:get_int(xp_type)
+	return experience
 end
 
 -- sets players experience value to 'value' or 0 if no 'value' is provided
 experience.set = function(player, xp_type, value)
-	local player_name = player:get_player_name()
-	local file_path = experience.worldpath .. "/" .. player_name .. "_" .. xp_type
-
-	local xp_file = io.open(file_path, "w")
-	xp_file:write(value or 0)
-	xp_file:close()
+	local meta = player:get_meta()
+	meta:set_int(xp_type, value or 0)
 end
 
 -- add experience points to selected type and call xp gain callbacks

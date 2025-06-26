@@ -4880,7 +4880,7 @@ minetest.register_node("tutorial:xp_block_yellow",{
     drop = '',
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,xp_source=1},
 	after_dig_node = function(pos, oldnode, oldmetadata, digger)
-		experience.add_orb(pos, "experience_grau")
+		experience.add_orb(pos, "experience_yellow")
 	end,
 })
 for i = 0, 127 do
