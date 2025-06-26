@@ -1,22 +1,15 @@
---[[
-TODO: refactor on_exp_gain code
-TODO: code cleanup and documentation
-TODO: mesh orbs
+-- TODO: refactor on_exp_gain code
 
-experience.get(player, "experience")
-experience.set(player, "experience", 0)
+-- XP REGISTRATION
 
-experience.add_orb(pos, "experience")
-experience.is_xp_orb(object, "experience")
+experience.registered_xp_types = {}
+experience.register_xp_type = function(name, def)
+	def.name = name
+	experience.registered_xp_types[name] = def
+end
 
-experience.register_xp_type("experience", {
-	description = "",
-	texture = "orb.png",
-	on_xp_gain = function(player, new_xp)
-	end,
-})
 
-]]
+-- XP TRACKING
 
 -- get player experience value, returns 0 if experience type not found
 experience.get = function(player, xp_type)
@@ -31,7 +24,7 @@ experience.set = function(player, xp_type, value)
 	meta:set_int(xp_type, value or 0)
 end
 
--- add experience points to selected type and call xp gain callbacks
+-- add experience points of selected type and call xp gain callbacks
 experience.add = function(player, xp_type, value)
 	local current_xp = experience.get(player, xp_type)
 	local new_xp = current_xp + value
@@ -39,17 +32,9 @@ experience.add = function(player, xp_type, value)
 
 	local xp_def = experience.registered_xp_types[xp_type]
 	if xp_def then
-		xp_def.on_xp_gain(player, new_xp)
+		xp_def.on_xp_gain(player, new_xp, current_xp)
 	end
 end
-
-
-experience.registered_xp_types = {}
-experience.register_xp_type = function(name, def)
-	def.name = name
-	experience.registered_xp_types[name] = def
-end
-
 
 
 -- EXPERIENCE ORBS
@@ -72,12 +57,13 @@ experience.is_xp_orb = function(obj, xp_type)
 	end
 end
 
+-- spawn xp orb at given location
 experience.add_orb = function(pos, xp_type)
 	local obj = core.add_entity(pos, "experience:xp_orb", xp_type)
 end
 
 -- unified xp orb object
-minetest.register_entity("experience:xp_orb", {
+core.register_entity("experience:xp_orb", {
 	initial_properties = {
 		physical = true,
 		collisionbox = {-0.17, -0.17, -0.17, 0.17, 0.17, 0.17},
@@ -122,8 +108,8 @@ minetest.register_entity("experience:xp_orb", {
 		-- disable physics while resting on a solid node
 		local p = self.object:get_pos()
 		p.y = p.y - 0.3
-		local nn = minetest.get_node(p).name
-		if not minetest.registered_nodes[nn] or minetest.registered_nodes[nn].walkable then
+		local nn = core.get_node(p).name
+		if not core.registered_nodes[nn] or core.registered_nodes[nn].walkable then
 			if self.physical_state then
 				self.object:set_velocity({x=0, y=0, z=0})
 				self.object:set_acceleration({x=0, y=0, z=0})
@@ -166,7 +152,7 @@ core.register_globalstep(function(dtime)
 					if xp_def then
 						object:remove()
 						experience.add(player, xp_type, 1)
-						minetest.sound_play("orb", {
+						core.sound_play("orb", {
 							to_player = player:get_player_name(),
 						})
 					end
@@ -179,6 +165,8 @@ core.register_globalstep(function(dtime)
 	end
 end)
 
+
+-- DEBUG COMMAND
 
 -- debug chat command for testing the new API
 core.register_chatcommand("exp", {
