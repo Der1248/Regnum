@@ -1,12 +1,3 @@
-minetest.register_on_dignode(function(pos, oldnode, digger)
-	local namer = oldnode.name
-	local see_if_mineral = minetest.get_item_group(namer, "xpb")
-	if see_if_mineral > 0 then
-		experience.add_orb(pos, "experience_blau")
-	end
-end)
-
-
 experience.register_xp_type("experience_blau", {
 	description = "",
 	texture = "orb_blau.png",

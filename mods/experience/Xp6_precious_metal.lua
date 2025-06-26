@@ -1,17 +1,3 @@
-minetest.register_on_dignode(function(pos, oldnode, digger)
-	local namer = oldnode.name
-	local see_if_mineral = minetest.get_item_group(namer, "xpp")
-	if digger then
-		local player_inv = digger:get_inventory()
-		if see_if_mineral > 0 and player_inv:get_stack("bronze_key", 1):get_name() == "tutorial:bronzekey" then
-			experience.add_orb(pos, "experience_silver")
-		elseif see_if_mineral > 0  then
-			experience.add_orb(pos, "experience_bronze")
-		end
-	end
-end)
-
-
 experience.register_xp_type("experience_bronze", {
 	description = "",
 	texture = "orb_bronze.png",

@@ -1,4 +1,9 @@
 --[[
+TODO: refactor on_exp_gain code
+TODO: move to metadata storage
+TODO: code cleanup and documentation
+TODO: mesh orbs
+
 experience.get(player, "experience")
 experience.set(player, "experience", 0)
 

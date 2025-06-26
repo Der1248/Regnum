@@ -984,9 +984,17 @@ minetest.register_node("tutorial:stone_with_precious_metal", {
 	description = "Precious Metal Ore",
 	tiles = {"default_stone.png^tutorial_precious_metal_ore.png"},
 	is_ground_content = true,
-	groups = {cracky=16,xpp=1},
+	groups = {cracky=16,xp_source=1},
 	drop = 'tutorial:precious_metal',
 	sounds = default.node_sound_stone_defaults(),
+	after_dig_node = function(pos, oldnode, oldmetadata, digger)
+		local player_inv = digger:get_inventory()
+		if player_inv:get_stack("bronze_key", 1):get_name() == "tutorial:bronzekey" then
+			experience.add_orb(pos, "experience_silver")
+		else
+			experience.add_orb(pos, "experience_bronze")
+		end
+	end,
 })
 minetest.register_craftitem("tutorial:precious_metal", {
 	description = "Precious Metal",
@@ -2266,7 +2274,7 @@ minetest.register_node("tutorial:bottle_crystal", {
         if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
         return itemstack
     end,
-	groups = {vessel=1,dig_immediate=3,attached_node=1},
+	groups = {vessel=1,dig_immediate=3,attached_node=1,xp_source=1},
 })
 for i = 1, 25, 1 do
     minetest.register_node("tutorial:level"..i.."_cyan",{
@@ -4870,7 +4878,10 @@ minetest.register_node("tutorial:xp_block_yellow",{
 	description = "Yellow Xp Block",
 	tiles  = {"tutorial_xp_block_yellow.png"},
     drop = '',
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,xpy=1},
+	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,xp_source=1},
+	after_dig_node = function(pos, oldnode, oldmetadata, digger)
+		experience.add_orb(pos, "experience_grau")
+	end,
 })
 for i = 0, 127 do
     local XTRAORES_TB = {
