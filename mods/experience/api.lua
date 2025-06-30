@@ -168,23 +168,41 @@ end)
 -- DEBUG COMMAND
 
 -- debug chat command for testing the new API
-core.register_chatcommand("exp", {
-	params = "set/get [exp_type] <value>" ,
+core.register_chatcommand("xp", {
+	params = "types/get/set/add <xp_type> <value>" ,
 	description = "Manipulation of experience values. For debuging purposes only!",
 	privs = {debug = true},
 	func = function(player_name, params)
 		local args = string.split(params, " ", false, -1, false)
 		local player = core.get_player_by_name(player_name)
 
-		if args[1] == "set" then
-			if args[2] then
-				experience.set(player, args[2], args[3] or 0)
+		local sub_command = args[1]
+		local xp_type = args[2]
+		local value = args[3]
+
+		if sub_command == "types" then
+			core.chat_send_player(player_name, "Registered XP types:")
+			for name, _ in pairs(experience.registered_xp_types) do
+				core.chat_send_player(player_name, name)
+			end
+			return
+		elseif sub_command == "get" then
+			if xp_type and experience.registered_xp_types[xp_type] then
+				local exp_value = experience.get(player, xp_type)
+				core.chat_send_player(player_name, string.format("%s: %s", xp_type, exp_value))
 				return
 			end
-		elseif args[1] == "get" then
-			if args[2] then
-				local exp_value = experience.get(player, args[2])
-				core.chat_send_player(player_name, string.format("%s: %s", args[2], exp_value))
+		elseif sub_command == "set" then
+			if xp_type and experience.registered_xp_types[xp_type] then
+				experience.set(player, xp_type, value or 0)
+				return
+			end
+		elseif sub_command == "add" then
+			if xp_type and experience.registered_xp_types[xp_type] then
+				value = tonumber(value) or 1
+				for i = 1, value do
+					experience.add(player, xp_type, 1)
+				end
 				return
 			end
 		end
