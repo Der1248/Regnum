@@ -99,12 +99,6 @@ core.register_entity("experience:xp_orb", {
 	end,
 
 	on_step = function(self, dtime)
-		-- remove orb after some time has passed
-		self.timer = self.timer + dtime
-		if (self.timer > 300) then
-			self.object:remove()
-		end
-
 		-- disable physics while resting on a solid node
 		local p = self.object:get_pos()
 		p.y = p.y - 0.3
@@ -129,6 +123,11 @@ core.register_entity("experience:xp_orb", {
 			end
 		end
 
+		-- remove orb after some time has passed
+		self.timer = self.timer + dtime
+		if (self.timer > 300) then
+			self.object:remove()
+		end
 	end,
 })
 

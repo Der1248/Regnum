@@ -13,6 +13,7 @@ experience.register_xp_type(xp_name, xp_definition)
 - 'xp_definition', table like so:
 	{
 		description = "", -- not currently used
+		color = ColarString, -- not currently used
 		texture = "orb.png", -- texture applied to xp orbs
 		on_xp_gain = function(player, new_xp, old_xp)
 			-- callback that triggers every time 'player' gains xp
