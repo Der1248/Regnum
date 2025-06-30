@@ -17,8 +17,9 @@ experience.register_xp_type("experience_cyan", {
 					to_player = player_name,
 				})
 			end
+			-- print(string.format("Level: %2d, Level XP: %3d", level, level_xp))
 		end
-		if new_xpc == 900 then
+		if new_xpc == 900 then -- Level 26
 			player_inv:add_item("xpi01", "tutorial:coin_cyan 5")
 			player_inv:set_stack("xpi6", 26, "tutorial:levelMAX_cyan 1")
 			core.sound_play("level_up", {

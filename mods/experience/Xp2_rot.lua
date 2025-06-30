@@ -19,16 +19,16 @@ experience.register_xp_type("experience_red", {
 					to_player = player_name,
 				})
 			end
+			-- print(string.format("Level: %2d, Level XP: %3d, Coins: %1d", level, level_xp, coins))
 		end
-		if new_xpr == 250 then
+
+		if new_xpr == 210 then -- Level 20
+			player_inv:add_item("xpi01", "tutorial:xp_rot")
+		end
+
+		if new_xpr == 250 then -- Level 21
 			player_inv:add_item("xpi01", "tutorial:coin_rot 5")
 			player_inv:set_stack("xpi2", 21, "tutorial:levelMAX_rot")
-			minetest.sound_play("level_up", {
-				to_player = player_name,
-			})
-		end
-		if new_xpr == 210 then
-			player_inv:add_item("xpi01", "tutorial:xp_rot")
 			minetest.sound_play("level_up", {
 				to_player = player_name,
 			})
