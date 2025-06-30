@@ -1,6 +1,7 @@
 experience.register_xp_type("experience_yellow", {
 	description = "",
-	texture = "orb_gelb.png",
+	color = "#ffff00",
+	texture = "orb_yellow.png",
 	on_xp_gain = function(player, new_xpy)
 		sfinv.set_player_inventory_formspec(player)
 		local player_inv = player:get_inventory()

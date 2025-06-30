@@ -1,5 +1,6 @@
 experience.register_xp_type("experience_bronze", {
 	description = "",
+	color = "#cd7f32",
 	texture = "orb_bronze.png",
 	on_xp_gain = function(player, new_xp)
 		sfinv.set_player_inventory_formspec(player)
@@ -54,6 +55,7 @@ experience.register_xp_type("experience_bronze", {
 
 experience.register_xp_type("experience_silver", {
 	description = "",
+	color = "#c0c0c0",
 	texture = "orb_silver.png",
 	on_xp_gain = function(player, new_xp)
 		sfinv.set_player_inventory_formspec(player)
