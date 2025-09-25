@@ -1185,39 +1185,39 @@ minetest.register_craft({
     recipe = {
 		{'tutorial:thunder','tutorial:megablock2','tutorial:thunder'},
 		{'tutorial:thunder','tutorial:megablock2','tutorial:thunder'},
-		{'tutorial:thunder','default:stick ','tutorial:thunder'},
+		{'tutorial:thunder','default:stick','tutorial:thunder'},
     }
 })
 minetest.register_craft({
     output = 'tutorial:swored_zauber2',
     recipe = {
-		{'tutorial:megablock2','tutorial:megablock2 ','tutorial:megablock2'},
+		{'tutorial:megablock2','tutorial:megablock2','tutorial:megablock2'},
 		{'tutorial:megablock2','tutorial:swored_zauber1','tutorial:megablock2'},
-		{'tutorial:megablock2','tutorial:megablock2 ','tutorial:megablock2'},
+		{'tutorial:megablock2','tutorial:megablock2','tutorial:megablock2'},
     }
 })
 minetest.register_craft({
     output = 'tutorial:swored_zauber3',
     recipe = {
-		{'tutorial:megablock2','tutorial:megablock2 ','tutorial:megablock2'},
+		{'tutorial:megablock2','tutorial:megablock2','tutorial:megablock2'},
 		{'tutorial:megablock2','tutorial:swored_zauber2','tutorial:megablock2'},
-		{'tutorial:megablock2','tutorial:megablock2 ','tutorial:megablock2'},
+		{'tutorial:megablock2','tutorial:megablock2','tutorial:megablock2'},
     }
 })
 minetest.register_craft({
     output = 'tutorial:swored_zauber4',
     recipe = {
-		{'tutorial:megablock2','tutorial:megablock2 ','tutorial:megablock2'},
+		{'tutorial:megablock2','tutorial:megablock2','tutorial:megablock2'},
 		{'tutorial:megablock2','tutorial:swored_zauber3','tutorial:megablock2'},
-		{'tutorial:megablock2','tutorial:megablock2 ','tutorial:megablock2'},
+		{'tutorial:megablock2','tutorial:megablock2','tutorial:megablock2'},
     }
 })
 minetest.register_craft({
     output = 'tutorial:swored_zauber5',
     recipe = {
-		{'tutorial:megablock2','tutorial:megablock2 ','tutorial:megablock2'},
+		{'tutorial:megablock2','tutorial:megablock2','tutorial:megablock2'},
 		{'tutorial:megablock2','tutorial:swored_zauber4','tutorial:megablock2'},
-		{'tutorial:megablock2','tutorial:megablock2 ','tutorial:megablock2'},
+		{'tutorial:megablock2','tutorial:megablock2','tutorial:megablock2'},
     }
 })
 minetest.register_craft({

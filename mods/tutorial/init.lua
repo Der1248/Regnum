@@ -134,7 +134,8 @@ minetest.register_globalstep(function(dtime)
             if dig_pos[player_name] and dig_pos[player_name] ~= node_pos then
                 local objects = minetest.get_objects_inside_radius(dig_pos[player_name], 0.5)
                 for _, object in ipairs(objects) do
-                    if object:get_luaentity().name == "tutorial:crack_overlay" then
+                    local e = object:get_luaentity()
+                    if e and e.name == "tutorial:crack_overlay" then
                         object:remove()
                     end
                 end
@@ -154,7 +155,8 @@ minetest.register_globalstep(function(dtime)
                     local objects = minetest.get_objects_inside_radius(dig_pos[player_name], 0.5)
                     local is_ent = false
                     for _, object in ipairs(objects) do
-                        if object:get_luaentity().name == "tutorial:crack_overlay" then
+                        local e = object:get_luaentity()
+                        if e and e.name == "tutorial:crack_overlay" then
                             is_ent = true
                             local time = 120
                             if node_group == 4 then
@@ -247,7 +249,8 @@ minetest.register_globalstep(function(dtime)
             if dig_pos[player_name] then
                 local objects = minetest.get_objects_inside_radius(dig_pos[player_name], 0.5)
                 for _, object in ipairs(objects) do
-                    if object:get_luaentity().name == "tutorial:crack_overlay" then
+                    local e = object:get_luaentity()
+                    if e and e.name == "tutorial:crack_overlay" then
                         object:remove()
                     end
                 end
@@ -326,7 +329,22 @@ minetest.register_allow_player_inventory_action(function(player, action, invento
         take_list = list_name
         take_index = index
     end
-    if list_name == "feld" and not string.find(stack:get_name(), "tutorial:craft_schluessel") then
+    if list_name == "craft" then
+        local feld_name = inventory:get_stack("feld", 1):get_name()
+        local feld3_name = inventory:get_stack("feld3", 1):get_name()
+        local width
+        if feld_name == "tutorial:craft_schluessel7" and feld3_name == "tutorial:legenden_schluessel" then
+            width = 5
+        elseif feld_name == "tutorial:craft_schluessel7" then
+            width = 4
+        else
+            width = 3
+        end
+        if index > width * width then
+            return 0
+        end
+        return inventory_info.count
+    elseif list_name == "feld" and not string.find(stack:get_name(), "tutorial:craft_schluessel") then
         return 0
     elseif list_name == "feld" then
         return 1
