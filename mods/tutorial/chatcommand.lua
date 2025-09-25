@@ -104,7 +104,7 @@ minetest.register_chatcommand("regnum", {
         inv:set_stack("tearyellow", 1, "tutorial:medallion 100")
         inv:set_stack("tearcyan", 1, "tutorial:medallion 100")
         inv:set_stack("tearpurple", 1, "tutorial:medallion 100")
-        
+
         inv:set_stack("arm2", 1, "tutorial:protection_schluessel3")
         inv:set_stack("fox", 1, "default:dirt 80")
 		inv:add_item("b", "tutorial:bag_schluessel4")
@@ -155,7 +155,7 @@ minetest.register_chatcommand("regnum", {
         inv:set_stack("xpi5", 101, "tutorial:levelMAX_gelb")
         inv:set_stack("xpi6", 26, "tutorial:levelMAX_cyan")
         inv:set_stack("xpi7", 101, "tutorial:levelMAX_bronze")
-        
+
         for i=1,9 do
 			inv:set_stack("medallionred",i,"default:dirt")
             inv:set_stack("medallionblue",i,"default:dirt")
@@ -175,30 +175,16 @@ minetest.register_chatcommand("regnum", {
         armor_inv:set_stack("armor", 4, "3d_armor:regnumboots")
         armor_inv:set_stack("armor", 5, "shields:regnumshield")
         armor_inv:set_stack("armor", 6, "tutorial:uraniumheart2")
-		local file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience", "w")
-		file:write("11950")
-		file:close()
-		file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_blau", "w")
-		file:write("250")
-		file:close()
-		file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_rot", "w")
-		file:write("250")
-		file:close()
-		file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_grau", "w")
-		file:write("3200")
-		file:close()
-        file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_gelb", "w")
-		file:write("600")
-		file:close()
-        file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_cyan", "w")
-		file:write("900")
-		file:close()
-        file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_bronze", "w")
-		file:write("1500")
-		file:close()
-        file = io.open(minetest.get_worldpath().."/"..player:get_player_name().."_experience_silver", "w")
-		file:write("400")
-		file:close()
+
+		experience.set(player, "experience_green", 11950)
+		experience.set(player, "experience_blue", 250)
+		experience.set(player, "experience_red", 250)
+		experience.set(player, "experience_grey", 3200)
+		experience.set(player, "experience_yellow", 600)
+		experience.set(player, "experience_cyan", 900)
+		experience.set(player, "experience_bronze", 1500)
+		experience.set(player, "experience_silver", 400)
+
 		player_inv:add_item("catdna","default:dirt 21")
 		player_inv:add_item("main","mobs:cat_egg")
 		player_inv:add_item("dogdna","default:dirt 21")
@@ -211,7 +197,7 @@ minetest.register_chatcommand("regnum", {
         player_inv:add_item("main","mobs:fox_egg")
         player_inv:add_item("tortoisedna","default:dirt 51")
         player_inv:add_item("main","mobs:tortoise_egg")
-        
+
         for j=1,12,1 do
             for i=1,5,1 do
                 player_inv:set_stack("art"..j, i, "default:dirt")

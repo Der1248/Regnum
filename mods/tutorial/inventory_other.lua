@@ -5,10 +5,10 @@ local remove_list = true
 
 minetest.register_on_mods_loaded(function()
     local old_pages = sfinv.pages_unordered
-	new_order = { 
-		"sfinv:crafting", 
+	new_order = {
+		"sfinv:crafting",
 		"mtg_craftguide:craftguide",
-		"tutorial:regnum_guide", 
+		"tutorial:regnum_guide",
 		"bags:bags",
 		"3d_armor:armor",
 		"tutorial:achievements",
@@ -1338,22 +1338,15 @@ end
 function xp_guide_formspec(player)
 	local name = player:get_player_name()
 	local player_inv = player:get_inventory()
-	local xp_gruen_o = io.open(minetest.get_worldpath().."/"..name.."_experience", "r")
-	local xp_gruen = xp_gruen_o:read("*l")
-	local xp_rot_o = io.open(minetest.get_worldpath().."/"..name.."_experience_rot", "r")
-	local xp_rot = xp_rot_o:read("*l")
-	local xp_blau_o = io.open(minetest.get_worldpath().."/"..name.."_experience_blau", "r")
-	local xp_blau = xp_blau_o:read("*l")
-	local xp_grau_o = io.open(minetest.get_worldpath().."/"..name.."_experience_grau", "r")
-	local xp_grau = xp_grau_o:read("*l")
-    local xp_gelb_o = io.open(minetest.get_worldpath().."/"..name.."_experience_gelb", "r")
-	local xp_gelb = xp_gelb_o:read("*l")
-    local xp_cyan_o = io.open(minetest.get_worldpath().."/"..name.."_experience_cyan", "r")
-	local xp_cyan = xp_cyan_o:read("*l")
-	local xp_bronze_o = io.open(minetest.get_worldpath().."/"..name.."_experience_bronze", "r")
-	local xp_bronze = xp_bronze_o:read("*l")
-	local xp_silver_o = io.open(minetest.get_worldpath().."/"..name.."_experience_silver", "r")
-	local xp_silver = xp_silver_o:read("*l")
+	local xp_gruen = experience.get(player, "experience_green")
+	local xp_rot = experience.get(player, "experience_red")
+	local xp_blau = experience.get(player, "experience_blue")
+	local xp_grau = experience.get(player, "experience_grey")
+	local xp_gelb = experience.get(player, "experience_yellow")
+	local xp_cyan = experience.get(player, "experience_cyan")
+	local xp_bronze = experience.get(player, "experience_bronze")
+	local xp_silver = experience.get(player, "experience_silver")
+
 	player_inv:set_size("feld2", 1)
 	player_inv:set_size("bronze_key", 1)
 	local feld2_name = player:get_inventory():get_stack("feld2",1):get_name()
@@ -1580,10 +1573,10 @@ function regnum_craft_formspec(player)
 		pr = "regnum:shield_"
 	elseif re2 == 6 then
 		pr = "regnum:gun_"
-	elseif re2 == 7 then 
-		pr = "regnum:wings_"  
-	elseif re2 == 8 then 
-		pr = "regnum:heart_" 
+	elseif re2 == 7 then
+		pr = "regnum:wings_"
+	elseif re2 == 8 then
+		pr = "regnum:heart_"
 		max_hight = 21
 		if re > 51 then
 			re = 51
@@ -2135,9 +2128,9 @@ end
 minetest.register_on_player_inventory_action(function(player, action, inventory, inventory_info)
 	if action == "move" then
 		if inventory_info.to_list == "krit" or inventory_info.from_list == "krit"
-		or inventory_info.to_list == "skinskey" or inventory_info.from_list == "skinskey" 
-		or inventory_info.to_list == "skinskey2" or inventory_info.from_list == "skinskey2" 
-		or inventory_info.to_list == "feld" or inventory_info.from_list == "feld" 
+		or inventory_info.to_list == "skinskey" or inventory_info.from_list == "skinskey"
+		or inventory_info.to_list == "skinskey2" or inventory_info.from_list == "skinskey2"
+		or inventory_info.to_list == "feld" or inventory_info.from_list == "feld"
 		or inventory_info.to_list == "feld3" or inventory_info.from_list == "feld3" then
 			sfinv.set_player_inventory_formspec(player)
 		end

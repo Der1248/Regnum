@@ -70,7 +70,7 @@ sfinv.register_page("tutorial:achievements", {
 		local num_ach = 0
 		local ach_array = {}
 		local name = player:get_player_name()
-		
+
 		update_arch(player)
 		for i=1, 54 do
 			local a = player_inv:get_stack("a"..i, 1):get_count()
@@ -144,7 +144,7 @@ sfinv.register_page("tutorial:achievements", {
 			end
 			formspec = formspec.."label[3.4,8.6;Page 3/3]"
 		elseif achievements_sub_page[name] == 4 then
-			formspec = formspec 
+			formspec = formspec
 			.."label[3.4,8.6;Page 4/4]"
 		end
 		if achievements_sub_page[name] > 1 then
@@ -195,21 +195,15 @@ function update_arch(player)
 	local type7 = player:get_inventory():get_stack("skinskey",1):get_name()
 	local type8 = 0
 	local type9 = 0
-	local type10 = player:get_inventory():get_stack("feld5",1):get_name()
-	local ge = io.open(minetest.get_worldpath().."/"..name.."_experience", "r")
-	local type10 = ge:read("*l")
-	local rt = io.open(minetest.get_worldpath().."/"..name.."_experience_rot", "r")
-	local type11 = rt:read("*l")
-	local bl = io.open(minetest.get_worldpath().."/"..name.."_experience_blau", "r")
-	local type12 = bl:read("*l")
-	local gr = io.open(minetest.get_worldpath().."/"..name.."_experience_grau", "r")
-	local type13 = gr:read("*l")
-	local ye = io.open(minetest.get_worldpath().."/"..name.."_experience_gelb", "r")
-	local type16 = ye:read("*l")
-	local ce = io.open(minetest.get_worldpath().."/"..name.."_experience_cyan", "r")
-	local type23 = ce:read("*l")
-	local br = io.open(minetest.get_worldpath().."/"..name.."_experience_bronze", "r")
-	local type27 = br:read("*l")
+
+	local type10 = experience.get(player, "experience_green")
+	local type11 = experience.get(player, "experience_red")
+	local type12 = experience.get(player, "experience_blue")
+	local type13 = experience.get(player, "experience_grey")
+	local type16 = experience.get(player, "experience_yellow")
+	local type23 = experience.get(player, "experience_cyan")
+	local type27 = experience.get(player, "experience_bronze")
+
 	local type14 = player:get_inventory():get_stack("feld5",1):get_name()
 	local type15 = player:get_inventory():get_stack("feld6",1):get_name()
 	local type17 = player:get_inventory():get_stack("feld7",1):get_name()
@@ -222,7 +216,7 @@ function update_arch(player)
 	local type25 = player:get_inventory():get_stack("pixkey",1):get_name()
 	local type26 = player:get_inventory():get_stack("arm2",1):get_name()
 	local type28 = player:get_inventory():get_stack("bronze_key",1):get_name()
-	
+
 	for i=1,8 do
 		if player:get_inventory():get_stack("bag",i):get_name() == "bags:trolley_admin" then
 			type8 = type8+1

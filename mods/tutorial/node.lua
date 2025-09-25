@@ -157,23 +157,32 @@ minetest.register_node("tutorial:stone_with_regnum", {
 minetest.register_node("tutorial:xp_block",{
 	description = "Grey Xp Block",
 	tiles  = {"tutorial_xp_block.png"},
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,xpg=1},
+	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,xp_source=1},
+	after_dig_node = function(pos, oldnode, oldmetadata, digger)
+		experience.add_orb(pos, "experience_grey")
+	end,
 })
 minetest.register_node("tutorial:stone_with_blau", {
 	description = "Blue Ore",
 	tiles = {"default_stone.png^tutorial_blau_erz.png"},
 	is_ground_content = true,
-	groups = {cracky=13, xpb=1},
+	groups = {cracky=13, xp_source=1},
 	drop = 'tutorial:blau_erz',
 	sounds = default.node_sound_stone_defaults(),
+	after_dig_node = function(pos, oldnode, oldmetadata, digger)
+		experience.add_orb(pos, "experience_blue")
+	end,
 })
 minetest.register_node("tutorial:stone_with_rot", {
 	description = "Red Ore",
 	tiles = {"default_stone.png^tutorial_rot_erz.png"},
 	is_ground_content = true,
-	groups = {cracky=13, xpr=1},
+	groups = {cracky=13, xp_source=1},
 	drop = 'tutorial:rot_erz',
 	sounds = default.node_sound_stone_defaults(),
+	after_dig_node = function(pos, oldnode, oldmetadata, digger)
+		experience.add_orb(pos, "experience_red")
+	end,
 })
 minetest.register_node("tutorial:rainbow_torch", {
 	description = "Rainbow Torch",
@@ -418,9 +427,12 @@ minetest.register_node("tutorial:stone_with_uranium", {
 	description = "Uranium Ore",
 	tiles = {"default_stone.png^tutorial_mineral_uran.png"},
 	is_ground_content = true,
-	groups = {cracky=5,xp=1},
+	groups = {cracky=5,xp_source=1},
 	drop = 'tutorial:uranium1 4',
 	sounds = default.node_sound_stone_defaults(),
+	after_dig_node = function(pos, oldnode, oldmetadata, digger)
+		experience.add_orb(pos, "experience_green")
+	end,
 })
 minetest.register_node("tutorial:uran_chest", {
 	description = "Uranium Chest",
