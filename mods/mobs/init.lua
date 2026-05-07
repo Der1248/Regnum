@@ -40,7 +40,10 @@ print("[MOD] Mobs Redo loaded")
 	--add dofile(path .. "/added_functions.lua")
 	--remove crafts.lua
 	--Changes for api.lua:
+		~50   changed few settings 							after 'Load settings'
 		~150  metadata3 = 0,								in mob_class = ...
+		~620  remove self.infotext							in function mob_class:update_tag
+		~740  old nametag									in function mob_class:check_for_death
 		~2690 check for animals								after 'do damage'
 		~2970 activate immortal								after 'Armor groups (immortal = 1 for custom damage handling)'
 		~2990 first activate(self) 							after 'set anything changed above' and self.object:set_properties(self)

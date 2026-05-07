@@ -14,7 +14,7 @@ minetest.register_on_joinplayer(function(player)
 		offset = {x=0, y=30},
 		alignment = {x=1, y=0},
 		number = 0xFFFFFF ,
-		text = "Game Version	 :  4.0.3",
+		text = "Game Version	 :  4.1.0",
 	})
 end)
 
@@ -47,7 +47,7 @@ minetest.register_tool("tutorial:waterbattleaxe", {
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
-		groupcaps={               		
+		groupcaps={
 			cracky	=	{times={[14]=0}, uses=0, maxlevel=3},
 		},
 		damage_groups = {fleshy=1}
@@ -62,7 +62,7 @@ minetest.register_tool("tutorial:lavabattleaxe", {
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
-		groupcaps={               		
+		groupcaps={
 			cracky	=	{times={[17]=0}, uses=0, maxlevel=3},
 		},
 		damage_groups = {fleshy=1}
@@ -109,8 +109,10 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 end)
 
 
+
 local dig_pos = {}
 local dig_timer = {}
+
 
 minetest.register_globalstep(function(dtime)
     for _, player in ipairs(minetest.get_connected_players()) do
@@ -132,11 +134,10 @@ minetest.register_globalstep(function(dtime)
         end
         if controls.LMB then
             if dig_pos[player_name] and dig_pos[player_name] ~= node_pos then
-                local objects = minetest.get_objects_inside_radius(dig_pos[player_name], 0.5)
-                for _, object in ipairs(objects) do
-                    if object:get_luaentity().name == "tutorial:crack_overlay" then
-                        object:remove()
-                    end
+                local pre_node = minetest.get_node(dig_pos[player_name])
+                local old_node = string.gsub(pre_node.name, "_crack[1-5]$", "")
+                if pre_node.name:match("_crack([1-5])$") then
+                    minetest.set_node(dig_pos[player_name], {name=old_node})
                 end
                 dig_timer[player_name] = 0
             end
@@ -150,122 +151,62 @@ minetest.register_globalstep(function(dtime)
                     if not dig_timer[player_name] then
                         dig_timer[player_name] = 0
                     end
+                    
                     dig_timer[player_name] = dig_timer[player_name]+dtime
-                    local objects = minetest.get_objects_inside_radius(dig_pos[player_name], 0.5)
-                    local is_ent = false
-                    for _, object in ipairs(objects) do
-                        if object:get_luaentity().name == "tutorial:crack_overlay" then
-                            is_ent = true
-                            local time = 120
-                            if node_group == 4 then
-                                time = 25
-                            elseif node_group == 5 then
-                                time = 30
-                            elseif node_group == 6 then
-                                time = 50
-                            elseif node_group == 7 then
-                                time = 60
-                            elseif node_group == 8 then
-                                time = 70
-                            elseif node_group == 9 then
-                                time = 80
-                            elseif node_group == 10 then
-                                time = 120
-                            elseif node_group == 12 then
-                                time = 100
-                            elseif node_group == 13 then
-                                time = 80
-                            elseif node_group == 16 then
-                                time = 100
-                            end
-                            if dig_timer[player_name] > (time) then
-                                minetest.set_node(node_pos, {name = "air"})
-                                object:remove()
-                            elseif dig_timer[player_name] > (time/5)*4 then
-                                object:set_properties({
-                                    textures = {
-                                        "tutorial_crack5.png",
-                                        "tutorial_crack5.png",
-                                        "tutorial_crack5.png",
-                                        "tutorial_crack5.png",
-                                        "tutorial_crack5.png",
-                                        "tutorial_crack5.png",
-                                    },
-                                })
-                            elseif dig_timer[player_name] > (time/5)*3 then
-                                object:set_properties({
-                                    textures = {
-                                        "tutorial_crack4.png",
-                                        "tutorial_crack4.png",
-                                        "tutorial_crack4.png",
-                                        "tutorial_crack4.png",
-                                        "tutorial_crack4.png",
-                                        "tutorial_crack4.png",
-                                    },
-                                })
-                            elseif dig_timer[player_name] > (time/5)*2 then
-                                object:set_properties({
-                                    textures = {
-                                        "tutorial_crack3.png",
-                                        "tutorial_crack3.png",
-                                        "tutorial_crack3.png",
-                                        "tutorial_crack3.png",
-                                        "tutorial_crack3.png",
-                                        "tutorial_crack3.png",
-                                    },
-                                })
-                            elseif dig_timer[player_name] > (time/5)*1 then
-                                object:set_properties({
-                                    textures = {
-                                        "tutorial_crack2.png",
-                                        "tutorial_crack2.png",
-                                        "tutorial_crack2.png",
-                                        "tutorial_crack2.png",
-                                        "tutorial_crack2.png",
-                                        "tutorial_crack2.png",
-                                    },
-                                })
-                            end
-                        end
+                    local is_cracked = node_name:match("_crack([1-5])$")
+                    if is_cracked then
+                        node_name = string.gsub(node_name, "_crack[1-5]$", "")
                     end
-                    if not is_ent then
-                        local entity = minetest.add_entity(node_pos, "tutorial:crack_overlay")
-                        entity:set_properties({
-                            textures = {
-                                "tutorial_crack1.png",
-                                "tutorial_crack1.png",
-                                "tutorial_crack1.png",
-                                "tutorial_crack1.png",
-                                "tutorial_crack1.png",
-                                "tutorial_crack1.png",
-                            },
-                        })
+                    local time = 120
+                    if node_group == 4 then
+                        time = 25
+                    elseif node_group == 5 then
+                        time = 30
+                    elseif node_group == 6 then
+                        time = 50
+                    elseif node_group == 7 then
+                        time = 60
+                    elseif node_group == 8 then
+                        time = 70
+                    elseif node_group == 9 then
+                        time = 80
+                    elseif node_group == 10 then
+                        time = 120
+                    elseif node_group == 12 then
+                        time = 100
+                    elseif node_group == 13 then
+                        time = 80
+                    elseif node_group == 16 then
+                        time = 100
+                    end
+                    if dig_timer[player_name] > (time) then
+                        minetest.set_node(node_pos, {name = "air"})
+                    elseif dig_timer[player_name] > (time/5)*4 then
+                        minetest.set_node(node_pos, {name=node_name.."_crack5"})
+                    elseif dig_timer[player_name] > (time/5)*3 then
+                        minetest.set_node(node_pos, {name=node_name.."_crack4"})
+                    elseif dig_timer[player_name] > (time/5)*2 then
+                        minetest.set_node(node_pos, {name=node_name.."_crack3"})
+                    elseif dig_timer[player_name] > (time/5)*1 then
+                        minetest.set_node(node_pos, {name=node_name.."_crack2"})
+                    else
+                        minetest.set_node(node_pos, {name=node_name.."_crack1"})
                     end
                 end
             end
         else
             if dig_pos[player_name] then
-                local objects = minetest.get_objects_inside_radius(dig_pos[player_name], 0.5)
-                for _, object in ipairs(objects) do
-                    if object:get_luaentity().name == "tutorial:crack_overlay" then
-                        object:remove()
-                    end
+                local node = minetest.get_node(dig_pos[player_name])
+                node_name = node.name
+                local old_node = string.gsub(node_name, "_crack[1-5]$", "")
+                if node_name:match("_crack([1-5])$") then
+                    minetest.set_node(dig_pos[player_name], {name=old_node})
                 end
                 dig_timer[player_name] = 0
             end
         end
     end
 end)
-
-minetest.register_entity("tutorial:crack_overlay", {
-    use_texture_alpha = true,
-    physical = true,
-    collisionbox = {-0.5,-0.5,-0.5, 0.5,0.5,0.5},
-    visual = "cube",
-    visual_size = {x=1.01, y=1.01, z=1.01},
-    textures = {""},
-    spritediv={x=1, y=1},
-})
 
 function give_or_drop_ore(pos, node, digger, ore_item)
     if digger and digger:is_player() then
@@ -293,14 +234,22 @@ function give_or_drop_ore(pos, node, digger, ore_item)
     end
 end
 
+local night_timer = 0
 minetest.register_globalstep(function(dtime)
-    local time = minetest.get_timeofday()
-    if time > 0.75 or time < 0.25 then
-        time = time + (dtime/1000)
-        if time >= 1 then
-            time = 0
+    night_timer = night_timer+dtime
+    if night_timer > 0.1 then
+        night_timer = 0
+        local time = minetest.get_timeofday()
+        local time_speed = tonumber(minetest.settings:get("time_speed"))
+        if time > 0.75 or time < 0.25 then
+            local time_speed = tonumber(minetest.settings:get("time_speed")) or 72
+            local delta = time_speed / 864000
+            time = time + delta
+            if time >= 1 then
+                time = 0
+            end
+            minetest.set_timeofday(time)
         end
-        minetest.set_timeofday(time)
     end
 end)
 
@@ -326,7 +275,22 @@ minetest.register_allow_player_inventory_action(function(player, action, invento
         take_list = list_name
         take_index = index
     end
-    if list_name == "feld" and not string.find(stack:get_name(), "tutorial:craft_schluessel") then
+    if list_name == "craft" then
+        local feld_name = inventory:get_stack("feld", 1):get_name()
+        local feld3_name = inventory:get_stack("feld3", 1):get_name()
+        local width
+        if feld_name == "tutorial:craft_schluessel7" and feld3_name == "tutorial:legenden_schluessel" then
+            width = 5
+        elseif feld_name == "tutorial:craft_schluessel7" then
+            width = 4
+        else
+            width = 3
+        end
+        if index > width * width then
+            return 0
+        end
+        return inventory_info.count
+    elseif list_name == "feld" and not string.find(stack:get_name(), "tutorial:craft_schluessel") then
         return 0
     elseif list_name == "feld" then
         return 1
@@ -451,7 +415,7 @@ minetest.register_allow_player_inventory_action(function(player, action, invento
     elseif list_name == "dragon" and (stack:get_name() ~= "tutorial:dragon_crystal" or prev_stack:get_count() ~= 0) then
         return 0
     elseif list_name == "dragon" then
-        return 1  
+        return 1
     elseif list_name == "sheep" and (minetest.get_item_group(stack:get_name(), "dye") == 0 or (prev_stack:get_count() ~= 0 and prev_stack:get_name() == stack:get_name())) then
         return 0
     elseif list_name == "sheep" then
@@ -459,7 +423,7 @@ minetest.register_allow_player_inventory_action(function(player, action, invento
     elseif list_name == "tortoise" and (stack:get_name() ~= "tutorial:dragon_crystal" or prev_stack:get_count() ~= 0) then
         return 0
     elseif list_name == "tortoise" then
-        return 1  
+        return 1
     elseif list_name == "trophcr" and minetest.get_item_group(stack:get_name(), "regnum_tear") == 0 then
         return 0
     elseif list_name == "trophcr" then
@@ -513,8 +477,8 @@ minetest.register_on_player_inventory_action(function(player, action, inventory,
     elseif inventory_info.stack then
         list_name = inventory_info.listname
     end
-    if list_name == "feld3" or list_name == "feld" or list_name == "feld4" or list_name == "feld5" or list_name == "feld6" or list_name == "feld7" or list_name == "feld8" 
-    or list_name == "cookkey" or list_name == "pixkey" or list_name == "skinskey" or list_name == "skinskey2" or list_name == "bronze_key" or list_name == "feld2" 
+    if list_name == "feld3" or list_name == "feld" or list_name == "feld4" or list_name == "feld5" or list_name == "feld6" or list_name == "feld7" or list_name == "feld8"
+    or list_name == "cookkey" or list_name == "pixkey" or list_name == "skinskey" or list_name == "skinskey2" or list_name == "bronze_key" or list_name == "feld2"
     or list_name == "arm" or list_name == "krit" or list_name == "b" or list_name == "bag" or list_name == "gem" or list_name == "2gem" then
         sfinv.set_player_inventory_formspec(player)
     end
@@ -565,7 +529,7 @@ minetest.register_on_joinplayer(function(player)
     player_inv:set_size("xpi5", 101)
     player_inv:set_size("xpi6", 26)
     player_inv:set_size("xpi7", 101)
-    player_inv:set_size("xpi8", 101)
+    player_inv:set_size("xpi8", 60)
     player_inv:set_size("craft", 25)
     player_inv:set_size("feld", 1)
 	player_inv:set_size("feld3", 1)
@@ -726,15 +690,25 @@ for i=1,4 do
 		stack_max = 1,
     })
 end
-minetest.register_craftitem("tutorial:uraniumheart1", {
-    description = "Uraniumheart Lv.1\nHeart-Lv.50",
-    inventory_image = "tutorial_uraniumheart1.png",
-    groups = {not_in_creative_inventory=1, heart=1},
-    stack_max = 1,
-})
-minetest.register_craftitem("tutorial:uraniumheart2", {
-    description = "Uraniumheart Lv.2\nHeart-Lv.51",
-    inventory_image = "tutorial_uraniumheart2.png",
+for i=1,2 do
+    minetest.register_craftitem("tutorial:uraniumheart"..i, {
+        description = "Uraniumheart Lv."..i.."\nHeart-Lv."..(i+49),
+	    inventory_image = "tutorial_uraniumheart"..i..".png",
+		groups = {not_in_creative_inventory=1, heart=1},
+		stack_max = 1,
+    })
+end
+for i=1,11 do
+    minetest.register_craftitem("tutorial:energyheart"..i, {
+        description = "Energyheart Lv."..i.."\nHeart-Lv."..(i+51),
+	    inventory_image = "tutorial_energyheart"..i..".png",
+		groups = {not_in_creative_inventory=1, heart=1},
+		stack_max = 1,
+    })
+end
+minetest.register_craftitem("tutorial:energyheart12", {
+    description = "Energyheart Lv.12\nHeart-Lv.63",
+    inventory_image = "tutorial_energyheart12.png",
     groups = {heart=1},
     stack_max = 1,
 })
@@ -783,6 +757,16 @@ minetest.register_craft({
         {'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver'},
         {'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver'},
         {'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:xraystick1', 'tutorial:coin_silver', 'tutorial:coin_silver'},
+        {'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver'},
+        {'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver'},
+    }
+})
+minetest.register_craft({
+    output = 'tutorial:xraystick3',
+    recipe = {
+        {'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver'},
+        {'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver'},
+        {'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:xraystick2', 'tutorial:coin_silver', 'tutorial:coin_silver'},
         {'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver'},
         {'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver', 'tutorial:coin_silver'},
     }
@@ -837,7 +821,7 @@ minetest.register_craft({
         {'tutorial:coin_bronze', 'tutorial:coin_bronze', 'tutorial:coin_bronze', 'tutorial:coin_bronze', 'tutorial:coin_bronze'},
     }
 })
-	
+
 minetest.register_craftitem("tutorial:xraystick1", {
     description = "Xray Stick Lv.1",
     inventory_image = "tutorial_xraystick1.png",
@@ -859,7 +843,7 @@ minetest.register_craftitem("tutorial:xraystick2", {
     description = "Xray Stick Lv.2",
     inventory_image = "tutorial_xraystick2.png",
     stack_max = 1,
-	groups = {},
+	groups = {not_in_creative_inventory=1},
     on_use = function(itemstack, user, pointed_thing)
         local playername = user:get_player_name()
         local player_inv = user:get_inventory()
@@ -867,6 +851,23 @@ minetest.register_craftitem("tutorial:xraystick2", {
         if player_inv:get_stack("xray", 1):get_count() == 0 then
             playereffects.apply_effect_type("xray", 20, user)
             player_inv:set_stack("xray", 1, "default:dirt 32")
+        end
+        return itemstack
+    end,
+})
+
+minetest.register_craftitem("tutorial:xraystick3", {
+    description = "Xray Stick Lv.3",
+    inventory_image = "tutorial_xraystick3.png",
+    stack_max = 1,
+	groups = {},
+    on_use = function(itemstack, user, pointed_thing)
+        local playername = user:get_player_name()
+        local player_inv = user:get_inventory()
+        local privs = minetest.get_player_privs(playername)
+        if player_inv:get_stack("xray", 1):get_count() == 0 then
+            playereffects.apply_effect_type("xray", 30, user)
+            player_inv:set_stack("xray", 1, "default:dirt 42")
         end
         return itemstack
     end,
@@ -984,9 +985,17 @@ minetest.register_node("tutorial:stone_with_precious_metal", {
 	description = "Precious Metal Ore",
 	tiles = {"default_stone.png^tutorial_precious_metal_ore.png"},
 	is_ground_content = true,
-	groups = {cracky=16,xpp=1},
+	groups = {cracky=16,xp_source=1},
 	drop = 'tutorial:precious_metal',
 	sounds = default.node_sound_stone_defaults(),
+	after_dig_node = function(pos, oldnode, oldmetadata, digger)
+		local player_inv = digger:get_inventory()
+		if player_inv:get_stack("bronze_key", 1):get_name() == "tutorial:bronzekey" then
+			experience.add_orb(pos, "experience_silver")
+		else
+			experience.add_orb(pos, "experience_bronze")
+		end
+	end,
 })
 minetest.register_craftitem("tutorial:precious_metal", {
 	description = "Precious Metal",
@@ -1397,6 +1406,11 @@ minetest.register_on_joinplayer(function(player)
 			new_max_hp = 69+i
 		end
 	end
+    for i=1,12 do
+		if stack:get_name() == "tutorial:energyheart"..i then
+			new_max_hp = 71+i
+		end
+	end
     if stack:get_name() == "tutorial:adminheart" then
         new_max_hp = 1000
         player:set_properties({hp_max = new_max_hp})
@@ -1486,294 +1500,55 @@ minetest.register_craftitem("tutorial:colorstick_broken", {
 	inventory_image = "tutorial_colorstick_broken.png",
 })
 minetest.register_alias("homedecor:trophy_year1", "tutorial:trophy_year1")
-minetest.register_node("tutorial:trophy_year1", {
-    description = "One Year Trophy",
-	tiles = {
-		"tutorial_trophy_year1.png"
-	},
-    groups = { snappy=3 },
-    drawtype = "nodebox",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.125, -0.5, -0.125, 0.1875, -0.4375, 0.1875}, -- NodeBox1
-			{-0.0625, -0.4375, -0.0625, 0.125, -0.375, 0.125}, -- NodeBox2
-			{-0.02, -0.375, -0.02, 0.0825, -0.1875, 0.0825}, -- NodeBox3
-			{-0.0625, -0.1875, -0.0625, 0.125, -0.125, 0.125}, -- NodeBox4
-			{-0.125, -0.1875, -0.0625, -0.0625, 0.125, 0.125}, -- NodeBox5
-			{0.125, -0.1875, -0.0625, 0.1875, 0.125, 0.125}, -- NodeBox6
-			{-0.125, -0.1875, 0.125, 0.1875, 0.125, 0.1875}, -- NodeBox7
-			{-0.125, -0.1875, -0.125, 0.1875, 0.125, -0.0625}, -- NodeBox8
-			{-0.0625, -0.25, -0.0625, 0.125, -0.1875, 0.125}, -- NodeBox9
-			{0.1875, 0.05, 0, 0.23, 0.0925, 0.0625}, -- NodeBox10
-			{0.1875, -0.15, 0, 0.23, -0.11, 0.0625}, -- NodeBox11
-			{0.23, -0.15, 0, 0.2725, 0.0925, 0.0625}, -- NodeBox12
-			{-0.1675, -0.15, 0, -0.125, -0.11, 0.0625}, -- NodeBox13
-			{-0.1675, 0.05, 0, -0.125, 0.0925, 0.0625}, -- NodeBox14
-			{-0.21, -0.15, 0, -0.1675, 0.0925, 0.0625}, -- NodeBox15
+local year_text = {
+	[1] = "One",
+	[2] = "Two",
+	[3] = "Three",
+	[4] = "Four",
+	[5] = "Five",
+	[6] = "Six",
+	[7] = "Seven",
+	[8] = "Eight",
+	[9] = "Nine",
+	[10] = "Ten"
+}
+local function register_trophy(year)
+	minetest.register_node("tutorial:trophy_year" .. year, {
+		description = year_text[year] .. " Year Trophy",
+		tiles = { "tutorial_trophy_year" .. year .. ".png" },
+		groups = { snappy = 3, not_in_creative_inventory=1},
+		drawtype = "nodebox",
+		node_box = {
+			type = "fixed",
+			fixed = {
+				{-0.125, -0.5, -0.125, 0.1875, -0.4375, 0.1875},
+				{-0.0625, -0.4375, -0.0625, 0.125, -0.375, 0.125},
+				{-0.02, -0.375, -0.02, 0.0825, -0.1875, 0.0825},
+				{-0.0625, -0.1875, -0.0625, 0.125, -0.125, 0.125},
+				{-0.125, -0.1875, -0.0625, -0.0625, 0.125, 0.125},
+				{0.125, -0.1875, -0.0625, 0.1875, 0.125, 0.125},
+				{-0.125, -0.1875, 0.125, 0.1875, 0.125, 0.1875},
+				{-0.125, -0.1875, -0.125, 0.1875, 0.125, -0.0625},
+				{-0.0625, -0.25, -0.0625, 0.125, -0.1875, 0.125},
+				{0.1875, 0.05, 0, 0.23, 0.0925, 0.0625},
+				{0.1875, -0.15, 0, 0.23, -0.11, 0.0625},
+				{0.23, -0.15, 0, 0.2725, 0.0925, 0.0625},
+				{-0.1675, -0.15, 0, -0.125, -0.11, 0.0625},
+				{-0.1675, 0.05, 0, -0.125, 0.0925, 0.0625},
+				{-0.21, -0.15, 0, -0.1675, 0.0925, 0.0625},
+			}
+		},
+
+		selection_box = {
+			type = "fixed",
+			fixed = { -0.21, -0.5, -0.125, 0.2725, 0.125, 0.1875 }
 		}
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.21, -0.5, -0.125, 0.2725, 0.125, 0.1875 }
-	}
-})
-minetest.register_node("tutorial:trophy_year2", {
-    description = "Two Year Trophy",
-	tiles = {
-		"tutorial_trophy_year2.png"
-	},
-    groups = { snappy=3 },
-    drawtype = "nodebox",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.125, -0.5, -0.125, 0.1875, -0.4375, 0.1875}, -- NodeBox1
-			{-0.0625, -0.4375, -0.0625, 0.125, -0.375, 0.125}, -- NodeBox2
-			{-0.02, -0.375, -0.02, 0.0825, -0.1875, 0.0825}, -- NodeBox3
-			{-0.0625, -0.1875, -0.0625, 0.125, -0.125, 0.125}, -- NodeBox4
-			{-0.125, -0.1875, -0.0625, -0.0625, 0.125, 0.125}, -- NodeBox5
-			{0.125, -0.1875, -0.0625, 0.1875, 0.125, 0.125}, -- NodeBox6
-			{-0.125, -0.1875, 0.125, 0.1875, 0.125, 0.1875}, -- NodeBox7
-			{-0.125, -0.1875, -0.125, 0.1875, 0.125, -0.0625}, -- NodeBox8
-			{-0.0625, -0.25, -0.0625, 0.125, -0.1875, 0.125}, -- NodeBox9
-			{0.1875, 0.05, 0, 0.23, 0.0925, 0.0625}, -- NodeBox10
-			{0.1875, -0.15, 0, 0.23, -0.11, 0.0625}, -- NodeBox11
-			{0.23, -0.15, 0, 0.2725, 0.0925, 0.0625}, -- NodeBox12
-			{-0.1675, -0.15, 0, -0.125, -0.11, 0.0625}, -- NodeBox13
-			{-0.1675, 0.05, 0, -0.125, 0.0925, 0.0625}, -- NodeBox14
-			{-0.21, -0.15, 0, -0.1675, 0.0925, 0.0625}, -- NodeBox15
-		}
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.21, -0.5, -0.125, 0.2725, 0.125, 0.1875 }
-	}
-})
-minetest.register_node("tutorial:trophy_year3", {
-    description = "Three Year Trophy",
-	tiles = {
-		"tutorial_trophy_year3.png"
-	},
-    groups = { snappy=3 },
-    drawtype = "nodebox",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.125, -0.5, -0.125, 0.1875, -0.4375, 0.1875}, -- NodeBox1
-			{-0.0625, -0.4375, -0.0625, 0.125, -0.375, 0.125}, -- NodeBox2
-			{-0.02, -0.375, -0.02, 0.0825, -0.1875, 0.0825}, -- NodeBox3
-			{-0.0625, -0.1875, -0.0625, 0.125, -0.125, 0.125}, -- NodeBox4
-			{-0.125, -0.1875, -0.0625, -0.0625, 0.125, 0.125}, -- NodeBox5
-			{0.125, -0.1875, -0.0625, 0.1875, 0.125, 0.125}, -- NodeBox6
-			{-0.125, -0.1875, 0.125, 0.1875, 0.125, 0.1875}, -- NodeBox7
-			{-0.125, -0.1875, -0.125, 0.1875, 0.125, -0.0625}, -- NodeBox8
-			{-0.0625, -0.25, -0.0625, 0.125, -0.1875, 0.125}, -- NodeBox9
-			{0.1875, 0.05, 0, 0.23, 0.0925, 0.0625}, -- NodeBox10
-			{0.1875, -0.15, 0, 0.23, -0.11, 0.0625}, -- NodeBox11
-			{0.23, -0.15, 0, 0.2725, 0.0925, 0.0625}, -- NodeBox12
-			{-0.1675, -0.15, 0, -0.125, -0.11, 0.0625}, -- NodeBox13
-			{-0.1675, 0.05, 0, -0.125, 0.0925, 0.0625}, -- NodeBox14
-			{-0.21, -0.15, 0, -0.1675, 0.0925, 0.0625}, -- NodeBox15
-		}
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.21, -0.5, -0.125, 0.2725, 0.125, 0.1875 }
-	}
-})
-minetest.register_node("tutorial:trophy_year4", {
-    description = "Four Year Trophy",
-	tiles = {
-		"tutorial_trophy_year4.png"
-	},
-    groups = { snappy=3 },
-    drawtype = "nodebox",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.125, -0.5, -0.125, 0.1875, -0.4375, 0.1875}, -- NodeBox1
-			{-0.0625, -0.4375, -0.0625, 0.125, -0.375, 0.125}, -- NodeBox2
-			{-0.02, -0.375, -0.02, 0.0825, -0.1875, 0.0825}, -- NodeBox3
-			{-0.0625, -0.1875, -0.0625, 0.125, -0.125, 0.125}, -- NodeBox4
-			{-0.125, -0.1875, -0.0625, -0.0625, 0.125, 0.125}, -- NodeBox5
-			{0.125, -0.1875, -0.0625, 0.1875, 0.125, 0.125}, -- NodeBox6
-			{-0.125, -0.1875, 0.125, 0.1875, 0.125, 0.1875}, -- NodeBox7
-			{-0.125, -0.1875, -0.125, 0.1875, 0.125, -0.0625}, -- NodeBox8
-			{-0.0625, -0.25, -0.0625, 0.125, -0.1875, 0.125}, -- NodeBox9
-			{0.1875, 0.05, 0, 0.23, 0.0925, 0.0625}, -- NodeBox10
-			{0.1875, -0.15, 0, 0.23, -0.11, 0.0625}, -- NodeBox11
-			{0.23, -0.15, 0, 0.2725, 0.0925, 0.0625}, -- NodeBox12
-			{-0.1675, -0.15, 0, -0.125, -0.11, 0.0625}, -- NodeBox13
-			{-0.1675, 0.05, 0, -0.125, 0.0925, 0.0625}, -- NodeBox14
-			{-0.21, -0.15, 0, -0.1675, 0.0925, 0.0625}, -- NodeBox15
-		}
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.21, -0.5, -0.125, 0.2725, 0.125, 0.1875 }
-	}
-})
-minetest.register_node("tutorial:trophy_year5", {
-    description = "Five Year Trophy",
-	tiles = {
-		"tutorial_trophy_year5.png"
-	},
-    groups = { snappy=3 },
-    drawtype = "nodebox",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.125, -0.5, -0.125, 0.1875, -0.4375, 0.1875}, -- NodeBox1
-			{-0.0625, -0.4375, -0.0625, 0.125, -0.375, 0.125}, -- NodeBox2
-			{-0.02, -0.375, -0.02, 0.0825, -0.1875, 0.0825}, -- NodeBox3
-			{-0.0625, -0.1875, -0.0625, 0.125, -0.125, 0.125}, -- NodeBox4
-			{-0.125, -0.1875, -0.0625, -0.0625, 0.125, 0.125}, -- NodeBox5
-			{0.125, -0.1875, -0.0625, 0.1875, 0.125, 0.125}, -- NodeBox6
-			{-0.125, -0.1875, 0.125, 0.1875, 0.125, 0.1875}, -- NodeBox7
-			{-0.125, -0.1875, -0.125, 0.1875, 0.125, -0.0625}, -- NodeBox8
-			{-0.0625, -0.25, -0.0625, 0.125, -0.1875, 0.125}, -- NodeBox9
-			{0.1875, 0.05, 0, 0.23, 0.0925, 0.0625}, -- NodeBox10
-			{0.1875, -0.15, 0, 0.23, -0.11, 0.0625}, -- NodeBox11
-			{0.23, -0.15, 0, 0.2725, 0.0925, 0.0625}, -- NodeBox12
-			{-0.1675, -0.15, 0, -0.125, -0.11, 0.0625}, -- NodeBox13
-			{-0.1675, 0.05, 0, -0.125, 0.0925, 0.0625}, -- NodeBox14
-			{-0.21, -0.15, 0, -0.1675, 0.0925, 0.0625}, -- NodeBox15
-		}
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.21, -0.5, -0.125, 0.2725, 0.125, 0.1875 }
-	}
-})
-minetest.register_node("tutorial:trophy_year6", {
-    description = "Six Year Trophy",
-	tiles = {
-		"tutorial_trophy_year6.png"
-	},
-    groups = { snappy=3 },
-    drawtype = "nodebox",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.125, -0.5, -0.125, 0.1875, -0.4375, 0.1875}, -- NodeBox1
-			{-0.0625, -0.4375, -0.0625, 0.125, -0.375, 0.125}, -- NodeBox2
-			{-0.02, -0.375, -0.02, 0.0825, -0.1875, 0.0825}, -- NodeBox3
-			{-0.0625, -0.1875, -0.0625, 0.125, -0.125, 0.125}, -- NodeBox4
-			{-0.125, -0.1875, -0.0625, -0.0625, 0.125, 0.125}, -- NodeBox5
-			{0.125, -0.1875, -0.0625, 0.1875, 0.125, 0.125}, -- NodeBox6
-			{-0.125, -0.1875, 0.125, 0.1875, 0.125, 0.1875}, -- NodeBox7
-			{-0.125, -0.1875, -0.125, 0.1875, 0.125, -0.0625}, -- NodeBox8
-			{-0.0625, -0.25, -0.0625, 0.125, -0.1875, 0.125}, -- NodeBox9
-			{0.1875, 0.05, 0, 0.23, 0.0925, 0.0625}, -- NodeBox10
-			{0.1875, -0.15, 0, 0.23, -0.11, 0.0625}, -- NodeBox11
-			{0.23, -0.15, 0, 0.2725, 0.0925, 0.0625}, -- NodeBox12
-			{-0.1675, -0.15, 0, -0.125, -0.11, 0.0625}, -- NodeBox13
-			{-0.1675, 0.05, 0, -0.125, 0.0925, 0.0625}, -- NodeBox14
-			{-0.21, -0.15, 0, -0.1675, 0.0925, 0.0625}, -- NodeBox15
-		}
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.21, -0.5, -0.125, 0.2725, 0.125, 0.1875 }
-	}
-})
-minetest.register_node("tutorial:trophy_year7", {
-    description = "Seven Year Trophy",
-	tiles = {
-		"tutorial_trophy_year7.png"
-	},
-    groups = { snappy=3 },
-    drawtype = "nodebox",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.125, -0.5, -0.125, 0.1875, -0.4375, 0.1875}, -- NodeBox1
-			{-0.0625, -0.4375, -0.0625, 0.125, -0.375, 0.125}, -- NodeBox2
-			{-0.02, -0.375, -0.02, 0.0825, -0.1875, 0.0825}, -- NodeBox3
-			{-0.0625, -0.1875, -0.0625, 0.125, -0.125, 0.125}, -- NodeBox4
-			{-0.125, -0.1875, -0.0625, -0.0625, 0.125, 0.125}, -- NodeBox5
-			{0.125, -0.1875, -0.0625, 0.1875, 0.125, 0.125}, -- NodeBox6
-			{-0.125, -0.1875, 0.125, 0.1875, 0.125, 0.1875}, -- NodeBox7
-			{-0.125, -0.1875, -0.125, 0.1875, 0.125, -0.0625}, -- NodeBox8
-			{-0.0625, -0.25, -0.0625, 0.125, -0.1875, 0.125}, -- NodeBox9
-			{0.1875, 0.05, 0, 0.23, 0.0925, 0.0625}, -- NodeBox10
-			{0.1875, -0.15, 0, 0.23, -0.11, 0.0625}, -- NodeBox11
-			{0.23, -0.15, 0, 0.2725, 0.0925, 0.0625}, -- NodeBox12
-			{-0.1675, -0.15, 0, -0.125, -0.11, 0.0625}, -- NodeBox13
-			{-0.1675, 0.05, 0, -0.125, 0.0925, 0.0625}, -- NodeBox14
-			{-0.21, -0.15, 0, -0.1675, 0.0925, 0.0625}, -- NodeBox15
-		}
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.21, -0.5, -0.125, 0.2725, 0.125, 0.1875 }
-	}
-})
-minetest.register_node("tutorial:trophy_year8", {
-    description = "Eight Year Trophy",
-	tiles = {
-		"tutorial_trophy_year8.png"
-	},
-    groups = { snappy=3 },
-    drawtype = "nodebox",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.125, -0.5, -0.125, 0.1875, -0.4375, 0.1875}, -- NodeBox1
-			{-0.0625, -0.4375, -0.0625, 0.125, -0.375, 0.125}, -- NodeBox2
-			{-0.02, -0.375, -0.02, 0.0825, -0.1875, 0.0825}, -- NodeBox3
-			{-0.0625, -0.1875, -0.0625, 0.125, -0.125, 0.125}, -- NodeBox4
-			{-0.125, -0.1875, -0.0625, -0.0625, 0.125, 0.125}, -- NodeBox5
-			{0.125, -0.1875, -0.0625, 0.1875, 0.125, 0.125}, -- NodeBox6
-			{-0.125, -0.1875, 0.125, 0.1875, 0.125, 0.1875}, -- NodeBox7
-			{-0.125, -0.1875, -0.125, 0.1875, 0.125, -0.0625}, -- NodeBox8
-			{-0.0625, -0.25, -0.0625, 0.125, -0.1875, 0.125}, -- NodeBox9
-			{0.1875, 0.05, 0, 0.23, 0.0925, 0.0625}, -- NodeBox10
-			{0.1875, -0.15, 0, 0.23, -0.11, 0.0625}, -- NodeBox11
-			{0.23, -0.15, 0, 0.2725, 0.0925, 0.0625}, -- NodeBox12
-			{-0.1675, -0.15, 0, -0.125, -0.11, 0.0625}, -- NodeBox13
-			{-0.1675, 0.05, 0, -0.125, 0.0925, 0.0625}, -- NodeBox14
-			{-0.21, -0.15, 0, -0.1675, 0.0925, 0.0625}, -- NodeBox15
-		}
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.21, -0.5, -0.125, 0.2725, 0.125, 0.1875 }
-	}
-})
-minetest.register_node("tutorial:trophy_year9", {
-    description = "Nine Year Trophy",
-	tiles = {
-		"tutorial_trophy_year9.png"
-	},
-    groups = { snappy=3 },
-    drawtype = "nodebox",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.125, -0.5, -0.125, 0.1875, -0.4375, 0.1875}, -- NodeBox1
-			{-0.0625, -0.4375, -0.0625, 0.125, -0.375, 0.125}, -- NodeBox2
-			{-0.02, -0.375, -0.02, 0.0825, -0.1875, 0.0825}, -- NodeBox3
-			{-0.0625, -0.1875, -0.0625, 0.125, -0.125, 0.125}, -- NodeBox4
-			{-0.125, -0.1875, -0.0625, -0.0625, 0.125, 0.125}, -- NodeBox5
-			{0.125, -0.1875, -0.0625, 0.1875, 0.125, 0.125}, -- NodeBox6
-			{-0.125, -0.1875, 0.125, 0.1875, 0.125, 0.1875}, -- NodeBox7
-			{-0.125, -0.1875, -0.125, 0.1875, 0.125, -0.0625}, -- NodeBox8
-			{-0.0625, -0.25, -0.0625, 0.125, -0.1875, 0.125}, -- NodeBox9
-			{0.1875, 0.05, 0, 0.23, 0.0925, 0.0625}, -- NodeBox10
-			{0.1875, -0.15, 0, 0.23, -0.11, 0.0625}, -- NodeBox11
-			{0.23, -0.15, 0, 0.2725, 0.0925, 0.0625}, -- NodeBox12
-			{-0.1675, -0.15, 0, -0.125, -0.11, 0.0625}, -- NodeBox13
-			{-0.1675, 0.05, 0, -0.125, 0.0925, 0.0625}, -- NodeBox14
-			{-0.21, -0.15, 0, -0.1675, 0.0925, 0.0625}, -- NodeBox15
-		}
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.21, -0.5, -0.125, 0.2725, 0.125, 0.1875 }
-	}
-})
+	})
+end
+
+for i = 1, 10 do
+	register_trophy(i)
+end
 minetest.register_craft({
     output = 'tutorial:legendstick9',
     recipe = {
@@ -2262,11 +2037,11 @@ minetest.register_node("tutorial:bottle_crystal", {
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
 	},
     on_place = function(itemstack, placer, pointed_thing)
-        minetest.add_entity(pointed_thing.above, "experience:orb_cyan")
+		experience.add_orb(pointed_thing.above, "experience_cyan")
         if not minetest.is_creative_enabled(placer:get_player_name()) then itemstack:take_item() end
         return itemstack
     end,
-	groups = {vessel=1,dig_immediate=3,attached_node=1},
+	groups = {vessel=1,dig_immediate=3,attached_node=1,xp_source=1},
 })
 for i = 1, 25, 1 do
     minetest.register_node("tutorial:level"..i.."_cyan",{
@@ -2360,6 +2135,11 @@ function set_new_hp(player)
             new_max_hp = 69+i
         end
     end
+    for i=1,12 do
+		if stack:get_name() == "tutorial:energyheart"..i then
+			new_max_hp = 71+i
+		end
+	end
     if stack:get_name() == "tutorial:adminheart" then
         new_max_hp = 1000
         player:set_properties({hp_max = new_max_hp})
@@ -2380,10 +2160,10 @@ minetest.register_globalstep(function(dtime)
 		local players = minetest.get_connected_players()
 		for _,player in ipairs(players) do
 			local player_inv = player:get_inventory()
-			player_inv:set_size("year", 9)
-			if player_inv:room_for_item("main", "tutorial:trophy_year9") and player_inv:get_stack("year", 9):get_count() == 0 then
-				player_inv:add_item("main", "tutorial:trophy_year9")
-				player_inv:set_stack("year", 9, "default:dirt")
+			player_inv:set_size("year", 10)
+			if player_inv:room_for_item("main", "tutorial:trophy_year10") and player_inv:get_stack("year", 10):get_count() == 0 then
+				player_inv:add_item("main", "tutorial:trophy_year10")
+				player_inv:set_stack("year", 10, "default:dirt")
 			end
             set_new_hp(player)
             local g1 = player_inv:get_stack("gem", 1):get_name()
@@ -2423,7 +2203,7 @@ minetest.register_globalstep(function(dtime)
                     num_ach = num_ach+1
                 end
             end
-        
+
             local player_rank = "[Outsider]"
             for _, rank in ipairs(rank_order) do
                 local privs = ranks[rank]
@@ -2446,7 +2226,7 @@ minetest.register_globalstep(function(dtime)
             elseif num_ach > 24 then
                 suffix = "[★]"
             end
-            
+
             if player_rank == "[Admin]" then
                 player:set_nametag_attributes({bgcolor = bcolor, color = {a = 255, r = 255, g = 0, b = 255}, text = "[Admin]"..player:get_player_name()..suffix})
             elseif player_rank == "[Moderator]" then
@@ -4870,7 +4650,10 @@ minetest.register_node("tutorial:xp_block_yellow",{
 	description = "Yellow Xp Block",
 	tiles  = {"tutorial_xp_block_yellow.png"},
     drop = '',
-	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,xpy=1},
+	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,xp_source=1},
+	after_dig_node = function(pos, oldnode, oldmetadata, digger)
+		experience.add_orb(pos, "experience_yellow")
+	end,
 })
 for i = 0, 127 do
     local XTRAORES_TB = {
@@ -5666,7 +5449,7 @@ local mode_tools = {
 	{"tutorial:gun_admin2","tutorial:gun_admin1",""},
 	{"tutorial:gun_admin3","tutorial:gun_admin2",""},
 
-    
+
 }
 for i = 1, 150 do
     table.insert(mode_tools, {"technic:drill_mkS"..i.."_1","technic:drill_mkS"..i.."_2"})
@@ -5742,14 +5525,14 @@ end
 for _, pair in ipairs(mode_tools) do
     local original_item = pair[1]
     local new_item = pair[2]
-    
+
     local old_def = minetest.registered_items[original_item]
     if old_def then
-        
+
         local old_on_place = minetest.registered_items[original_item].on_place
         minetest.override_item(original_item, {
             on_place = function(itemstack, placer, pointed_thing)
-                
+
                 if pointed_thing.type == "node" then
                     local node = minetest.get_node(pointed_thing.under)
                     local nodedef = minetest.registered_nodes[node.name]
@@ -5774,7 +5557,7 @@ for _, pair in ipairs(mode_tools) do
 
             end,
             on_secondary_use = function(itemstack, user)
-                
+
                 local transformed = get_transformed_item(itemstack:get_name())
                 local ctrl = user:get_player_control()
                 if transformed and ctrl.sneak then
@@ -5787,5 +5570,38 @@ for _, pair in ipairs(mode_tools) do
                 return itemstack
             end
         })
+    end
+end
+
+
+for nodename, nodedef in pairs(minetest.registered_nodes) do
+    local node_group = minetest.get_item_group(nodename, "cracky")
+    if node_group > 3 and node_group ~= 11 and node_group ~= 14 and node_group ~= 15 and node_group ~= 17 and not nodename:match("_crack([1-5])$") then
+        local base_node = minetest.registered_nodes[nodename]
+        local new_node_def1 = table.copy(base_node)
+        local new_node_def2 = table.copy(base_node)
+        local new_node_def3 = table.copy(base_node)
+        local new_node_def4 = table.copy(base_node)
+        local new_node_def5 = table.copy(base_node)
+        for i, tile in ipairs(base_node.tiles) do
+            if type(tile) == "table" then
+                tile = tile[1]
+            end
+            new_node_def1.tiles[i] = tile.."^tutorial_crack1.png"
+            new_node_def2.tiles[i] = tile.."^tutorial_crack2.png"
+            new_node_def3.tiles[i] = tile.."^tutorial_crack3.png"
+            new_node_def4.tiles[i] = tile.."^tutorial_crack4.png"
+            new_node_def5.tiles[i] = tile.."^tutorial_crack5.png"
+        end
+        new_node_def1.groups["not_in_creative_inventory"] = 1
+        new_node_def2.groups["not_in_creative_inventory"] = 1
+        new_node_def3.groups["not_in_creative_inventory"] = 1
+        new_node_def4.groups["not_in_creative_inventory"] = 1
+        new_node_def5.groups["not_in_creative_inventory"] = 1
+        minetest.register_node(":"..nodename.."_crack1", new_node_def1)
+        minetest.register_node(":"..nodename.."_crack2", new_node_def2)
+        minetest.register_node(":"..nodename.."_crack3", new_node_def3)
+        minetest.register_node(":"..nodename.."_crack4", new_node_def4)
+        minetest.register_node(":"..nodename.."_crack5", new_node_def5)
     end
 end

@@ -105,7 +105,8 @@ skins.formspec.main = function(name)
 	local num = 0
 	local skip = 0 -- Skip skins, used for pages
 	for i, skin in ipairs(skins.list) do
-		if skin == "character_180" and player:get_inventory():get_stack("skinskey",1):get_name() ~= "tutorial:regnum_key_pixeled" then
+		if skin == "character_181" and player:get_inventory():get_stack("year",10):get_count() < 1 then
+		elseif skin == "character_180" and player:get_inventory():get_stack("skinskey",1):get_name() ~= "tutorial:regnum_key_pixeled" then
         elseif (skin == "character_174" or skin == "character_175" or skin == "character_176" or skin == "character_177" or skin == "character_178" or skin == "character_179") and player:get_inventory():get_stack("skinskey2",1):get_name() ~= "tutorial:knight_schluessel" then
 		elseif skin == "character_173" and name ~= "1248" and name ~= "The1248" and name ~= "Der1248" then
 		else

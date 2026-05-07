@@ -38,7 +38,7 @@ local monster_dic = {
 	},
 }
 
-function monster_dict(drop_mode, drop1, drop2, texture)
+function monster_dict(drop_mode, drop1, drop2, texture, blood_texture)
     local new_dict = {}
     for k, v in pairs(monster_dic) do
         new_dict[k] = v
@@ -70,6 +70,7 @@ function monster_dict(drop_mode, drop1, drop2, texture)
     -- Aktualisiere den gewünschten Wert
     new_dict["textures"] = {{texture},}
 	new_dict["drops"] = drop
+	new_dict["blood_texture"] = blood_texture
 
     -- Gib die neue Tabelle zurück
     return new_dict
@@ -141,31 +142,31 @@ for old_entity, new_entity in pairs(entity_aliases) do
 	})
 end
 
-mobs:register_mob("mobs:red_monster", monster_dict(1, "tutorial:red_tear", "", "mobs_red_monster.png"))
-mobs:register_mob("mobs:blue_monster", monster_dict(1, "tutorial:blue_tear", "", "mobs_blue_monster.png"))
-mobs:register_mob("mobs:cyan_monster", monster_dict(1, "tutorial:cyan_tear", "", "mobs_cyan_monster.png"))
-mobs:register_mob("mobs:green2_monster", monster_dict(1, "tutorial:green_tear", "", "mobs_green_monster.png"))
-mobs:register_mob("mobs:yellow_monster", monster_dict(1, "tutorial:yellow_tear", "", "mobs_yellow_monster.png"))
-mobs:register_mob("mobs:purple_monster", monster_dict(1, "tutorial:purple_tear", "", "mobs_purple_monster.png"))
+mobs:register_mob("mobs:red_monster", monster_dict(1, "tutorial:red_tear", "", "mobs_red_monster.png", "tutorial_red_tear.png"))
+mobs:register_mob("mobs:blue_monster", monster_dict(1, "tutorial:blue_tear", "", "mobs_blue_monster.png", "tutorial_blue_tear.png"))
+mobs:register_mob("mobs:cyan_monster", monster_dict(1, "tutorial:cyan_tear", "", "mobs_cyan_monster.png", "tutorial_cyan_tear.png"))
+mobs:register_mob("mobs:green2_monster", monster_dict(1, "tutorial:green_tear", "", "mobs_green_monster.png", "tutorial_green_tear.png"))
+mobs:register_mob("mobs:yellow_monster", monster_dict(1, "tutorial:yellow_tear", "", "mobs_yellow_monster.png", "tutorial_yellow_tear.png"))
+mobs:register_mob("mobs:purple_monster", monster_dict(1, "tutorial:purple_tear", "", "mobs_purple_monster.png", "tutorial_purple_tear.png"))
 
-mobs:register_mob("mobs:stone_monster", 				monster_dict(2, "", "", "mobs_stone_monster.png"))
-mobs:register_mob("mobs:dirt_monster", 					monster_dict(2, "", "", "mobs_dirt_monster.png"))
-mobs:register_mob("mobs:sand_monster", 					monster_dict(2, "", "", "mobs_sand_monster.png"))
-mobs:register_mob("mobs:silver_sand_monster", 			monster_dict(2, "", "", "mobs_silver_sand_monster.png"))
-mobs:register_mob("mobs:desert_sand_monster", 			monster_dict(2, "", "", "mobs_desert_sand_monster.png"))
-mobs:register_mob("mobs:desert_stone_monster", 			monster_dict(2, "", "", "mobs_desert_stone_monster.png"))
-mobs:register_mob("mobs:snow_monster", 					monster_dict(2, "", "", "mobs_snow_monster.png"))
-mobs:register_mob("mobs:ice_monster", 					monster_dict(2, "", "", "mobs_ice_monster.png"))
-mobs:register_mob("mobs:grass_monster", 				monster_dict(2, "", "", "mobs_grass_monster.png"))
-mobs:register_mob("mobs:dry_dirt_monster", 				monster_dict(2, "", "", "mobs_dry_dirt_monster.png"))
-mobs:register_mob("mobs:clay_monster", 					monster_dict(2, "", "", "mobs_clay_monster.png"))
-mobs:register_mob("mobs:gravel_monster", 				monster_dict(2, "", "", "mobs_gravel_monster.png"))
-mobs:register_mob("mobs:coniferous_litter_monster", 	monster_dict(2, "", "", "mobs_coniferous_litter_monster.png"))
-mobs:register_mob("mobs:moss_monster", 					monster_dict(2, "", "", "mobs_moss_monster.png"))
-mobs:register_mob("mobs:permafrost_monster", 			monster_dict(2, "", "", "mobs_permafrost_monster.png"))
-mobs:register_mob("mobs:dry_grass_monster", 			monster_dict(2, "", "", "mobs_dry_grass_monster.png"))
-mobs:register_mob("mobs:rainforest_litter_monster", 	monster_dict(2, "", "", "mobs_rainforest_litter_monster.png"))
-mobs:register_mob("mobs:obsidian_monster", 				monster_dict(2, "", "", "mobs_obsidian_monster.png"))
+mobs:register_mob("mobs:stone_monster", 				monster_dict(2, "", "", "mobs_stone_monster.png",				"default_stone.png"))
+mobs:register_mob("mobs:dirt_monster", 					monster_dict(2, "", "", "mobs_dirt_monster.png",				"default_dirt.png"))
+mobs:register_mob("mobs:sand_monster", 					monster_dict(2, "", "", "mobs_sand_monster.png",				"default_sand.png"))
+mobs:register_mob("mobs:silver_sand_monster", 			monster_dict(2, "", "", "mobs_silver_sand_monster.png",			"default_silver_sand.png"))
+mobs:register_mob("mobs:desert_sand_monster", 			monster_dict(2, "", "", "mobs_desert_sand_monster.png",			"default_desert_sand.png"))
+mobs:register_mob("mobs:desert_stone_monster", 			monster_dict(2, "", "", "mobs_desert_stone_monster.png",		"default_desert_stone.png"))
+mobs:register_mob("mobs:snow_monster", 					monster_dict(2, "", "", "mobs_snow_monster.png",				"default_snow.png"))
+mobs:register_mob("mobs:ice_monster", 					monster_dict(2, "", "", "mobs_ice_monster.png",					"default_ice.png"))
+mobs:register_mob("mobs:grass_monster", 				monster_dict(2, "", "", "mobs_grass_monster.png",				"default_grass.png"))
+mobs:register_mob("mobs:dry_dirt_monster", 				monster_dict(2, "", "", "mobs_dry_dirt_monster.png",			"default_dry_dirt.png"))
+mobs:register_mob("mobs:clay_monster", 					monster_dict(2, "", "", "mobs_clay_monster.png",				"default_clay.png"))
+mobs:register_mob("mobs:gravel_monster", 				monster_dict(2, "", "", "mobs_gravel_monster.png",				"default_gravel.png"))
+mobs:register_mob("mobs:coniferous_litter_monster", 	monster_dict(2, "", "", "mobs_coniferous_litter_monster.png",	"default_coniferous_litter.png"))
+mobs:register_mob("mobs:moss_monster", 					monster_dict(2, "", "", "mobs_moss_monster.png",				"default_moss.png"))
+mobs:register_mob("mobs:permafrost_monster", 			monster_dict(2, "", "", "mobs_permafrost_monster.png",			"default_permafrost.png"))
+mobs:register_mob("mobs:dry_grass_monster", 			monster_dict(2, "", "", "mobs_dry_grass_monster.png",			"default_dry_grass.png"))
+mobs:register_mob("mobs:rainforest_litter_monster", 	monster_dict(2, "", "", "mobs_rainforest_litter_monster.png",	"default_rainforest_litter.png"))
+mobs:register_mob("mobs:obsidian_monster", 				monster_dict(2, "", "", "mobs_obsidian_monster.png",			"default_obsidian.png"))
 
 mobs:register_egg("mobs:stone_monster", 				"Stone Monster", 				"default_stone.png", 1)
 mobs:register_egg("mobs:dirt_monster", 					"Dirt Monster", 				"default_dirt.png", 1)
@@ -186,6 +187,9 @@ mobs:register_egg("mobs:dry_grass_monster", 			"Dry Grass Monster", 			"default_
 mobs:register_egg("mobs:rainforest_litter_monster", 	"Rainforest Litter Monster", 	"default_rainforest_litter.png", 1)
 mobs:register_egg("mobs:obsidian_monster", 				"Obsidian Monster", 			"default_obsidian.png", 1)
 
+
+
+
 mobs:register_spawn("mobs:stone_monster", {"default:stone", "default:cobble", "default:mossycobble"}, 20, -1, 1, 2, 31000)
 mobs:register_spawn("mobs:dirt_monster", {"default:dirt"}, 20, -1, 1, 2, 31000)
 mobs:register_spawn("mobs:sand_monster", {"default:sand"}, 20, -1, 1, 2, 31000)
@@ -194,7 +198,7 @@ mobs:register_spawn("mobs:desert_sand_monster", {"default:desert_sand"}, 20, -1,
 mobs:register_spawn("mobs:desert_stone_monster", {"default:desert_stone", "default:desert_cobble"}, 20, -1, 1, 2, 31000)
 mobs:register_spawn("mobs:snow_monster", {"default:snowblock", "default:dirt_with_snow"}, 20, -1, 1, 2, 31000)
 mobs:register_spawn("mobs:ice_monster", {"default:ice"}, 20, -1, 1, 2, 31000)
-mobs:register_spawn("mobs:green_monster", {"default:dirt_with_grass"}, 20, -1, 1, 2, 31000)
+mobs:register_spawn("mobs:grass_monster", {"default:dirt_with_grass"}, 20, -1, 1, 2, 31000)
 mobs:register_spawn("mobs:dry_dirt_monster", {"default:dry_dirt"}, 20, -1, 1, 2, 31000)
 mobs:register_spawn("mobs:clay_monster", {"default:clay"}, 20, -1, 1, 2, 31000)
 mobs:register_spawn("mobs:gravel_monster", {"default:gravel"}, 20, -1, 1, 2, 31000)

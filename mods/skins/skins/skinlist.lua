@@ -3,7 +3,7 @@ skins.add = function(skin)
 	table.insert(skins.list,skin)
 end
 
-for id=1,180 do
+for id=1,181 do
 	local f = io.open(minetest.get_modpath("skins").."/textures/player_"..id..".png")
 	if f then 
 		f:close()
@@ -11,7 +11,7 @@ for id=1,180 do
 	end
 end
 
-for id=1,180 do
+for id=1,181 do
 	local f = io.open(minetest.get_modpath("skins").."/textures/character_"..id..".png")
 	if f then 
 		f:close()

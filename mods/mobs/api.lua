@@ -52,13 +52,13 @@ end
 local damage_enabled = settings:get_bool("enable_damage")
 local mobs_spawn = settings:get_bool("mobs_spawn") ~= false
 local peaceful_only = settings:get_bool("only_peaceful_mobs")
-local disable_blood = settings:get_bool("mobs_disable_blood")
-local mob_hit_effect = settings:get_bool("mob_hit_effect")
+local disable_blood = false--settings:get_bool("mobs_disable_blood")
+local mob_hit_effect = true--settings:get_bool("mob_hit_effect")
 local mobs_drop_items = settings:get_bool("mobs_drop_items") ~= false
 local mobs_griefing = settings:get_bool("mobs_griefing") ~= false
 local spawn_protected = settings:get_bool("mobs_spawn_protected") ~= false
 local spawn_monster_protected = settings:get_bool("mobs_spawn_monster_protected") ~= false
-local remove_far = settings:get_bool("remove_far_mobs") ~= false
+local remove_far = false --settings:get_bool("remove_far_mobs") ~= false
 local mob_area_spawn = settings:get_bool("mob_area_spawn")
 local difficulty = tonumber(settings:get("mob_difficulty")) or 1.0
 local max_per_block = tonumber(settings:get("max_objects_per_block") or 99)
@@ -571,7 +571,7 @@ function mob_class:update_tag(newname)
 	local qua = prop.hp_max / 6
 	local old_nametag = prop.nametag
 	local old_nametag_color = self.nametag_col
-
+	
 	-- backwards compatibility
 	if self.nametag and self.nametag ~= "" then
 		newname = self.nametag ; self.nametag = nil
@@ -618,9 +618,9 @@ function mob_class:update_tag(newname)
 		end
 	end
 
-	self.infotext = "Entity: " .. self.name .. " | Type: " .. self.type
-		.. ("\nHealth: " .. self.health .. " / " .. prop.hp_max)
-		.. (self.owner == "" and "" or "\nOwner: " .. self.owner) .. text
+	---self.infotext = "Entity: " .. self.name .. " | Type: " .. self.type
+	---	.. ("\nHealth: " .. self.health .. " / " .. prop.hp_max)
+	---	.. (self.owner == "" and "" or "\nOwner: " .. self.owner) .. text
 
 	-- set infotext changes
 	if self.infotext ~= prop.infotext then
@@ -740,6 +740,13 @@ function mob_class:check_for_death(cmi_cause)
 
 		-- make sure health isn't higher than max
 		if self.health > prop.hp_max then self.health = prop.hp_max end
+
+		if (cmi_cause and cmi_cause.type == "punch") then
+			
+			self.htimer = 2
+			self.nametag = "♥ " .. self.health .. " / " .. self.object:get_properties().hp_max
+			self:update_tag()
+		end
 
 		self:update_tag() ; return false
 	end

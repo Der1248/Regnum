@@ -40,7 +40,10 @@ reg_pages[1] = "label[0.2,0;!!WELLCOME TO REGNUM!!]"
 	.."label[0.2,2.7;wuschel1912 for testing]"
 	.."label[0.2,3.0;jumali for testing]"
 	.."label[0.2,3.3;Verlo for language improvements]"
-	.."label[0.2,3.6;Skamiz Kazzarch for warning fixes]"
+	.."label[0.2,3.6;Skamiz Kazzarch for warning fixes and refactoring the experience mod]"
+	.."label[0.2,3.9;programmerjake for fixing some bugs]"
+	
+
 		
 reg_pages[2] = "label[0.2,0;CONTENS]"
 	.."label[0.2,0.6;  I. Inventory Navigation]"

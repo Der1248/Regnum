@@ -1,0 +1,4 @@
+name = "10 Year Skin",
+author = "1248",
+description = "Regnum’s 10th anniversary reward",
+comment = "obtainable until May 2027",

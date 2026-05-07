@@ -5,10 +5,10 @@ local remove_list = true
 
 minetest.register_on_mods_loaded(function()
     local old_pages = sfinv.pages_unordered
-	new_order = { 
-		"sfinv:crafting", 
+	new_order = {
+		"sfinv:crafting",
 		"mtg_craftguide:craftguide",
-		"tutorial:regnum_guide", 
+		"tutorial:regnum_guide",
 		"bags:bags",
 		"3d_armor:armor",
 		"tutorial:achievements",
@@ -189,7 +189,7 @@ sfinv.register_page("tutorial:other", {
 			other_sub_page[name] = 8
 		elseif fields.achc then
 			other_sub_page[name] = 9
-			player_inv:set_size("year", 9)
+			player_inv:set_size("year", 10)
 			if player:get_inventory():contains_item("main", "tutorial:trophy_year1") then
 				player_inv:set_stack("year", 1,"tutorial:dirt")
 			end
@@ -216,6 +216,9 @@ sfinv.register_page("tutorial:other", {
 			end
 			if player:get_inventory():contains_item("main", "tutorial:trophy_year9") then
 				player_inv:set_stack("year", 9,"tutorial:dirt")
+			end
+			if player:get_inventory():contains_item("main", "tutorial:trophy_year10") then
+				player_inv:set_stack("year", 10,"tutorial:dirt")
 			end
 		elseif fields.xp_gui then
 			other_sub_page[name] = 10
@@ -1064,10 +1067,10 @@ function artifacts_formspec(player)
     player_inv:set_size("art13", 11)
     local af = 0
 	formspec = "button[0,0;2,0.5;back;Back]"
-		.."label[3.1,3.6;Green Artifacts]"
+		.."label[3.1,1.2;Green Artifacts]"
         .."label[3.1,2.4;Blue Artifacts]"
-        .."label[3.1,4.8;Yellow Artifacts]"
-		.."label[3.1,1.2;Red Artifacts]"
+        .."label[3.1,3.6;Yellow Artifacts]"
+		.."label[3.1,4.8;Red Artifacts]"
         .."label[3.1,6.0;Purple Artifacts]"
         .."label[3.1,7.2;Cyan Artifacts]"
         .."label[3.1,8.7;Grey Artifacts]"
@@ -1284,6 +1287,7 @@ function anniversarys_formspec(player)
 	local year7 = player_inv:get_stack("year", 7):get_count()
 	local year8 = player_inv:get_stack("year", 8):get_count()
 	local year9 = player_inv:get_stack("year", 9):get_count()
+	local year10 = player_inv:get_stack("year", 10):get_count()
     local d = 0
     if year == 1 then
         d = d+1
@@ -1312,6 +1316,9 @@ function anniversarys_formspec(player)
 	if year9 == 1 then
         d = d+1
     end
+	if year10 == 1 then
+        d = d+1
+    end
     formspec = "button[0,0;2,0.5;back;Back]"
         .."label[0.8,1.1;One Year Trophy]"
         .."label[0.8,1.9;Two Year Trophy]"
@@ -1322,7 +1329,8 @@ function anniversarys_formspec(player)
 		.."label[0.8,5.9;Seven Year Trophy]"
 		.."label[0.8,6.7;Eight Year Trophy]"
 		.."label[0.8,7.5;Nine Year Trophy]"
-        .."label[7,0;"..d.."/9]"
+		.."label[4.8,1.1;Ten Year Trophy]"
+        .."label[7,0;"..d.."/10]"
         .."image[0,1;0.8,0.8;tutorial_"..year..".png]"
         .."image[0,1.8;0.8,0.8;tutorial_"..year2..".png]"
 		.."image[0,2.6;0.8,0.8;tutorial_"..year3..".png]"
@@ -1332,28 +1340,22 @@ function anniversarys_formspec(player)
 		.."image[0,5.8;0.8,0.8;tutorial_"..year7..".png]"
 		.."image[0,6.6;0.8,0.8;tutorial_"..year8..".png]"
 		.."image[0,7.4;0.8,0.8;tutorial_"..year9..".png]"
+		.."image[4,1;0.8,0.8;tutorial_"..year10..".png]"
 	return formspec
 end
 
 function xp_guide_formspec(player)
 	local name = player:get_player_name()
 	local player_inv = player:get_inventory()
-	local xp_gruen_o = io.open(minetest.get_worldpath().."/"..name.."_experience", "r")
-	local xp_gruen = xp_gruen_o:read("*l")
-	local xp_rot_o = io.open(minetest.get_worldpath().."/"..name.."_experience_rot", "r")
-	local xp_rot = xp_rot_o:read("*l")
-	local xp_blau_o = io.open(minetest.get_worldpath().."/"..name.."_experience_blau", "r")
-	local xp_blau = xp_blau_o:read("*l")
-	local xp_grau_o = io.open(minetest.get_worldpath().."/"..name.."_experience_grau", "r")
-	local xp_grau = xp_grau_o:read("*l")
-    local xp_gelb_o = io.open(minetest.get_worldpath().."/"..name.."_experience_gelb", "r")
-	local xp_gelb = xp_gelb_o:read("*l")
-    local xp_cyan_o = io.open(minetest.get_worldpath().."/"..name.."_experience_cyan", "r")
-	local xp_cyan = xp_cyan_o:read("*l")
-	local xp_bronze_o = io.open(minetest.get_worldpath().."/"..name.."_experience_bronze", "r")
-	local xp_bronze = xp_bronze_o:read("*l")
-	local xp_silver_o = io.open(minetest.get_worldpath().."/"..name.."_experience_silver", "r")
-	local xp_silver = xp_silver_o:read("*l")
+	local xp_gruen = experience.get(player, "experience_green")
+	local xp_rot = experience.get(player, "experience_red")
+	local xp_blau = experience.get(player, "experience_blue")
+	local xp_grau = experience.get(player, "experience_grey")
+	local xp_gelb = experience.get(player, "experience_yellow")
+	local xp_cyan = experience.get(player, "experience_cyan")
+	local xp_bronze = experience.get(player, "experience_bronze")
+	local xp_silver = experience.get(player, "experience_silver")
+
 	player_inv:set_size("feld2", 1)
 	player_inv:set_size("bronze_key", 1)
 	local feld2_name = player:get_inventory():get_stack("feld2",1):get_name()
@@ -1430,7 +1432,7 @@ function xp_guide_formspec_bro(player)
 end
 function xp_guide_formspec_sil(player)
 	formspec = "button[0,0;2,0.5;xp_gui;Back]"
-		.."textlist[0.9,1;6,7.3;xp;Lv.1 = 4xp,Lv.2 = 8xp,Lv.3 = 12xp,Lv.4 = 16xp,Lv.5 = 20xp,Lv.6 = 24xp,Lv.7 = 28xp,Lv.8 = 32xp,Lv.9 = 36xp,Lv.10 = 40xp,Lv.11 = 48xp,Lv.12 = 56xp,Lv.13 = 64xp,Lv.14 = 72xp,Lv.15 = 80xp,Lv.16 = 88xp,Lv.17 = 96xp,Lv.18 = 104xp,Lv.19 = 112xp,Lv.20 = 120xp,Lv.21 = 132xp,Lv.22 = 144xp,Lv.23 = 156xp,Lv.24 = 168xp,Lv.25 = 180xp,Lv.26 = 192xp,Lv.27 = 204xp,Lv.28 = 216xp,Lv.29 = 228xp,Lv.30 = 240xp,Lv.31 = 256xp,Lv.32 = 272xp,Lv.33 = 288xp,Lv.34 = 304xp,Lv.35 = 320xp,Lv.36 = 336xp,Lv.37 = 352xp,Lv.38 = 368xp,Lv.39 = 384xp,Lv.40 = 400xp]"--,Lv.41 = 210xp,Lv.42 = 220xp,Lv.43 = 230xp,Lv.44 = 240xp,Lv.45 = 250xp,Lv.46 = 260xp,Lv.47 = 270xp,Lv.48 = 280xp,Lv.49 = 290xp,Lv.50 = 300xp,Lv.51 = 312xp,Lv.52 = 324xp,Lv.53 = 336xp,Lv.54 = 348xp,Lv.55 = 360xp,Lv.56 = 372xp,Lv.57 = 384xp,Lv.58 = 396xp,Lv.59 = 408xp,Lv.60 = 420xp,Lv.61 = 434xp,Lv.62 = 448xp,Lv.63 = 462xp,Lv.64 = 476xp,Lv.65 = 490xp,Lv.66 = 504xp,Lv.67 = 518xp,Lv.68 = 532xp,Lv.69 = 546xp,Lv.70 = 560xp,Lv.71 = 576xp,Lv.72 = 592xp,Lv.73 = 608xp,Lv.74 = 624xp,Lv.75 = 640xp,Lv.76 = 656xp,Lv.77 = 672xp,Lv.78 = 688xp,Lv.79 = 704xp,Lv.80 = 720xp,Lv.81 = 738xp,Lv.82 = 756xp,Lv.83 = 774xp,Lv.84 = 792xp,Lv.85 = 810xp,Lv.86 = 828xp,Lv.87 = 846xp,Lv.88 = 864xp,Lv.89 = 882xp,Lv.90 = 900xp,Lv.91 = 920xp,Lv.92 = 940xp,Lv.93 = 960xp,Lv.94 = 980xp,Lv.95 = 1000xp,Lv.96 = 1020xp,Lv.97 = 1040xp,Lv.98 = 1060xp,Lv.99 = 1080xp,Lv.100 = 1100xp,Lv.MAX = 1500xp]"
+		.."textlist[0.9,1;6,7.3;xp;Lv.1 = 4xp,Lv.2 = 8xp,Lv.3 = 12xp,Lv.4 = 16xp,Lv.5 = 20xp,Lv.6 = 24xp,Lv.7 = 28xp,Lv.8 = 32xp,Lv.9 = 36xp,Lv.10 = 40xp,Lv.11 = 48xp,Lv.12 = 56xp,Lv.13 = 64xp,Lv.14 = 72xp,Lv.15 = 80xp,Lv.16 = 88xp,Lv.17 = 96xp,Lv.18 = 104xp,Lv.19 = 112xp,Lv.20 = 120xp,Lv.21 = 132xp,Lv.22 = 144xp,Lv.23 = 156xp,Lv.24 = 168xp,Lv.25 = 180xp,Lv.26 = 192xp,Lv.27 = 204xp,Lv.28 = 216xp,Lv.29 = 228xp,Lv.30 = 240xp,Lv.31 = 256xp,Lv.32 = 272xp,Lv.33 = 288xp,Lv.34 = 304xp,Lv.35 = 320xp,Lv.36 = 336xp,Lv.37 = 352xp,Lv.38 = 368xp,Lv.39 = 384xp,Lv.40 = 400xp,Lv.41 = 420xp,Lv.42 = 440xp,Lv.43 = 460xp,Lv.44 = 480xp,Lv.45 = 500xp,Lv.46 = 520xp,Lv.47 = 540xp,Lv.48 = 560xp,Lv.49 = 580xp,Lv.50 = 600xp,Lv.51 = 624xp,Lv.52 = 648xp,Lv.53 = 672xp,Lv.54 = 696xp,Lv.55 = 720xp,Lv.56 = 744xp,Lv.57 = 768xp,Lv.58 = 792xp,Lv.59 = 816xp,Lv.60 = 840xp]"--,Lv.61 = 434xp,Lv.62 = 448xp,Lv.63 = 462xp,Lv.64 = 476xp,Lv.65 = 490xp,Lv.66 = 504xp,Lv.67 = 518xp,Lv.68 = 532xp,Lv.69 = 546xp,Lv.70 = 560xp,Lv.71 = 576xp,Lv.72 = 592xp,Lv.73 = 608xp,Lv.74 = 624xp,Lv.75 = 640xp,Lv.76 = 656xp,Lv.77 = 672xp,Lv.78 = 688xp,Lv.79 = 704xp,Lv.80 = 720xp,Lv.81 = 738xp,Lv.82 = 756xp,Lv.83 = 774xp,Lv.84 = 792xp,Lv.85 = 810xp,Lv.86 = 828xp,Lv.87 = 846xp,Lv.88 = 864xp,Lv.89 = 882xp,Lv.90 = 900xp,Lv.91 = 920xp,Lv.92 = 940xp,Lv.93 = 960xp,Lv.94 = 980xp,Lv.95 = 1000xp,Lv.96 = 1020xp,Lv.97 = 1040xp,Lv.98 = 1060xp,Lv.99 = 1080xp,Lv.100 = 1100xp,Lv.MAX = 1500xp]"
 	return formspec
 end
 
@@ -1580,13 +1582,13 @@ function regnum_craft_formspec(player)
 		pr = "regnum:shield_"
 	elseif re2 == 6 then
 		pr = "regnum:gun_"
-	elseif re2 == 7 then 
-		pr = "regnum:wings_"  
-	elseif re2 == 8 then 
-		pr = "regnum:heart_" 
-		max_hight = 21
-		if re > 51 then
-			re = 51
+	elseif re2 == 7 then
+		pr = "regnum:wings_"
+	elseif re2 == 8 then
+		pr = "regnum:heart_"
+		max_hight = 41
+		if re > 63 then
+			re = 62
 		end
 	end
 	if re ~= 0 then
@@ -1760,19 +1762,19 @@ function regnum_craft_formspec(player)
 	.."image_button[6.4,3.266;0.8,0.8;;recraftbd;49]"
 	.."image_button[7.2,3.266;0.8,0.8;;recraftca;50]"
 	.."image_button[0,4.166;0.8,0.8;;recraftcb;51]"
+	.."image_button[0.8,4.166;0.8,0.8;;recraftda;52]"
+	.."image_button[1.6,4.166;0.8,0.8;;recraftdb;53]"
+	.."image_button[2.4,4.166;0.8,0.8;;recraftdc;54]"
+	.."image_button[3.2,4.166;0.8,0.8;;recraftdd;55]"
+	.."image_button[4,4.166;0.8,0.8;;recraftde;56]"
+	.."image_button[4.8,4.166;0.8,0.8;;recraftdf;57]"
+	.."image_button[5.6,4.166;0.8,0.8;;recraftdg;58]"
+	.."image_button[6.4,4.166;0.8,0.8;;recraftdh;59]"
+	.."image_button[7.2,4.166;0.8,0.8;;recraftdi;60]"
+	.."image_button[0,5.066;0.8,0.8;;recraftdj;61]"
+	.."image_button[0.8,5.066;0.8,0.8;;recraftdk;62]"
 	if re2 < 8 then
 		formspec = formspec
-		.."image_button[0.8,4.166;0.8,0.8;;recraftda;52]"
-		.."image_button[1.6,4.166;0.8,0.8;;recraftdb;53]"
-		.."image_button[2.4,4.166;0.8,0.8;;recraftdc;54]"
-		.."image_button[3.2,4.166;0.8,0.8;;recraftdd;55]"
-		.."image_button[4,4.166;0.8,0.8;;recraftde;56]"
-		.."image_button[4.8,4.166;0.8,0.8;;recraftdf;57]"
-		.."image_button[5.6,4.166;0.8,0.8;;recraftdg;58]"
-		.."image_button[6.4,4.166;0.8,0.8;;recraftdh;59]"
-		.."image_button[7.2,4.166;0.8,0.8;;recraftdi;60]"
-		.."image_button[0,5.066;0.8,0.8;;recraftdj;61]"
-		.."image_button[0.8,5.066;0.8,0.8;;recraftdk;62]"
 		.."image_button[1.6,5.066;0.8,0.8;;recraftdl;63]"
 		.."image_button[2.4,5.066;0.8,0.8;;recraftea;64]"
 		.."image_button[3.2,5.066;0.8,0.8;;recrafteb;65]"
@@ -1990,10 +1992,10 @@ function xp_items_formspec9(player)
     local player_inv = player:get_inventory()
 	formspec = "button[0,0;2,0.5;back;Back]"
 		.."image_button[2.4,4.45;0.8,0.8;craftguide_prev_icon.png;xpi_page8;]"
-		.."scrollbaroptions[min=0;max=46;smallstep=10]"
+		.."scrollbaroptions[min=0;max=115;smallstep=10]"
 		.."scrollbar[7.85,1.15;0.2,2.9;vertical;scrbar2;0]"
 		.."scroll_container[0,1.68;10.3,3.35;scrbar2;vertical;0.05]"
-		.."list[current_player;xpi8;0,-0.29;8,5]"
+		.."list[current_player;xpi8;0,-0.29;8,8]"
 		.."scroll_container_end[]"
 		.."label[3,0.7;Silver Level Blocks]"
 		.."listring[current_player;main]"
@@ -2135,9 +2137,9 @@ end
 minetest.register_on_player_inventory_action(function(player, action, inventory, inventory_info)
 	if action == "move" then
 		if inventory_info.to_list == "krit" or inventory_info.from_list == "krit"
-		or inventory_info.to_list == "skinskey" or inventory_info.from_list == "skinskey" 
-		or inventory_info.to_list == "skinskey2" or inventory_info.from_list == "skinskey2" 
-		or inventory_info.to_list == "feld" or inventory_info.from_list == "feld" 
+		or inventory_info.to_list == "skinskey" or inventory_info.from_list == "skinskey"
+		or inventory_info.to_list == "skinskey2" or inventory_info.from_list == "skinskey2"
+		or inventory_info.to_list == "feld" or inventory_info.from_list == "feld"
 		or inventory_info.to_list == "feld3" or inventory_info.from_list == "feld3" then
 			sfinv.set_player_inventory_formspec(player)
 		end
